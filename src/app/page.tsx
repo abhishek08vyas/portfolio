@@ -1,12 +1,37 @@
+'use client';
+
+import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { Projects } from "@/components/Projects";
+import { Skills } from "@/components/Skills";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">
-        Welcome to My Portfolio
-      </h1>
-      <p className="text-gray-600">
-        Start building your amazing portfolio here!
-      </p>
-    </main>
-  )
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <div className="min-h-screen bg-white">
+          <Header />
+          <main>
+            <Hero />
+            <About />
+            <Experience />
+            <Projects />
+            <Skills />
+          </main>
+          <Footer />
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
 }
