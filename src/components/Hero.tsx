@@ -4,6 +4,7 @@ import { HiCode, HiCloud } from "react-icons/hi";
 import { TbBrandJavascript } from "react-icons/tb";
 import { SiSpringboot } from "react-icons/si";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 export const Hero = () => {
   return (
@@ -41,11 +42,16 @@ export const Hero = () => {
           <div className="relative w-36 h-36 mx-auto mb-8">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 animate-spin-slow"></div>
             <div className="absolute inset-1 rounded-full bg-white"></div>
-            <div className="absolute inset-2 rounded-full bg-gray-200 overflow-hidden">
-              {/* Placeholder for profile image */}
-              <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center text-primary/40 text-2xl font-bold">
-                AV
-              </div>
+            <div className="absolute inset-2 rounded-full overflow-hidden">
+              {/* Placeholder image using Next.js Image component */}
+              <Image 
+                src="/images/profile_photo.png"
+                alt="Abhishek Vyas Avatar" 
+                width={144} 
+                height={144} 
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
           </div>
           
@@ -61,15 +67,15 @@ export const Hero = () => {
           </div>
           
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Building <span className="font-semibold text-blue-600">scalable backend systems</span> and 
-              <span className="font-semibold text-blue-600"> REST APIs</span> with Spring Boot, Java, and cloud technologies.
-              Specialized in <span className="font-semibold text-blue-600">microservices architecture</span> and 
-              <span className="font-semibold text-blue-600"> serverless solutions</span>.
+            <p className="text-gray-700 leading-relaxed mb-4 text-justify">
+              Hello! I am a Java Full Stack Developer with over 3 years of hands-on experience in building 
+              <span className="font-semibold text-blue-600"> scalable backend systems</span> and 
+              <span className="font-semibold text-blue-600"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
+              I've worked with clients to solve production issues, led modules, and integrated systems in healthcare and loyalty-based projects.
             </p>
             
             <div className="flex flex-wrap justify-center gap-2 mb-2">
-              {["Java", "Spring Boot", "Microservices", "AWS", "React", "TypeScript"].map((skill) => (
+              {["Java", "Spring Boot", "Kafka", "Microservices", "Azure", "AWS", "React"].map((skill) => (
                 <span key={skill} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                   {skill}
                 </span>
@@ -79,7 +85,7 @@ export const Hero = () => {
           
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="mailto:your-email@example.com" className="inline-flex group transform transition-transform hover:scale-105">
+            <a href="#contact" className="inline-flex group transform transition-transform hover:scale-105">
               <Button 
                 className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-600/40"
               >
@@ -89,14 +95,14 @@ export const Hero = () => {
             </a>
             
             <div className="flex gap-3">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="transform transition-transform hover:scale-105">
+              <a href="#" aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
                   <FaGithub className="w-6 h-6 text-gray-700" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </a>
               
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="transform transition-transform hover:scale-105">
+              <a href="#" aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
                   <FaLinkedin className="w-6 h-6 text-blue-700" />
                   <span className="sr-only">LinkedIn</span>
