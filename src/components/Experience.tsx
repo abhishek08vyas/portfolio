@@ -1,4 +1,4 @@
-import { Building2, Calendar } from "lucide-react";
+import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
 
 interface ExperienceItem {
   title: string;
@@ -63,12 +63,12 @@ export const Experience = () => {
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <h3 className="text-xl font-semibold mb-2 md:mb-0">{exp.title}</h3>
                   <div className="flex items-center text-gray-500 text-sm">
-                    <Calendar className="w-4 h-4 mr-2" />
+                    <FaCalendarAlt className="w-4 h-4 mr-2" />
                     {exp.period}
                   </div>
                 </div>
                 <div className="flex items-center text-gray-600 mb-4">
-                  <Building2 className="w-4 h-4 mr-2" />
+                  <FaBuilding className="w-4 h-4 mr-2" />
                   {exp.company}, {exp.location}
                 </div>
                 <div className="mb-4">

@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 export const Footer = () => {
   return (
@@ -7,13 +8,13 @@ export const Footer = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex gap-6">
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-              <Github className="w-5 h-5" />
+              <FaGithub className="w-5 h-5" />
             </a>
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-              <Linkedin className="w-5 h-5" />
+              <FaLinkedin className="w-5 h-5" />
             </a>
             <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-              <Mail className="w-5 h-5" />
+              <MdEmail className="w-5 h-5" />
             </a>
           </div>
           <p className="text-sm text-gray-500">

@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Button } from "./ui/button";
 
 export const Header = () => {
@@ -15,7 +15,7 @@ export const Header = () => {
           <a href="#skills" className="text-sm text-gray-600 hover:text-primary transition-colors">Skills</a>
         </div>
         <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
+          <GiHamburgerMenu className="h-5 w-5" />
         </Button>
       </nav>
     </header>

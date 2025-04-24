@@ -1,4 +1,5 @@
-import { ExternalLink, Github } from "lucide-react";
+import { FaGithub, FaCalendarAlt } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 import { Button } from "./ui/button";
 
 interface Project {
@@ -59,7 +60,10 @@ export const Projects = () => {
             <div key={index} className="bg-gray-50 rounded-lg p-6 border border-gray-100">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold mb-2 md:mb-0">{project.title}</h3>
-                <span className="text-sm text-gray-500">{project.period}</span>
+                <div className="flex items-center text-gray-500 text-sm">
+                                    <FaCalendarAlt className="w-4 h-4 mr-2" />
+                                    {project.period}
+                                  </div>
               </div>
               
               <p className="text-gray-600 mb-6">{project.description}</p>
@@ -87,11 +91,11 @@ export const Projects = () => {
               
               <div className="flex gap-4">
                 <Button variant="outline" size="sm" className="gap-2">
-                  <Github className="w-4 h-4" />
+                  <FaGithub className="w-4 h-4" />
                   View Code
                 </Button>
                 <Button variant="outline" size="sm" className="gap-2">
-                  <ExternalLink className="w-4 h-4" />
+                  <FiExternalLink className="w-4 h-4" />
                   Live Demo
                 </Button>
               </div>

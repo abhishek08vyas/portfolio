@@ -1,17 +1,16 @@
-"use client"
-
-import { Button, buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { differenceInCalendarDays } from "date-fns"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import * as React from "react"
+"use client";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { differenceInCalendarDays } from "date-fns";
+import { FaChevronRight, FaEllipsisH } from "react-icons/fa";
+import * as React from "react";
 import {
-    DayPicker,
-    labelNext,
-    labelPrevious,
-    useDayPicker,
-    type DayPickerProps,
-} from "react-day-picker"
+  DayPicker,
+  labelNext,
+  labelPrevious,
+  useDayPicker,
+  type DayPickerProps,
+} from "react-day-picker";
 
 export type CalendarProps = DayPickerProps & {
   /**
@@ -197,7 +196,7 @@ function Calendar({
       }}
       components={{
         Chevron: ({ orientation }) => {
-          const Icon = orientation === "left" ? ChevronLeft : ChevronRight
+          const Icon = orientation === "left" ? FaEllipsisH : FaChevronRight
           return <Icon className="h-4 w-4" />
         },
         Nav: ({ className }) => (
@@ -355,7 +354,7 @@ function Nav({
         }
         onClick={handlePreviousClick}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <FaEllipsisH className="h-4 w-4" />
       </Button>
 
       <Button
@@ -371,7 +370,7 @@ function Nav({
         }
         onClick={handleNextClick}
       >
-        <ChevronRight className="h-4 w-4" />
+        <FaChevronRight className="h-4 w-4" />
       </Button>
     </nav>
   )
