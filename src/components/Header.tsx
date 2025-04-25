@@ -9,10 +9,8 @@ export const Header = () => {
           AV
         </a>
         <div className="hidden md:flex gap-6">
-          <a href="#about" className="text-sm text-gray-600 hover:text-primary transition-colors">About</a>
-          <a href="#experience" className="text-sm text-gray-600 hover:text-primary transition-colors">Experience</a>
+          <a href="#skillsandexperience" className="text-sm text-gray-600 hover:text-primary transition-colors">Skills And Experience</a>
           <a href="#projects" className="text-sm text-gray-600 hover:text-primary transition-colors">Projects</a>
-          <a href="#skills" className="text-sm text-gray-600 hover:text-primary transition-colors">Skills</a>
         </div>
         <Button variant="ghost" size="icon" className="md:hidden">
           <GiHamburgerMenu className="h-5 w-5" />

@@ -1,3 +1,4 @@
+// Hero.tsx
 import { LuMail } from "react-icons/lu";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiCode, HiCloud } from "react-icons/hi";
@@ -24,10 +25,10 @@ export const Hero = () => {
         <div className="absolute top-24 left-1/4 animate-bounce-slow opacity-20">
           <HiCode className="w-16 h-16 text-blue-600" />
         </div>
-        <div className="absolute bottom-24 right-1/4 animate-pulse opacity-20">
+        <div className="absolute top-1/3 right-1/6 animate-bounce-slow opacity-20">
           <SiSpringboot className="w-16 h-16 text-green-600" />
         </div>
-        <div className="absolute top-1/3 right-1/6 animate-bounce-slow opacity-20">
+        <div className="absolute bottom-24 left-3/4 animate-pulse opacity-20">
           <HiCloud className="w-12 h-12 text-sky-500" />
         </div>
         <div className="absolute bottom-1/3 left-1/6 animate-pulse opacity-20">
@@ -68,7 +69,7 @@ export const Hero = () => {
           
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
             <p className="text-gray-700 leading-relaxed mb-4 text-justify">
-              Hello! I am a Java Full Stack Developer with over 3 years of hands-on experience in building 
+              Hello! I am a <span className="font-semibold text-blue-600">Java Full Stack Developer </span> with over 3 years of hands-on experience in building 
               <span className="font-semibold text-blue-600"> scalable backend systems</span> and 
               <span className="font-semibold text-blue-600"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
               I've worked with clients to solve production issues, led modules, and integrated systems in healthcare and loyalty-based projects.
