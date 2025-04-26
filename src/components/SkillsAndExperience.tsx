@@ -24,7 +24,7 @@ const experiences: ExperienceItem[] = [
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "Jan 2023 - August 2023",
-    skills: "Java8, MySQL, SpringBoot Framework, microservice architecture, AWS",
+    skills: "Java11, MongoDB, Spring Boot, Azure, Microservices, Elastic Search, Apache Kafka, Redis",
     responsibilities: [
       "Ensured client relationships by engaging with them for production issues",
       "Led a team of 8 members in a demanding module",
@@ -37,7 +37,7 @@ const experiences: ExperienceItem[] = [
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "August 2021 - Jan 2023",
-    skills: "Java8, MySQL, SpringBoot Framework, microservice architecture, AWS, Azure",
+    skills: "Java8, MySQL, Spring Boot, Microservices, AWS, Azure, Redis, Apache Kafka",
     responsibilities: [
       "Worked on Loyalty based project developing REST APIs",
       "Developed Azure Functions for serverless architecture",
@@ -50,7 +50,7 @@ const experiences: ExperienceItem[] = [
     company: "Crest Data System",
     location: "Ahmedabad, Gujarat",
     period: "August 2021 - Jan 2023",
-    skills: "Splunk, DevOps, Python, AWS, Linux",
+    skills: "Splunk, DevOps, Python, AWS, Linux, Jenkins, Shell Scripting",
     responsibilities: [
       "Automated development and testing of Splunk apps",
       "Troubleshot Splunk environment issues",
@@ -78,7 +78,6 @@ const specificSkillIcons = {
   "Shell": <HiCode className="w-4 h-4 mr-1 text-gray-800" />,
   "Spring Boot": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
   "Spring MVC": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
-  "SpringBoot Framework": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
   "JPA": <FaDatabase className="w-4 h-4 mr-1 text-gray-800" />,
   "Apache Kafka": <SiApachekafka className="w-4 h-4 mr-1 text-[#231F20]" />,
   "MySQL": <SiMysql className="w-4 h-4 mr-1 text-[#4479A1]" />,
@@ -105,7 +104,7 @@ const skills = {
   "Databases": ["MySQL", "MongoDB", "Redis"],
   "Cloud Platforms": ["Azure (Functions, Blob Storage, AKS)", "AWS"],
   "DevOps & Tools": ["Jenkins", "Git", "Docker", "Elastic Search"],
-  "Architecture": ["Microservices", "Serverless", "Asynchronous systems"],
+  "Architecture": ["Microservices", "Asynchronous systems", "Serverless"],
 };
 
 export const SkillsAndExperience = () => {

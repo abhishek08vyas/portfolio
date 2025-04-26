@@ -15,7 +15,7 @@ const experiences: ExperienceItem[] = [
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "Jan 2023 - August 2023",
-    skills: "Java8, MySQL, SpringBoot Framework, microservice architecture, AWS",
+    skills: "Java8, MySQL, Spring Boot, microservice architecture, AWS",
     responsibilities: [
       "Ensured client relationships by engaging with them for production issues",
       "Led a team of 8 members in a demanding module",
@@ -28,7 +28,7 @@ const experiences: ExperienceItem[] = [
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "August 2021 - Jan 2023",
-    skills: "Java8, MySQL, SpringBoot Framework, microservice architecture, AWS, Azure",
+    skills: "Java8, MySQL, Spring Boot, microservice architecture, AWS, Azure",
     responsibilities: [
       "Worked on Loyalty based project developing REST APIs",
       "Developed Azure Functions for serverless architecture",
