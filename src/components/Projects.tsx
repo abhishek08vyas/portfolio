@@ -124,7 +124,7 @@ const projects: Project[] = [
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
     },
-    image: "/images/expense_tracker_light.jpg",
+    image: "/images/ios_app_gesture_recognition.png",
     links: {
       github: "https://github.com/abhishek08vyas/gesture_recognition",
     }

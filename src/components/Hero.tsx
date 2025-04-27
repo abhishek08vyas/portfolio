@@ -110,7 +110,7 @@ export const Hero = () => {
             
             <div className="flex gap-3">
               {/* GitHub Icon - Custom SVG */}
-              <a href="https://github.com/abhishek08vyas/" aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
+              <a href={process.env.NEXT_PUBLIC_GITHUB_LINK ?? '#'} aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
                 <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-md border border-gray-300 hover:bg-gray-50 transition-colors">
                   <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
                     <path 
@@ -122,7 +122,7 @@ export const Hero = () => {
               </a>
               
               {/* LinkedIn Icon - Custom SVG */}
-              <a href="https://www.linkedin.com/in/abhishekvvyas/" aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
+              <a href={process.env.NEXT_PUBLIC_LINKEDIN_LINK ?? '#'} aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
                 <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-md border border-gray-300 hover:bg-gray-50 transition-colors">
                   <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
                     <path 

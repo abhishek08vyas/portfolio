@@ -5,7 +5,6 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { LuX } from "react-icons/lu";
 import emailjs from '@emailjs/browser';
-import config from "@/config/config";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -32,13 +31,13 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     setIsSubmitting(true);
     
     // Initialize EmailJS with your user ID
-    emailjs.init(`${config.emailjs.userId}`);
+    emailjs.init("Ps4x85xXNJZdeJZwF");
     
     try {
       // Send email using EmailJS
       await emailjs.send(
-        `${config.emailjs.serviceId}`,
-        `${config.emailjs.templateId}`,
+        "service_73hagje",
+        "template_azkrh9n",
         {
           name: formData.name,
           email: formData.email,

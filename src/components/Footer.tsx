@@ -18,10 +18,10 @@ export const Footer = () => {
               & functionality seamlessly come together.
             </p>
             <div className="flex space-x-4 mt-2">
-              <Link href="https://www.linkedin.com/in/abhishekvvyas/" aria-label="LinkedIn">
+              <Link href= {process.env.NEXT_PUBLIC_LINKEDIN_LINK ?? '#'} aria-label="LinkedIn">
                 <FaLinkedin className="w-5 h-5 text-gray-400 hover:text-blue-500 transition-colors" />
               </Link>
-              <Link href="https://github.com/abhishek08vyas/" aria-label="GitHub">
+              <Link href={process.env.NEXT_PUBLIC_GITHUB_LINK ?? '#'} aria-label="GitHub">
                 <FaGithub className="w-5 h-5 text-gray-400 hover:text-white transition-colors" />
               </Link>
             </div>
