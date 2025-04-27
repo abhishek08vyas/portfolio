@@ -1,9 +1,12 @@
-// SkillsAndExperience.tsx
 import { useState, useEffect, useRef } from 'react';
 import { FaBuilding, FaCalendarAlt, FaLaptopCode, FaDatabase, FaServer, FaJava, FaAws, FaBriefcase, FaArrowRight } from "react-icons/fa";
 import { HiCode, HiCloud, HiLightningBolt } from "react-icons/hi";
-import { TbBrandJavascript } from "react-icons/tb";
-import { SiSpringboot, SiDocker, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch } from "react-icons/si";
+import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
+import {
+  SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb,
+  SiMysql, SiApachekafka, SiPython, SiElasticsearch,
+  SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe
+} from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
@@ -69,20 +72,26 @@ const skillIcons = {
   "Cloud Platforms": <HiCloud className="w-5 h-5 text-gray-800" />,
   "DevOps & Tools": <VscTools className="w-5 h-5 text-gray-800" />,
   "Architecture": <AiOutlineApartment className="w-5 h-5 text-gray-800" />,
-  "Web Technologies": <TbBrandJavascript className="w-5 h-5 text-gray-800" />
+  "Web Technologies": <TbBrandJavascript className="w-5 h-5 text-gray-800" />,
+  "Applied Machine Learning": <SiTensorflow className="w-5 h-5 text-gray-800" />
 };
 
 // Specific skill icons with their original brand colors
 const specificSkillIcons = {
   "Java": <FaJava className="w-4 h-4 mr-1 text-[#ED8B00]" />,
+  "JavaScript": <TbBrandJavascript className="w-4 h-4 mr-1 text-[#F7DF1E]" />,
+  "TypeScript": <TbBrandTypescript className="w-4 h-4 mr-1 text-[#3178C6]" />,
   "Python": <SiPython className="w-4 h-4 mr-1 text-[#3776AB]" />,
   "Shell": <HiCode className="w-4 h-4 mr-1 text-gray-800" />,
   "Spring Boot": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
   "Spring MVC": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
   "JPA": <FaDatabase className="w-4 h-4 mr-1 text-gray-800" />,
+  "NextJS": <SiNextdotjs className="w-4 h-4 mr-1 text-[#000000]" />,
+  "Tailwind CSS": <SiTailwindcss className="w-4 h-4 mr-1 text-[#38B2AC]" />,
   "Apache Kafka": <SiApachekafka className="w-4 h-4 mr-1 text-[#231F20]" />,
   "MySQL": <SiMysql className="w-4 h-4 mr-1 text-[#4479A1]" />,
   "MongoDB": <SiMongodb className="w-4 h-4 mr-1 text-[#47A248]" />,
+  "PostgreSQL": <SiPostgresql className="w-4 h-4 mr-1 text-[#336791]" />,
   "Redis": <SiRedis className="w-4 h-4 mr-1 text-[#DC382D]" />,
   "Azure": <HiCloud className="w-4 h-4 mr-1 text-[#0078D4]" />,
   "AWS": <FaAws className="w-4 h-4 mr-1 text-[#FF9900]" />,
@@ -96,16 +105,20 @@ const specificSkillIcons = {
   "React": <GrReactjs className="w-4 h-4 mr-1 text-[#61DAFB]" />,
   "Linux": <FaServer className="w-4 h-4 mr-1 text-[#FCC624]" />,
   "Splunk": <FaDatabase className="w-4 h-4 mr-1 text-[#FF4500]" />,
-  "DevOps": <VscTools className="w-4 h-4 mr-1 text-gray-800" />
+  "DevOps": <VscTools className="w-4 h-4 mr-1 text-gray-800" />,
+  "TensorFlow": <SiTensorflow className="w-4 h-4 mr-1 text-[#FF6F00]" />,
+  "scikit-learn": <SiScikitlearn className="w-4 h-4 mr-1 text-[#F7931E]" />,
+  "MediaPipe": <SiMediapipe className="w-4 h-4 mr-1 text-[#00A3E0]" />
 };
 
 const skills = {
-  "Programming Languages": ["Java (8 & 11)", "Python", "Shell Scripting"],
-  "Frameworks & Libraries": ["Spring Boot", "Spring MVC", "React", "JPA", "Apache Kafka"],
-  "Databases": ["MySQL", "MongoDB", "Redis"],
+  "Programming Languages": ["Java (8 & 11)", "JavaScript", "TypeScript", "Python", "Shell Scripting"],
+  "Frameworks & Libraries": ["Spring Boot", "Spring MVC", "NextJS", "React", "Tailwind CSS", "JPA", "Apache Kafka"],
+  "Databases": ["MySQL", "MongoDB", "PostgreSQL", "Redis"],
   "Cloud Platforms": ["Azure (Functions, Blob Storage, AKS)", "AWS"],
   "DevOps & Tools": ["Jenkins", "Git", "Docker", "Elastic Search"],
-  "Architecture": ["Microservices", "Asynchronous systems", "Serverless"],
+  // "Architecture": ["Microservices", "Asynchronous systems", "Serverless"],
+  "Applied Machine Learning": ["TensorFlow", "scikit-learn", "MediaPipe"]
 };
 
 export const SkillsAndExperience = () => {
