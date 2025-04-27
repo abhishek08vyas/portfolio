@@ -36,10 +36,13 @@ export const Footer = () => {
                   <Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
                 </li>
                 <li>
-                  <Link href="/projects" className="text-gray-400 hover:text-white transition-colors">Projects</Link>
+                  <Link href="/#projects" className="text-gray-400 hover:text-white transition-colors">Projects</Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link>
+                  {/* Use direct Link to coming-soon instead of onClick handler */}
+                  <Link href="/coming-soon" className="text-gray-400 hover:text-white transition-colors">
+                    Blog
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -47,10 +50,16 @@ export const Footer = () => {
               <h3 className="font-medium mb-4">The Website</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/bucket-list" className="text-gray-400 hover:text-white transition-colors">Bucket List</Link>
+                  {/* Use direct Link to coming-soon instead of onClick handler */}
+                  <Link href="/coming-soon" className="text-gray-400 hover:text-white transition-colors">
+                    Bucket List
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/book-call" className="text-gray-400 hover:text-white transition-colors">Book a call</Link>
+                  {/* Use direct Link to coming-soon instead of onClick handler */}
+                  <Link href="/coming-soon" className="text-gray-400 hover:text-white transition-colors">
+                    Book a call
+                  </Link>
                 </li>
               </ul>
             </div>
