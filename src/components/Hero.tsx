@@ -49,7 +49,7 @@ export const Hero = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center py-8">
           {/* Profile Image with Animated Border */}
           <div className="relative w-36 h-36 mx-auto mb-8">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 animate-spin-slow"></div>
@@ -96,7 +96,7 @@ export const Hero = () => {
           </div>
           
           {/* Call to Action Buttons */}
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center mb-16">
             <button 
               onClick={openContactModal}
               className="inline-flex group transform transition-transform hover:scale-105"
@@ -112,22 +112,22 @@ export const Hero = () => {
             <div className="flex gap-3">
               <a href="https://github.com/abhishek08vyas/" aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
-                  <FaGithub className="w-6 h-6 text-gray-700" />
+                  <FaGithub className="w-12 h-12 text-gray-700" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </a>
               
               <a href="https://www.linkedin.com/in/abhishekvvyas/" aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
-                  <FaLinkedin className="w-6 h-6 text-blue-700" />
+                  <FaLinkedin className="w-12 h-12 text-blue-700" />
                   <span className="sr-only">LinkedIn</span>
                 </Button>
               </a>
             </div>
           </div>
           
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          {/* Scroll Indicator - Moved to bottom of container with absolute positioning */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
             <div className="w-8 h-12 rounded-full border-2 border-blue-500 flex items-start justify-center p-2">
               <div className="w-1 h-3 bg-blue-500 rounded-full animate-ping"></div>
             </div>

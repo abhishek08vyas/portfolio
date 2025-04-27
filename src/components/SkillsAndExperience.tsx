@@ -176,7 +176,7 @@ export const SkillsAndExperience = () => {
   };
 
   return (
-    <section id="skills-experience" className="relative py-24 overflow-hidden">
+    <section id="skills-experience" className="relative py-16 overflow-hidden">
       {/* Background with gradient similar to hero */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100">
         <div className="absolute inset-0 opacity-10">
@@ -187,7 +187,7 @@ export const SkillsAndExperience = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
           Skills & Experience
         </h2>
 
