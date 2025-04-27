@@ -28,6 +28,7 @@ import { GrReactjs } from "react-icons/gr";
 import { VscTools } from "react-icons/vsc";
 import { AiOutlineApartment } from "react-icons/ai";
 import { Button } from "./ui/button";
+import { ContactModal } from "./ContactModel";
 
 // Specific tech stack icons with their original brand colors
 const techStackIcons = {
@@ -76,6 +77,10 @@ interface Project {
   };
   image?: string; // URL for project image
   featured?: boolean;
+  links?: {
+    github?: string;
+    demo?: string;
+  };
 }
 
 const projects: Project[] = [
@@ -97,7 +102,11 @@ const projects: Project[] = [
       "Other": ["Swagger API docs", "JUnit4"]
     },
     image: "/images/expense_tracker.jpg",
-    featured: true
+    featured: true,
+    links: {
+      // github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
+      demo: "https://expense-tracker-mun.vercel.app/"
+    }
   },
   {
     title: "iOS App for Real-Time Gesture Recognition",
@@ -115,7 +124,10 @@ const projects: Project[] = [
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
     },
-    image: "/images/expense_tracker_light.jpg"
+    image: "/images/expense_tracker_light.jpg",
+    links: {
+      github: "https://github.com/abhishek08vyas/gesture_recognition",
+    }
   }
 ];
 
@@ -130,6 +142,7 @@ const getTechIcon = (tech: string) => {
 export const Projects = () => {
   const [activeProject, setActiveProject] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const featuredProject = projects.find(p => p.featured) || projects[0];
   
   const goToNextProject = () => {
@@ -144,6 +157,14 @@ export const Projects = () => {
     setIsAnimating(true);
     setActiveProject((prev) => (prev - 1 + projects.length) % projects.length);
     setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  const openContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const closeContactModal = () => {
+    setIsContactModalOpen(false);
   };
 
   // Automatic slider
@@ -230,19 +251,26 @@ export const Projects = () => {
                   </div>
                   
                   <div className="flex gap-4">
-                    <Button 
-                      className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-6 py-3 gap-2 shadow-lg shadow-blue-500/30 transition-all hover:shadow-indigo-500/40 text-md"
-                    >
-                      <FaGithub className="w-5 h-5" />
-                      View Code
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-6 py-3 gap-2 shadow-sm transition-all text-md"
-                    >
-                      <FiExternalLink className="w-5 h-5" />
-                      Live Demo
-                    </Button>
+                    {featuredProject.links?.github && (
+                      <Button 
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-6 py-3 gap-2 shadow-lg shadow-blue-500/30 transition-all hover:shadow-indigo-500/40 text-md"
+                        onClick={() => window.open(featuredProject.links?.github, '_blank')}
+                      >
+                        <FaGithub className="w-5 h-5" />
+                        View Code
+                      </Button>
+                    )}
+                    
+                    {featuredProject.links?.demo && (
+                      <Button 
+                        variant="outline"
+                        className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-6 py-3 gap-2 shadow-sm transition-all text-md"
+                        onClick={() => window.open(featuredProject.links?.demo, '_blank')}
+                      >
+                        <FiExternalLink className="w-5 h-5" />
+                        Live Demo
+                      </Button>
+                    )}
                   </div>
                 </div>
                 
@@ -396,21 +424,31 @@ export const Projects = () => {
                   </div>
                 </div>
                 
-                <div className="flex gap-4">
-                  <Button 
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-5 py-2 gap-2 shadow-md transition-all"
-                  >
-                    <FaGithub className="w-5 h-5" />
-                    View Code
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-5 py-2 gap-2 shadow-sm transition-all"
-                  >
-                    <FiExternalLink className="w-5 h-5" />
-                    Live Demo
-                  </Button>
-                </div>
+                {/* Only render buttons if links exist */}
+                {(currentProject.links?.github || currentProject.links?.demo) && (
+                  <div className="flex gap-4">
+                    {currentProject.links?.github && (
+                      <Button 
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-5 py-2 gap-2 shadow-md transition-all"
+                        onClick={() => window.open(currentProject.links?.github, '_blank')}
+                      >
+                        <FaGithub className="w-5 h-5" />
+                        View Code
+                      </Button>
+                    )}
+                    
+                    {currentProject.links?.demo && (
+                      <Button 
+                        variant="outline"
+                        className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-5 py-2 gap-2 shadow-sm transition-all"
+                        onClick={() => window.open(currentProject.links?.demo, '_blank')}
+                      >
+                        <FiExternalLink className="w-5 h-5" />
+                        Live Demo
+                      </Button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -442,13 +480,13 @@ export const Projects = () => {
                   Let's collaborate on your next project and create something exceptional together.
                 </p>
                 
-                <a 
-                  href="#contact" 
+                <button 
+                  onClick={openContactModal}
                   className="group inline-flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-medium px-8 py-4 rounded-lg shadow-xl transition-all hover:shadow-2xl hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-lg"
                 >
                   Start a Conversation
                   <FaArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </button>
               </div>
               
               {/* Enhanced decorative elements */}
@@ -462,6 +500,9 @@ export const Projects = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-// Hero.tsx
+import { useState } from "react";
 import { LuMail } from "react-icons/lu";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiCode, HiCloud } from "react-icons/hi";
@@ -6,8 +6,19 @@ import { TbBrandJavascript } from "react-icons/tb";
 import { SiSpringboot } from "react-icons/si";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { ContactModal } from "./ContactModel";
 
 export const Hero = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const openContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const closeContactModal = () => {
+    setIsContactModalOpen(false);
+  };
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background Banner with Gradient */}
@@ -70,9 +81,9 @@ export const Hero = () => {
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
             <p className="text-gray-700 leading-relaxed mb-4 text-justify">
               Hello! I am a <span className="font-semibold text-blue-600">Java Full Stack Developer </span> with over 3 years of hands-on experience in building 
-              <span className="font-semibold text-blue-600"> scalable backend systems</span> and 
+              <span className="font-semibold text-blue-600"> Scalable Backend Systems</span> and 
               <span className="font-semibold text-blue-600"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
-              I've worked with clients to solve production issues, led modules, and integrated systems in healthcare and loyalty-based projects.
+              I've worked with clients to solve production issues, led team, and integrated systems in healthcare and loyalty-based projects.
             </p>
             
             <div className="flex flex-wrap justify-center gap-2 mb-2">
@@ -86,24 +97,27 @@ export const Hero = () => {
           
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#contact" className="inline-flex group transform transition-transform hover:scale-105">
+            <button 
+              onClick={openContactModal}
+              className="inline-flex group transform transition-transform hover:scale-105"
+            >
               <Button 
                 className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-600/40"
               >
                 <LuMail className="w-6 h-6 group-hover:animate-bounce" />
                 <span className="text-lg">Contact Me</span>
               </Button>
-            </a>
+            </button>
             
             <div className="flex gap-3">
-              <a href="#" aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
+              <a href="https://github.com/abhishek08vyas/" aria-label="GitHub Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
                   <FaGithub className="w-6 h-6 text-gray-700" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </a>
               
-              <a href="#" aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
+              <a href="https://www.linkedin.com/in/abhishekvvyas/" aria-label="LinkedIn Profile" className="transform transition-transform hover:scale-105">
                 <Button variant="outline" className="gap-2 bg-white/80 hover:bg-white border-gray-300 shadow-md h-14 w-14 rounded-full p-0 flex items-center justify-center">
                   <FaLinkedin className="w-6 h-6 text-blue-700" />
                   <span className="sr-only">LinkedIn</span>
@@ -120,6 +134,9 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
     </section>
   );
 };

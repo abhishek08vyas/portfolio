@@ -5,11 +5,11 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="#hero" className="text-xl font-semibold text-primary hover:text-primary/80 transition-colors">
+        <a href="/" className="text-xl font-semibold text-primary hover:text-primary/80 transition-colors">
           AV
         </a>
         <div className="hidden md:flex gap-6">
-          <a href="#skillsandexperience" className="text-sm text-gray-600 hover:text-primary transition-colors">Skills And Experience</a>
+          <a href="#skills-experience" className="text-sm text-gray-600 hover:text-primary transition-colors">Skills And Experience</a>
           <a href="#projects" className="text-sm text-gray-600 hover:text-primary transition-colors">Projects</a>
         </div>
         <Button variant="ghost" size="icon" className="md:hidden">

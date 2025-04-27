@@ -8,6 +8,7 @@ import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
 import { AiOutlineApartment } from "react-icons/ai";
+import { ContactModal } from './ContactModel'; // Import the ContactModal component
 
 interface ExperienceItem {
   title: string;
@@ -110,6 +111,16 @@ const skills = {
 export const SkillsAndExperience = () => {
   const [activeExp, setActiveExp] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add state for ContactModal
+
+  // Open and close modal functions
+  const openContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const closeContactModal = () => {
+    setIsContactModalOpen(false);
+  };
 
   // Automatic slider
   useEffect(() => {
@@ -299,15 +310,15 @@ export const SkillsAndExperience = () => {
                     With expertise in Java & cloud technologies, I build scalable systems that deliver business value.
                   </p>
                   
-                  {/* Hire Me button */}
-                  <a 
-                    href="#contact" 
+                  {/* Hire Me button - Modified to open contact modal */}
+                  <button 
+                    onClick={openContactModal}
                     className="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:from-blue-600 hover:to-purple-600 hover:shadow-xl group"
                   >
                     <FaBriefcase className="w-5 h-5 mr-2" />
                     Hire Me
                     <FaArrowRight className="w-4 h-4 ml-2 opacity-70 transform transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </button>
                   
                   {/* Lightning bolt decorative element */}
                   <div className="absolute top-6 right-6 text-yellow-400 opacity-80">
@@ -319,6 +330,9 @@ export const SkillsAndExperience = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Modal component */}
+      <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
     </section>
   );
 };
