@@ -50,7 +50,7 @@ const experiences: ExperienceItem[] = [
     ]
   },
   {
-    title: "Splunk CloudOps",
+    title: "Devops Engineer",
     company: "Crest Data System",
     location: "Ahmedabad, Gujarat",
     period: "August 2021 - Jan 2023",
