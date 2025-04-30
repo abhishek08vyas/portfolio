@@ -24,7 +24,7 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    title: "Engineer 2",
+    title: "Software Engineer 2",
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "Jan 2023 - August 2023",
@@ -37,7 +37,7 @@ const experiences: ExperienceItem[] = [
     ]
   },
   {
-    title: "Engineer 1",
+    title: "Software Engineer 1",
     company: "Apexon",
     location: "Ahmedabad, Gujarat",
     period: "August 2021 - Jan 2023",
@@ -178,16 +178,16 @@ export const SkillsAndExperience = () => {
   return (
     <section id="skills-experience" className="relative py-16 overflow-hidden">
       {/* Background with gradient similar to hero */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-blue-300 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-indigo-300 blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#797F8C] blur-3xl"></div>
         </div>
         <div className="absolute inset-0 bg-white/40"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-[#142240] to-[#797F8C] bg-clip-text text-transparent">
           Skills & Experience
         </h2>
 
@@ -195,7 +195,7 @@ export const SkillsAndExperience = () => {
           {/* Skills Section - Left Side */}
           <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200">
             <h3 className="text-2xl font-semibold mb-8 text-center text-gray-800 flex items-center justify-center">
-              <FaLaptopCode className="w-6 h-6 mr-3 text-gray-700" />
+              <FaLaptopCode className="w-6 h-6 mr-3 text-[#142240]" />
               <span>Technical Skills</span>
             </h3>
             
@@ -227,7 +227,7 @@ export const SkillsAndExperience = () => {
           {/* Experience Section - Right Side with Infinite Slider */}
           <div className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200 overflow-hidden">
             <h3 className="text-2xl font-semibold mb-8 text-center text-gray-800 flex items-center justify-center">
-              <FaBuilding className="w-6 h-6 mr-3 text-gray-700" />
+              <FaBuilding className="w-6 h-6 mr-3 text-[#142240]" />
               <span>Work Experience</span>
             </h3>
             
@@ -239,7 +239,7 @@ export const SkillsAndExperience = () => {
                   onClick={() => setActiveExp(index)}
                   className={`w-4 h-4 rounded-full transition-all duration-300 ${
                     activeExp === index 
-                      ? 'bg-blue-600 scale-125' 
+                      ? 'bg-[#142240] scale-125' 
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`View experience ${index + 1}`}
@@ -302,11 +302,11 @@ export const SkillsAndExperience = () => {
             
             {/* Open to Work & Hire Me Section */}
             <div className="mt-8">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl">
+              <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl">
                 <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg p-6 overflow-hidden">
                   {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-blue-500 opacity-20 blur-xl"></div>
-                  <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full bg-purple-500 opacity-20 blur-xl"></div>
+                  <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-[#142240] opacity-20 blur-xl"></div>
+                  <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 blur-xl"></div>
                   
                   {/* Status badge */}
                   <div className="inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium">
@@ -326,7 +326,7 @@ export const SkillsAndExperience = () => {
                   {/* Hire Me button - Modified to open contact modal */}
                   <button 
                     onClick={openContactModal}
-                    className="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:from-blue-600 hover:to-purple-600 hover:shadow-xl group"
+                    className="inline-flex items-center justify-center bg-gradient-to-r from-[#142240] to-[#797F8C] text-white font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:from-[#142240] hover:to-[#797F8C] hover:shadow-xl group"
                   >
                     <FaBriefcase className="w-5 h-5 mr-2" />
                     Hire Me

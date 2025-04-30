@@ -21,11 +21,11 @@ export const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       {/* Background Banner with Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-blue-300 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-indigo-300 blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-200 blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#797F8C] blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-200 blur-3xl"></div>
         </div>
         <div className="absolute inset-0 bg-white/40"></div>
       </div>
@@ -33,13 +33,13 @@ export const Hero = () => {
       {/* Floating Tech Icons */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-24 left-1/4 animate-bounce-slow opacity-20">
-          <HiCode className="w-16 h-16 text-blue-600" />
+          <HiCode className="w-16 h-16 text-[#142240]" />
         </div>
         <div className="absolute top-1/3 right-1/6 animate-bounce-slow opacity-20">
           <SiSpringboot className="w-16 h-16 text-green-600" />
         </div>
         <div className="absolute bottom-24 left-3/4 animate-pulse opacity-20">
-          <HiCloud className="w-12 h-12 text-sky-500" />
+          <HiCloud className="w-12 h-12 text-[#797F8C]" />
         </div>
         <div className="absolute bottom-1/3 left-1/6 animate-pulse opacity-20">
           <TbBrandJavascript className="w-12 h-12 text-yellow-500" />
@@ -51,7 +51,7 @@ export const Hero = () => {
         <div className="max-w-3xl mx-auto text-center py-8">
           {/* Profile Image with Animated Border */}
           <div className="relative w-36 h-36 mx-auto mb-8">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 animate-spin-slow"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#142240] to-[#797F8C] animate-spin-slow"></div>
             <div className="absolute inset-1 rounded-full bg-white"></div>
             <div className="absolute inset-2 rounded-full overflow-hidden">
               {/* Placeholder image using Next.js Image component */}
@@ -66,7 +66,7 @@ export const Hero = () => {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#142240] to-[#797F8C] bg-clip-text text-transparent">
             Abhishek Vyas
           </h1>
           
@@ -74,20 +74,20 @@ export const Hero = () => {
             <h2 className="text-xl md:text-2xl font-semibold text-gray-700">
               Java Full Stack Developer
             </h2>
-            <div className="absolute -bottom-2 left-1/2 w-24 h-1 bg-blue-500 transform -translate-x-1/2 rounded-full"></div>
+            <div className="absolute -bottom-2 left-1/2 w-24 h-1 bg-[#142240] transform -translate-x-1/2 rounded-full"></div>
           </div>
           
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
             <p className="text-gray-700 leading-relaxed mb-4 text-justify">
-              Hello! I am a <span className="font-semibold text-blue-600">Java Full Stack Developer </span> with over 3 years of hands-on experience in building 
-              <span className="font-semibold text-blue-600"> Scalable Backend Systems</span> and 
-              <span className="font-semibold text-blue-600"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
+              Hello! I am a <span className="font-semibold text-[#142240]">Java Full Stack Developer </span> with over 3 years of hands-on experience in building 
+              <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and 
+              <span className="font-semibold text-[#142240]"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
               I've worked with clients to solve production issues, led team, and integrated systems in healthcare and loyalty-based projects.
             </p>
             
             <div className="flex flex-wrap justify-center gap-2 mb-2">
               {["Java", "Spring Boot", "Kafka", "Microservices", "Azure", "AWS", "React"].map((skill) => (
-                <span key={skill} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                <span key={skill} className="px-3 py-1 bg-[#142240]/10 text-[#142240] rounded-full text-sm font-medium">
                   {skill}
                 </span>
               ))}
@@ -101,7 +101,7 @@ export const Hero = () => {
               className="inline-flex group transform transition-transform hover:scale-105"
             >
               <Button 
-                className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-600/40"
+                className="bg-[#142240] hover:bg-[#142240]/90 text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-[#142240]/30 transition-all duration-300 hover:shadow-[#142240]/40"
               >
                 <LuMail className="w-6 h-6 group-hover:animate-bounce" />
                 <span className="text-lg">Contact Me</span>
@@ -137,8 +137,8 @@ export const Hero = () => {
           
           {/* Scroll Indicator - Moved to bottom of container with absolute positioning */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-8 h-12 rounded-full border-2 border-blue-500 flex items-start justify-center p-2">
-              <div className="w-1 h-3 bg-blue-500 rounded-full animate-ping"></div>
+            <div className="w-8 h-12 rounded-full border-2 border-[#142240] flex items-start justify-center p-2">
+              <div className="w-1 h-3 bg-[#142240] rounded-full animate-ping"></div>
             </div>
           </div>
         </div>

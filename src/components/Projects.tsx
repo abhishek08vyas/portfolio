@@ -58,13 +58,13 @@ const techStackIcons = {
 
 // Category icons for tech stack
 const techCategoryIcons = {
-  "Backend": <FaServer className="w-5 h-5 mr-2 text-blue-600" />,
-  "Frontend": <GrReactjs className="w-5 h-5 mr-2 text-blue-500" />,
-  "Deployment": <SiDocker className="w-5 h-5 mr-2 text-blue-600" />,
-  "Mobile": <SiSwift className="w-5 h-5 mr-2 text-blue-600" />,
-  "ML/AI": <SiTensorflow className="w-5 h-5 mr-2 text-blue-600" />,
-  "Cloud": <HiCloud className="w-5 h-5 mr-2 text-blue-600" />,
-  "Other": <VscTools className="w-5 h-5 mr-2 text-blue-600" />
+  "Backend": <FaServer className="w-5 h-5 mr-2 text-[#142240]" />,
+  "Frontend": <GrReactjs className="w-5 h-5 mr-2 text-[#142240]" />,
+  "Deployment": <SiDocker className="w-5 h-5 mr-2 text-[#142240]" />,
+  "Mobile": <SiSwift className="w-5 h-5 mr-2 text-[#142240]" />,
+  "ML/AI": <SiTensorflow className="w-5 h-5 mr-2 text-[#142240]" />,
+  "Cloud": <HiCloud className="w-5 h-5 mr-2 text-[#142240]" />,
+  "Other": <VscTools className="w-5 h-5 mr-2 text-[#142240]" />
 };
 
 interface Project {
@@ -180,12 +180,12 @@ export const Projects = () => {
 
   return (
     <section id="projects" className="relative py-24 overflow-hidden">
-      {/* Enhanced background with more vibrant gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100">
+      {/* Enhanced background with new color scheme */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-blue-400 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-indigo-400 blur-3xl"></div>
-          <div className="absolute top-1/3 left-1/2 w-64 h-64 -translate-x-1/2 rounded-full bg-purple-300 blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-[#142240]/30 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-[#797F8C]/30 blur-3xl"></div>
+          <div className="absolute top-1/3 left-1/2 w-64 h-64 -translate-x-1/2 rounded-full bg-[#142240]/20 blur-3xl"></div>
         </div>
         <div className="absolute inset-0 bg-white/30"></div>
       </div>
@@ -194,21 +194,21 @@ export const Projects = () => {
         {/* Featured Project Spotlight */}
         <div className="mb-24">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="h-1 w-12 bg-blue-500 rounded-full"></div>
-            <span className="text-blue-600 font-semibold uppercase text-sm tracking-wider">Featured Project</span>
-            <div className="h-1 w-12 bg-blue-500 rounded-full"></div>
+            <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
+            <span className="text-[#142240] font-semibold uppercase text-sm tracking-wider">Featured Project</span>
+            <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
           </div>
           
-          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
             My Work
           </h2>
           
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-1 rounded-2xl shadow-xl max-w-6xl mx-auto transform hover:scale-[1.01] transition-all duration-500">
+          <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] p-1 rounded-2xl shadow-xl max-w-6xl mx-auto transform hover:scale-[1.01] transition-all duration-500">
             <div className="bg-white rounded-2xl p-6 md:p-8 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div className="order-2 lg:order-1">
-                  <div className="inline-flex items-center bg-blue-100 text-blue-700 rounded-full py-1 px-3 mb-4 text-sm font-medium">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
+                  <div className="inline-flex items-center bg-[#142240]/10 text-[#142240] rounded-full py-1 px-3 mb-4 text-sm font-medium">
+                    <span className="w-2 h-2 bg-[#142240] rounded-full mr-2"></span>
                     {featuredProject.period}
                   </div>
                   
@@ -218,31 +218,20 @@ export const Projects = () => {
                   
                   <div className="mb-6">
                     <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                      <FaCode className="w-5 h-5 mr-2 text-blue-600" />
+                      <FaCode className="w-5 h-5 mr-2 text-[#142240]" />
                       Key Technologies
                     </h4>
                     
-                    {/* Updated Tech Stack Rendering for Featured Project */}
+                    {/* Updated Tech Stack Rendering for Featured Project - now using getTechIcon function */}
                     <div className="flex flex-wrap gap-2">
                       {Object.entries(featuredProject.techStack).flatMap(([category, techs]) => 
                         techs.map((tech, idx) => (
                           <div
                             key={`${category}-${idx}`}
-                            className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-md text-sm font-medium shadow-sm flex items-center"
+                            className="px-3 py-1 bg-gradient-to-r from-[#142240] to-[#797F8C] text-white rounded-md text-sm font-medium shadow-sm flex items-center"
                           >
-                            {/* Explicitly render the icons */}
-                            {tech === "Java 21" && <FaJava className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "Spring Boot 3.2" && <SiSpringboot className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "PostgreSQL" && <SiPostgresql className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "Docker" && <SiDocker className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "Amazon EC2" && <FaAws className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "NextJS" && <SiNextdotjs className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "Tailwind CSS" && <SiTailwindcss className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "Swagger API docs" && <SiSwagger className="w-4 h-4 mr-1 text-white" />}
-                            {tech === "JUnit4" && <SiJunit5 className="w-4 h-4 mr-1 text-white" />}
-                            {!["Java 21", "Spring Boot 3.2", "PostgreSQL", "Docker", "Amazon EC2", "NextJS", "Tailwind CSS", "Swagger API docs", "JUnit4"].includes(tech) && 
-                              <HiCode className="w-4 h-4 mr-1 text-white" />
-                            }
+                            {/* Use getTechIcon function for consistent icon rendering */}
+                            {getTechIcon(tech)}
                             {tech}
                           </div>
                         ))
@@ -253,7 +242,7 @@ export const Projects = () => {
                   <div className="flex gap-4">
                     {featuredProject.links?.github && (
                       <Button 
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-6 py-3 gap-2 shadow-lg shadow-blue-500/30 transition-all hover:shadow-indigo-500/40 text-md"
+                        className="bg-gradient-to-r from-[#142240] to-[#142240] hover:from-[#142240]/90 hover:to-[#142240]/90 text-white font-medium rounded-lg px-6 py-3 gap-2 shadow-lg shadow-[#142240]/30 transition-all hover:shadow-[#142240]/40 text-md"
                         onClick={() => window.open(featuredProject.links?.github, '_blank')}
                       >
                         <FaGithub className="w-5 h-5" />
@@ -264,7 +253,7 @@ export const Projects = () => {
                     {featuredProject.links?.demo && (
                       <Button 
                         variant="outline"
-                        className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-6 py-3 gap-2 shadow-sm transition-all text-md"
+                        className="bg-white hover:bg-gray-50 border-gray-200 text-[#142240] font-medium rounded-lg px-6 py-3 gap-2 shadow-sm transition-all text-md"
                         onClick={() => window.open(featuredProject.links?.demo, '_blank')}
                       >
                         <FiExternalLink className="w-5 h-5" />
@@ -275,7 +264,7 @@ export const Projects = () => {
                 </div>
                 
                 <div className="order-1 lg:order-2 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-xl blur-xl transform -translate-y-4 translate-x-4"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#142240]/20 to-[#797F8C]/20 rounded-xl blur-xl transform -translate-y-4 translate-x-4"></div>
                   <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-white">
                     <img 
                       src={featuredProject.image} 
@@ -305,14 +294,14 @@ export const Projects = () => {
             <div className="flex gap-3">
               <button
                 onClick={goToPrevProject}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-blue-50 transition-all"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-[#142240]/5 transition-all"
                 disabled={isAnimating}
               >
                 <HiOutlineChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={goToNextProject}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-blue-50 transition-all"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-[#142240]/5 transition-all"
                 disabled={isAnimating}
               >
                 <HiOutlineChevronRight className="w-5 h-5" />
@@ -328,7 +317,7 @@ export const Projects = () => {
                 onClick={() => setActiveProject(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   activeProject === index 
-                    ? 'bg-blue-600 w-6' 
+                    ? 'bg-[#142240] w-6' 
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`View project ${index + 1}`}
@@ -349,12 +338,12 @@ export const Projects = () => {
                     transform: isAnimating ? 'scale(1.05)' : 'scale(1)'
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-indigo-900/40 mix-blend-multiply"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#142240]/60 to-[#142240]/40 mix-blend-multiply"></div>
                 </div>
                 <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
                   <div className="flex items-center gap-2">
-                    <div className="h-1 w-8 bg-blue-400 rounded-full"></div>
-                    <span className="text-sm font-medium text-blue-100">{currentProject.period}</span>
+                    <div className="h-1 w-8 bg-[#797F8C] rounded-full"></div>
+                    <span className="text-sm font-medium text-gray-100">{currentProject.period}</span>
                   </div>
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow-md">
@@ -381,13 +370,13 @@ export const Projects = () => {
                 
                 <div className="mb-6">
                   <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                    <FaLaptopCode className="w-5 h-5 mr-2 text-blue-600" />
+                    <FaLaptopCode className="w-5 h-5 mr-2 text-[#142240]" />
                     Responsibilities
                   </h4>
                   <ul className="space-y-2">
                     {currentProject.responsibilities.map((resp, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="text-blue-500 mr-2 mt-1">•</span>
+                        <span className="text-[#142240] mr-2 mt-1">•</span>
                         <span className="text-gray-700">{resp}</span>
                       </li>
                     ))}
@@ -397,7 +386,7 @@ export const Projects = () => {
                 {/* Technology Categories Section */}
                 <div className="mb-6">
                   <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                    <AiOutlineApartment className="w-5 h-5 mr-2 text-blue-600" />
+                    <AiOutlineApartment className="w-5 h-5 mr-2 text-[#142240]" />
                     Tech Stack
                   </h4>
                   <div className="space-y-3">
@@ -405,7 +394,7 @@ export const Projects = () => {
                       <div key={category} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <h5 className="text-sm font-medium mb-2 text-gray-800 flex items-center">
                           {techCategoryIcons[category as keyof typeof techCategoryIcons] || 
-                           <VscTools className="w-5 h-5 mr-2 text-blue-600" />}
+                           <VscTools className="w-5 h-5 mr-2 text-[#142240]" />}
                           {category}
                         </h5>
                         <div className="flex flex-wrap gap-2">
@@ -429,7 +418,7 @@ export const Projects = () => {
                   <div className="flex gap-4">
                     {currentProject.links?.github && (
                       <Button 
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg px-5 py-2 gap-2 shadow-md transition-all"
+                        className="bg-gradient-to-r from-[#142240] to-[#142240] hover:from-[#142240]/90 hover:to-[#142240]/90 text-white font-medium rounded-lg px-5 py-2 gap-2 shadow-md transition-all"
                         onClick={() => window.open(currentProject.links?.github, '_blank')}
                       >
                         <FaGithub className="w-5 h-5" />
@@ -440,7 +429,7 @@ export const Projects = () => {
                     {currentProject.links?.demo && (
                       <Button 
                         variant="outline"
-                        className="bg-white hover:bg-gray-50 border-gray-200 text-gray-800 font-medium rounded-lg px-5 py-2 gap-2 shadow-sm transition-all"
+                        className="bg-white hover:bg-gray-50 border-gray-200 text-[#142240] font-medium rounded-lg px-5 py-2 gap-2 shadow-sm transition-all"
                         onClick={() => window.open(currentProject.links?.demo, '_blank')}
                       >
                         <FiExternalLink className="w-5 h-5" />
@@ -455,20 +444,20 @@ export const Projects = () => {
           
           {/* Animated project count indicator */}
           <div className="flex justify-center mt-8 items-center">
-            <span className="text-2xl font-bold text-blue-600 mr-2">{activeProject + 1}</span>
-            <span className="text-gray-500 text-lg">/</span>
-            <span className="text-gray-500 text-lg ml-2">{projects.length}</span>
+            <span className="text-2xl font-bold text-[#142240] mr-2">{activeProject + 1}</span>
+            <span className="text-[#797F8C] text-lg">/</span>
+            <span className="text-[#797F8C] text-lg ml-2">{projects.length}</span>
           </div>
         </div>
         
         {/* Enhanced Call to Action */}
         <div className="mt-24 max-w-5xl mx-auto">
-          <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-2xl p-0.5 shadow-2xl transform transition-all hover:scale-[1.01] hover:shadow-3xl">
-            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-10 overflow-hidden">
+          <div className="bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] rounded-2xl p-0.5 shadow-2xl transform transition-all hover:scale-[1.01] hover:shadow-3xl">
+            <div className="relative bg-gradient-to-br from-[#142240] to-[#142240]/90 rounded-xl p-10 overflow-hidden">
               {/* Enhanced decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-blue-500 opacity-10 blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-purple-500 opacity-10 blur-3xl"></div>
-              <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-indigo-400 opacity-20 animate-pulse blur-2xl"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#797F8C] opacity-10 blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#797F8C] opacity-10 blur-3xl"></div>
+              <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 animate-pulse blur-2xl"></div>
               
               <div className="relative flex flex-col items-center text-center">
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight max-w-2xl">
@@ -482,7 +471,7 @@ export const Projects = () => {
                 
                 <button 
                   onClick={openContactModal}
-                  className="group inline-flex items-center justify-center bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-medium px-8 py-4 rounded-lg shadow-xl transition-all hover:shadow-2xl hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600 text-lg"
+                  className="group inline-flex items-center justify-center bg-gradient-to-r from-[#797F8C] via-[#797F8C] to-[#797F8C] text-white font-medium px-8 py-4 rounded-lg shadow-xl transition-all hover:shadow-2xl hover:opacity-90 text-lg"
                 >
                   Start a Conversation
                   <FaArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
