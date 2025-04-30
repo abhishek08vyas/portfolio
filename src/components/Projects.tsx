@@ -193,15 +193,16 @@ export const Projects = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Featured Project Spotlight */}
         <div className="mb-24">
-          <div className="flex items-center justify-center gap-3 mb-2">
+                    
+          <h2 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
+            My Work
+          </h2>
+
+          <div className="flex items-center justify-center gap-3 mb-8">
             <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
             <span className="text-[#142240] font-semibold uppercase text-sm tracking-wider">Featured Project</span>
             <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
           </div>
-          
-          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
-            My Work
-          </h2>
           
           <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] p-1 rounded-2xl shadow-xl max-w-6xl mx-auto transform hover:scale-[1.01] transition-all duration-500">
             <div className="bg-white rounded-2xl p-6 md:p-8 overflow-hidden">
@@ -223,14 +224,12 @@ export const Projects = () => {
                     </h4>
                     
                     {/* Updated Tech Stack Rendering for Featured Project - now using getTechIcon function */}
-                    <div className="flex flex-wrap gap-2">
-                      {Object.entries(featuredProject.techStack).flatMap(([category, techs]) => 
+                   <div className="flex flex-wrap gap-2">
+                      {Object.entries(featuredProject.techStack).flatMap(([category, techs]) =>
                         techs.map((tech, idx) => (
                           <div
                             key={`${category}-${idx}`}
-                            className="px-3 py-1 bg-gradient-to-r from-[#142240] to-[#797F8C] text-white rounded-md text-sm font-medium shadow-sm flex items-center"
-                          >
-                            {/* Use getTechIcon function for consistent icon rendering */}
+                            className="px-3 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium border border-gray-200 shadow-sm flex items-center">
                             {getTechIcon(tech)}
                             {tech}
                           </div>

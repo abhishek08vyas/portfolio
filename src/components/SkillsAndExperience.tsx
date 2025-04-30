@@ -10,7 +10,6 @@ import {
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
-import { AiOutlineApartment } from "react-icons/ai";
 import { ContactModal } from './ContactModel'; // Import the ContactModal component
 
 interface ExperienceItem {
@@ -64,15 +63,13 @@ const experiences: ExperienceItem[] = [
   }
 ];
 
-// Skill icons mapping with original brand colors
+// Skill categories with their respective icons
 const skillIcons = {
   "Programming Languages": <HiCode className="w-5 h-5 text-gray-800" />,
   "Frameworks & Libraries": <SiSpringboot className="w-5 h-5 text-gray-800" />,
   "Databases": <FaDatabase className="w-5 h-5 text-gray-800" />,
   "Cloud Platforms": <HiCloud className="w-5 h-5 text-gray-800" />,
   "DevOps & Tools": <VscTools className="w-5 h-5 text-gray-800" />,
-  "Architecture": <AiOutlineApartment className="w-5 h-5 text-gray-800" />,
-  "Web Technologies": <TbBrandJavascript className="w-5 h-5 text-gray-800" />,
   "Applied Machine Learning": <SiTensorflow className="w-5 h-5 text-gray-800" />
 };
 
@@ -111,20 +108,21 @@ const specificSkillIcons = {
   "MediaPipe": <SiMediapipe className="w-4 h-4 mr-1 text-[#00A3E0]" />
 };
 
+// Simplified skill lists for a cleaner presentation
 const skills = {
   "Programming Languages": ["Java (8 & 11)", "JavaScript", "TypeScript", "Python", "Shell Scripting"],
   "Frameworks & Libraries": ["Spring Boot", "Spring MVC", "NextJS", "React", "Tailwind CSS", "JPA", "Apache Kafka"],
   "Databases": ["MySQL", "MongoDB", "PostgreSQL", "Redis"],
   "Cloud Platforms": ["Azure (Functions, Blob Storage, AKS)", "AWS"],
   "DevOps & Tools": ["Jenkins", "Git", "Docker", "Elastic Search"],
-  // "Architecture": ["Microservices", "Asynchronous systems", "Serverless"],
   "Applied Machine Learning": ["TensorFlow", "scikit-learn", "MediaPipe"]
 };
 
 export const SkillsAndExperience = () => {
+  const [activeTab, setActiveTab] = useState('skills'); // Track active tab: 'skills' or 'experience'
   const [activeExp, setActiveExp] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false); // Add state for ContactModal
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Open and close modal functions
   const openContactModal = () => {
@@ -135,14 +133,16 @@ export const SkillsAndExperience = () => {
     setIsContactModalOpen(false);
   };
 
-  // Automatic slider
+  // Automatic slider for experiences
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveExp((prev) => (prev + 1) % experiences.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
+    if (activeTab === 'experience') {
+      const interval = setInterval(() => {
+        setActiveExp((prev) => (prev + 1) % experiences.length);
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+  }, [activeTab]);
 
   // Find matching icon for a skill
   const getSkillIcon = (skillName: string) => {
@@ -159,13 +159,13 @@ export const SkillsAndExperience = () => {
   // Format skills string into an array of skill tags with icons
   const renderSkillsWithIcons = (skillsString: string) => {
     const skillsArray = skillsString.split(', ').map(skill => skill.trim());
-    
+
     return (
       <div className="flex flex-wrap gap-2">
         {skillsArray.map((skill, idx) => (
-          <span 
-            key={idx} 
-            className="px-2 py-1 bg-white text-gray-800 rounded-md text-xs font-medium border border-gray-200 shadow-sm flex items-center"
+          <span
+            key={idx}
+            className="px-2 py-1 bg-white text-gray-800 rounded-md text-xs font-medium border border-gray-200 shadow-sm flex items-center hover:shadow-md transition-shadow"
           >
             {getSkillIcon(skill)}
             {skill}
@@ -177,7 +177,7 @@ export const SkillsAndExperience = () => {
 
   return (
     <section id="skills-experience" className="relative py-16 overflow-hidden">
-      {/* Background with gradient similar to hero */}
+      {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
@@ -191,17 +191,43 @@ export const SkillsAndExperience = () => {
           Skills & Experience
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Skills Section - Left Side */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200">
-            <h3 className="text-2xl font-semibold mb-8 text-center text-gray-800 flex items-center justify-center">
-              <FaLaptopCode className="w-6 h-6 mr-3 text-[#142240]" />
-              <span>Technical Skills</span>
-            </h3>
-            
-            <div className="space-y-6">
-              {Object.entries(skills).map(([category, items]) => (
-                <div key={category} className="rounded-lg bg-gray-50 p-4 border border-gray-200">
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-lg shadow-md bg-gray-100/70 p-1">
+            <button
+              onClick={() => setActiveTab('skills')}
+              className={`px-6 py-2 rounded-lg transition-all flex items-center ${
+                activeTab === 'skills'
+                  ? 'bg-white shadow-sm text-[#142240] font-medium'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              <FaLaptopCode className="w-5 h-5 mr-2" />
+              Technical Skills
+            </button>
+            <button
+              onClick={() => setActiveTab('experience')}
+              className={`px-6 py-2 rounded-lg transition-all flex items-center ${
+                activeTab === 'experience'
+                  ? 'bg-white shadow-sm text-[#142240] font-medium'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              <FaBuilding className="w-5 h-5 mr-2" />
+              Work Experience
+            </button>
+          </div>
+        </div>
+
+        <div className="max-w-5xl mx-auto">
+          {/* Skills Content */}
+          <div className={`${activeTab === 'skills' ? 'block' : 'hidden'} bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Object.entries(skills).map(([category, items], index) => (
+                <div
+                  key={category}
+                  className="rounded-lg bg-gray-50 p-4 border border-gray-200 transition-all hover:shadow-md"
+                >
                   <h4 className="text-lg font-medium mb-3 text-gray-800 flex items-center">
                     <span className="mr-2">
                       {skillIcons[category as keyof typeof skillIcons]}
@@ -212,7 +238,7 @@ export const SkillsAndExperience = () => {
                     {items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium border border-gray-200 shadow-sm flex items-center"
+                        className="px-3 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium border border-gray-200 shadow-sm flex items-center hover:shadow-md transition-all"
                       >
                         {getSkillIcon(skill)}
                         {skill}
@@ -224,43 +250,39 @@ export const SkillsAndExperience = () => {
             </div>
           </div>
 
-          {/* Experience Section - Right Side with Infinite Slider */}
-          <div className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200 overflow-hidden">
-            <h3 className="text-2xl font-semibold mb-8 text-center text-gray-800 flex items-center justify-center">
-              <FaBuilding className="w-6 h-6 mr-3 text-[#142240]" />
-              <span>Work Experience</span>
-            </h3>
-            
+          {/* Experience Content */}
+          <div className={`${activeTab === 'experience' ? 'block' : 'hidden'} bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200`}>
             {/* Slider controls */}
             <div className="flex justify-center mb-6 gap-3">
-              {experiences.map((_, index) => (
+              {experiences.map((exp, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveExp(index)}
                   className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                    activeExp === index 
-                      ? 'bg-[#142240] scale-125' 
+                    activeExp === index
+                      ? 'bg-[#142240] scale-125'
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   aria-label={`View experience ${index + 1}`}
                 />
               ))}
             </div>
-            
+
             {/* Slider container */}
-            <div 
+            <div
               ref={sliderRef}
-              className="transition-all duration-500 ease-in-out"
-              style={{ transform: `translateX(-${activeExp * 100}%)` }}
+              className="transition-all duration-500 ease-in-out overflow-hidden"
             >
-              <div className="flex">
+              <div
+                className="flex"
+                style={{ transform: `translateX(-${activeExp * 100}%)` }}
+              >
                 {experiences.map((exp, index) => (
-                  <div 
-                    key={index} 
-                    className="min-w-full px-2" // Added horizontal padding
+                  <div
+                    key={index}
+                    className="min-w-full px-2"
                   >
-                    {/* Added mb-6 for vertical spacing between cards */}
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 h-full shadow-sm mb-6">
+                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm mb-6">
                       <div className="flex flex-col justify-between h-full">
                         <div>
                           <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
@@ -299,44 +321,48 @@ export const SkillsAndExperience = () => {
                 ))}
               </div>
             </div>
-            
-            {/* Open to Work & Hire Me Section */}
-            <div className="mt-8">
-              <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl">
-                <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg p-6 overflow-hidden">
-                  {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-[#142240] opacity-20 blur-xl"></div>
-                  <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 blur-xl"></div>
-                  
-                  {/* Status badge */}
-                  <div className="inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                    Open to Work
+          </div>
+
+          {/* Open to Work & Hire Me Section - Always visible */}
+          <div className="mt-8">
+            <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl">
+              <div className="relative bg-black rounded-lg p-6 overflow-hidden">
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-[#142240] opacity-20 blur-xl"></div>
+                <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 blur-xl"></div>
+
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                  <div className="mb-6 md:mb-0 md:mr-6">
+                    {/* Status badge */}
+                    <div className="inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium">
+                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                      Open to Work
+                    </div>
+
+                    {/* Main content */}
+                    <h4 className="text-xl md:text-2xl font-bold text-white mb-3">
+                      Transforming complex challenges into elegant solutions
+                    </h4>
+
+                    <p className="text-gray-300">
+                      With expertise in Java & cloud technologies, I build scalable systems that deliver business value.
+                    </p>
                   </div>
-                  
-                  {/* Main content */}
-                  <h4 className="text-xl md:text-2xl font-bold text-white mb-3">
-                    Transforming complex challenges into elegant solutions.
-                  </h4>
-                  
-                  <p className="text-gray-300 mb-5">
-                    With expertise in Java & cloud technologies, I build scalable systems that deliver business value.
-                  </p>
-                  
+
                   {/* Hire Me button - Modified to open contact modal */}
-                  <button 
+                  <button
                     onClick={openContactModal}
-                    className="inline-flex items-center justify-center bg-gradient-to-r from-[#142240] to-[#797F8C] text-white font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:from-[#142240] hover:to-[#797F8C] hover:shadow-xl group"
+                    className="inline-flex items-center justify-center bg-white text-[#142240] font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl group whitespace-nowrap"
                   >
                     <FaBriefcase className="w-5 h-5 mr-2" />
                     Hire Me
                     <FaArrowRight className="w-4 h-4 ml-2 opacity-70 transform transition-transform group-hover:translate-x-1" />
                   </button>
-                  
-                  {/* Lightning bolt decorative element */}
-                  <div className="absolute top-6 right-6 text-yellow-400 opacity-80">
-                    <HiLightningBolt className="w-6 h-6" />
-                  </div>
+                </div>
+
+                {/* Lightning bolt decorative element */}
+                <div className="absolute top-6 right-6 text-yellow-400 opacity-80">
+                  <HiLightningBolt className="w-6 h-6" />
                 </div>
               </div>
             </div>

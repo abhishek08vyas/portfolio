@@ -66,20 +66,20 @@ export const Hero = () => {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#142240] to-[#797F8C] bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-4xl font-bold mb-2 bg-[#142240] bg-clip-text text-transparent">
             Abhishek Vyas
           </h1>
           
           <div className="relative mb-6">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-700">
-              Java Full Stack Developer
+            <h2 className="text-xl md:text-xl font-semibold text-[#797F8C]">
+              Senior Software Engineer
             </h2>
             <div className="absolute -bottom-2 left-1/2 w-24 h-1 bg-[#142240] transform -translate-x-1/2 rounded-full"></div>
           </div>
           
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
             <p className="text-gray-700 leading-relaxed mb-4 text-justify">
-              Hello! I am a <span className="font-semibold text-[#142240]">Java Full Stack Developer </span> with over 3 years of hands-on experience in building 
+              Hello! I am a <span className="font-semibold text-[#142240]">Senior Software Engineer </span> with over 3 years of hands-on experience in building 
               <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and 
               <span className="font-semibold text-[#142240]"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS. 
               I've worked with clients to solve production issues, led team, and integrated systems in healthcare and loyalty-based projects.
