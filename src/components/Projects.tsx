@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
-import { FaGithub, FaArrowRight, FaCode, FaLaptopCode, FaJava, FaAws, FaServer } from "react-icons/fa";
+import { FaGithub, FaArrowRight, FaCode, FaJava, FaAws, FaServer } from "react-icons/fa";
 import {
   FiExternalLink
 } from "react-icons/fi";
-import {
-  HiLightningBolt,
-  HiOutlineChevronLeft,
-  HiOutlineChevronRight,
-  HiCode,
-  HiCloud
-} from "react-icons/hi";
+import { HiLightningBolt, HiCode, HiCloud } from "react-icons/hi";
 import {
   SiSpringboot,
   SiDocker,
@@ -23,10 +17,13 @@ import {
   SiJunit5,
   SiSwagger,
   SiTensorflow,
+  SiNodedotjs,
+  SiMongodb,
+  SiReact,
+  SiFirebase,
 } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { VscTools } from "react-icons/vsc";
-import { AiOutlineApartment } from "react-icons/ai";
 import { Button } from "./ui/button";
 import { ContactModal } from "./ContactModel";
 
@@ -53,7 +50,11 @@ const techStackIcons = {
   "AWS Lambda": <FaAws className="w-4 h-4 mr-1 text-[#FF9900]" />,
   "S3": <SiAmazons3 className="w-4 h-4 mr-1 text-[#569A31]" />,
   "AWS": <FaAws className="w-4 h-4 mr-1 text-[#FF9900]" />,
-  "Azure": <HiCloud className="w-4 h-4 mr-1 text-[#0078D4]" />
+  "Azure": <HiCloud className="w-4 h-4 mr-1 text-[#0078D4]" />,
+  "Node.js": <SiNodedotjs className="w-4 h-4 mr-1 text-[#339933]" />,
+  "MongoDB": <SiMongodb className="w-4 h-4 mr-1 text-[#47A248]" />,
+  "React": <SiReact className="w-4 h-4 mr-1 text-[#61DAFB]" />,
+  "Firebase": <SiFirebase className="w-4 h-4 mr-1 text-[#FFCA28]" />
 };
 
 // Category icons for tech stack
@@ -104,7 +105,7 @@ const projects: Project[] = [
     image: "/images/expense_tracker.jpg",
     featured: true,
     links: {
-      // github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
+      github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
       demo: "https://expense-tracker-mun.vercel.app/"
     }
   },
@@ -128,6 +129,28 @@ const projects: Project[] = [
     links: {
       github: "https://github.com/abhishek08vyas/gesture_recognition",
     }
+  },
+  {
+    title: "Social Networking Platform",
+    period: "Aug 2023 - Mar 2024",
+    description: "A full-stack social platform allowing users to create profiles, connect with friends, share media, and engage through real-time messaging.",
+    responsibilities: [
+      "Built a scalable backend API with Node.js and Express",
+      "Implemented real-time chat functionality using Socket.io",
+      "Designed responsive UI components with React and styled-components",
+      "Configured Firebase for authentication and real-time database operations"
+    ],
+    techStack: {
+      "Backend": ["Node.js", "MongoDB"],
+      "Frontend": ["React", "Tailwind CSS"],
+      "Cloud": ["Firebase", "AWS"],
+      "Other": ["Socket.io", "JWT"]
+    },
+    image: "/images/social_network.jpg",
+    links: {
+      github: "https://github.com/abhishek08vyas/social-network",
+      demo: "https://social-connect-demo.vercel.app/"
+    }
   }
 ];
 
@@ -143,15 +166,14 @@ export const Projects = () => {
   const [activeProject, setActiveProject] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const featuredProject = projects.find(p => p.featured) || projects[0];
-  
+
   const goToNextProject = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     setActiveProject((prev) => (prev + 1) % projects.length);
     setTimeout(() => setIsAnimating(false), 500);
   };
-  
+
   const goToPrevProject = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -172,319 +194,218 @@ export const Projects = () => {
     const interval = setInterval(() => {
       goToNextProject();
     }, 8000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
-  const currentProject = projects[activeProject];
-
   return (
-    <section id="projects" className="relative py-24 overflow-hidden">
-      {/* Enhanced background with new color scheme */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-[#142240]/30 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-[#797F8C]/30 blur-3xl"></div>
-          <div className="absolute top-1/3 left-1/2 w-64 h-64 -translate-x-1/2 rounded-full bg-[#142240]/20 blur-3xl"></div>
+    <section id="projects" className="relative py-20 overflow-hidden">
+      {/* Subtle background with light gradients */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240]/10 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#797F8C]/10 blur-3xl"></div>
         </div>
-        <div className="absolute inset-0 bg-white/30"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Featured Project Spotlight */}
-        <div className="mb-24">
-                    
-          <h2 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Minimalist section header */}
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
             My Work
           </h2>
-
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
-            <span className="text-[#142240] font-semibold uppercase text-sm tracking-wider">Featured Project</span>
-            <div className="h-1 w-12 bg-[#142240] rounded-full"></div>
-          </div>
-          
-          <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] p-1 rounded-2xl shadow-xl max-w-6xl mx-auto transform hover:scale-[1.01] transition-all duration-500">
-            <div className="bg-white rounded-2xl p-6 md:p-8 overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div className="order-2 lg:order-1">
-                  <div className="inline-flex items-center bg-[#142240]/10 text-[#142240] rounded-full py-1 px-3 mb-4 text-sm font-medium">
-                    <span className="w-2 h-2 bg-[#142240] rounded-full mr-2"></span>
-                    {featuredProject.period}
-                  </div>
-                  
-                  <h3 className="text-3xl font-bold mb-4 text-gray-800">{featuredProject.title}</h3>
-                  
-                  <p className="text-gray-700 mb-6 text-lg">{featuredProject.description}</p>
-                  
-                  <div className="mb-6">
-                    <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                      <FaCode className="w-5 h-5 mr-2 text-[#142240]" />
-                      Key Technologies
-                    </h4>
-                    
-                    {/* Updated Tech Stack Rendering for Featured Project - now using getTechIcon function */}
-                   <div className="flex flex-wrap gap-2">
-                      {Object.entries(featuredProject.techStack).flatMap(([category, techs]) =>
-                        techs.map((tech, idx) => (
-                          <div
-                            key={`${category}-${idx}`}
-                            className="px-3 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium border border-gray-200 shadow-sm flex items-center">
-                            {getTechIcon(tech)}
-                            {tech}
-                          </div>
-                        ))
-                      ).slice(0, 8)}
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-4">
-                    {featuredProject.links?.github && (
-                      <Button 
-                        className="bg-gradient-to-r from-[#142240] to-[#142240] hover:from-[#142240]/90 hover:to-[#142240]/90 text-white font-medium rounded-lg px-6 py-3 gap-2 shadow-lg shadow-[#142240]/30 transition-all hover:shadow-[#142240]/40 text-md"
-                        onClick={() => window.open(featuredProject.links?.github, '_blank')}
-                      >
-                        <FaGithub className="w-5 h-5" />
-                        View Code
-                      </Button>
-                    )}
-                    
-                    {featuredProject.links?.demo && (
-                      <Button 
-                        variant="outline"
-                        className="bg-white hover:bg-gray-50 border-gray-200 text-[#142240] font-medium rounded-lg px-6 py-3 gap-2 shadow-sm transition-all text-md"
-                        onClick={() => window.open(featuredProject.links?.demo, '_blank')}
-                      >
-                        <FiExternalLink className="w-5 h-5" />
-                        Live Demo
-                      </Button>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="order-1 lg:order-2 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#142240]/20 to-[#797F8C]/20 rounded-xl blur-xl transform -translate-y-4 translate-x-4"></div>
-                  <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-white">
-                    <img 
-                      src={featuredProject.image} 
-                      alt={featuredProject.title} 
-                      className="w-full h-64 md:h-80 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent flex items-end p-4">
-                      <div className="inline-flex items-center bg-white/90 backdrop-blur-sm text-gray-800 rounded-full py-1 px-4 text-sm font-medium">
-                        Featured Project
-                        <HiLightningBolt className="w-4 h-4 ml-1 text-yellow-500" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="flex items-center justify-center">
+            <div className="h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full"></div>
           </div>
         </div>
 
-        {/* Project Carousel */}
-        <div className="max-w-6xl mx-auto relative">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-gray-800">
-              More Projects
-            </h3>
-            
-            <div className="flex gap-3">
-              <button
-                onClick={goToPrevProject}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-[#142240]/5 transition-all"
-                disabled={isAnimating}
-              >
-                <HiOutlineChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={goToNextProject}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 hover:bg-[#142240]/5 transition-all"
-                disabled={isAnimating}
-              >
-                <HiOutlineChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          
-          {/* Slider dots */}
-          <div className="flex justify-center mb-8 gap-3">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveProject(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeProject === index 
-                    ? 'bg-[#142240] w-6' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`View project ${index + 1}`}
-              />
-            ))}
-          </div>
-          
-          {/* Project showcase with animation */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              {/* Project Image Side */}
-              <div className="relative h-64 md:h-full">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-all duration-500 transform"
-                  style={{ 
-                    backgroundImage: `url(${currentProject.image})`,
-                    opacity: isAnimating ? 0.5 : 1,
-                    transform: isAnimating ? 'scale(1.05)' : 'scale(1)'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#142240]/60 to-[#142240]/40 mix-blend-multiply"></div>
-                </div>
-                <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
-                  <div className="flex items-center gap-2">
-                    <div className="h-1 w-8 bg-[#797F8C] rounded-full"></div>
-                    <span className="text-sm font-medium text-gray-100">{currentProject.period}</span>
+        {/* Featured Project - More minimal design */}
+        <div className="mb-16 max-w-6xl mx-auto">
+          {projects.filter(p => p.featured).map((project, index) => (
+            <div key={`featured-${index}`} className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Left side - Image */}
+                <div className="relative h-64 lg:h-auto overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-102"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white/80 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                      <HiLightningBolt className="w-3 h-3 mr-1" />
+                      Featured
+                    </span>
                   </div>
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow-md">
-                      {currentProject.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {Object.values(currentProject.techStack).flat().slice(0, 4).map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-md text-xs font-medium flex items-center"
+                </div>
+
+                {/* Right side - Content */}
+                <div className="p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-gray-500 text-sm">{project.period}</span>
+                    <div className="flex space-x-3">
+                      {project.links?.github && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                          aria-label="GitHub"
                         >
+                          <FaGithub className="w-5 h-5" />
+                        </a>
+                      )}
+                      {project.links?.demo && (
+                        <a
+                          href={project.links.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                          aria-label="Live Demo"
+                        >
+                          <FiExternalLink className="w-5 h-5" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 text-sm">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {Object.entries(project.techStack).flatMap(([category, techs]) =>
+                      techs.map((tech, idx) => (
+                        <div
+                          key={`${category}-${idx}`}
+                          className="px-2.5 py-1 bg-gray-50 rounded-md text-xs font-medium border border-gray-100 flex items-center">
                           {getTechIcon(tech)}
                           {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Project Details Side */}
-              <div className="p-6 md:p-8">
-                <p className="text-gray-700 mb-6">{currentProject.description}</p>
-                
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                    <FaLaptopCode className="w-5 h-5 mr-2 text-[#142240]" />
-                    Responsibilities
-                  </h4>
-                  <ul className="space-y-2">
-                    {currentProject.responsibilities.map((resp, idx) => (
-                      <li key={idx} className="flex items-start">
-                        <span className="text-[#142240] mr-2 mt-1">•</span>
-                        <span className="text-gray-700">{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Technology Categories Section */}
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-                    <AiOutlineApartment className="w-5 h-5 mr-2 text-[#142240]" />
-                    Tech Stack
-                  </h4>
-                  <div className="space-y-3">
-                    {Object.entries(currentProject.techStack).map(([category, technologies]) => (
-                      <div key={category} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                        <h5 className="text-sm font-medium mb-2 text-gray-800 flex items-center">
-                          {techCategoryIcons[category as keyof typeof techCategoryIcons] || 
-                           <VscTools className="w-5 h-5 mr-2 text-[#142240]" />}
-                          {category}
-                        </h5>
-                        <div className="flex flex-wrap gap-2">
-                          {technologies.map((tech, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2 py-1 bg-white text-gray-800 rounded-md text-xs font-medium border border-gray-200 shadow-sm flex items-center"
-                            >
-                              {getTechIcon(tech)}
-                              {tech}
-                            </span>
-                          ))}
                         </div>
+                      ))
+                    ).slice(0, 6)}
+                  </div>
+
+                  <div className="space-y-1 mb-4">
+                    {project.responsibilities.slice(0, 2).map((resp, idx) => (
+                      <div key={idx} className="flex items-start text-gray-600 text-sm">
+                        <div className="mr-2 mt-1 text-[#142240] text-xs">•</div>
+                        <div>{resp}</div>
                       </div>
                     ))}
                   </div>
+
+                  {project.links?.demo && (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center mt-2 text-[#142240] hover:text-[#142240]/80 text-sm font-medium"
+                    >
+                      View Live Demo
+                      <FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  )}
                 </div>
-                
-                {/* Only render buttons if links exist */}
-                {(currentProject.links?.github || currentProject.links?.demo) && (
-                  <div className="flex gap-4">
-                    {currentProject.links?.github && (
-                      <Button 
-                        className="bg-gradient-to-r from-[#142240] to-[#142240] hover:from-[#142240]/90 hover:to-[#142240]/90 text-white font-medium rounded-lg px-5 py-2 gap-2 shadow-md transition-all"
-                        onClick={() => window.open(currentProject.links?.github, '_blank')}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Regular Projects - Grid Layout with more minimal design */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {projects.filter(p => !p.featured).map((project, index) => (
+            <div key={`other-${index}`} className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+              {/* Project Header */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#142240]/80 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <span className="inline-block bg-white/90 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-md mb-2">
+                    {project.period}
+                  </span>
+                  <h3 className="text-lg font-bold text-white">{project.title}</h3>
+                </div>
+              </div>
+
+              {/* Project Content */}
+              <div className="p-4">
+                <p className="text-gray-600 mb-3 text-sm">{project.description.substring(0, 100)}...</p>
+
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {Object.entries(project.techStack).flatMap(([category, techs]) =>
+                    techs.slice(0, 1).map((tech, idx) => (
+                      <div
+                        key={`${category}-${idx}`}
+                        className="px-2 py-0.5 bg-gray-50 rounded-md text-xs font-medium border border-gray-100 flex items-center">
+                        {getTechIcon(tech)}
+                        {tech}
+                      </div>
+                    ))
+                  ).slice(0, 4)}
+                </div>
+
+                <div className="flex justify-between items-center mt-2">
+                  <div className="flex space-x-1">
+                    {Object.keys(project.techStack).slice(0, 2).map((category, idx) => (
+                      <span key={idx} className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded">
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex space-x-2">
+                    {project.links?.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                        aria-label="GitHub"
                       >
-                        <FaGithub className="w-5 h-5" />
-                        View Code
-                      </Button>
-                    )}
-                    
-                    {currentProject.links?.demo && (
-                      <Button 
-                        variant="outline"
-                        className="bg-white hover:bg-gray-50 border-gray-200 text-[#142240] font-medium rounded-lg px-5 py-2 gap-2 shadow-sm transition-all"
-                        onClick={() => window.open(currentProject.links?.demo, '_blank')}
-                      >
-                        <FiExternalLink className="w-5 h-5" />
-                        Live Demo
-                      </Button>
+                        <FaGithub className="w-4.5 h-4.5" />
+                      </a>
                     )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
-          </div>
-          
-          {/* Animated project count indicator */}
-          <div className="flex justify-center mt-8 items-center">
-            <span className="text-2xl font-bold text-[#142240] mr-2">{activeProject + 1}</span>
-            <span className="text-[#797F8C] text-lg">/</span>
-            <span className="text-[#797F8C] text-lg ml-2">{projects.length}</span>
-          </div>
+          ))}
         </div>
-        
-        {/* Enhanced Call to Action */}
-        <div className="mt-24 max-w-5xl mx-auto">
-          <div className="bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] rounded-2xl p-0.5 shadow-2xl transform transition-all hover:scale-[1.01] hover:shadow-3xl">
-            <div className="relative bg-gradient-to-br from-[#142240] to-[#142240]/90 rounded-xl p-10 overflow-hidden">
-              {/* Enhanced decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-[#797F8C] opacity-10 blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#797F8C] opacity-10 blur-3xl"></div>
-              <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 animate-pulse blur-2xl"></div>
-              
-              <div className="relative flex flex-col items-center text-center">
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight max-w-2xl">
-                  Ready to bring your vision to life?
-                </h3>
-                
-                <p className="text-gray-300 mb-8 max-w-2xl text-lg">
-                  I specialize in building scalable, high-performance applications with cutting-edge technologies. 
-                  Let's collaborate on your next project and create something exceptional together.
-                </p>
-                
-                <button 
-                  onClick={openContactModal}
-                  className="group inline-flex items-center justify-center bg-gradient-to-r from-[#797F8C] via-[#797F8C] to-[#797F8C] text-white font-medium px-8 py-4 rounded-lg shadow-xl transition-all hover:shadow-2xl hover:opacity-90 text-lg"
-                >
-                  Start a Conversation
-                  <FaArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-              
-              {/* Enhanced decorative elements */}
-              <div className="absolute top-8 right-8 text-yellow-400 opacity-80">
-                <HiLightningBolt className="w-8 h-8" />
-              </div>
-              <div className="absolute bottom-8 left-8 text-blue-400 opacity-80">
-                <HiLightningBolt className="w-6 h-6" />
-              </div>
-            </div>
+
+        {/* View All Projects Button - Minimalist design */}
+        <div className="flex justify-center mt-10">
+          <Button
+            variant="outline"
+            className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm"
+          >
+            View All Projects
+            <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
+          </Button>
+        </div>
+
+        {/* Simplified Call to Action */}
+        <div className="mt-20 max-w-3xl mx-auto">
+          <div className="bg-[#142240] rounded-lg p-6 shadow-md text-center">
+            <h3 className="text-xl font-bold text-white mb-3">
+              Ready to bring your vision to life?
+            </h3>
+
+            <p className="text-gray-300 mb-4 max-w-lg mx-auto text-sm">
+              I specialize in building scalable, high-performance applications with cutting-edge technologies.
+              Let's collaborate on your next project.
+            </p>
+
+            <button
+              onClick={openContactModal}
+              className="group inline-flex items-center justify-center bg-white text-[#142240] font-medium px-5 py-2 rounded-md text-sm transition-all hover:bg-gray-50"
+            >
+              Start a Conversation
+              <FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
         </div>
       </div>

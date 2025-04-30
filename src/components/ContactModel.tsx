@@ -80,10 +80,10 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         </button>
         
         <div className="p-6">
-          <h2 className="text-2xl font-bold mb-2 text-center bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold mb-2 text-center bg-[#797F8C] bg-clip-text text-[#142240]">
             Get in Touch
           </h2>
-          <p className="text-gray-600 mb-6 text-center">
+          <p className="text-[#797F8C] mb-6 text-center">
             Fill out the form below and I'll get back to you as soon as possible.
           </p>
           
@@ -100,7 +100,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-[#797F8C] mb-1">
                   Name
                 </label>
                 <Input
@@ -115,7 +115,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-[#797F8C] mb-1">
                   Email
                 </label>
                 <Input
@@ -131,7 +131,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-[#797F8C] mb-1">
                   Subject
                 </label>
                 <Input
@@ -146,7 +146,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-[#797F8C] mb-1">
                   Message
                 </label>
                 <Textarea
@@ -169,7 +169,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition-colors"
+                className="w-full bg-[#142240] hover:bg-[#2B3342] text-white py-2 rounded-md transition-colors"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
