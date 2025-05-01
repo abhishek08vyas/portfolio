@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { FaGithub, FaArrowRight, FaCode, FaJava, FaAws, FaServer } from "react-icons/fa";
+import { useState } from 'react';
+import { FaGithub, FaArrowRight, FaCode, FaJava, FaAws } from "react-icons/fa";
 import {
   FiExternalLink
 } from "react-icons/fi";
@@ -22,10 +22,9 @@ import {
   SiReact,
   SiFirebase, SiHeroku, SiFlutter
 } from "react-icons/si";
-import { GrReactjs } from "react-icons/gr";
-import { VscTools } from "react-icons/vsc";
 import { Button } from "./ui/button";
 import { ContactModal } from "./ContactModel";
+import Image from 'next/image';
 
 // Specific tech stack icons with their original brand colors
 const techStackIcons = {
@@ -62,7 +61,7 @@ const techStackIcons = {
 };
 
 // Category icons for tech stack
-const techCategoryIcons = {
+/* const techCategoryIcons = {
   "Backend": <FaServer className="w-5 h-5 mr-2 text-[#142240]" />,
   "Frontend": <GrReactjs className="w-5 h-5 mr-2 text-[#142240]" />,
   "Deployment": <SiDocker className="w-5 h-5 mr-2 text-[#142240]" />,
@@ -70,7 +69,7 @@ const techCategoryIcons = {
   "ML/AI": <SiTensorflow className="w-5 h-5 mr-2 text-[#142240]" />,
   "Cloud": <HiCloud className="w-5 h-5 mr-2 text-[#142240]" />,
   "Other": <VscTools className="w-5 h-5 mr-2 text-[#142240]" />
-};
+};*/
 
 interface Project {
   title: string;
@@ -80,7 +79,7 @@ interface Project {
   techStack: {
     [key: string]: string[];
   };
-  image?: string; // URL for project image
+  image: string; // URL for project image
   featured?: boolean;
   links?: {
     github?: string;
@@ -165,23 +164,7 @@ const getTechIcon = (tech: string) => {
 };
 
 export const Projects = () => {
-  const [activeProject, setActiveProject] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-
-  const goToNextProject = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveProject((prev) => (prev + 1) % projects.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const goToPrevProject = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveProject((prev) => (prev - 1 + projects.length) % projects.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
 
   const openContactModal = () => {
     setIsContactModalOpen(true);
@@ -190,15 +173,6 @@ export const Projects = () => {
   const closeContactModal = () => {
     setIsContactModalOpen(false);
   };
-
-  // Automatic slider
-  useEffect(() => {
-    const interval = setInterval(() => {
-      goToNextProject();
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section id="projects" className="relative py-20 overflow-hidden">
@@ -228,11 +202,19 @@ export const Projects = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Left side - Image */}
                 <div className="relative h-64 lg:h-auto overflow-hidden">
-                  <img
+                  <div className="relative w-full h-full">
+                    <Image
                     src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-102"
-                  />
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-500 hover:scale-102"
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: 'center'
+                      }}
+                    />
+                  </div>
                   <div className="absolute top-4 left-4">
                     <span className="bg-white/80 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
                       <HiLightningBolt className="w-3 h-3 mr-1" />
@@ -317,11 +299,18 @@ export const Projects = () => {
             <div key={`other-${index}`} className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
               {/* Project Header */}
               <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    style={{
+                      objectFit: 'cover',
+                    }}
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#142240]/80 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <span className="inline-block bg-white/90 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-md mb-2">
@@ -415,7 +404,7 @@ export const Projects = () => {
 
             <p className="text-gray-300 mb-4 max-w-lg mx-auto text-sm">
               I specialize in building scalable, high-performance applications with cutting-edge technologies.
-              Let's collaborate on your next project.
+              Let&apos;s collaborate on your next project.
             </p>
 
             <button

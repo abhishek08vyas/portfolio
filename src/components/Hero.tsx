@@ -84,7 +84,7 @@ export const Hero = () => {
               Namaste! I am a <span className="font-semibold text-[#142240]">Abhishek Vyas </span> with over 3 years of hands-on experience in building
               <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and
               <span className="font-semibold text-[#142240]"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS.
-              I've worked with clients to solve production issues, led teams, and integrated systems in healthcare and loyalty-based projects.
+              I&apos;ve worked with clients to solve production issues, led teams, and integrated systems in healthcare and loyalty-based projects.
             </p>
 
             <div className="flex flex-wrap justify-center gap-2 mb-4">

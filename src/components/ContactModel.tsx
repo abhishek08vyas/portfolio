@@ -32,9 +32,9 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   
   
     // Use environment variables for EmailJS configuration
-    let emailjsUserId = process.env?.NEXT_PUBLIC_EMAILJS_USER_ID ?? "_Ps4x85xXNJZdeJZwF";
-    let emailjsServiceId = process.env?.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "_service_73hagje";
-    let emailjsTemplateId = process.env?.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "_template_azkrh9n";
+    const emailjsUserId = process.env?.NEXT_PUBLIC_EMAILJS_USER_ID ?? "_Ps4x85xXNJZdeJZwF";
+    const emailjsServiceId = process.env?.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "_service_73hagje";
+    const emailjsTemplateId = process.env?.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "_template_azkrh9n";
     
     // Initialize EmailJS with your user ID
     emailjs.init(emailjsUserId);
@@ -90,7 +90,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             Get in Touch
           </h2>
           <p className="text-[#797F8C] mb-6 text-center">
-            Fill out the form below and I'll get back to you as soon as possible.
+            Fill out the form below and I&apos;ll get back to you as soon as possible.
           </p>
           
           {submitStatus === "success" ? (
@@ -101,7 +101,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-green-600 mb-2">Message Sent!</h3>
-              <p className="text-[#797F8C]">Thank you for reaching out. I'll respond to your message soon.</p>
+              <p className="text-[#797F8C]">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">

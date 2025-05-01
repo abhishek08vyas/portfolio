@@ -223,7 +223,7 @@ export const SkillsAndExperience = () => {
           {/* Skills Content */}
           <div className={`${activeTab === 'skills' ? 'block' : 'hidden'} bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200`}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {Object.entries(skills).map(([category, items], index) => (
+              {Object.entries(skills).map(([category, items]) => (
                 <div
                   key={category}
                   className="rounded-lg bg-gray-50 p-4 border border-gray-200 transition-all hover:shadow-md"
