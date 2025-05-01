@@ -131,8 +131,8 @@ const projects: Project[] = [
     }
   },
   {
-    title: "Social Networking Platform",
-    period: "Aug 2023 - Mar 2024",
+    title: "Ehalo",
+    period: "Jun 2021 - Aug 2023",
     description: "A full-stack social platform allowing users to create profiles, connect with friends, share media, and engage through real-time messaging.",
     responsibilities: [
       "Built a scalable backend API with Node.js and Express",
@@ -141,15 +141,14 @@ const projects: Project[] = [
       "Configured Firebase for authentication and real-time database operations"
     ],
     techStack: {
-      "Backend": ["Node.js", "MongoDB"],
-      "Frontend": ["React", "Tailwind CSS"],
-      "Cloud": ["Firebase", "AWS"],
-      "Other": ["Socket.io", "JWT"]
+      "Backend": ["Node.js", "Express JS", "SQL"],
+      "Frontend": ["Flutter"],
+      "Cloud": ["Heroku"],
     },
-    image: "/images/social_network.jpg",
+    image: "/images/ehalo.jpeg",
     links: {
-      github: "https://github.com/abhishek08vyas/social-network",
-      demo: "https://social-connect-demo.vercel.app/"
+      // github: "https://github.com/abhishek08vyas/social-network",
+      demo: "https://apps.apple.com/ca/app/ehalo/id1588979357"
     }
   }
 ];
@@ -260,11 +259,12 @@ export const Projects = () => {
                           href={project.links.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                          className="border-[#142240] w-9 h-9 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
                           aria-label="Live Demo"
                         >
                           <FiExternalLink className="w-5 h-5" />
                         </a>
+                        
                       )}
                     </div>
                   </div>
@@ -295,15 +295,12 @@ export const Projects = () => {
                   </div>
 
                   {project.links?.demo && (
-                    <a
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center mt-2 text-[#142240] hover:text-[#142240]/80 text-sm font-medium"
-                    >
-                      View Live Demo
-                      <FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    <Button
+                      variant="outline"
+                      className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm">
+                      Live Demo
+                      <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                    </Button>
                   )}
                 </div>
               </div>

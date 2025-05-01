@@ -13,6 +13,9 @@ export default {
 			},
 		},
 		extend: {
+			fontFamily: {
+				signature: ["Dancing Script", "cursive"],
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
@@ -80,6 +83,30 @@ export default {
 						animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
 					},
 				},
+				writing: {
+					"0%, 90%, 100%": {
+						width: "0",
+						borderRight: "2px solid transparent",
+					},
+					"5%": {
+						borderRight: "2px solid hsl(var(--primary))",
+					},
+					"80%": {
+						width: "100%",
+						borderRight: "2px solid hsl(var(--primary))",
+					},
+					"85%": {
+						borderRight: "2px solid transparent",
+					},
+				},
+				"delay-appear": {
+					"0%, 99%": {
+						opacity: "0",
+					},
+					"100%": {
+						opacity: "1",
+					},
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -87,6 +114,8 @@ export default {
 				"fade-in": "fade-in 0.5s ease-out forwards",
 				"spin-slow": "spin-slow 10s linear infinite",
 				"bounce-slow": "bounce-slow 5s infinite",
+				writing: "writing 6s infinite",
+				"delay-appear": "delay-appear 0.1s 3s forwards",
 			},
 		},
 	},

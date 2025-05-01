@@ -81,7 +81,7 @@ export const Hero = () => {
 
           <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-10 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">
-              Hello! I am a <span className="font-semibold text-[#142240]">Senior Software Engineer </span> with over 3 years of hands-on experience in building
+              Namaste! I am a <span className="font-semibold text-[#142240]">Abhishek Vyas </span> with over 3 years of hands-on experience in building
               <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and
               <span className="font-semibold text-[#142240]"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS.
               I've worked with clients to solve production issues, led teams, and integrated systems in healthcare and loyalty-based projects.

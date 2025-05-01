@@ -65,3 +65,61 @@
 		border-color: hsl(var(--border));
 	}
 }
+
+/* Apply Dancing Script font to the font-signature class */
+.font-signature {
+	font-family: var(--font-signature), cursive;
+	font-weight: 700; /* Bolder signature looks better */
+	position: relative;
+	white-space: nowrap;
+}
+
+/* Writing animation for signature */
+@keyframes writing {
+	0%,
+	90%,
+	100% {
+		width: 0;
+		border-right: 2px solid transparent;
+	}
+	5% {
+		border-right: 2px solid hsl(var(--primary));
+	}
+	80% {
+		width: 100%;
+		border-right: 2px solid hsl(var(--primary));
+	}
+	85% {
+		border-right: 2px solid transparent;
+	}
+}
+
+@keyframes delay-appear {
+	0%,
+	99% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.signature-container {
+	position: relative;
+	display: inline-block;
+}
+
+.signature-animated {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	animation: writing 6s infinite;
+}
+
+.signature-static {
+	visibility: hidden;
+	animation: delay-appear 0.1s 3s forwards;
+}
