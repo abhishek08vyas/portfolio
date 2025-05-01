@@ -32,9 +32,9 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   
   
     // Use environment variables for EmailJS configuration
-    const emailjsUserId = process.env?.NEXT_PUBLIC_EMAILJS_USER_ID ?? "_Ps4x85xXNJZdeJZwF";
-    const emailjsServiceId = process.env?.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "_service_73hagje";
-    const emailjsTemplateId = process.env?.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "_template_azkrh9n";
+    const emailjsUserId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "_Ps4x85xXNJZdeJZwF";
+    const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "_service_73hagje";
+    const emailjsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "_template_azkrh9n";
     
     // Initialize EmailJS with your user ID
     emailjs.init(emailjsUserId);
