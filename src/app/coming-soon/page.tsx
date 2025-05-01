@@ -16,8 +16,8 @@ const ComingSoon = () => {
         {/* Background Banner with Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100">
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-blue-300 blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-indigo-300 blur-3xl"></div>
+            <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[##6D71DE] blur-3xl"></div>
             <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-200 blur-3xl"></div>
           </div>
           <div className="absolute inset-0 bg-white/40"></div>
@@ -48,20 +48,20 @@ const ComingSoon = () => {
               <HiOutlineBeaker className="w-32 h-32 text-indigo-600 mx-auto -mt-24 opacity-75" />
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent py-2">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-[#142240] bg-clip-text text-transparent py-2">
   Coming Soon!
 </h1>
             
             <div className="relative mb-6">
-              <h2 className="text-xl md:text-2xl font-semibold text-gray-700">
-                I&apos;am working hard to bring you something amazing
+              <h2 className="text-xl md:text-2xl font-semibold text-[#797F8C]">
+                I&apos;m working hard to bring you something amazing
               </h2>
-              <div className="absolute -bottom-2 left-1/2 w-24 h-1 bg-blue-500 transform -translate-x-1/2 rounded-full"></div>
+              <div className="absolute -bottom-2 left-1/2 w-24 h-1 bg-[#797F8C] transform -translate-x-1/2 rounded-full"></div>
             </div>
             
             <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-8">
-              <p className="text-gray-700 leading-relaxed mb-4 text-center">
-                This page is currently under construction. I&apos;am putting the finishing
+              <p className="text-[#797F8C] leading-relaxed mb-4 text-center">
+                This page is currently under construction. I&apos;m putting the finishing
                 touches on this feature and will launch it very soon. Stay tuned!
               </p>
               
@@ -69,7 +69,7 @@ const ComingSoon = () => {
               <div className="mt-6">
                 <Link href="/" className="inline-block">
                   <Button 
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-600/40"
+                    className="bg-[#142240] hover:bg-[#2B3342] text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-600/40"
                   >
                     <span className="text-lg">Return to Homepage</span>
                   </Button>
