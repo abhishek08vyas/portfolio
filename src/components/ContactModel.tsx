@@ -29,15 +29,21 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+  
+  
+    // Use environment variables for EmailJS configuration
+    let emailjsUserId = process.env?.NEXT_PUBLIC_EMAILJS_USER_ID ?? "_Ps4x85xXNJZdeJZwF";
+    let emailjsServiceId = process.env?.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "_service_73hagje";
+    let emailjsTemplateId = process.env?.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "_template_azkrh9n";
     
     // Initialize EmailJS with your user ID
-    emailjs.init("Ps4x85xXNJZdeJZwF");
+    emailjs.init(emailjsUserId);
     
     try {
       // Send email using EmailJS
       await emailjs.send(
-        "service_73hagje",
-        "template_azkrh9n",
+        emailjsServiceId,
+        emailjsTemplateId,
         {
           name: formData.name,
           email: formData.email,
@@ -95,7 +101,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-green-600 mb-2">Message Sent!</h3>
-              <p className="text-gray-600">Thank you for reaching out. I'll respond to your message soon.</p>
+              <p className="text-[#797F8C]">Thank you for reaching out. I'll respond to your message soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">

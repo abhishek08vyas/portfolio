@@ -20,7 +20,7 @@ import {
   SiNodedotjs,
   SiMongodb,
   SiReact,
-  SiFirebase,
+  SiFirebase, SiHeroku, SiFlutter
 } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { VscTools } from "react-icons/vsc";
@@ -52,9 +52,13 @@ const techStackIcons = {
   "AWS": <FaAws className="w-4 h-4 mr-1 text-[#FF9900]" />,
   "Azure": <HiCloud className="w-4 h-4 mr-1 text-[#0078D4]" />,
   "Node.js": <SiNodedotjs className="w-4 h-4 mr-1 text-[#339933]" />,
+  "Express JS": <SiNodedotjs className="w-4 h-4 mr-1 text-[#000000]" />,
+  "SQL": <SiPostgresql className="w-4 h-4 mr-1 text-[#336791]" />,
   "MongoDB": <SiMongodb className="w-4 h-4 mr-1 text-[#47A248]" />,
   "React": <SiReact className="w-4 h-4 mr-1 text-[#61DAFB]" />,
-  "Firebase": <SiFirebase className="w-4 h-4 mr-1 text-[#FFCA28]" />
+  "Firebase": <SiFirebase className="w-4 h-4 mr-1 text-[#FFCA28]" />,
+  "Flutter": <SiFlutter className="w-4 h-4 mr-1 text-[#02569B]" />,
+  "Heroku": <SiHeroku className="w-4 h-4 mr-1 text-[#430098]" />
 };
 
 // Category icons for tech stack
@@ -120,7 +124,7 @@ const projects: Project[] = [
       "Implemented secure video processing and privacy compliance"
     ],
     techStack: {
-      "ML/AI": ["TensorFlow", "MediaPipe", "NumPy", "scikit-learn"],
+      "ML/AI": ["TensorFlow", "MediaPipe", "NumPy", "scikit-learn", "PostgreSQL"],
       "Mobile": ["iOS", "Swift"],
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
@@ -133,12 +137,11 @@ const projects: Project[] = [
   {
     title: "Ehalo",
     period: "Jun 2021 - Aug 2023",
-    description: "A full-stack social platform allowing users to create profiles, connect with friends, share media, and engage through real-time messaging.",
+    description: "Ehalo is a free trip planner app. It allows you to create trips, events and checklists. You can also attach the checklist with your trips.",
     responsibilities: [
-      "Built a scalable backend API with Node.js and Express",
-      "Implemented real-time chat functionality using Socket.io",
-      "Designed responsive UI components with React and styled-components",
-      "Configured Firebase for authentication and real-time database operations"
+      "Led the Backend Team and Developed Rest APIs using ExpressJS, MVC architecture and MySQL.",
+      "The features are available online and offline anywhere.",
+      "Share your trips with family and friends to collaborate and have fun.",
     ],
     techStack: {
       "Backend": ["Node.js", "Express JS", "SQL"],
@@ -330,11 +333,12 @@ export const Projects = () => {
 
               {/* Project Content */}
               <div className="p-4">
-                <p className="text-gray-600 mb-3 text-sm">{project.description.substring(0, 100)}...</p>
+                <p className="text-gray-600 mb-3 text-sm">{project.description}</p>
 
+                {/* Updated tech stack section to show all techs */}
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {Object.entries(project.techStack).flatMap(([category, techs]) =>
-                    techs.slice(0, 1).map((tech, idx) => (
+                    techs.map((tech, idx) => (
                       <div
                         key={`${category}-${idx}`}
                         className="px-2 py-0.5 bg-gray-50 rounded-md text-xs font-medium border border-gray-100 flex items-center">
@@ -342,16 +346,17 @@ export const Projects = () => {
                         {tech}
                       </div>
                     ))
-                  ).slice(0, 4)}
+                  ).slice(0, 5)}
                 </div>
 
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex space-x-1">
-                    {Object.keys(project.techStack).slice(0, 2).map((category, idx) => (
-                      <span key={idx} className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded">
-                        {category}
+                    {/* Smart display for remaining tech count with proper singular/plural */}
+                    {Object.values(project.techStack).flat().length > 6 && (
+                      <span className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded">
+                        And {Object.values(project.techStack).flat().length - 5} More {Object.values(project.techStack).flat().length - 6 === 1 ? 'Technology' : 'Technologies'}
                       </span>
-                    ))}
+                    )}
                   </div>
 
                   <div className="flex space-x-2">
@@ -366,6 +371,17 @@ export const Projects = () => {
                         <FaGithub className="w-4.5 h-4.5" />
                       </a>
                     )}
+                    {project.links?.demo && (
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                        aria-label="Live Demo"
+                      >
+                        <FiExternalLink className="w-4.5 h-4.5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -375,13 +391,19 @@ export const Projects = () => {
 
         {/* View All Projects Button - Minimalist design */}
         <div className="flex justify-center mt-10">
-          <Button
-            variant="outline"
-            className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm"
+          <a 
+            href={`${process.env.NEXT_PUBLIC_GITHUB_LINK}?tab=repositories`} 
+            target="_blank" 
+            rel="noopener noreferrer"
           >
-            View All Projects
-            <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
-          </Button>
+            <Button
+              variant="outline"
+              className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm"
+            >
+              View All Projects
+              <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
+            </Button>
+          </a>
         </div>
 
         {/* Simplified Call to Action */}
