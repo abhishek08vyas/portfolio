@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { LuMail } from "react-icons/lu";
 import { HiCode, HiCloud } from "react-icons/hi";
 import { TbBrandJavascript } from "react-icons/tb";
@@ -9,6 +10,7 @@ import { ContactModal } from "./ContactModel";
 
 export const Hero = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const openContactModal = () => {
     setIsContactModalOpen(true);
@@ -16,6 +18,53 @@ export const Hero = () => {
 
   const closeContactModal = () => {
     setIsContactModalOpen(false);
+  };
+
+  // Circular text component
+  const CircularText = () => {
+    const text = "• OPEN TO WORK • HIRE ME ";
+    const chars = text.split("");
+    const radius = 75; // Radius from center of image
+    
+    return (
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <motion.div
+          className="relative"
+          animate={{ 
+            rotate: 360
+          }}
+          transition={{
+            duration: isHovered ? 5 : 15,
+            ease: "linear",
+            repeat: Infinity
+          }}
+        >
+          {chars.map((char, index) => {
+            const angle = (index / chars.length) * 360;
+            const radian = (angle * Math.PI) / 180;
+            const x = Math.cos(radian) * radius;
+            const y = Math.sin(radian) * radius;
+            
+            return (
+              <motion.span
+                key={index}
+                className="absolute text-sm font-bold text-[#142240] select-none"
+                style={{
+                  left: x,
+                  top: y,
+                  transform: `translate(-50%, -50%) rotate(${angle + 90}deg)`,
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                {char}
+              </motion.span>
+            );
+          })}
+        </motion.div>
+      </div>
+    );
   };
 
   return (
@@ -52,19 +101,29 @@ export const Hero = () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center py-8">
-          {/* Profile Image with Enhanced Animated Border */}
-          <div className="relative w-36 h-36 mx-auto mb-8">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#142240] via-[#3D5176] to-[#797F8C] animate-spin-slow"></div>
-            <div className="absolute inset-1 rounded-full bg-white"></div>
-            <div className="absolute inset-2 rounded-full overflow-hidden">
-              <Image
-                src="/images/profile_photo.png"
-                alt="Abhishek Vyas Avatar"
-                width={144}
-                height={144}
-                className="w-full h-full object-cover"
-                priority
-              />
+          {/* Profile Image with Enhanced Animated Border and Circular Text */}
+          <div 
+            className="relative w-40 h-40 mx-auto mb-8"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {/* Circular Text */}
+            <CircularText />
+            
+            {/* Profile Image Container */}
+            <div className="absolute inset-4">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#142240] via-[#3D5176] to-[#797F8C] animate-spin-slow"></div>
+              <div className="absolute inset-1 rounded-full bg-white"></div>
+              <div className="absolute inset-2 rounded-full overflow-hidden">
+                <Image
+                  src="/images/profile_photo.png"
+                  alt="Abhishek Vyas Avatar"
+                  width={144}
+                  height={144}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
 
