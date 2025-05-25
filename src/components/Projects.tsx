@@ -105,7 +105,7 @@ const projects: Project[] = [
       "Frontend": ["NextJS", "Tailwind CSS"],
       "Other": ["Swagger API docs", "JUnit4"]
     },
-    image: "/images/expense_tracker.jpg",
+    image: "/images/expense2.png",
     featured: true,
     links: {
       github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
@@ -128,7 +128,7 @@ const projects: Project[] = [
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
     },
-    image: "/images/ios_app_gesture_recognition.png",
+    image: "/images/ios.png",
     links: {
       github: "https://github.com/abhishek08vyas/gesture_recognition",
     }
