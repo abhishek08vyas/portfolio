@@ -15,7 +15,7 @@ const useTypewriterGreeting = () => {
 
 	useEffect(() => {
 		const currentGreeting = greetings[currentGreetingIndex];
-		let timeoutId: string | number | NodeJS.Timeout | undefined;
+		let timeoutId: NodeJS.Timeout | null = null;
 
 		if (isTyping) {
 			// Typing animation
@@ -133,9 +133,9 @@ export const Hero = () => {
 					className="absolute inset-0 opacity-15"
 					style={{
 						backgroundImage: `
-							linear-gradient(rgba(20, 34, 64, 0.3) 1px, transparent 1px),
-							linear-gradient(90deg, rgba(20, 34, 64, 0.3) 1px, transparent 1px)
-						`,
+                                linear-gradient(rgba(20, 34, 64, 0.3) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(20, 34, 64, 0.3) 1px, transparent 1px)
+                            `,
 						backgroundSize: "60px 60px",
 						animation: "moveGrid 25s linear infinite",
 					}}
@@ -146,13 +146,27 @@ export const Hero = () => {
 					className="absolute inset-0 opacity-10"
 					style={{
 						backgroundImage: `
-							linear-gradient(rgba(121, 127, 140, 0.4) 1px, transparent 1px),
-							linear-gradient(90deg, rgba(121, 127, 140, 0.4) 1px, transparent 1px)
-						`,
+                                linear-gradient(rgba(121, 127, 140, 0.4) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(121, 127, 140, 0.4) 1px, transparent 1px)
+                            `,
 						backgroundSize: "100px 100px",
 						animation: "moveGridReverse 30s linear infinite",
 					}}
 				></div>
+
+				{/* Bottom Gradient Overlay for Smooth Transition */}
+				<div
+					className="pointer-events-none absolute left-0 right-0 bottom-0 h-40 sm:h-56 z-10"
+					style={{
+						background: `
+			linear-gradient(to bottom,
+				rgba(255,255,255,0.2) 0%,
+				#f1f5f9 60%,
+				#f8fafc 100%
+			)
+		`,
+					}}
+				/>
 			</div>
 
 			{/* CSS Animations */}
