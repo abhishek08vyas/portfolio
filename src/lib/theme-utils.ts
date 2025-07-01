@@ -26,6 +26,16 @@ export const colors = {
 		firebase: "#FFCA28",
 		flutter: "#02569B",
 		heroku: "#430098",
+		typescript: "#3178C6",
+		mysql: "#4479A1",
+		redis: "#DC382D",
+		jenkins: "#D24939",
+		git: "#F05032",
+		elasticsearch: "#005571",
+		splunk: "#FF4500",
+		scikitlearn: "#F7931E",
+		mediapipe: "#00A3E0",
+		kafka: "#231F20",
 	},
 	semantic: {
 		success: "#10B981",
@@ -104,6 +114,35 @@ export const commonStyles = {
 
 	// Skill tag styles
 	skillTag: "px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default",
+
+	// Tab styles
+	tab: {
+		container: "inline-flex rounded-lg shadow-md bg-gray-100/70 p-1",
+		button: "px-6 py-2 rounded-lg transition-all flex items-center",
+		active: "bg-white shadow-sm text-[#142240] font-medium",
+		inactive: "text-gray-600 hover:text-gray-800",
+	},
+
+	// Experience card styles
+	experienceCard: {
+		base: "bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm",
+		header: "flex flex-col md:flex-row md:items-center justify-between mb-4",
+		title: "text-xl font-semibold mb-2 md:mb-0 text-gray-800",
+		period: "flex items-center text-gray-600 text-sm bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200",
+		company: "flex items-center text-gray-700 mb-4",
+		skillsSection: "mb-5 p-3 bg-white rounded-lg border border-gray-200",
+		responsibilitiesSection: "bg-white p-3 rounded-lg border border-gray-200",
+	},
+
+	// Open to work section
+	openToWork: {
+		container: "bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl",
+		content: "relative bg-black rounded-lg p-6 overflow-hidden",
+		badge: "inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium",
+		title: "text-xl md:text-2xl font-bold text-white mb-3",
+		description: "text-gray-300",
+		button: "inline-flex items-center justify-center bg-white text-[#142240] font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl group whitespace-nowrap",
+	},
 };
 
 // Responsive utilities
@@ -145,6 +184,7 @@ export const getTechColor = (tech: string): string => {
 		Azure: colors.tech.azure,
 		AWS: colors.tech.aws,
 		JavaScript: colors.tech.javascript,
+		TypeScript: colors.tech.typescript,
 		React: colors.tech.react,
 		"Tailwind CSS": colors.tech.tailwind,
 		Swagger: colors.tech.swagger,
@@ -155,6 +195,15 @@ export const getTechColor = (tech: string): string => {
 		Docker: colors.tech.docker,
 		PostgreSQL: colors.tech.postgresql,
 		MongoDB: colors.tech.mongodb,
+		MySQL: colors.tech.mysql,
+		Redis: colors.tech.redis,
+		Jenkins: colors.tech.jenkins,
+		Git: colors.tech.git,
+		Elasticsearch: colors.tech.elasticsearch,
+		Splunk: colors.tech.splunk,
+		"scikit-learn": colors.tech.scikitlearn,
+		MediaPipe: colors.tech.mediapipe,
+		"Apache Kafka": colors.tech.kafka,
 		Firebase: colors.tech.firebase,
 		Flutter: colors.tech.flutter,
 		Heroku: colors.tech.heroku,

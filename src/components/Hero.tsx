@@ -135,8 +135,8 @@ export const Hero = () => {
 
           {/* Updated Title with smaller, more attractive typography */}
           <div className="relative mb-8">
-            <h2 className={`${heroTypography.title} text-[#797F8C]`}>
-              Senior Software Engineer
+            <h2 className={`${heroTypography.title} `}>
+              Machine Learning Engineer | MLOps Practitioner | Full-Stack Developer
             </h2>
             <div className="absolute -bottom-3 left-1/2 w-32 h-1 bg-gradient-to-r from-[#142240] to-[#3D5176] transform -translate-x-1/2 rounded-full"></div>
           </div>
