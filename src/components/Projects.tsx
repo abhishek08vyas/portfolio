@@ -25,6 +25,7 @@ import {
 import { Button } from "./ui/button";
 import { ContactModal } from "./ContactModel";
 import Image from 'next/image';
+import { colors, commonStyles } from '../lib/theme-utils';
 
 // Specific tech stack icons with their original brand colors
 const techStackIcons = {
@@ -106,7 +107,6 @@ const projects: Project[] = [
       "Other": ["Swagger API docs", "JUnit4"]
     },
     image: "/images/expense2.png",
-    featured: true,
     links: {
       github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
       demo: "https://expense-tracker-mun.vercel.app/"
@@ -128,6 +128,7 @@ const projects: Project[] = [
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
     },
+    featured: true,
     image: "/images/ios.png",
     links: {
       github: "https://github.com/abhishek08vyas/gesture_recognition",
@@ -160,7 +161,7 @@ const getTechIcon = (tech: string) => {
   if (techStackIcons[tech as keyof typeof techStackIcons]) {
     return techStackIcons[tech as keyof typeof techStackIcons];
   }
-  return <HiCode className="w-4 h-4 mr-1 text-gray-800" />;
+  return <HiCode className="w-4 h-4 mr-1" style={{ color: "#6b7280" }} />;
 };
 
 export const Projects = () => {
@@ -177,28 +178,28 @@ export const Projects = () => {
   return (
     <section id="projects" className="relative py-20 overflow-hidden">
       {/* Subtle background with light gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <div className={`absolute inset-0 ${commonStyles.section.background}`}>
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240]/10 blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#797F8C]/10 blur-3xl"></div>
+          <div className={`absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl`} style={{ backgroundColor: `${colors.brand.dark}10` }}></div>
+          <div className={`absolute bottom-10 right-10 w-64 h-64 rounded-full blur-3xl`} style={{ backgroundColor: `${colors.brand.light}10` }}></div>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className={commonStyles.section.container}>
         {/* Minimalist section header */}
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent">
+          <h2 className={commonStyles.header.title}>
             My Work
           </h2>
           <div className="flex items-center justify-center">
-            <div className="h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full"></div>
+            <div className={commonStyles.header.divider}></div>
           </div>
         </div>
 
         {/* Featured Project - More minimal design */}
         <div className="mb-16 max-w-6xl mx-auto">
           {projects.filter(p => p.featured).map((project, index) => (
-            <div key={`featured-${index}`} className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+            <div key={`featured-${index}`} className={`${commonStyles.card.base} ${commonStyles.card.hover}`}>
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Left side - Image */}
                 <div className="relative h-64 lg:h-auto overflow-hidden">
@@ -216,7 +217,7 @@ export const Projects = () => {
                     />
                   </div>
                   <div className="absolute top-4 left-4">
-                    <span className="bg-white/80 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
+                    <span className="bg-white/80 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center" style={{ color: colors.brand.dark }}>
                       <HiLightningBolt className="w-3 h-3 mr-1" />
                       Featured
                     </span>
@@ -244,7 +245,7 @@ export const Projects = () => {
                           href={project.links.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="border-[#142240] w-9 h-9 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
                           aria-label="Live Demo"
                         >
                           <FiExternalLink className="w-5 h-5" />
@@ -273,7 +274,7 @@ export const Projects = () => {
                   <div className="space-y-1 mb-4">
                     {project.responsibilities.slice(0, 2).map((resp, idx) => (
                       <div key={idx} className="flex items-start text-gray-600 text-sm">
-                        <div className="mr-2 mt-1 text-[#142240] text-xs">•</div>
+                        <div className="mr-2 mt-1 text-xs" style={{ color: colors.brand.dark }}>•</div>
                         <div>{resp}</div>
                       </div>
                     ))}
@@ -282,7 +283,12 @@ export const Projects = () => {
                   {project.links?.demo && (
                     <Button
                       variant="outline"
-                      className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm">
+                      className="font-medium px-5 py-2 rounded-md transition-all text-sm"
+                      style={{ 
+                        borderColor: colors.brand.dark,
+                        color: colors.brand.dark,
+                      }}
+                    >
                       Live Demo
                       <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
                     </Button>
@@ -296,7 +302,7 @@ export const Projects = () => {
         {/* Regular Projects - Grid Layout with more minimal design */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {projects.filter(p => !p.featured).map((project, index) => (
-            <div key={`other-${index}`} className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+            <div key={`other-${index}`} className={`${commonStyles.card.base} ${commonStyles.card.hover}`}>
               {/* Project Header */}
               <div className="relative h-48 overflow-hidden">
                 <div className="relative w-full h-full">
@@ -311,9 +317,9 @@ export const Projects = () => {
                     }}
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#142240]/80 to-transparent"></div>
+                <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${colors.brand.dark}80, transparent)` }}></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <span className="inline-block bg-white/90 backdrop-blur-sm text-[#142240] text-xs font-medium px-2.5 py-1 rounded-md mb-2">
+                  <span className="inline-block bg-white/90 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-md mb-2" style={{ color: colors.brand.dark }}>
                     {project.period}
                   </span>
                   <h3 className="text-lg font-bold text-white">{project.title}</h3>
@@ -365,7 +371,7 @@ export const Projects = () => {
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#142240] hover:text-white flex items-center justify-center text-gray-700 transition-colors"
+                        className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
                         aria-label="Live Demo"
                       >
                         <FiExternalLink className="w-4.5 h-4.5" />
@@ -387,7 +393,11 @@ export const Projects = () => {
           >
             <Button
               variant="outline"
-              className="border-[#142240] text-[#142240] hover:bg-[#142240]/5 font-medium px-5 py-2 rounded-md transition-all text-sm"
+              className="font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
+              style={{ 
+                borderColor: colors.brand.dark,
+                color: colors.brand.dark,
+              }}
             >
               View All Projects
               <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
@@ -397,7 +407,7 @@ export const Projects = () => {
 
         {/* Simplified Call to Action */}
         <div className="mt-20 max-w-3xl mx-auto">
-          <div className="bg-[#142240] rounded-lg p-6 shadow-md text-center">
+          <div className="rounded-lg p-6 shadow-md text-center" style={{ backgroundColor: colors.brand.dark }}>
             <h3 className="text-xl font-bold text-white mb-3">
               Ready to bring your vision to life?
             </h3>
@@ -409,7 +419,8 @@ export const Projects = () => {
 
             <button
               onClick={openContactModal}
-              className="group inline-flex items-center justify-center bg-white text-[#142240] font-medium px-5 py-2 rounded-md text-sm transition-all hover:bg-gray-50"
+              className="group inline-flex items-center justify-center bg-white font-medium px-5 py-2 rounded-md text-sm transition-all hover:bg-gray-50"
+              style={{ color: colors.brand.dark }}
             >
               Start a Conversation
               <FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />

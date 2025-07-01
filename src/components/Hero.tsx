@@ -7,6 +7,7 @@ import { SiSpringboot } from "react-icons/si";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { ContactModal } from "./ContactModel";
+import { commonStyles, responsive, heroTypography } from "@/lib/theme-utils";
 
 export const Hero = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -99,7 +100,7 @@ export const Hero = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className={responsive.container + " relative z-10"}>
         <div className="max-w-3xl mx-auto text-center py-8">
           {/* Profile Image with Enhanced Animated Border and Circular Text */}
           <div 
@@ -127,18 +128,20 @@ export const Hero = () => {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text text-transparent" style={{ padding: "0.5rem" }}>
+          {/* Updated Name with smaller, more attractive typography */}
+          <h1 className={`${heroTypography.name} mb-2 bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text text-transparent`} style={{ padding: "0.5rem" }}>
             Abhishek Vyas
           </h1>
 
+          {/* Updated Title with smaller, more attractive typography */}
           <div className="relative mb-8">
-            <h2 className="text-xl md:text-2xl font-semibold text-[#797F8C]">
-              Senior Software Engineer
+            <h2 className={`${heroTypography.title} `}>
+              Machine Learning Engineer | MLOps Practitioner | Full-Stack Developer
             </h2>
             <div className="absolute -bottom-3 left-1/2 w-32 h-1 bg-gradient-to-r from-[#142240] to-[#3D5176] transform -translate-x-1/2 rounded-full"></div>
           </div>
 
-          <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-lg mb-10 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+          <div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-6 mb-10`}>
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">
               Namaste! I am a <span className="font-semibold text-[#142240]">Abhishek Vyas </span> with over 3 years of hands-on experience in building
               <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and
@@ -148,7 +151,7 @@ export const Hero = () => {
 
             <div className="flex flex-wrap justify-center gap-2 mb-4">
               {["Java", "Spring Boot", "Kafka", "Microservices", "Azure", "AWS", "React"].map((skill) => (
-                <span key={skill} className="px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default">
+                <span key={skill} className={commonStyles.skillTag}>
                   {skill}
                 </span>
               ))}
@@ -162,7 +165,7 @@ export const Hero = () => {
               className="inline-flex group transform transition-transform hover:scale-105 duration-300"
             >
               <Button
-                className="bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md px-8 py-6 gap-3 flex items-center justify-center shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30"
+                className={`${commonStyles.button.primary} px-8 py-6 gap-3 flex items-center justify-center`}
               >
                 <LuMail className="w-6 h-6 group-hover:animate-bounce" />
                 <span className="text-lg">Contact Me</span>
