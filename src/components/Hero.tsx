@@ -1,17 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { LuMail } from "react-icons/lu";
-import { HiCode, HiCloud } from "react-icons/hi";
-import { TbBrandJavascript } from "react-icons/tb";
-import { SiSpringboot } from "react-icons/si";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { ContactModal } from "./ContactModel";
 import { commonStyles, responsive, heroTypography } from "@/lib/theme-utils";
+import { SiPostgresql, SiDocker, SiTensorflow, SiPython, SiFlask, SiNodedotjs, SiMongodb, SiReact, SiFirebase, SiHeroku } from "react-icons/si";
+import { FaCode, FaAws } from "react-icons/fa";
+import { HiCloud } from "react-icons/hi";
+
+// Custom hook for typewriter greeting animation
+const useTypewriterGreeting = () => {
+  const greetings = ["Namaste!","Hola!", "Bonjour!", "Konnichiwa!", "Ciao!", "Hallo!"];
+  const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    const currentGreeting = greetings[currentGreetingIndex];
+    let timeoutId;
+
+    if (isTyping) {
+      // Typing animation
+      if (displayText.length < currentGreeting.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(currentGreeting.slice(0, displayText.length + 1));
+        }, 100); // Speed of typing (100ms per character)
+      } else {
+        // Finished typing, wait before erasing
+        timeoutId = setTimeout(() => {
+          setIsTyping(false);
+        }, 2000); // Wait 2 seconds before erasing
+      }
+    } else {
+      // Erasing animation
+      if (displayText.length > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 50); // Speed of erasing (50ms per character - faster than typing)
+      } else {
+        // Finished erasing, move to next greeting
+        setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
+        setIsTyping(true);
+      }
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [displayText, isTyping, currentGreetingIndex, greetings]);
+
+  return { displayText, isTyping };
+};
+
+const techStackIcons = {
+  "PostgreSQL": <SiPostgresql className="w-10 h-10 mr-1 text-[#336791]" />,
+  "Docker": <SiDocker className="w-10 h-10 mr-1 text-[#2496ED]" />,
+  "TensorFlow": <SiTensorflow className="w-10 h-10 mr-1 text-[#FF6F00]" />,
+  "MediaPipe": <FaCode className="w-10 h-10 mr-1 text-gray-800" />,
+  "scikit-learn": <SiPython className="w-10 h-10 mr-1 text-[#F7931E]" />,
+  "Python": <SiPython className="w-10 h-10 mr-1 text-[#3776AB]" />,
+  "Flask": <SiFlask className="w-10 h-10 mr-1 text-[#000000]" />,
+  "AWS Lambda": <FaAws className="w-10 h-10 mr-1 text-[#FF9900]" />,
+  "AWS": <FaAws className="w-10 h-10 mr-1 text-[#FF9900]" />,
+  "Azure": <HiCloud className="w-10 h-10 mr-1 text-[#0078D4]" />,
+  "Node.js": <SiNodedotjs className="w-10 h-10 mr-1 text-[#339933]" />,
+  "MongoDB": <SiMongodb className="w-10 h-10 mr-1 text-[#47A248]" />,
+  "React": <SiReact className="w-10 h-10 mr-1 text-[#61DAFB]" />,
+  "Firebase": <SiFirebase className="w-10 h-10 mr-1 text-[#FFCA28]" />,
+  "Heroku": <SiHeroku className="w-10 h-10 mr-1 text-[#430098]" />
+};
 
 export const Hero = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { displayText, isTyping } = useTypewriterGreeting();
 
   const openContactModal = () => {
     setIsContactModalOpen(true);
@@ -21,8 +82,8 @@ export const Hero = () => {
     setIsContactModalOpen(false);
   };
 
-  // Circular text component
-  const CircularText = () => {
+  // Memoized Circular text component to prevent unnecessary re-renders
+  const CircularText = useMemo(() => {
     const text = "• OPEN TO WORK • HIRE ME ";
     const chars = text.split("");
     const radius = 75; // Radius from center of image
@@ -39,6 +100,8 @@ export const Hero = () => {
             ease: "linear",
             repeat: Infinity
           }}
+          // Add will-change for better performance
+          style={{ willChange: 'transform' }}
         >
           {chars.map((char, index) => {
             const angle = (index / chars.length) * 360;
@@ -48,16 +111,20 @@ export const Hero = () => {
             
             return (
               <motion.span
-                key={index}
+                key={`${char}-${index}`} // More stable key
                 className="absolute text-sm font-bold text-[#142240] select-none"
                 style={{
                   left: x,
                   top: y,
                   transform: `translate(-50%, -50%) rotate(${angle + 90}deg)`,
+                  willChange: 'opacity', // Optimize for opacity changes
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ 
+                  delay: index * 0.05,
+                  duration: 0.3, // Shorter duration for smoother animation
+                }}
               >
                 {char}
               </motion.span>
@@ -66,7 +133,7 @@ export const Hero = () => {
         </motion.div>
       </div>
     );
-  };
+  }, [isHovered]); // Only re-create when isHovered changes
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
@@ -83,19 +150,87 @@ export const Hero = () => {
         <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMxLjIgMCAyIC44IDIgMnY4YzAgMS4yLS44IDItMiAycy0yLS44LTItMnYtOGMwLTEuMi44LTIgMi0yem0wIDEyYzEuMiAwIDIgLjggMiAydjZjMCAxLjItLjggMi0yIDJzLTItLjgtMi0ydi02YzAtMS4yLjgtMiAyLTJ6Ii8+PC9nPjwvc3ZnPg==')]"></div>
       </div>
 
-      {/* Floating Tech Icons with improved animation */}
+{/* Floating Tech Icons with ML/AI and MLOps focus */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-24 left-1/4 animate-bounce-slow opacity-20">
-          <HiCode className="w-16 h-16 text-[#142240]" />
+        {/* Top Row */}
+        <div className="absolute top-16 left-1/6 animate-bounce-slow opacity-15" style={{ animationDelay: "0.5s" }}>
+          {techStackIcons.Python}
         </div>
-        <div className="absolute top-1/3 right-1/6 animate-bounce-slow opacity-20" style={{ animationDelay: "1.5s" }}>
-          <SiSpringboot className="w-16 h-16 text-green-600" />
+        <div className="absolute top-20 left-1/3 animate-pulse opacity-15" style={{ animationDuration: "4s" }}>
+          {techStackIcons.TensorFlow}
         </div>
-        <div className="absolute bottom-24 left-3/4 animate-pulse opacity-20" style={{ animationDuration: "3s" }}>
-          <HiCloud className="w-12 h-12 text-[#797F8C]" />
+        <div className="absolute top-16 left-1/2 animate-bounce-slow opacity-15" style={{ animationDelay: "1s" }}>
+          {techStackIcons.React}
         </div>
-        <div className="absolute bottom-1/3 left-1/6 animate-pulse opacity-20" style={{ animationDuration: "4s" }}>
-          <TbBrandJavascript className="w-12 h-12 text-yellow-500" />
+        <div className="absolute top-20 left-2/3 animate-pulse opacity-15" style={{ animationDuration: "3.5s" }}>
+          {techStackIcons.AWS}
+        </div>
+        <div className="absolute top-16 left-5/6 animate-bounce-slow opacity-15" style={{ animationDelay: "1.5s" }}>
+          {techStackIcons.Docker}
+        </div>
+
+        {/* Upper Middle Row */}
+        <div className="absolute top-1/3 left-1/8 animate-pulse opacity-15" style={{ animationDuration: "5s" }}>
+          {techStackIcons["scikit-learn"]}
+        </div>
+        <div className="absolute top-1/3 left-4/5 animate-bounce-slow opacity-15" style={{ animationDelay: "2.5s" }}>
+          {techStackIcons.Firebase}
+        </div>
+
+        {/* Middle Row */}
+        <div className="absolute top-1/2 left-1/12 animate-bounce-slow opacity-15" style={{ animationDelay: "3s" }}>
+          {techStackIcons.PostgreSQL}
+        </div>
+        <div className="absolute top-1/2 left-1/3 animate-pulse opacity-15" style={{ animationDuration: "3s" }}>
+          {techStackIcons.Flask}
+        </div>
+        <div className="absolute top-1/2 left-2/3 animate-bounce-slow opacity-15" style={{ animationDelay: "3.5s" }}>
+          {techStackIcons.Azure}
+        </div>
+        <div className="absolute top-1/2 left-11/12 animate-pulse opacity-15" style={{ animationDuration: "4s" }}>
+          {techStackIcons.Heroku}
+        </div>
+
+        {/* Lower Middle Row */}
+        <div className="absolute bottom-1/3 left-1/6 animate-pulse opacity-15" style={{ animationDuration: "5.5s" }}>
+          {techStackIcons["AWS Lambda"]}
+        </div>
+        <div className="absolute bottom-1/3 left-1/2 animate-bounce-slow opacity-15" style={{ animationDelay: "4s" }}>
+          {techStackIcons.MediaPipe}
+        </div>
+        <div className="absolute bottom-1/3 left-4/5 animate-pulse opacity-15" style={{ animationDuration: "3.5s" }}>
+          {techStackIcons.Python}
+        </div>
+
+        {/* Bottom Row */}
+        <div className="absolute bottom-20 left-1/8 animate-bounce-slow opacity-15" style={{ animationDelay: "4.5s" }}>
+          {techStackIcons.TensorFlow}
+        </div>
+        <div className="absolute bottom-16 left-1/4 animate-pulse opacity-15" style={{ animationDuration: "4s" }}>
+          {techStackIcons.React}
+        </div>
+        <div className="absolute bottom-20 left-1/2 animate-bounce-slow opacity-15" style={{ animationDelay: "5s" }}>
+          {techStackIcons.Docker}
+        </div>
+        <div className="absolute bottom-16 left-3/4 animate-pulse opacity-15" style={{ animationDuration: "3s" }}>
+          {techStackIcons.AWS}
+        </div>
+        <div className="absolute bottom-20 left-5/6 animate-bounce-slow opacity-15" style={{ animationDelay: "5.5s" }}>
+          {techStackIcons["Node.js"]}
+        </div>
+
+        {/* Additional scattered icons for more coverage */}
+        <div className="absolute top-1/4 left-1/12 animate-pulse opacity-10" style={{ animationDuration: "6s" }}>
+          {techStackIcons.MongoDB}
+        </div>
+        <div className="absolute top-3/4 left-1/6 animate-bounce-slow opacity-10" style={{ animationDelay: "6s" }}>
+          {techStackIcons.Firebase}
+        </div>
+        <div className="absolute top-1/6 left-4/5 animate-pulse opacity-10" style={{ animationDuration: "5.5s" }}>
+          {techStackIcons.PostgreSQL}
+        </div>
+        <div className="absolute top-5/6 left-1/3 animate-bounce-slow opacity-10" style={{ animationDelay: "6.5s" }}>
+          {techStackIcons.Flask}
         </div>
       </div>
 
@@ -108,8 +243,8 @@ export const Hero = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {/* Circular Text */}
-            <CircularText />
+            {/* Circular Text - Now memoized */}
+            {CircularText}
             
             {/* Profile Image Container */}
             <div className="absolute inset-4">
@@ -143,14 +278,18 @@ export const Hero = () => {
 
           <div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-6 mb-10`}>
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">
-              Namaste! I am a <span className="font-semibold text-[#142240]">Abhishek Vyas </span> with over 3 years of hands-on experience in building
-              <span className="font-semibold text-[#142240]"> Scalable Backend Systems</span> and
-              <span className="font-semibold text-[#142240]"> REST APIs</span>. My expertise lies in using Spring Boot, Java, Kafka, and cloud platforms like Azure and AWS.
-              I&apos;ve worked with clients to solve production issues, led teams, and integrated systems in healthcare and loyalty-based projects.
+              <span className="inline-block">
+                <span className="font-semibold text-[#142240]">
+                  {displayText}
+                </span>
+              </span> I am <span className="font-semibold text-[#142240]">Abhishek Vyas</span>, a passionate Machine Learning Engineer and MLOps Practitioner with over 3 years of experience in developing
+              <span className="font-semibold text-[#142240]"> end-to-end ML solutions</span>,
+              <span className="font-semibold text-[#142240]"> scalable data pipelines</span>, and
+              <span className="font-semibold text-[#142240]"> production-ready applications</span>. My expertise spans from building and deploying ML models to designing robust backend systems and full-stack applications. I specialize in Python, TensorFlow/PyTorch, cloud platforms (AWS/Azure), and modern web technologies.
             </p>
 
             <div className="flex flex-wrap justify-center gap-2 mb-4">
-              {["Java", "Spring Boot", "Kafka", "Microservices", "Azure", "AWS", "React"].map((skill) => (
+              {["Python", "TensorFlow", "PyTorch", "MLOps", "AWS", "Azure", "React", "Node.js", "Docker", "Kubernetes", "FastAPI", "PostgreSQL"].map((skill) => (
                 <span key={skill} className={commonStyles.skillTag}>
                   {skill}
                 </span>
