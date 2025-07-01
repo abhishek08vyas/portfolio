@@ -10,7 +10,8 @@ import {
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
-import { ContactModal } from './ContactModel'; // Import the ContactModal component
+import { ContactModal } from './ContactModel';
+import { colors, commonStyles, responsive } from '../lib/theme-utils';
 
 interface ExperienceItem {
   title: string;
@@ -75,37 +76,37 @@ const skillIcons = {
 
 // Specific skill icons with their original brand colors
 const specificSkillIcons = {
-  "Java": <FaJava className="w-4 h-4 mr-1 text-[#ED8B00]" />,
-  "JavaScript": <TbBrandJavascript className="w-4 h-4 mr-1 text-[#F7DF1E]" />,
-  "TypeScript": <TbBrandTypescript className="w-4 h-4 mr-1 text-[#3178C6]" />,
-  "Python": <SiPython className="w-4 h-4 mr-1 text-[#3776AB]" />,
+  "Java": <FaJava className="w-4 h-4 mr-1" style={{ color: colors.tech.java }} />,
+  "JavaScript": <TbBrandJavascript className="w-4 h-4 mr-1" style={{ color: colors.tech.javascript }} />,
+  "TypeScript": <TbBrandTypescript className="w-4 h-4 mr-1" style={{ color: colors.tech.typescript }} />,
+  "Python": <SiPython className="w-4 h-4 mr-1" style={{ color: colors.tech.python }} />,
   "Shell": <HiCode className="w-4 h-4 mr-1 text-gray-800" />,
-  "Spring Boot": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
-  "Spring MVC": <SiSpringboot className="w-4 h-4 mr-1 text-[#6DB33F]" />,
+  "Spring Boot": <SiSpringboot className="w-4 h-4 mr-1" style={{ color: colors.tech.spring }} />,
+  "Spring MVC": <SiSpringboot className="w-4 h-4 mr-1" style={{ color: colors.tech.spring }} />,
   "JPA": <FaDatabase className="w-4 h-4 mr-1 text-gray-800" />,
-  "NextJS": <SiNextdotjs className="w-4 h-4 mr-1 text-[#000000]" />,
-  "Tailwind CSS": <SiTailwindcss className="w-4 h-4 mr-1 text-[#38B2AC]" />,
-  "Apache Kafka": <SiApachekafka className="w-4 h-4 mr-1 text-[#231F20]" />,
-  "MySQL": <SiMysql className="w-4 h-4 mr-1 text-[#4479A1]" />,
-  "MongoDB": <SiMongodb className="w-4 h-4 mr-1 text-[#47A248]" />,
-  "PostgreSQL": <SiPostgresql className="w-4 h-4 mr-1 text-[#336791]" />,
-  "Redis": <SiRedis className="w-4 h-4 mr-1 text-[#DC382D]" />,
-  "Azure": <HiCloud className="w-4 h-4 mr-1 text-[#0078D4]" />,
-  "AWS": <FaAws className="w-4 h-4 mr-1 text-[#FF9900]" />,
-  "Jenkins": <SiJenkins className="w-4 h-4 mr-1 text-[#D24939]" />,
-  "Git": <SiGit className="w-4 h-4 mr-1 text-[#F05032]" />,
-  "Docker": <SiDocker className="w-4 h-4 mr-1 text-[#2496ED]" />,
-  "Elastic Search": <SiElasticsearch className="w-4 h-4 mr-1 text-[#005571]" />,
+  "NextJS": <SiNextdotjs className="w-4 h-4 mr-1" style={{ color: "#000000" }} />,
+  "Tailwind CSS": <SiTailwindcss className="w-4 h-4 mr-1" style={{ color: colors.tech.tailwind }} />,
+  "Apache Kafka": <SiApachekafka className="w-4 h-4 mr-1" style={{ color: colors.tech.kafka }} />,
+  "MySQL": <SiMysql className="w-4 h-4 mr-1" style={{ color: colors.tech.mysql }} />,
+  "MongoDB": <SiMongodb className="w-4 h-4 mr-1" style={{ color: colors.tech.mongodb }} />,
+  "PostgreSQL": <SiPostgresql className="w-4 h-4 mr-1" style={{ color: colors.tech.postgresql }} />,
+  "Redis": <SiRedis className="w-4 h-4 mr-1" style={{ color: colors.tech.redis }} />,
+  "Azure": <HiCloud className="w-4 h-4 mr-1" style={{ color: colors.tech.azure }} />,
+  "AWS": <FaAws className="w-4 h-4 mr-1" style={{ color: colors.tech.aws }} />,
+  "Jenkins": <SiJenkins className="w-4 h-4 mr-1" style={{ color: colors.tech.jenkins }} />,
+  "Git": <SiGit className="w-4 h-4 mr-1" style={{ color: colors.tech.git }} />,
+  "Docker": <SiDocker className="w-4 h-4 mr-1" style={{ color: colors.tech.docker }} />,
+  "Elastic Search": <SiElasticsearch className="w-4 h-4 mr-1" style={{ color: colors.tech.elasticsearch }} />,
   "Microservices": <BiNetworkChart className="w-4 h-4 mr-1 text-gray-800" />,
   "Serverless": <FaServer className="w-4 h-4 mr-1 text-gray-800" />,
   "Asynchronous": <BiNetworkChart className="w-4 h-4 mr-1 text-gray-800" />,
-  "React": <GrReactjs className="w-4 h-4 mr-1 text-[#61DAFB]" />,
-  "Linux": <FaServer className="w-4 h-4 mr-1 text-[#FCC624]" />,
-  "Splunk": <FaDatabase className="w-4 h-4 mr-1 text-[#FF4500]" />,
+  "React": <GrReactjs className="w-4 h-4 mr-1" style={{ color: colors.tech.react }} />,
+  "Linux": <FaServer className="w-4 h-4 mr-1" style={{ color: "#FCC624" }} />,
+  "Splunk": <FaDatabase className="w-4 h-4 mr-1" style={{ color: colors.tech.splunk }} />,
   "DevOps": <VscTools className="w-4 h-4 mr-1 text-gray-800" />,
-  "TensorFlow": <SiTensorflow className="w-4 h-4 mr-1 text-[#FF6F00]" />,
-  "scikit-learn": <SiScikitlearn className="w-4 h-4 mr-1 text-[#F7931E]" />,
-  "MediaPipe": <SiMediapipe className="w-4 h-4 mr-1 text-[#00A3E0]" />
+  "TensorFlow": <SiTensorflow className="w-4 h-4 mr-1" style={{ color: colors.tech.tensorflow }} />,
+  "scikit-learn": <SiScikitlearn className="w-4 h-4 mr-1" style={{ color: colors.tech.scikitlearn }} />,
+  "MediaPipe": <SiMediapipe className="w-4 h-4 mr-1" style={{ color: colors.tech.mediapipe }} />
 };
 
 // Simplified skill lists for a cleaner presentation
@@ -119,7 +120,7 @@ const skills = {
 };
 
 export const SkillsAndExperience = () => {
-  const [activeTab, setActiveTab] = useState('skills'); // Track active tab: 'skills' or 'experience'
+  const [activeTab, setActiveTab] = useState('skills');
   const [activeExp, setActiveExp] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -165,7 +166,12 @@ export const SkillsAndExperience = () => {
         {skillsArray.map((skill, idx) => (
           <span
             key={idx}
-            className="px-2 py-1 bg-white text-gray-800 rounded-md text-xs font-medium border border-gray-200 shadow-sm flex items-center hover:shadow-md transition-shadow"
+            className="px-2 py-1 bg-white rounded-md text-xs font-medium border shadow-sm flex items-center hover:shadow-md transition-shadow"
+            style={{
+              color: "#1e293b",
+              borderColor: "#e2e8f0",
+              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+            }}
           >
             {getSkillIcon(skill)}
             {skill}
@@ -176,30 +182,35 @@ export const SkillsAndExperience = () => {
   };
 
   return (
-    <section id="skills-experience" className="relative py-16 overflow-hidden">
+    <section id="skills-experience" className="relative py-16 overflow-hidden" style={{ background: "#f8fafc" }}>
       {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200">
+      <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom right, #f1f5f9, #ffffff, #f8fafc)` }}>
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#797F8C] blur-3xl"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl" style={{ backgroundColor: colors.brand.dark }}></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full blur-3xl" style={{ backgroundColor: colors.brand.light }}></div>
         </div>
-        <div className="absolute inset-0 bg-white/40"></div>
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-[#142240] to-[#797F8C] bg-clip-text text-transparent">
+      <div className={responsive.container + " relative z-10"}>
+        <h2 className="text-4xl font-bold text-center mb-8" style={{
+          background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
           Skills & Experience
         </h2>
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-lg shadow-md bg-gray-100/70 p-1">
+          <div className={commonStyles.tab.container}>
             <button
               onClick={() => setActiveTab('skills')}
-              className={`px-6 py-2 rounded-lg transition-all flex items-center ${
+              className={`${commonStyles.tab.button} ${
                 activeTab === 'skills'
-                  ? 'bg-white shadow-sm text-[#142240] font-medium'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? commonStyles.tab.active
+                  : commonStyles.tab.inactive
               }`}
             >
               <FaLaptopCode className="w-5 h-5 mr-2" />
@@ -207,10 +218,10 @@ export const SkillsAndExperience = () => {
             </button>
             <button
               onClick={() => setActiveTab('experience')}
-              className={`px-6 py-2 rounded-lg transition-all flex items-center ${
+              className={`${commonStyles.tab.button} ${
                 activeTab === 'experience'
-                  ? 'bg-white shadow-sm text-[#142240] font-medium'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? commonStyles.tab.active
+                  : commonStyles.tab.inactive
               }`}
             >
               <FaBuilding className="w-5 h-5 mr-2" />
@@ -221,14 +232,18 @@ export const SkillsAndExperience = () => {
 
         <div className="max-w-5xl mx-auto">
           {/* Skills Content */}
-          <div className={`${activeTab === 'skills' ? 'block' : 'hidden'} bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200`}>
+          <div className={`${activeTab === 'skills' ? 'block' : 'hidden'} ${commonStyles.card.base} ${commonStyles.card.hover} p-8`}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(skills).map(([category, items]) => (
                 <div
                   key={category}
-                  className="rounded-lg bg-gray-50 p-4 border border-gray-200 transition-all hover:shadow-md"
+                  className="rounded-lg p-4 border transition-all hover:shadow-md"
+                  style={{
+                    backgroundColor: "#f1f5f9",
+                    borderColor: "#e2e8f0"
+                  }}
                 >
-                  <h4 className="text-lg font-medium mb-3 text-gray-800 flex items-center">
+                  <h4 className="text-lg font-medium mb-3 flex items-center" style={{ color: "#1e293b" }}>
                     <span className="mr-2">
                       {skillIcons[category as keyof typeof skillIcons]}
                     </span>
@@ -238,7 +253,13 @@ export const SkillsAndExperience = () => {
                     {items.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-2 bg-white text-gray-800 rounded-lg text-sm font-medium border border-gray-200 shadow-sm flex items-center hover:shadow-md transition-all"
+                        className="px-3 py-2 rounded-lg text-sm font-medium border shadow-sm flex items-center hover:shadow-md transition-all"
+                        style={{
+                          backgroundColor: "#ffffff",
+                          color: "#1e293b",
+                          borderColor: "#e2e8f0",
+                          boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+                        }}
                       >
                         {getSkillIcon(skill)}
                         {skill}
@@ -251,7 +272,7 @@ export const SkillsAndExperience = () => {
           </div>
 
           {/* Experience Content */}
-          <div className={`${activeTab === 'experience' ? 'block' : 'hidden'} bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-gray-200`}>
+          <div className={`${activeTab === 'experience' ? 'block' : 'hidden'} ${commonStyles.card.base} ${commonStyles.card.hover} p-8`}>
             {/* Slider controls */}
             <div className="flex justify-center mb-6 gap-3">
               {experiences.map((exp, index) => (
@@ -260,9 +281,12 @@ export const SkillsAndExperience = () => {
                   onClick={() => setActiveExp(index)}
                   className={`w-4 h-4 rounded-full transition-all duration-300 ${
                     activeExp === index
-                      ? 'bg-[#142240] scale-125'
-                      : 'bg-gray-300 hover:bg-gray-400'
+                      ? 'scale-125'
+                      : 'hover:bg-gray-400'
                   }`}
+                  style={{
+                    backgroundColor: activeExp === index ? colors.brand.dark : "#cbd5e0"
+                  }}
                   aria-label={`View experience ${index + 1}`}
                 />
               ))}
@@ -282,35 +306,35 @@ export const SkillsAndExperience = () => {
                     key={index}
                     className="min-w-full px-2"
                   >
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm mb-6">
+                    <div className={commonStyles.experienceCard.base}>
                       <div className="flex flex-col justify-between h-full">
                         <div>
-                          <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                            <h3 className="text-xl font-semibold mb-2 md:mb-0 text-gray-800">{exp.title}</h3>
-                            <div className="flex items-center text-gray-600 text-sm bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200">
-                              <FaCalendarAlt className="w-4 h-4 mr-2 text-gray-500" />
+                          <div className={commonStyles.experienceCard.header}>
+                            <h3 className={commonStyles.experienceCard.title}>{exp.title}</h3>
+                            <div className={commonStyles.experienceCard.period}>
+                              <FaCalendarAlt className="w-4 h-4 mr-2" style={{ color: "#64748b" }} />
                               {exp.period}
                             </div>
                           </div>
-                          <div className="flex items-center text-gray-700 mb-4">
-                            <FaBuilding className="w-4 h-4 mr-2 text-gray-500" />
-                            <span className="font-medium">{exp.company}</span>, {exp.location}
+                          <div className={commonStyles.experienceCard.company}>
+                            <FaBuilding className="w-4 h-4 mr-2" style={{ color: "#64748b" }} />
+                            <span className="font-medium" style={{ color: "#1e293b" }}>{exp.company}</span>, {exp.location}
                           </div>
-                          <div className="mb-5 p-3 bg-white rounded-lg border border-gray-200">
-                            <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                          <div className={commonStyles.experienceCard.skillsSection}>
+                            <h4 className="text-sm font-semibold mb-2 flex items-center" style={{ color: "#1e293b" }}>
                               <FaLaptopCode className="w-4 h-4 mr-2" />
                               Skills:
                             </h4>
                             {renderSkillsWithIcons(exp.skills)}
                           </div>
                         </div>
-                        <div className="bg-white p-3 rounded-lg border border-gray-200">
-                          <h4 className="text-sm font-semibold text-gray-700 mb-2">Key Responsibilities:</h4>
+                        <div className={commonStyles.experienceCard.responsibilitiesSection}>
+                          <h4 className="text-sm font-semibold mb-2" style={{ color: "#1e293b" }}>Key Responsibilities:</h4>
                           <ul className="space-y-2">
                             {exp.responsibilities.map((resp, idx) => (
                               <li key={idx} className="flex items-start">
-                                <span className="text-gray-500 mr-2 mt-1">•</span>
-                                <span className="text-gray-700">{resp}</span>
+                                <span className="mr-2 mt-1" style={{ color: "#64748b" }}>•</span>
+                                <span style={{ color: "#1e293b" }}>{resp}</span>
                               </li>
                             ))}
                           </ul>
@@ -325,26 +349,26 @@ export const SkillsAndExperience = () => {
 
           {/* Open to Work & Hire Me Section - Always visible */}
           <div className="mt-8">
-            <div className="bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl">
-              <div className="relative bg-black rounded-lg p-6 overflow-hidden">
+            <div className={commonStyles.openToWork.container}>
+              <div className={commonStyles.openToWork.content}>
                 {/* Decorative elements */}
-                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-[#142240] opacity-20 blur-xl"></div>
-                <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full bg-[#797F8C] opacity-20 blur-xl"></div>
+                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full blur-xl" style={{ backgroundColor: colors.brand.dark, opacity: 0.2 }}></div>
+                <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full blur-xl" style={{ backgroundColor: colors.brand.light, opacity: 0.2 }}></div>
 
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                   <div className="mb-6 md:mb-0 md:mr-6">
                     {/* Status badge */}
-                    <div className="inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    <div className={commonStyles.openToWork.badge}>
+                      <span className="w-2 h-2 rounded-full mr-2 animate-pulse" style={{ backgroundColor: colors.semantic.success }}></span>
                       Open to Work
                     </div>
 
                     {/* Main content */}
-                    <h4 className="text-xl md:text-2xl font-bold text-white mb-3">
+                    <h4 className={commonStyles.openToWork.title}>
                       Transforming complex challenges into elegant solutions
                     </h4>
 
-                    <p className="text-gray-300">
+                    <p className={commonStyles.openToWork.description}>
                       With expertise in Java & cloud technologies, I build scalable systems that deliver business value.
                     </p>
                   </div>
@@ -352,7 +376,7 @@ export const SkillsAndExperience = () => {
                   {/* Hire Me button - Modified to open contact modal */}
                   <button
                     onClick={openContactModal}
-                    className="inline-flex items-center justify-center bg-white text-[#142240] font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl group whitespace-nowrap"
+                    className={commonStyles.openToWork.button}
                   >
                     <FaBriefcase className="w-5 h-5 mr-2" />
                     Hire Me
@@ -361,7 +385,7 @@ export const SkillsAndExperience = () => {
                 </div>
 
                 {/* Lightning bolt decorative element */}
-                <div className="absolute top-6 right-6 text-yellow-400 opacity-80">
+                <div className="absolute top-6 right-6 opacity-80" style={{ color: colors.semantic.warning }}>
                   <HiLightningBolt className="w-6 h-6" />
                 </div>
               </div>
