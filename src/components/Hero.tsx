@@ -119,7 +119,7 @@ export const Hero = () => {
 			id="hero"
 			className="relative min-h-screen flex items-center pt-16 overflow-hidden"
 		>
-			{/* Background Banner with Refined Gradient */}
+			{/* Background Banner with Refined Gradient and Moving Grid */}
 			<div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-white to-gray-200">
 				<div className="absolute inset-0 opacity-20">
 					<div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-[#142240] blur-3xl"></div>
@@ -127,9 +127,54 @@ export const Hero = () => {
 					<div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-200 blur-3xl"></div>
 				</div>
 				<div className="absolute inset-0 bg-white/40"></div>
-				{/* Subtle grid pattern overlay */}
-				<div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMxLjIgMCAyIC44IDIgMnY4YzAgMS4yLS44IDItMiAycy0yLS44LTItMnYtOGMwLTEuMi44LTIgMi0yem0wIDEyYzEuMiAwIDIgLjggMiAydjZjMCAxLjItLjggMi0yIDJzLTItLjgtMi0ydi02YzAtMS4yLjgtMiAyLTJ6Ii8+PC9nPjwvc3ZnPg==')]"></div>
+
+				{/* Moving grid overlay */}
+				<div
+					className="absolute inset-0 opacity-15"
+					style={{
+						backgroundImage: `
+							linear-gradient(rgba(20, 34, 64, 0.3) 1px, transparent 1px),
+							linear-gradient(90deg, rgba(20, 34, 64, 0.3) 1px, transparent 1px)
+						`,
+						backgroundSize: "60px 60px",
+						animation: "moveGrid 25s linear infinite",
+					}}
+				></div>
+
+				{/* Secondary grid for depth */}
+				<div
+					className="absolute inset-0 opacity-10"
+					style={{
+						backgroundImage: `
+							linear-gradient(rgba(121, 127, 140, 0.4) 1px, transparent 1px),
+							linear-gradient(90deg, rgba(121, 127, 140, 0.4) 1px, transparent 1px)
+						`,
+						backgroundSize: "100px 100px",
+						animation: "moveGridReverse 30s linear infinite",
+					}}
+				></div>
 			</div>
+
+			{/* CSS Animations */}
+			<style jsx>{`
+				@keyframes moveGrid {
+					0% {
+						transform: translate(0, 0);
+					}
+					100% {
+						transform: translate(60px, 60px);
+					}
+				}
+
+				@keyframes moveGridReverse {
+					0% {
+						transform: translate(0, 0);
+					}
+					100% {
+						transform: translate(-100px, -100px);
+					}
+				}
+			`}</style>
 
 			{/* Main Content */}
 			<div className={responsive.container + " relative z-10"}>
@@ -253,13 +298,13 @@ export const Hero = () => {
 						</div>
 					</div>
 
-					{/* Scroll Indicator - Fixed positioning to avoid overlap */}
+					{/* Scroll Indicator - Enhanced for dark theme */}
 					<div
 						className="absolute left-1/2 transform -translate-x-1/2 animate-bounce"
 						style={{ bottom: "1rem" }}
 					>
-						<div className="w-8 h-12 rounded-full border-2 border-[#142240] flex items-start justify-center p-2">
-							<div className="w-1 h-3 bg-[#142240] rounded-full animate-ping"></div>
+						<div className="w-8 h-12 rounded-full border-2 border-blue-400 flex items-start justify-center p-2 shadow-lg shadow-blue-500/25">
+							<div className="w-1 h-3 bg-blue-400 rounded-full animate-ping"></div>
 						</div>
 					</div>
 				</div>
