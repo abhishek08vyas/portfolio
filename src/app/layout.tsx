@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Dancing_Script } from 'next/font/google';
 import './globals.css';
 
@@ -25,7 +26,9 @@ export default function RootLayout({
       <head>        
         <link rel="icon" href="/images/av2.png" sizes="192x192" />
       </head>
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`${inter.className}`}>{children}
+        <Analytics />
+      </body>
     </html>
   );
 }
