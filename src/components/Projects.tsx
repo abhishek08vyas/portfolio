@@ -106,7 +106,6 @@ const projects: Project[] = [
       "Other": ["Swagger API docs", "JUnit4"]
     },
     image: "/images/expense2.png",
-    featured: true,
     links: {
       github: "https://github.com/abhishek08vyas/ExpenseTracker-Backend",
       demo: "https://expense-tracker-mun.vercel.app/"
@@ -128,6 +127,7 @@ const projects: Project[] = [
       "Backend": ["Python", "Flask"],
       "Cloud": ["AWS Lambda", "S3"]
     },
+    featured: true,
     image: "/images/ios.png",
     links: {
       github: "https://github.com/abhishek08vyas/gesture_recognition",

@@ -2,10 +2,42 @@
 
 @theme {
 	--spacing-20: 5rem; /* Define py-20 equivalent (1rem = 4px) */
+
+	/* Custom brand colors */
+	--brand-dark: #142240;
+	--brand-medium: #3d5176;
+	--brand-light: #797f8c;
+
+	/* Tech colors */
+	--tech-java: #ed8b00;
+	--tech-spring: #6db33f;
+	--tech-azure: #0078d4;
+	--tech-aws: #ff9900;
+	--tech-javascript: #f7931e;
+	--tech-react: #61dafb;
+	--tech-tailwind: #38b2ac;
+	--tech-swagger: #85ea2d;
+	--tech-junit: #25a162;
+	--tech-tensorflow: #ff6f00;
+	--tech-swift: #f05138;
+	--tech-python: #3776ab;
+	--tech-docker: #2496ed;
+	--tech-postgresql: #336791;
+	--tech-mongodb: #47a248;
+	--tech-firebase: #ffca28;
+	--tech-flutter: #02569b;
+	--tech-heroku: #430098;
+
+	/* Semantic colors */
+	--semantic-success: #10b981;
+	--semantic-warning: #f59e0b;
+	--semantic-error: #ef4444;
+	--semantic-info: #3b82f6;
 }
 
 @layer base {
 	:root {
+		/* Your existing shadcn/ui variables */
 		--background: 0 0% 100%;
 		--foreground: 222.2 84% 4.9%;
 		--card: 0 0% 100%;
@@ -56,6 +88,35 @@
 		.section-padding {
 			@apply px-24;
 		}
+	}
+
+	/* Theme-based component classes */
+	.brand-gradient {
+		@apply bg-gradient-to-r from-[#142240] to-[#3D5176];
+	}
+
+	.brand-text-gradient {
+		@apply bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text text-transparent;
+	}
+
+	.card-base {
+		@apply bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100;
+	}
+
+	.card-hover {
+		@apply hover:shadow-xl transition-shadow duration-300;
+	}
+
+	.skill-tag {
+		@apply px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default;
+	}
+
+	.section-header {
+		@apply text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent;
+	}
+
+	.section-divider {
+		@apply h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full;
 	}
 }
 
