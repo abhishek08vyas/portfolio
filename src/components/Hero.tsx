@@ -15,7 +15,7 @@ const useTypewriterGreeting = () => {
 
 	useEffect(() => {
 		const currentGreeting = greetings[currentGreetingIndex];
-		let timeoutId: NodeJS.Timeout | null = null;
+		let timeoutId: string | number | NodeJS.Timeout | undefined;
 
 		if (isTyping) {
 			// Typing animation
