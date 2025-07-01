@@ -5,9 +5,6 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { ContactModal } from "./ContactModel";
 import { commonStyles, responsive, heroTypography } from "@/lib/theme-utils";
-import { SiPostgresql, SiDocker, SiTensorflow, SiPython, SiFlask, SiNodedotjs, SiMongodb, SiReact, SiFirebase, SiHeroku } from "react-icons/si";
-import { FaCode, FaAws } from "react-icons/fa";
-import { HiCloud } from "react-icons/hi";
 
 // Custom hook for typewriter greeting animation
 const useTypewriterGreeting = () => {
@@ -49,22 +46,6 @@ const useTypewriterGreeting = () => {
 	}, [displayText, isTyping, currentGreetingIndex, greetings]);
 
 	return { displayText, isTyping };
-};
-
-const techStackIcons = {
-	PostgreSQL: <SiPostgresql className="w-10 h-10 mr-1 text-[#336791]" />,
-	Docker: <SiDocker className="w-10 h-10 mr-1 text-[#2496ED]" />,
-	TensorFlow: <SiTensorflow className="w-10 h-10 mr-1 text-[#FF6F00]" />,
-	MediaPipe: <FaCode className="w-10 h-10 mr-1 text-gray-800" />,
-	Python: <SiPython className="w-10 h-10 mr-1 text-[#3776AB]" />,
-	Flask: <SiFlask className="w-10 h-10 mr-1 text-[#000000]" />,
-	AWS: <FaAws className="w-10 h-10 mr-1 text-[#FF9900]" />,
-	Azure: <HiCloud className="w-10 h-10 mr-1 text-[#0078D4]" />,
-	"Node.js": <SiNodedotjs className="w-10 h-10 mr-1 text-[#339933]" />,
-	MongoDB: <SiMongodb className="w-10 h-10 mr-1 text-[#47A248]" />,
-	React: <SiReact className="w-10 h-10 mr-1 text-[#61DAFB]" />,
-	Firebase: <SiFirebase className="w-10 h-10 mr-1 text-[#FFCA28]" />,
-	Heroku: <SiHeroku className="w-10 h-10 mr-1 text-[#430098]" />,
 };
 
 export const Hero = () => {
@@ -146,114 +127,8 @@ export const Hero = () => {
 					<div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-200 blur-3xl"></div>
 				</div>
 				<div className="absolute inset-0 bg-white/40"></div>
-
 				{/* Subtle grid pattern overlay */}
 				<div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMxLjIgMCAyIC44IDIgMnY4YzAgMS4yLS44IDItMiAycy0yLS44LTItMnYtOGMwLTEuMi44LTIgMi0yem0wIDEyYzEuMiAwIDIgLjggMiAydjZjMCAxLjItLjggMi0yIDJzLTItLjgtMi0ydi02YzAtMS4yLjgtMiAyLTJ6Ii8+PC9nPjwvc3ZnPg==')]"></div>
-			</div>
-
-			{/* Floating Tech Icons with ML/AI and MLOps focus */}
-			<div className="absolute inset-0 pointer-events-none">
-				{/* Top Row */}
-
-				{/* Upper Middle Row */}
-				<div
-					className="absolute top-1/3 left-4/5 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "2.5s" }}
-				>
-					{techStackIcons.AWS}
-				</div>
-
-				{/* Middle Row */}
-				<div
-					className="absolute top-1/2 left-1/12 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "0.5s" }}
-				>
-					{techStackIcons.Python}
-				</div>
-				<div
-					className="absolute top-1/2 left-1/3 animate-pulse opacity-15"
-					style={{ animationDuration: "3s" }}
-				>
-					{techStackIcons.Flask}
-				</div>
-				<div
-					className="absolute top-1/2 left-2/3 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "3.5s" }}
-				>
-					{techStackIcons.Azure}
-				</div>
-				<div
-					className="absolute top-1/2 left-11/12 animate-pulse opacity-15"
-					style={{ animationDuration: "4s" }}
-				>
-					{techStackIcons.Docker}
-				</div>
-
-				{/* Lower Middle Row */}
-				<div
-					className="absolute bottom-1/3 left-1/2 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "4s" }}
-				>
-					{techStackIcons.MediaPipe}
-				</div>
-
-				{/* Bottom Row */}
-				<div
-					className="absolute bottom-20 left-1/8 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "4.5s" }}
-				>
-					{techStackIcons.Firebase}
-				</div>
-				<div
-					className="absolute bottom-16 left-1/4 animate-pulse opacity-15"
-					style={{ animationDuration: "4s" }}
-				>
-					{techStackIcons.React}
-				</div>
-				<div
-					className="absolute bottom-20 left-1/2 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "5s" }}
-				>
-					{techStackIcons.Heroku}
-				</div>
-				<div
-					className="absolute bottom-16 left-3/4 animate-pulse opacity-15"
-					style={{ animationDuration: "3s" }}
-				>
-					{techStackIcons.AWS}
-				</div>
-				<div
-					className="absolute bottom-20 left-5/6 animate-bounce-slow opacity-15"
-					style={{ animationDelay: "5.5s" }}
-				>
-					{techStackIcons["Node.js"]}
-				</div>
-
-				{/* Additional scattered icons for more coverage */}
-				<div
-					className="absolute top-1/4 left-1/12 animate-pulse opacity-10"
-					style={{ animationDuration: "6s" }}
-				>
-					{techStackIcons.MongoDB}
-				</div>
-				<div
-					className="absolute top-3/4 left-1/6 animate-bounce-slow opacity-10"
-					style={{ animationDelay: "6s" }}
-				>
-					{techStackIcons.TensorFlow}
-				</div>
-				<div
-					className="absolute top-1/6 left-4/5 animate-pulse opacity-10"
-					style={{ animationDuration: "5.5s" }}
-				>
-					{techStackIcons.PostgreSQL}
-				</div>
-				<div
-					className="absolute top-5/6 left-1/3 animate-bounce-slow opacity-10"
-					style={{ animationDelay: "6.5s" }}
-				>
-					{techStackIcons.Flask}
-				</div>
 			</div>
 
 			{/* Main Content */}
@@ -295,18 +170,17 @@ export const Hero = () => {
 
 					{/* Updated Title with smaller, more attractive typography */}
 					<div className="relative mb-8">
-						<h2 className={`${heroTypography.title} `}>AI Engineering Professional | MLOps Practitioner | Full-Stack Developer</h2>
+						<h2 className={`${heroTypography.title} `}>Software Engineer</h2>
 						<div className="absolute -bottom-3 left-1/2 w-32 h-1 bg-gradient-to-r from-[#142240] to-[#3D5176] transform -translate-x-1/2 rounded-full"></div>
 					</div>
 
 					<div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-6 mb-10`}>
 						<p className="text-gray-700 leading-relaxed mb-6 text-justify">
-							<span className="inline-block">
+							<span className="block text-center">
 								<span className="font-semibold text-[#142240]">{displayText}</span>
-							</span>{" "}
-							I am <span className="font-semibold text-[#142240]">Abhishek Vyas</span>, a passionate Machine Learning Engineer and MLOps Practitioner with over 3 years of experience in developing
-							<span className="font-semibold text-[#142240]"> end-to-end ML solutions</span>,<span className="font-semibold text-[#142240]"> scalable data pipelines</span>, and
-							<span className="font-semibold text-[#142240]"> production-ready applications</span>. My expertise spans from building and deploying ML models to designing robust backend systems and full-stack applications. I specialize in Python, TensorFlow/PyTorch, cloud platforms (AWS/Azure), and modern web technologies.
+								<br />
+							</span>
+							I'm a solution-driven <span className="font-semibold text-[#142240]">Software Engineer</span> and <span className="font-semibold text-[#142240]">AI Engineering Practitioner</span> dedicated to turning ideas into impactful technology. I thrive on building robust software and intelligent systems that solve real-world problems. With experience across full-stack development, cloud platforms, and modern machine learning, I deliver scalable, production-ready solutions tailored to diverse domains. Let's create something innovative together!
 						</p>
 
 						<div className="flex flex-wrap justify-center gap-2 mb-4">
