@@ -137,7 +137,7 @@ export const commonStyles = {
 	// Open to work section
 	openToWork: {
 		container: "bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl",
-		content: "relative bg-black rounded-lg p-6 overflow-hidden",
+		content: "relative bg-[#142240] rounded-lg p-6 overflow-hidden",
 		badge: "inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "text-xl md:text-2xl font-bold text-white mb-3",
 		description: "text-gray-300",
