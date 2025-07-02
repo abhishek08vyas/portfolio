@@ -1,7 +1,7 @@
 // components/Experience.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { FaBuilding, FaCalendarAlt, FaLaptopCode, FaArrowRight } from "react-icons/fa";
-import { colors } from "../lib/theme-utils";
+import { colors, commonStyles, responsive } from "../lib/theme-utils";
 import { BiNetworkChart } from "react-icons/bi";
 import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe } from "react-icons/si";
 import { HiCode, HiCloud, HiLightningBolt } from "react-icons/hi";
@@ -9,6 +9,7 @@ import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
 import { FaAws, FaBriefcase, FaJava, FaServer, FaDatabase } from "react-icons/fa";
 import { VscTools } from "react-icons/vsc";
+import { ContactModal } from "./ContactModel";
 
 interface ExperienceItem {
 	title: string;
@@ -205,13 +206,9 @@ const specificSkillIcons = {
 	),
 };
 
-interface ExperienceProps {
-	commonStyles: any;
-	openContactModal: () => void;
-}
-
-export const Experience: React.FC<ExperienceProps> = ({ commonStyles, openContactModal }) => {
+export const Experience: React.FC = () => {
 	const [activeExp, setActiveExp] = useState(0);
+	const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 	const sliderRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -254,174 +251,215 @@ export const Experience: React.FC<ExperienceProps> = ({ commonStyles, openContac
 		);
 	};
 
+	// Open and close modal functions
+	const openContactModal = () => {
+		setIsContactModalOpen(true);
+	};
+
+	const closeContactModal = () => {
+		setIsContactModalOpen(false);
+	};
+
 	return (
 		<>
-			<div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-8 mt-12`}>
-				{" "}
-				{/* Added mt-12 for spacing */}
-				<h3
-					className="text-2xl font-bold text-center mb-6"
-					style={{
-						background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
-						WebkitBackgroundClip: "text",
-						WebkitTextFillColor: "transparent",
-						backgroundClip: "text",
-					}}
-				>
-					Work Experience
-				</h3>
-				{/* Slider controls */}
-				<div className="flex justify-center mb-6 gap-3">
-					{experiences.map((exp, index) => (
-						<button
-							key={index}
-							onClick={() => setActiveExp(index)}
-							className={`w-4 h-4 rounded-full transition-all duration-300 ${activeExp === index ? "scale-125" : "hover:bg-gray-400"}`}
-							style={{
-								backgroundColor: activeExp === index ? colors.brand.dark : "#cbd5e0",
-							}}
-							aria-label={`View experience ${index + 1}`}
-						/>
-					))}
-				</div>
-				{/* Slider container */}
+			<section
+				id="experience"
+				className="relative py-16 overflow-hidden"
+				style={{ background: "#f8fafc" }}
+			>
+				{/* Background with gradient */}
 				<div
-					ref={sliderRef}
-					className="transition-all duration-500 ease-in-out overflow-hidden"
+					className="absolute inset-0"
+					style={{ background: `linear-gradient(to bottom right, #f1f5f9, #ffffff, #f8fafc)` }}
 				>
+					<div className="absolute inset-0 opacity-10">
+						<div
+							className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl"
+							style={{ backgroundColor: colors.brand.dark }}
+						></div>
+						<div
+							className="absolute bottom-10 right-10 w-64 h-64 rounded-full blur-3xl"
+							style={{ backgroundColor: colors.brand.light }}
+						></div>
+					</div>
 					<div
-						className="flex"
-						style={{ transform: `translateX(-${activeExp * 100}%)` }}
-					>
-						{experiences.map((exp, index) => (
-							<div
-								key={index}
-								className="min-w-full px-2"
+						className="absolute inset-0"
+						style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+					></div>
+				</div>
+
+				<div className={responsive.container + " relative z-10"}>
+					<div className="max-w-5xl mx-auto">
+						<div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+							<h3
+								className="text-2xl font-bold text-center mb-6"
+								style={{
+									background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
+									WebkitBackgroundClip: "text",
+									WebkitTextFillColor: "transparent",
+									backgroundClip: "text",
+								}}
 							>
-								<div className={commonStyles.experienceCard.base}>
-									<div className="flex flex-col justify-between h-full">
-										<div>
-											<div className={commonStyles.experienceCard.header}>
-												<h3 className={commonStyles.experienceCard.title}>{exp.title}</h3>
-												<div className={commonStyles.experienceCard.period}>
-													<FaCalendarAlt
-														className="w-4 h-4 mr-2"
-														style={{ color: "#64748b" }}
-													/>
-													{exp.period}
+								Work Experience
+							</h3>
+							{/* Slider controls */}
+							<div className="flex justify-center mb-6 gap-3">
+								{experiences.map((exp, index) => (
+									<button
+										key={index}
+										onClick={() => setActiveExp(index)}
+										className={`w-4 h-4 rounded-full transition-all duration-300 ${activeExp === index ? "scale-125" : "hover:bg-gray-400"}`}
+										style={{
+											backgroundColor: activeExp === index ? colors.brand.dark : "#cbd5e0",
+										}}
+										aria-label={`View experience ${index + 1}`}
+									/>
+								))}
+							</div>
+							{/* Slider container */}
+							<div
+								ref={sliderRef}
+								className="transition-all duration-500 ease-in-out overflow-hidden"
+							>
+								<div
+									className="flex"
+									style={{ transform: `translateX(-${activeExp * 100}%)` }}
+								>
+									{experiences.map((exp, index) => (
+										<div
+											key={index}
+											className="min-w-full px-2"
+										>
+											<div className="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow">
+												<div className="flex flex-col justify-between h-full">
+													<div>
+														<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+															<h3 className="text-xl font-bold text-gray-900 mb-2 sm:mb-0">{exp.title}</h3>
+															<div className="flex items-center text-sm text-gray-600">
+																<FaCalendarAlt
+																	className="w-4 h-4 mr-2"
+																	style={{ color: "#64748b" }}
+																/>
+																{exp.period}
+															</div>
+														</div>
+														<div className="flex items-center text-sm text-gray-600 mb-4">
+															<FaBuilding
+																className="w-4 h-4 mr-2"
+																style={{ color: "#64748b" }}
+															/>
+															<span
+																className="font-medium"
+																style={{ color: "#1e293b" }}
+															>
+																{exp.company}
+															</span>
+															, {exp.location}
+														</div>
+														<div className="mb-4">
+															<h4
+																className="text-sm font-semibold mb-2 flex items-center"
+																style={{ color: "#1e293b" }}
+															>
+																<FaLaptopCode className="w-4 h-4 mr-2" />
+																Skills:
+															</h4>
+															{renderSkillsWithIcons(exp.skills)}
+														</div>
+													</div>
+													<div className="mt-4">
+														<h4
+															className="text-sm font-semibold mb-2"
+															style={{ color: "#1e293b" }}
+														>
+															Key Responsibilities:
+														</h4>
+														<ul className="space-y-2">
+															{exp.responsibilities.map((resp, idx) => (
+																<li
+																	key={idx}
+																	className="flex items-start"
+																>
+																	<span
+																		className="mr-2 mt-1"
+																		style={{ color: "#64748b" }}
+																	>
+																		•
+																	</span>
+																	<span style={{ color: "#1e293b" }}>{resp}</span>
+																</li>
+															))}
+														</ul>
+													</div>
 												</div>
 											</div>
-											<div className={commonStyles.experienceCard.company}>
-												<FaBuilding
-													className="w-4 h-4 mr-2"
-													style={{ color: "#64748b" }}
-												/>
+										</div>
+									))}
+								</div>
+							</div>
+						</div>
+
+						{/* Open to Work & Hire Me Section - Always visible */}
+						<div className="mt-8">
+							<div className={commonStyles.openToWork.container}>
+								<div className={commonStyles.openToWork.content}>
+									{/* Decorative elements */}
+									<div
+										className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full blur-xl"
+										style={{ backgroundColor: "#142240", opacity: 0.2 }}
+									></div>
+									<div
+										className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full blur-xl"
+										style={{ backgroundColor: colors.brand.light, opacity: 0.2 }}
+									></div>
+
+									<div className="flex flex-col md:flex-row md:items-center md:justify-between">
+										<div className="mb-6 md:mb-0 md:mr-6">
+											{/* Status badge */}
+											<div className={commonStyles.openToWork.badge}>
 												<span
-													className="font-medium"
-													style={{ color: "#1e293b" }}
-												>
-													{exp.company}
-												</span>
-												, {exp.location}
+													className="w-2 h-2 rounded-full mr-2 animate-pulse"
+													style={{ backgroundColor: colors.semantic.success }}
+												></span>
+												Open to Work
 											</div>
-											<div className={commonStyles.experienceCard.skillsSection}>
-												<h4
-													className="text-sm font-semibold mb-2 flex items-center"
-													style={{ color: "#1e293b" }}
-												>
-													<FaLaptopCode className="w-4 h-4 mr-2" />
-													Skills:
-												</h4>
-												{renderSkillsWithIcons(exp.skills)}
-											</div>
+
+											{/* Main content */}
+											<h4 className={commonStyles.openToWork.title}>Transforming complex challenges into elegant solutions</h4>
+
+											<p className={commonStyles.openToWork.description}>With expertise in delivering high quality software, I build scalable systems that deliver business value.</p>
 										</div>
-										<div className={commonStyles.experienceCard.responsibilitiesSection}>
-											<h4
-												className="text-sm font-semibold mb-2"
-												style={{ color: "#1e293b" }}
-											>
-												Key Responsibilities:
-											</h4>
-											<ul className="space-y-2">
-												{exp.responsibilities.map((resp, idx) => (
-													<li
-														key={idx}
-														className="flex items-start"
-													>
-														<span
-															className="mr-2 mt-1"
-															style={{ color: "#64748b" }}
-														>
-															•
-														</span>
-														<span style={{ color: "#1e293b" }}>{resp}</span>
-													</li>
-												))}
-											</ul>
-										</div>
+
+										{/* Hire Me button - Modified to open contact modal */}
+										<button
+											onClick={openContactModal}
+											className={commonStyles.openToWork.button}
+										>
+											<FaBriefcase className="w-5 h-5 mr-2" />
+											Hire Me
+											<FaArrowRight className="w-4 h-4 ml-2 opacity-70 transform transition-transform group-hover:translate-x-1" />
+										</button>
+									</div>
+
+									{/* Lightning bolt decorative element */}
+									<div
+										className="absolute top-6 right-6 opacity-80"
+										style={{ color: colors.semantic.warning }}
+									>
+										<HiLightningBolt className="w-6 h-6" />
 									</div>
 								</div>
 							</div>
-						))}
-					</div>
-				</div>
-			</div>
-
-			{/* Open to Work & Hire Me Section - Always visible */}
-			<div className="mt-8">
-				<div className={commonStyles.openToWork.container}>
-					<div
-						className="relative p-6 md:p-8 rounded-xl overflow-hidden shadow-lg border border-gray-200"
-						style={{ background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})` }}
-					>
-						{/* Decorative elements */}
-						<div
-							className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full blur-xl"
-							style={{ backgroundColor: colors.brand.dark, opacity: 0.2 }}
-						></div>
-						<div
-							className="absolute bottom-0 left-0 -mb-6 -ml-6 w-32 h-32 rounded-full blur-xl"
-							style={{ backgroundColor: colors.brand.light, opacity: 0.2 }}
-						></div>
-
-						<div className="flex flex-col md:flex-row md:items-center md:justify-between">
-							<div className="mb-6 md:mb-0 md:mr-6">
-								{/* Status badge */}
-								<div className={commonStyles.openToWork.badge}>
-									<span
-										className="w-2 h-2 rounded-full mr-2 animate-pulse"
-										style={{ backgroundColor: colors.semantic.success }}
-									></span>
-									Open to Work
-								</div>
-
-								{/* Main content */}
-								<h4 className={commonStyles.openToWork.title}>Transforming complex challenges into elegant solutions</h4>
-
-								<p className={commonStyles.openToWork.description}>With expertise in Java & cloud technologies, I build scalable systems that deliver business value.</p>
-							</div>
-
-							{/* Hire Me button - Modified to open contact modal */}
-							<button
-								onClick={openContactModal}
-								className={commonStyles.openToWork.button}
-							>
-								<FaBriefcase className="w-5 h-5 mr-2" />
-								Hire Me
-								<FaArrowRight className="w-4 h-4 ml-2 opacity-70 transform transition-transform group-hover:translate-x-1" />
-							</button>
-						</div>
-
-						{/* Lightning bolt decorative element */}
-						<div
-							className="absolute top-6 right-6 opacity-80"
-							style={{ color: colors.semantic.warning }}
-						>
-							<HiLightningBolt className="w-6 h-6" />
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
+
+			{/* Contact Modal component */}
+			<ContactModal
+				isOpen={isContactModalOpen}
+				onClose={closeContactModal}
+			/>
 		</>
 	);
 };

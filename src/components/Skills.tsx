@@ -7,21 +7,10 @@ import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMong
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
-import { colors } from "../lib/theme-utils";
+import { colors, responsive } from "../lib/theme-utils";
 
 // Constants
 const SCROLL_SPEED = 0.5;
-const SKILL_ITEM_MARGIN = 16; // mx-2 equivalent
-
-// Skill categories with their respective icons
-const skillCategoryIcons = {
-	"Programming Languages": <HiCode className="w-5 h-5 text-gray-800" />,
-	"Frameworks & Libraries": <SiSpringboot className="w-5 h-5 text-gray-800" />,
-	Databases: <FaDatabase className="w-5 h-5 text-gray-800" />,
-	"Cloud Platforms": <HiCloud className="w-5 h-5 text-gray-800" />,
-	"DevOps & Tools": <VscTools className="w-5 h-5 text-gray-800" />,
-	"Applied Machine Learning": <SiTensorflow className="w-5 h-5 text-gray-800" />,
-} as const;
 
 // Specific skill icons with their original brand colors
 const specificSkillIcons = {
@@ -186,11 +175,7 @@ const specificSkillIcons = {
 // Consolidated skill list for the marquee
 const allSkills = ["Java", "JavaScript", "TypeScript", "Python", "Shell Scripting", "Spring Boot", "Spring MVC", "NextJS", "React", "Tailwind CSS", "JPA", "Apache Kafka", "MySQL", "MongoDB", "PostgreSQL", "Redis", "Azure", "AWS", "Jenkins", "Git", "Docker", "Elastic Search", "TensorFlow", "scikit-learn", "MediaPipe"] as const;
 
-interface SkillsProps {
-	commonStyles: any;
-}
-
-export const Skills: React.FC<SkillsProps> = ({ commonStyles }) => {
+export const Skills: React.FC = () => {
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const innerContentRef = useRef<HTMLDivElement>(null);
 	const animationFrameRef = useRef<number | null>(null);
@@ -307,26 +292,57 @@ export const Skills: React.FC<SkillsProps> = ({ commonStyles }) => {
 	}, [scroll, handleMouseEnter, handleMouseLeave]);
 
 	return (
-		<div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-8`}>
-			<h3
-				className="text-2xl font-bold text-center mb-6"
-				style={titleGradientStyle}
-			>
-				Technical Skills
-			</h3>
-
+		<section
+			id="skills"
+			className="relative py-16 overflow-hidden"
+			style={{ background: "#f8fafc" }}
+		>
+			{/* Background with gradient */}
 			<div
-				ref={scrollContainerRef}
-				className="flex flex-nowrap overflow-hidden py-4"
-				style={maskStyle}
+				className="absolute inset-0"
+				style={{ background: `linear-gradient(to bottom right, #f1f5f9, #ffffff, #f8fafc)` }}
 			>
+				<div className="absolute inset-0 opacity-10">
+					<div
+						className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl"
+						style={{ backgroundColor: colors.brand.dark }}
+					></div>
+					<div
+						className="absolute bottom-10 right-10 w-64 h-64 rounded-full blur-3xl"
+						style={{ backgroundColor: colors.brand.light }}
+					></div>
+				</div>
 				<div
-					ref={innerContentRef}
-					className="flex flex-shrink-0"
-				>
-					{skillItems}
+					className="absolute inset-0"
+					style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+				></div>
+			</div>
+
+			<div className={responsive.container + " relative z-10"}>
+				<div className="max-w-5xl mx-auto">
+					<div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
+						<h3
+							className="text-2xl font-bold text-center mb-6"
+							style={titleGradientStyle}
+						>
+							Technical Skills
+						</h3>
+
+						<div
+							ref={scrollContainerRef}
+							className="flex flex-nowrap overflow-hidden py-4"
+							style={maskStyle}
+						>
+							<div
+								ref={innerContentRef}
+								className="flex flex-shrink-0"
+							>
+								{skillItems}
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
