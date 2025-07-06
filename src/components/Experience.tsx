@@ -1,5 +1,5 @@
-// components/Experience.tsx
-import React, { useState, useEffect, useRef } from "react";
+// Experience.tsx
+import React, { useState } from "react";
 import { FaBuilding, FaCalendarAlt, FaLaptopCode } from "react-icons/fa";
 import { colors, responsive } from "../lib/theme-utils";
 import { BiNetworkChart } from "react-icons/bi";
@@ -10,6 +10,7 @@ import { GrReactjs } from "react-icons/gr";
 import { FaAws, FaJava, FaServer, FaDatabase } from "react-icons/fa";
 import { VscTools } from "react-icons/vsc";
 import { OpenToWorkSection } from "./OpenToWorkSection";
+import CardSwap, { Card as CardSwapCard } from "./CardSwap/CardSwap";
 
 interface ExperienceItem {
 	title: string;
@@ -208,15 +209,6 @@ const specificSkillIcons = {
 
 export const Experience: React.FC = () => {
 	const [activeExp, setActiveExp] = useState(0);
-	const sliderRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setActiveExp((prev) => (prev + 1) % experiences.length);
-		}, 5000);
-
-		return () => clearInterval(interval);
-	}, []);
 
 	const getSkillIcon = (skillName: string) => {
 		for (const [key, icon] of Object.entries(specificSkillIcons)) {
@@ -280,117 +272,95 @@ export const Experience: React.FC = () => {
 
 				<div className={responsive.container + " relative z-10"}>
 					<div className="max-w-5xl mx-auto">
-						<div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-shadow duration-300">
-							<h3
-								className="text-2xl font-bold text-center mb-6"
-								style={{
-									background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
-									WebkitBackgroundClip: "text",
-									WebkitTextFillColor: "transparent",
-									backgroundClip: "text",
-								}}
-							>
-								Work Experience
-							</h3>
-							{/* Slider controls */}
-							<div className="flex justify-center mb-6 gap-3">
-								{experiences.map((exp, index) => (
-									<button
-										key={index}
-										onClick={() => setActiveExp(index)}
-										className={`w-4 h-4 rounded-full transition-all duration-300 ${activeExp === index ? "scale-125" : "hover:bg-gray-400"}`}
-										style={{
-											backgroundColor: activeExp === index ? colors.brand.dark : "#cbd5e0",
-										}}
-										aria-label={`View experience ${index + 1}`}
-									/>
-								))}
-							</div>
-							{/* Slider container */}
-							<div
-								ref={sliderRef}
-								className="transition-all duration-500 ease-in-out overflow-hidden"
-							>
-								<div
-									className="flex"
-									style={{ transform: `translateX(-${activeExp * 100}%)` }}
+						<h3
+							className="text-2xl font-bold text-center mb-6"
+							style={{
+								background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
+								WebkitBackgroundClip: "text",
+								WebkitTextFillColor: "transparent",
+								backgroundClip: "text",
+							}}
+						>
+							Work Experience
+						</h3>
+						<div className="mb-52">
+							{/* CardSwap for experience cards */}
+							<div className="relative min-h-[400px] flex items-center justify-start">
+								{" "}
+								{/* Changed justify-center to justify-start */}
+								<CardSwap
+									width={500}
+									height={400}
+									cardDistance={60}
+									verticalDistance={70}
+									delay={5000}
+									pauseOnHover={true}
+									onCardChange={setActiveExp}
 								>
 									{experiences.map((exp, index) => (
-										<div
+										<CardSwapCard
 											key={index}
-											className="min-w-full px-2"
+											customClass="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow flex flex-col justify-between h-full"
 										>
-											<div className="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow">
-												<div className="flex flex-col justify-between h-full">
-													<div>
-														<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-															<h3 className="text-xl font-bold text-gray-900 mb-2 sm:mb-0">{exp.title}</h3>
-															<div className="flex items-center text-sm text-gray-600">
-																<FaCalendarAlt
-																	className="w-4 h-4 mr-2"
-																	style={{ color: "#64748b" }}
-																/>
-																{exp.period}
-															</div>
-														</div>
-														<div className="flex items-center text-sm text-gray-600 mb-4">
-															<FaBuilding
-																className="w-4 h-4 mr-2"
-																style={{ color: "#64748b" }}
-															/>
-															<span
-																className="font-medium"
-																style={{ color: "#1e293b" }}
-															>
-																{exp.company}
-															</span>
-															, {exp.location}
-														</div>
-														<div className="mb-4">
-															<h4
-																className="text-sm font-semibold mb-2 flex items-center"
-																style={{ color: "#1e293b" }}
-															>
-																<FaLaptopCode className="w-4 h-4 mr-2" />
-																Skills:
-															</h4>
-															{renderSkillsWithIcons(exp.skills)}
-														</div>
-													</div>
-													<div className="mt-4">
-														<h4
-															className="text-sm font-semibold mb-2"
-															style={{ color: "#1e293b" }}
-														>
-															Key Responsibilities:
-														</h4>
-														<ul className="space-y-2">
-															{exp.responsibilities.map((resp, idx) => (
-																<li
-																	key={idx}
-																	className="flex items-start"
-																>
-																	<span
-																		className="mr-2 mt-1"
-																		style={{ color: "#64748b" }}
-																	>
-																		•
-																	</span>
-																	<span style={{ color: "#1e293b" }}>{resp}</span>
-																</li>
-															))}
-														</ul>
+											<div>
+												<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+													<h3 className="text-xl font-bold text-gray-900 mb-2 sm:mb-0">{exp.title}</h3>
+													<div className="flex items-center text-sm text-gray-600">
+														<FaCalendarAlt
+															className="w-4 h-4 mr-2"
+															style={{ color: "#64748b" }}
+														/>
+														{exp.period}
 													</div>
 												</div>
+												<div className="flex items-center text-sm text-gray-600 mb-4">
+													<FaBuilding
+														className="w-4 h-4 mr-2"
+														style={{ color: "#64748b" }}
+													/>
+													<span
+														className="font-medium"
+														style={{ color: "#1e293b" }}
+													>
+														{exp.company}
+													</span>
+													, {exp.location}
+												</div>
+												<div className="mb-4">
+													<h4
+														className="text-sm font-semibold mb-2 flex items-center"
+														style={{ color: "#1e293b" }}
+													>
+														<FaLaptopCode className="w-4 h-4 mr-2" />
+														Skills:
+													</h4>
+													{renderSkillsWithIcons(exp.skills)}
+												</div>
 											</div>
+										</CardSwapCard>
+									))}
+								</CardSwap>
+							</div>
+
+							{/* Responsibilities grid synced with card */}
+							<div className="mt-8 flex justify-center">
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+									{experiences[activeExp]?.responsibilities.map((resp, idx) => (
+										<div
+											key={idx}
+											className="bg-white rounded-lg p-4 shadow border flex items-start"
+										>
+											<span className="mr-2 mt-1 text-gray-400">•</span>
+											<span className="text-gray-800">{resp}</span>
 										</div>
 									))}
 								</div>
 							</div>
 						</div>
-
 						{/* Open to Work & Hire Me Section */}
-						<OpenToWorkSection className="mt-8" />
+						<div className="mt-8">
+							<OpenToWorkSection className="mt-8" />
+						</div>
 					</div>
 				</div>
 			</section>
