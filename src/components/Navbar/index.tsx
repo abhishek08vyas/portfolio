@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
-export const Header = () => {
+export const Navbar = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
@@ -35,6 +35,12 @@ export const Header = () => {
 
 				{/* Desktop menu */}
 				<div className="hidden md:flex gap-6">
+					<Link
+						href="/"
+						className="text-sm text-gray-600 hover:text-primary transition-colors font-bold"
+					>
+						Home
+					</Link>
 					<Link
 						href="/#skills"
 						className="text-sm text-gray-600 hover:text-primary transition-colors font-bold"
@@ -70,6 +76,13 @@ export const Header = () => {
 			{menuOpen && (
 				<div className="md:hidden bg-white border-t shadow-md">
 					<div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+						<Link
+							href="/"
+							className="text-sm text-gray-600 hover:text-primary font-bold"
+							onClick={() => setMenuOpen(false)}
+						>
+							Home
+						</Link>
 						<Link
 							href="/#skills"
 							className="text-sm text-gray-600 hover:text-primary font-bold"

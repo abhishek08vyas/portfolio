@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import Experience from "@/components/Experience";
 
 export const metadata = {
@@ -9,7 +8,6 @@ export const metadata = {
 export default function ExperiencePage() {
 	return (
 		<div className="min-h-screen bg-white">
-			<Header />
 			<main>
 				<Experience />
 			</main>

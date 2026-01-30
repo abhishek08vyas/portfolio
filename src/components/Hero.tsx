@@ -243,7 +243,7 @@ export const Hero = () => {
 						</p>
 
 						<div className="flex flex-wrap justify-center gap-2 mb-4">
-							{["Python", "TensorFlow", "PyTorch", "MLOps", "AWS", "Azure", "React", "Node.js", "Docker", "Kubernetes", "FastAPI", "PostgreSQL"].map((skill) => (
+							{["Typescript", "JavaScript", "React", "Redux", "Saga", "Node.js", "Azure", "AWS", "Docker", "Kubernetes", "Redis", "MySQL", "PostgreSQL", "MongoDB", "Jenkins", "Git", "Python", "Java", "FastAPI", "Spring Boot"].map((skill) => (
 								<span
 									key={skill}
 									className={commonStyles.skillTag}

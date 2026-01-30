@@ -1,179 +1,11 @@
 // components/Skills.tsx
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import { HiCode, HiCloud } from "react-icons/hi";
-import { FaDatabase, FaLaptopCode, FaJava, FaAws } from "react-icons/fa";
-import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
-import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe } from "react-icons/si";
-import { GrReactjs } from "react-icons/gr";
-import { BiNetworkChart } from "react-icons/bi";
-import { VscTools } from "react-icons/vsc";
-import { colors, responsive } from "../lib/theme-utils";
+import { HiCode } from "react-icons/hi";
+import { SKILL_ICONS, ALL_SKILLS } from "@/constants/SkillIcons";
+import { colors, responsive } from "@/lib/theme-utils";
 
 // Constants
 const SCROLL_SPEED = 0.5;
-
-// Specific skill icons with their original brand colors
-const specificSkillIcons = {
-	Java: (
-		<FaJava
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.java }}
-		/>
-	),
-	JavaScript: (
-		<TbBrandJavascript
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.javascript }}
-		/>
-	),
-	TypeScript: (
-		<TbBrandTypescript
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.typescript }}
-		/>
-	),
-	Python: (
-		<SiPython
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.python }}
-		/>
-	),
-	"Shell Scripting": <HiCode className="w-4 h-4 mr-1 text-gray-800" />,
-	"Spring Boot": (
-		<SiSpringboot
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.spring }}
-		/>
-	),
-	"Spring MVC": (
-		<SiSpringboot
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.spring }}
-		/>
-	),
-	JPA: <FaDatabase className="w-4 h-4 mr-1 text-gray-800" />,
-	NextJS: (
-		<SiNextdotjs
-			className="w-4 h-4 mr-1"
-			style={{ color: "#000000" }}
-		/>
-	),
-	"Tailwind CSS": (
-		<SiTailwindcss
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.tailwind }}
-		/>
-	),
-	"Apache Kafka": (
-		<SiApachekafka
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.kafka }}
-		/>
-	),
-	MySQL: (
-		<SiMysql
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.mysql }}
-		/>
-	),
-	MongoDB: (
-		<SiMongodb
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.mongodb }}
-		/>
-	),
-	PostgreSQL: (
-		<SiPostgresql
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.postgresql }}
-		/>
-	),
-	Redis: (
-		<SiRedis
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.redis }}
-		/>
-	),
-	Azure: (
-		<HiCloud
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.azure }}
-		/>
-	),
-	AWS: (
-		<FaAws
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.aws }}
-		/>
-	),
-	Jenkins: (
-		<SiJenkins
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.jenkins }}
-		/>
-	),
-	Git: (
-		<SiGit
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.git }}
-		/>
-	),
-	Docker: (
-		<SiDocker
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.docker }}
-		/>
-	),
-	"Elastic Search": (
-		<SiElasticsearch
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.elasticsearch }}
-		/>
-	),
-	Microservices: <BiNetworkChart className="w-4 h-4 mr-1 text-gray-800" />,
-	Serverless: <FaLaptopCode className="w-4 h-4 mr-1 text-gray-800" />,
-	Asynchronous: <BiNetworkChart className="w-4 h-4 mr-1 text-gray-800" />,
-	React: (
-		<GrReactjs
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.react }}
-		/>
-	),
-	Linux: (
-		<FaLaptopCode
-			className="w-4 h-4 mr-1"
-			style={{ color: "#FCC624" }}
-		/>
-	),
-	Splunk: (
-		<FaDatabase
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.splunk }}
-		/>
-	),
-	DevOps: <VscTools className="w-4 h-4 mr-1 text-gray-800" />,
-	TensorFlow: (
-		<SiTensorflow
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.tensorflow }}
-		/>
-	),
-	"scikit-learn": (
-		<SiScikitlearn
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.scikitlearn }}
-		/>
-	),
-	MediaPipe: (
-		<SiMediapipe
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.mediapipe }}
-		/>
-	),
-} as const;
-
-// Consolidated skill list for the marquee
-const allSkills = ["Java", "JavaScript", "TypeScript", "Python", "Shell Scripting", "Spring Boot", "Spring MVC", "NextJS", "React", "Tailwind CSS", "JPA", "Apache Kafka", "MySQL", "MongoDB", "PostgreSQL", "Redis", "Azure", "AWS", "Jenkins", "Git", "Docker", "Elastic Search", "TensorFlow", "scikit-learn", "MediaPipe"] as const;
 
 export const Skills: React.FC = () => {
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -181,15 +13,15 @@ export const Skills: React.FC = () => {
 	const animationFrameRef = useRef<number | null>(null);
 	const isPausedRef = useRef(false);
 
-	// Memoized skill icon getter
+	// Memoized skill icon getter – uses SKILL_ICONS from constants
 	const getSkillIcon = useCallback((skillName: string) => {
 		// Direct lookup first
-		if (skillName in specificSkillIcons) {
-			return specificSkillIcons[skillName as keyof typeof specificSkillIcons];
+		if (skillName in SKILL_ICONS) {
+			return SKILL_ICONS[skillName];
 		}
 
 		// Fallback for partial matches
-		for (const [key, icon] of Object.entries(specificSkillIcons)) {
+		for (const [key, icon] of Object.entries(SKILL_ICONS)) {
 			if (skillName.includes(key) || key.includes(skillName)) {
 				return icon;
 			}
@@ -200,7 +32,7 @@ export const Skills: React.FC = () => {
 	// Memoized skill items to prevent unnecessary re-renders
 	const skillItems = useMemo(
 		() =>
-			allSkills.map((skill, index) => (
+			ALL_SKILLS.map((skill, index) => (
 				<span
 					key={`${skill}-${index}`}
 					className="px-4 py-2 rounded-lg text-sm font-medium border shadow-sm flex items-center flex-shrink-0 mx-2 transition-transform duration-200 ease-in-out hover:scale-105"

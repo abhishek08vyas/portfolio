@@ -1,6 +1,5 @@
 "use client";
 import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,7 +8,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Skills } from "@/components/Skills";
 import { RecentExperience } from "@/components/RecentExperience";
-
 const queryClient = new QueryClient();
 
 export default function Home() {
@@ -19,7 +17,6 @@ export default function Home() {
 				<Toaster />
 				<Sonner />
 				<div className="min-h-screen bg-white">
-					<Header />
 					<main>
 						<Hero />
 						<Skills />
