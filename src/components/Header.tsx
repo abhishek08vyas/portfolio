@@ -48,7 +48,7 @@ export const Header = () => {
 						Projects
 					</Link>
 					<Link
-						href="/#experience"
+						href="/experience"
 						className="text-sm text-gray-600 hover:text-primary transition-colors font-bold"
 					>
 						Experience
@@ -85,7 +85,7 @@ export const Header = () => {
 							Projects
 						</Link>
 						<Link
-							href="/#experience"
+							href="/experience"
 							className="text-sm text-gray-600 hover:text-primary font-bold"
 							onClick={() => setMenuOpen(false)}
 						>

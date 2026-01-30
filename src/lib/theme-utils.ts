@@ -3,6 +3,8 @@
 // Color constants
 export const colors = {
 	brand: {
+		/** Primary brand color – navy. Use for accents, icons, badges, and key UI. */
+		primary: "#142240",
 		dark: "#142240",
 		medium: "#3D5176",
 		light: "#797F8C",

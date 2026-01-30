@@ -24,8 +24,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(({ customClass, ...res
 	<div
 		ref={ref}
 		{...rest}
-		// Removed 'left-1/2' and 'transform' related classes for left alignment
-		className={`absolute top-1/2 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass ?? ""} ${rest.className ?? ""}`.trim()}
+		// Position cards relative to the centered container
+		className={`absolute top-0 left-0 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass ?? ""} ${rest.className ?? ""}`.trim()}
 	/>
 ));
 Card.displayName = "Card";
@@ -41,7 +41,7 @@ interface Slot {
 const makeSlot = (i: number, distX: number, distY: number, total: number): Slot => ({
 	// Invert x to position cards to the left
 	x: -i * distX,
-	y: -i * distY,
+	y: i * distY, // Use positive Y values to stack downward
 	z: -i * distX * 1.5,
 	zIndex: total - i,
 });
@@ -51,8 +51,8 @@ const placeNow = (el: HTMLElement, slot: Slot, skew: number) =>
 		x: slot.x,
 		y: slot.y,
 		z: slot.z,
-		xPercent: 0, // Set xPercent to 0 for left alignment
-		yPercent: -50,
+		xPercent: -50, // Center horizontally
+		yPercent: 0, // Start from top instead of center to prevent overflow
 		skewY: skew,
 		transformOrigin: "center center",
 		zIndex: slot.zIndex,
@@ -100,9 +100,9 @@ const CardSwap: React.FC<CardSwapProps> = ({ width = 500, height = 400, cardDist
 			const tl = gsap.timeline();
 			tlRef.current = tl;
 
-			// Invert drop direction if you want horizontal drop, otherwise keep vertical
+			// Drop the front card down
 			tl.to(elFront, {
-				y: "+=500", // keep vertical drop, or change to x: "-=500" for horizontal left
+				y: "+=400", // Reduced drop distance since cards start higher up
 				duration: config.durDrop,
 				ease: config.ease,
 			});
@@ -196,8 +196,8 @@ const CardSwap: React.FC<CardSwapProps> = ({ width = 500, height = 400, cardDist
 	return (
 		<div
 			ref={container}
-			// Removed translate-x-[2%] and similar for left alignment
-			className="absolute bottom-0 left-0 origin-bottom-left perspective-[900px] overflow-visible max-[768px]:translate-x-[1%] max-[768px]:translate-y-[-5%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[0%] max-[480px]:translate-y-[-2%] max-[480px]:scale-[0.55]"
+			// Center the cards within the container
+			className="relative flex items-center justify-center perspective-[900px] overflow-visible max-[768px]:scale-[0.75] max-[480px]:scale-[0.55]"
 			style={{ width, height }}
 		>
 			{rendered}
