@@ -1,4 +1,5 @@
 import Experience from "@/components/Experience";
+import { Footer } from "@/components/Footer";
 
 export const metadata = {
 	title: "Experience | Abhishek Vyas",
@@ -11,6 +12,7 @@ export default function ExperiencePage() {
 			<main>
 				<Experience />
 			</main>
+			<Footer />
 		</div>
 	);
 }
