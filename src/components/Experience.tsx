@@ -1,6 +1,6 @@
 // pages/experience.tsx - Dedicated Experience Page
 import React from "react";
-import { FaBuilding, FaCalendarAlt, FaLaptopCode, FaMapMarkerAlt, FaArrowLeft } from "react-icons/fa";
+import { FaBuilding, FaCalendarAlt, FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
 import { colors } from "../lib/theme-utils";
 import { BiNetworkChart } from "react-icons/bi";
 import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe } from "react-icons/si";
@@ -9,7 +9,6 @@ import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
 import { FaAws, FaJava, FaServer, FaDatabase } from "react-icons/fa";
 import { VscTools } from "react-icons/vsc";
-import Link from "next/link";
 import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
 
 interface ExperienceItem {
@@ -213,34 +212,6 @@ const ExperiencePage: React.FC = () => {
 			className="min-h-screen"
 			style={{ background: "#f8fafc" }}
 		>
-			{/* Header with Back Button */}
-			<div className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-				<div className="max-w-6xl mx-auto px-4 py-4">
-					<div className="flex items-center justify-between">
-						<Link
-							href="/"
-							className="flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all group"
-							style={{ color: colors.brand.dark }}
-						>
-							<FaArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-							<span>Back to Portfolio</span>
-						</Link>
-						<h1
-							className="text-xl md:text-2xl font-bold"
-							style={{
-								background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
-								WebkitBackgroundClip: "text",
-								WebkitTextFillColor: "transparent",
-								backgroundClip: "text",
-							}}
-						>
-							Work Experience
-						</h1>
-						<div className="w-24"></div> {/* Spacer for centering */}
-					</div>
-				</div>
-			</div>
-
 			{/* Background */}
 			<div className="relative">
 				<div
@@ -261,6 +232,17 @@ const ExperiencePage: React.FC = () => {
 
 				{/* Content */}
 				<div className="relative z-10 max-w-5xl mx-auto px-4 py-8 md:py-12">
+					<h1
+						className="text-2xl md:text-3xl font-bold mb-8 md:mb-10"
+						style={{
+							background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
+							WebkitBackgroundClip: "text",
+							WebkitTextFillColor: "transparent",
+							backgroundClip: "text",
+						}}
+					>
+						Work Experience
+					</h1>
 					<div className="space-y-6">
 						{EXPERIENCE_ITEMS.map((exp, index) => (
 							<div

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, Dancing_Script } from 'next/font/google';
+import { Navbar } from '@/components/Navbar';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -26,7 +27,9 @@ export default function RootLayout({
       <head>        
         <link rel="icon" href="/images/av2.png" sizes="192x192" />
       </head>
-      <body className={`${inter.className}`}>{children}
+      <body className={`${inter.className}`}>
+        <Navbar />
+        <div className="pt-16">{children}</div>
         <Analytics />
       </body>
     </html>

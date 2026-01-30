@@ -1,25 +1,44 @@
 import { HiCode, HiCloud } from "react-icons/hi";
 import { FaDatabase, FaLaptopCode, FaJava, FaAws } from "react-icons/fa";
 import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
-import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe } from "react-icons/si";
+import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe, SiRedux, SiReduxsaga } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
 import { colors } from "@/lib/theme-utils";
 
 export const SKILL_ICONS: Record<string, React.ReactNode> = {
-	Java: (
-		<FaJava
-			className="w-4 h-4 mr-1"
-			style={{ color: colors.tech.java }}
-		/>
-	),
 	JavaScript: (
 		<TbBrandJavascript
 			className="w-4 h-4 mr-1"
 			style={{ color: colors.tech.javascript }}
 		/>
 	),
+	Redux: (
+		<SiRedux
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.redux }}
+		/>
+	),
+	Saga: (
+		<SiReduxsaga
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.saga }}
+		/>
+	),
+	Zustand: (
+		<SiRedux
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.zustand }}
+		/>
+	),
+	Java: (
+		<FaJava
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.java }}
+		/>
+	),
+
 	TypeScript: (
 		<TbBrandTypescript
 			className="w-4 h-4 mr-1"
@@ -165,3 +184,6 @@ export const SKILL_ICONS: Record<string, React.ReactNode> = {
 		/>
 	),
 } as const;
+
+/** Ordered list of all skill names for the marquee – single source of truth */
+export const ALL_SKILLS: string[] = Object.keys(SKILL_ICONS);
