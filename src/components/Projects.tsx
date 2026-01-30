@@ -384,22 +384,35 @@ export const Projects = () => {
           ))}
         </div>
 
-        {/* View All Projects Button - Minimalist design */}
-        <div className="flex justify-center mt-10">
-          <a 
-            href={`${process.env.NEXT_PUBLIC_GITHUB_LINK}?tab=repositories`} 
-            target="_blank" 
+        {/* View All Projects / Browse All - Minimalist design */}
+        <div className="flex flex-wrap justify-center gap-3 mt-10">
+          <a href="/projects">
+            <Button
+              variant="outline"
+              className="font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
+              style={{
+                borderColor: colors.brand.dark,
+                color: colors.brand.dark,
+              }}
+            >
+              Browse All Projects
+              <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
+            </Button>
+          </a>
+          <a
+            href={`${process.env.NEXT_PUBLIC_GITHUB_LINK}?tab=repositories`}
+            target="_blank"
             rel="noopener noreferrer"
           >
             <Button
               variant="outline"
               className="font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
-              style={{ 
+              style={{
                 borderColor: colors.brand.dark,
                 color: colors.brand.dark,
               }}
             >
-              View All Projects
+              View on GitHub
               <FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Button>
           </a>

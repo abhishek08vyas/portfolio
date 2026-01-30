@@ -54,6 +54,12 @@ export const Navbar = () => {
 						Projects
 					</Link>
 					<Link
+						href="/projects"
+						className="text-sm text-gray-600 hover:text-primary transition-colors font-bold"
+					>
+						All Projects
+					</Link>
+					<Link
 						href="/experience"
 						className="text-sm text-gray-600 hover:text-primary transition-colors font-bold"
 					>
@@ -96,6 +102,13 @@ export const Navbar = () => {
 							onClick={() => setMenuOpen(false)}
 						>
 							Projects
+						</Link>
+						<Link
+							href="/projects"
+							className="text-sm text-gray-600 hover:text-primary font-bold"
+							onClick={() => setMenuOpen(false)}
+						>
+							All Projects
 						</Link>
 						<Link
 							href="/experience"
