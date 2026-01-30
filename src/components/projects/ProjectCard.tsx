@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
-import { HiCode, HiCalendar } from "react-icons/hi";
+import { HiCode } from "react-icons/hi";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { colors } from "@/lib/theme-utils";
 import type { Project } from "@/data/projects";
@@ -53,10 +53,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			{/* Content Section */}
 			<div className="p-5 md:p-6 flex flex-col flex-1">
 				{/* Period Badge */}
-				<div className="flex items-center gap-2 mb-4">
+				{/* <div className="flex items-center gap-2 mb-4">
 					<HiCalendar className="w-4 h-4 text-[#797F8C]" />
 					<span className="text-sm font-medium text-[#797F8C]">{project.period}</span>
-				</div>
+				</div> */}
 
 				{/* Description */}
 				<p className="text-gray-600 text-sm md:text-base leading-relaxed mb-5 line-clamp-3 flex-1">{project.description}</p>
