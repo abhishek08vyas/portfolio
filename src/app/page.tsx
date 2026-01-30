@@ -8,7 +8,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Skills } from "@/components/Skills";
-import { Experience } from "@/components/Experience";
+import { RecentExperience } from "@/components/RecentExperience";
 
 const queryClient = new QueryClient();
 
@@ -23,8 +23,8 @@ export default function Home() {
 					<main>
 						<Hero />
 						<Skills />
+						<RecentExperience />
 						<Projects />
-						<Experience />
 					</main>
 					<Footer />
 				</div>
