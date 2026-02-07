@@ -19,6 +19,7 @@ export const RecentExperience: React.FC<RecentExperienceProps> = ({ experience =
 		.split(",")
 		.map((s: string) => s.trim())
 		.filter(Boolean);
+	const skillsDisplayed = skillsList.slice(0, 12);
 
 	const getSkillIcon = (skill: string) => {
 		for (const [key, icon] of Object.entries(SKILL_ICONS)) {
@@ -92,9 +93,9 @@ export const RecentExperience: React.FC<RecentExperienceProps> = ({ experience =
 						{/* RIGHT COLUMN: Dark Side (Navy Background) */}
 						<div className="p-8 md:p-12 lg:w-2/5 bg-[#142240] flex flex-col justify-between text-white">
 							<div>
-								<h5 className="text-[11px] uppercase tracking-[0.2em] font-bold text-blue-300/60 mb-6">Core Tech Stack</h5>
+								<h5 className="text-[11px] uppercase tracking-[0.2em] font-bold text-blue-300/60 mb-6">{skillsList.length > 12 ? "Top 12 Tech Stack" : "Core Tech Stack"}</h5>
 								<div className="flex flex-wrap gap-2.5 mb-10">
-									{skillsList.map((skill: string, i: number) => (
+									{skillsDisplayed.map((skill: string, i: number) => (
 										<div
 											key={i}
 											className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/15 rounded-xl border border-white/10 text-xs font-bold transition-all cursor-default"
@@ -106,16 +107,17 @@ export const RecentExperience: React.FC<RecentExperienceProps> = ({ experience =
 							</div>
 
 							<div className="space-y-6">
-								<div className="grid grid-cols-2 gap-4">
-									<StatBox
-										label="Stack Depth"
-										value={`${skillsList.length} Tools`}
-									/>
-									<StatBox
-										label="Impact"
-										value={`${experience.responsibilities.length} Points`}
-									/>
-								</div>
+								{experience.metrics && Object.keys(experience.metrics).length > 0 && (
+									<div className="grid grid-cols-2 gap-4">
+										{Object.entries(experience.metrics).map(([label, value]) => (
+											<StatBox
+												key={label}
+												label={label}
+												value={value}
+											/>
+										))}
+									</div>
+								)}
 
 								<Button
 									asChild

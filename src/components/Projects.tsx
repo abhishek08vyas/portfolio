@@ -55,7 +55,7 @@ const techStackIcons = {
 
 interface Project {
 	title: string;
-	period: string;
+	period?: string;
 	description: string;
 	responsibilities: string[];
 	techStack: {
@@ -72,7 +72,7 @@ interface Project {
 const projects: Project[] = [
 	{
 		title: "Expense Tracker Web App",
-		period: "Jan 2025 - April 2025",
+		// period: "Jan 2025 - April 2025",
 		description: "A comprehensive financial management application helping users track, categorize, and analyze financial transactions.",
 		responsibilities: ["Designed and implemented backend architecture using Spring Boot 3.2 and Java 21", "Established secure RESTful API endpoints with JWT authentication", "Containerized the application using Docker for consistent deployment", "Architected PostgreSQL database schema for financial tracking", "Collaborated with frontend team for integration using NextJS"],
 		techStack: {
@@ -89,7 +89,7 @@ const projects: Project[] = [
 	},
 	{
 		title: "iOS App for Real-Time Gesture Recognition",
-		period: "May 2024 - Dec 2024",
+		// period: "May 2024 - Dec 2024",
 		description: "A gesture detection model for iOS that offers real-time hand posture analysis using MediaPipe trained on 40 classes combining ASL and gestures.",
 		responsibilities: ["Built preprocessing pipeline extracting hand landmarks via MediaPipe", "Developed neural network with Conv2D layers, MaxPooling, and Dense layers", "Deployed model on both server and edge devices", "Implemented secure video processing and privacy compliance"],
 		techStack: {
@@ -106,7 +106,7 @@ const projects: Project[] = [
 	},
 	{
 		title: "Ehalo",
-		period: "Jun 2021 - Aug 2023",
+		// period: "Jun 2021 - Aug 2023",
 		description: "Ehalo is a free trip planner app. It allows you to create trips, events and checklists. You can also attach the checklist with your trips.",
 		responsibilities: ["Led the Backend Team and Developed Rest APIs using ExpressJS, MVC architecture and MySQL.", "The features are available online and offline anywhere.", "Share your trips with family and friends to collaborate and have fun."],
 		techStack: {
@@ -181,27 +181,53 @@ export const Projects = () => {
 						.map((project, index) => (
 							<div
 								key={`featured-${index}`}
-								className={`${commonStyles.card.base} ${commonStyles.card.hover}`}
+								className={`relative ${commonStyles.card.base} ${commonStyles.card.hover}`}
 							>
+								{/* Top right - GitHub & demo links */}
+								<div className="absolute top-4 right-4 z-10 flex space-x-2">
+									{project.links?.github && (
+										<a
+											href={project.links.github}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors shadow-sm"
+											aria-label="GitHub"
+										>
+											<FaGithub className="w-5 h-5" />
+										</a>
+									)}
+									{project.links?.demo && (
+										<a
+											href={project.links.demo}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors shadow-sm"
+											aria-label="Live Demo"
+										>
+											<FiExternalLink className="w-5 h-5" />
+										</a>
+									)}
+								</div>
+
 								<div className="grid grid-cols-1 lg:grid-cols-2">
-									{/* Left side - Image */}
-									<div className="relative h-64 lg:h-auto overflow-hidden">
-										<div className="relative w-full h-full">
+									{/* Left side - Image with padding and border for scale animation */}
+									<div className="relative p-4 lg:p-5">
+										<div className="relative h-64 lg:min-h-[280px] rounded-lg overflow-hidden bg-gray-50">
 											<Image
 												src={project.image}
 												alt={project.title}
 												fill
 												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-												className="object-cover object-center transition-transform duration-500 hover:scale-102"
+												className="object-cover object-center transition-transform duration-500 hover:scale-105"
 												style={{
 													objectFit: "cover",
 													objectPosition: "center",
 												}}
 											/>
 										</div>
-										<div className="absolute top-4 left-4">
+										<div className="absolute top-6 left-6 lg:top-7 lg:left-7">
 											<span
-												className="bg-white/80 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center"
+												className="bg-white/80 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm"
 												style={{ color: colors.brand.dark }}
 											>
 												<HiLightningBolt className="w-3 h-3 mr-1" />
@@ -212,34 +238,6 @@ export const Projects = () => {
 
 									{/* Right side - Content */}
 									<div className="p-6">
-										<div className="flex justify-between items-center mb-4">
-											<span className="text-gray-500 text-sm">{project.period}</span>
-											<div className="flex space-x-3">
-												{project.links?.github && (
-													<a
-														href={project.links.github}
-														target="_blank"
-														rel="noopener noreferrer"
-														className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
-														aria-label="GitHub"
-													>
-														<FaGithub className="w-5 h-5" />
-													</a>
-												)}
-												{project.links?.demo && (
-													<a
-														href={project.links.demo}
-														target="_blank"
-														rel="noopener noreferrer"
-														className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors"
-														aria-label="Live Demo"
-													>
-														<FiExternalLink className="w-5 h-5" />
-													</a>
-												)}
-											</div>
-										</div>
-
 										<h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
 										<p className="text-gray-600 mb-4 text-sm">{project.description}</p>
 
@@ -403,23 +401,6 @@ export const Projects = () => {
 							}}
 						>
 							Browse All Projects
-							<FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
-						</Button>
-					</a>
-					<a
-						href={`${process.env.NEXT_PUBLIC_GITHUB_LINK}?tab=repositories`}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Button
-							variant="outline"
-							className="font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
-							style={{
-								borderColor: colors.brand.dark,
-								color: colors.brand.dark,
-							}}
-						>
-							View on GitHub
 							<FaArrowRight className="w-3.5 h-3.5 ml-1.5" />
 						</Button>
 					</a>
