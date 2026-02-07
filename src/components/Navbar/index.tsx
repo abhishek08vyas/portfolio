@@ -52,7 +52,7 @@ export const Navbar = () => {
 				</div>
 
 				{/* Right Side: Desktop Menu */}
-				<div className="hidden md:flex items-center gap-6">
+				<div className="hidden md:flex items-center gap-3">
 					<div
 						className="relative"
 						onMouseEnter={handleMouseEnter}
@@ -68,7 +68,7 @@ export const Navbar = () => {
 							<DropdownMenuTrigger asChild>
 								<Button
 									variant="ghost"
-									className="text-sm text-gray-600 hover:text-primary font-bold gap-1 px-4 h-10"
+									className="text-sm text-gray-600 hover:text-primary font-bold gap-1 px-2 h-10"
 									asChild
 								>
 									{/* Link is inside asChild; Navigates on click */}
@@ -108,13 +108,13 @@ export const Navbar = () => {
 
 					<Link
 						href="/projects"
-						className="text-sm text-gray-600 hover:text-primary font-bold py-0.5 pb-1 inline-block leading-normal"
+						className="text-sm text-gray-600 hover:text-primary font-bold py-0.5 pb-1 px-2 inline-block leading-normal"
 					>
 						Projects
 					</Link>
 					<Link
 						href="/experience"
-						className="text-sm text-gray-600 hover:text-primary font-bold"
+						className="text-sm text-gray-600 hover:text-primary font-bold px-2"
 					>
 						Experience
 					</Link>

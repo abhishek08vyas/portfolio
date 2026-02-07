@@ -72,32 +72,6 @@ export const Projects = () => {
 							key={project.id}
 							className={`relative ${commonStyles.card.base} ${commonStyles.card.hover}`}
 						>
-							{/* Top right - GitHub & demo links */}
-							<div className="absolute top-4 right-4 z-10 flex space-x-2">
-								{project.links?.github && (
-									<a
-										href={project.links.github}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors shadow-sm"
-										aria-label="GitHub"
-									>
-										<FaGithub className="w-5 h-5" />
-									</a>
-								)}
-								{project.links?.demo && (
-									<a
-										href={project.links.demo}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-700 transition-colors shadow-sm"
-										aria-label="Live Demo"
-									>
-										<FiExternalLink className="w-5 h-5" />
-									</a>
-								)}
-							</div>
-
 							{/* Image */}
 							<div className="relative h-48 overflow-hidden">
 								<div className="relative w-full h-full">
@@ -182,10 +156,13 @@ export const Projects = () => {
 
 				{/* View All Projects / Browse All - Minimalist design */}
 				<div className="flex flex-wrap justify-center gap-3 mt-10">
-					<a href="/projects">
+					<a
+						href="/projects"
+						className="cursor-pointer"
+					>
 						<Button
 							variant="outline"
-							className="font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
+							className="cursor-pointer font-medium px-5 py-2 rounded-md transition-all text-sm hover:bg-gray-50"
 							style={{
 								borderColor: colors.brand.dark,
 								color: colors.brand.dark,
@@ -209,7 +186,7 @@ export const Projects = () => {
 
 						<button
 							onClick={openContactModal}
-							className="group inline-flex items-center justify-center bg-white font-medium px-5 py-2 rounded-md text-sm transition-all hover:bg-gray-50"
+							className="cursor-pointer group inline-flex items-center justify-center bg-white font-medium px-5 py-2 rounded-md text-sm transition-all hover:bg-gray-50"
 							style={{ color: colors.brand.dark }}
 						>
 							Start a Conversation
