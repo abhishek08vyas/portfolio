@@ -65,7 +65,7 @@ export function ProjectsArchive() {
 					</div>
 
 					{/* Title with Gradient */}
-					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4"}>Project Archive</h1>
+					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Library</h1>
 
 					{/* Subtitle */}
 					<p className="mt-4 text-[#797F8C] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">A curated collection of systems, applications, and experiments showcasing modern development practices.</p>

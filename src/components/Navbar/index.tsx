@@ -99,7 +99,7 @@ export const Navbar = () => {
 										href="/#projects"
 										className="cursor-pointer w-full"
 									>
-										My Work
+										Project Spotlight
 									</Link>
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -108,9 +108,9 @@ export const Navbar = () => {
 
 					<Link
 						href="/projects"
-						className="text-sm text-gray-600 hover:text-primary font-bold"
+						className="text-sm text-gray-600 hover:text-primary font-bold py-0.5 pb-1 inline-block leading-normal"
 					>
-						Projects Archive
+						Projects
 					</Link>
 					<Link
 						href="/experience"

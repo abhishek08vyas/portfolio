@@ -5,6 +5,8 @@ export interface ExperienceItem {
 	period: string;
 	skills: string;
 	responsibilities: string[];
+	/** Key = label text, value = display value. e.g. { "API Performance": "<90ms", "Users Served": "8K+ Daily" } */
+	metrics?: Record<string, string>;
 }
 
 export const EXPERIENCE_ITEMS: ExperienceItem[] = [
@@ -13,8 +15,12 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
 		company: "Apexon",
 		location: "Ahmedabad, India",
 		period: "Jan 2023 - Aug 2023",
-		skills: "JavaScript, TypeScript, ReactJs, NextJs, Redux, Saga, Zustand, Tailwind CSS, MongoDB, Azure, Microservices, Elastic Search, Apache Kafka, Redis, Java11, MySQL, Spring Boot",
+		skills: "TypeScript, ReactJs, NextJs, Redux, Saga, Zustand, Tailwind CSS, MongoDB, Azure, Apache Kafka, Redis,  Elastic Search,JavaScript, Java11, MySQL, Microservices, Spring Boot",
 		responsibilities: ["Improved performance of high-traffic REST APIs by implementing asynchronous Azure functions and optimizing Java workflows, resulting in a 10% increase in system throughput.", "Built responsive frontend components using Next.js and integrated RESTful services for seamless user experiences.", "Implemented state management solutions with Redux and Zustand to handle complex data flows, reducing application errors by 40% and improving scalability.", "Implemented Azure Monitor logging and alerting to track application health and support faster troubleshooting in production.", "Contributed to release management and production deployments, supporting multiple rollout strategies including Blue-Green and Canary deployments to ensure smooth environment promotions and minimal user impact.", "Mentored Junior Engineers and guided architectural decisions, ensuring performance, maintainable code."],
+		metrics: {
+			"API Performance": "<90ms",
+			"Users Served": "8K+ Daily",
+		},
 	},
 	{
 		title: "Software Engineer 1",
