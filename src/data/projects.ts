@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
 		// period: "Jan 2025 - April 2025",
 		description: "A comprehensive financial management application helping users track, categorize, and analyze financial transactions.",
 		responsibilities: ["Designed and implemented backend architecture using Spring Boot and Java", "Established secure RESTful API endpoints with JWT authentication", "Containerized the application using Docker for consistent deployment", "Architected PostgreSQL database schema for financial tracking", "Collaborated with frontend team for integration using NextJS"],
-		skills: ["Java", "Spring Boot", "PostgreSQL", "Docker", "AWS", "NextJS", "Tailwind CSS"],
+		skills: ["NextJS", "Fastify", "TypeScript", "JavaScript", "Redux", "Prisma", "PostgreSQL", "Docker", "AWS", "Tailwind CSS", "Swagger API docs"],
 		image: "/images/expense2.png",
 		featured: false,
 		links: {
@@ -47,6 +47,18 @@ export const PROJECTS: Project[] = [
 		featured: true,
 		links: {
 			github: "https://github.com/abhishek08vyas/gesture_recognition",
+		},
+	},
+	{
+		id: "commissh",
+		title: "Commissh",
+		description: "Commissh is a website that sells tickets for festivals, concerts, and sporting events. There is giveaway every month for the tickets.",
+		responsibilities: ["Developed the frontend of the website using NextJS, TypeScript, JavaScript, React, Docker, AWS, Tailwind CSS"],
+		skills: ["NextJS", "TypeScript", "JavaScript", "React", "Docker", "AWS", "Tailwind CSS"],
+		image: "/images/commissh.png",
+		featured: false,
+		links: {
+			demo: "https://commissh.com/",
 		},
 	},
 	{

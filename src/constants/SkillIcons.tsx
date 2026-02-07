@@ -1,7 +1,7 @@
 import { HiCode, HiCloud } from "react-icons/hi";
 import { FaDatabase, FaLaptopCode, FaJava, FaAws } from "react-icons/fa";
 import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
-import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe, SiRedux, SiReduxsaga } from "react-icons/si";
+import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe, SiRedux, SiReduxsaga, SiSwagger, SiJunit5, SiSwift, SiFlask, SiAmazons3, SiNodedotjs, SiFirebase, SiFlutter, SiHeroku } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
@@ -181,6 +181,115 @@ export const SKILL_ICONS: Record<string, React.ReactNode> = {
 		<SiMediapipe
 			className="w-4 h-4 mr-1"
 			style={{ color: colors.tech.mediapipe }}
+		/>
+	),
+	// Project-specific / variant keys (used in Projects.tsx and projects data)
+	"Java 21": (
+		<FaJava
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.java }}
+		/>
+	),
+	"Java 8": (
+		<FaJava
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.java }}
+		/>
+	),
+	"Spring Boot 3.2": (
+		<SiSpringboot
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.spring }}
+		/>
+	),
+	"Amazon EC2": (
+		<FaAws
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.aws }}
+		/>
+	),
+	"Swagger API docs": (
+		<SiSwagger
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.swagger }}
+		/>
+	),
+	JUnit4: (
+		<SiJunit5
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.junit }}
+		/>
+	),
+	NumPy: (
+		<SiPython
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.python }}
+		/>
+	),
+	iOS: (
+		<SiSwift
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.swift }}
+		/>
+	),
+	Swift: (
+		<SiSwift
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.swift }}
+		/>
+	),
+	Flask: (
+		<SiFlask
+			className="w-4 h-4 mr-1"
+			style={{ color: "#000000" }}
+		/>
+	),
+	"AWS Lambda": (
+		<FaAws
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.aws }}
+		/>
+	),
+	S3: (
+		<SiAmazons3
+			className="w-4 h-4 mr-1"
+			style={{ color: "#569A31" }}
+		/>
+	),
+	"Node.js": (
+		<SiNodedotjs
+			className="w-4 h-4 mr-1"
+			style={{ color: "#339933" }}
+		/>
+	),
+	"Express JS": (
+		<SiNodedotjs
+			className="w-4 h-4 mr-1"
+			style={{ color: "#000000" }}
+		/>
+	),
+	SQL: (
+		<SiPostgresql
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.postgresql }}
+		/>
+	),
+	Firebase: (
+		<SiFirebase
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.firebase }}
+		/>
+	),
+	Flutter: (
+		<SiFlutter
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.flutter }}
+		/>
+	),
+	Heroku: (
+		<SiHeroku
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.heroku }}
 		/>
 	),
 } as const;
