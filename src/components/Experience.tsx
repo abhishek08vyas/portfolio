@@ -1,325 +1,252 @@
-// pages/experience.tsx - Dedicated Experience Page
-import React from "react";
-import { FaBuilding, FaCalendarAlt, FaLaptopCode, FaMapMarkerAlt } from "react-icons/fa";
-import { colors } from "../lib/theme-utils";
-import { BiNetworkChart } from "react-icons/bi";
-import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe } from "react-icons/si";
-import { HiCode, HiCloud } from "react-icons/hi";
+"use client";
+
+import React, { useState } from "react";
+import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase } from "react-icons/fa";
+import { colors, commonStyles } from "../lib/theme-utils";
+import { SiSpringboot, SiDocker, SiPython, SiNextdotjs, SiTailwindcss } from "react-icons/si";
+import { HiCode } from "react-icons/hi";
 import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
-import { FaAws, FaJava, FaServer, FaDatabase } from "react-icons/fa";
-import { VscTools } from "react-icons/vsc";
+import { FaAws, FaJava } from "react-icons/fa";
 import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
+import { motion } from "framer-motion";
 
-interface ExperienceItem {
-	title: string;
-	company: string;
-	location: string;
-	period: string;
-	skills: string;
-	responsibilities: string[];
-}
-
-const specificSkillIcons = {
-	Java: (
-		<FaJava
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.java }}
-		/>
-	),
-	JavaScript: (
-		<TbBrandJavascript
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.javascript }}
-		/>
-	),
-	TypeScript: (
-		<TbBrandTypescript
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.typescript }}
-		/>
-	),
-	Python: (
-		<SiPython
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.python }}
-		/>
-	),
-	"Shell Scripting": <HiCode className="w-3.5 h-3.5 text-gray-700" />,
-	"Spring Boot": (
-		<SiSpringboot
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.spring }}
-		/>
-	),
-	"Spring MVC": (
-		<SiSpringboot
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.spring }}
-		/>
-	),
-	JPA: <FaDatabase className="w-3.5 h-3.5 text-gray-700" />,
-	NextJS: (
-		<SiNextdotjs
-			className="w-3.5 h-3.5"
-			style={{ color: "#000000" }}
-		/>
-	),
-	"Tailwind CSS": (
-		<SiTailwindcss
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.tailwind }}
-		/>
-	),
-	"Apache Kafka": (
-		<SiApachekafka
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.kafka }}
-		/>
-	),
-	MySQL: (
-		<SiMysql
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.mysql }}
-		/>
-	),
-	MongoDB: (
-		<SiMongodb
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.mongodb }}
-		/>
-	),
-	PostgreSQL: (
-		<SiPostgresql
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.postgresql }}
-		/>
-	),
-	Redis: (
-		<SiRedis
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.redis }}
-		/>
-	),
-	Azure: (
-		<HiCloud
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.azure }}
-		/>
-	),
-	AWS: (
-		<FaAws
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.aws }}
-		/>
-	),
-	Jenkins: (
-		<SiJenkins
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.jenkins }}
-		/>
-	),
-	Git: (
-		<SiGit
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.git }}
-		/>
-	),
-	Docker: (
-		<SiDocker
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.docker }}
-		/>
-	),
-	"Elastic Search": (
-		<SiElasticsearch
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.elasticsearch }}
-		/>
-	),
-	Microservices: <BiNetworkChart className="w-3.5 h-3.5 text-gray-700" />,
-	Serverless: <FaServer className="w-3.5 h-3.5 text-gray-700" />,
-	React: (
-		<GrReactjs
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.react }}
-		/>
-	),
-	Linux: (
-		<FaServer
-			className="w-3.5 h-3.5"
-			style={{ color: "#FCC624" }}
-		/>
-	),
-	Splunk: (
-		<FaDatabase
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.splunk }}
-		/>
-	),
-	DevOps: <VscTools className="w-3.5 h-3.5 text-gray-700" />,
-	TensorFlow: (
-		<SiTensorflow
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.tensorflow }}
-		/>
-	),
-	"scikit-learn": (
-		<SiScikitlearn
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.scikitlearn }}
-		/>
-	),
-	MediaPipe: (
-		<SiMediapipe
-			className="w-3.5 h-3.5"
-			style={{ color: colors.tech.mediapipe }}
-		/>
-	),
+// Icon mapping helper
+const specificSkillIcons: Record<string, React.ReactNode> = {
+	Java: <FaJava style={{ color: colors.tech.java }} />,
+	JavaScript: <TbBrandJavascript style={{ color: colors.tech.javascript }} />,
+	TypeScript: <TbBrandTypescript style={{ color: colors.tech.typescript }} />,
+	Python: <SiPython style={{ color: colors.tech.python }} />,
+	"Spring Boot": <SiSpringboot style={{ color: colors.tech.spring }} />,
+	NextJS: <SiNextdotjs style={{ color: "#000" }} />,
+	"Tailwind CSS": <SiTailwindcss style={{ color: colors.tech.tailwind }} />,
+	Docker: <SiDocker style={{ color: colors.tech.docker }} />,
+	AWS: <FaAws style={{ color: colors.tech.aws }} />,
+	React: <GrReactjs style={{ color: colors.tech.react }} />,
 };
 
 const ExperiencePage: React.FC = () => {
+	const [expanded, setExpanded] = useState<number>(-1); // -1 means all closed by default
+	const [hoveredDot, setHoveredDot] = useState<number>(-1);
+
 	const getSkillIcon = (skillName: string) => {
 		for (const [key, icon] of Object.entries(specificSkillIcons)) {
-			if (skillName.includes(key) || key.includes(skillName)) {
-				return icon;
-			}
+			if (skillName.includes(key) || key.includes(skillName)) return icon;
 		}
-		return <HiCode className="w-3.5 h-3.5 text-gray-700" />;
+		return <HiCode className="opacity-50" />;
 	};
 
-	const renderSkillsWithIcons = (skillsString: string) => {
-		const skillsArray = skillsString.split(", ").map((skill) => skill.trim());
-		return (
-			<div className="flex flex-wrap gap-1.5">
-				{skillsArray.map((skill, idx) => (
-					<span
-						key={idx}
-						className="px-2.5 py-1 bg-gray-50 rounded-md text-xs font-medium flex items-center gap-1 border border-gray-200 hover:border-gray-300 hover:bg-white transition-all"
-						style={{ color: "#334155" }}
-					>
-						{getSkillIcon(skill)}
-						<span>{skill}</span>
-					</span>
-				))}
-			</div>
-		);
-	};
+	const renderSkillBadge = (skill: string, isHeader: boolean) => (
+		<span
+			key={skill}
+			className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] md:text-[11px] font-semibold border transition-all duration-500 ${isHeader ? "bg-white/10 border-white/20 text-white" : "bg-slate-50 border-slate-200 text-slate-600 shadow-sm"}`}
+		>
+			<span className="w-3 h-3 flex items-center justify-center scale-90">{getSkillIcon(skill)}</span>
+			{skill}
+		</span>
+	);
 
 	return (
 		<div
 			id="experience"
-			className="min-h-screen"
-			style={{ background: "#f8fafc" }}
+			className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50"
 		>
-			{/* Background */}
-			<div className="relative">
+			{/* Subtle Background Pattern */}
+			<div className="absolute inset-0 -z-10 opacity-10">
 				<div
-					className="absolute inset-0"
-					style={{ background: `linear-gradient(to bottom right, #f1f5f9, #ffffff, #f8fafc)` }}
-				>
-					<div className="absolute inset-0 opacity-10">
-						<div
-							className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl"
-							style={{ backgroundColor: colors.brand.dark }}
-						></div>
-						<div
-							className="absolute bottom-10 right-10 w-64 h-64 rounded-full blur-3xl"
-							style={{ backgroundColor: colors.brand.light }}
-						></div>
-					</div>
-				</div>
+					className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[100px]"
+					style={{ backgroundColor: colors.brand.primary }}
+				/>
+				<div
+					className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full blur-[100px]"
+					style={{ backgroundColor: colors.brand.medium }}
+				/>
+			</div>
 
-				{/* Content */}
-				<div className="relative z-10 max-w-5xl mx-auto px-4 py-8 md:py-12">
-					<h1
-						className="text-2xl md:text-3xl font-bold mb-8 md:mb-10"
-						style={{
-							background: `linear-gradient(to right, ${colors.brand.dark}, ${colors.brand.light})`,
-							WebkitBackgroundClip: "text",
-							WebkitTextFillColor: "transparent",
-							backgroundClip: "text",
-						}}
-					>
-						Work Experience
-					</h1>
-					<div className="space-y-6">
-						{EXPERIENCE_ITEMS.map((exp, index) => (
-							<div
-								key={index}
-								className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
-							>
-								{/* Header Section */}
-								<div className="p-5 md:p-6 bg-gradient-to-br from-white to-gray-50">
-									<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-										<div className="flex-1">
-											<h4 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{exp.title}</h4>
-											<div className="space-y-1.5">
-												<div className="flex items-center gap-2 text-sm text-gray-600">
-													<FaBuilding
-														className="w-3.5 h-3.5 flex-shrink-0"
-														style={{ color: colors.brand.dark }}
-													/>
-													<span className="font-semibold text-gray-900">{exp.company}</span>
-												</div>
-												<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
-													<div className="flex items-center gap-1.5">
-														<FaMapMarkerAlt
-															className="w-3 h-3"
-															style={{ color: colors.brand.light }}
-														/>
-														<span>{exp.location}</span>
-													</div>
-													<span className="hidden sm:inline text-gray-300">|</span>
-													<div className="flex items-center gap-1.5">
-														<FaCalendarAlt
-															className="w-3 h-3"
-															style={{ color: colors.brand.light }}
-														/>
-														<span>{exp.period}</span>
-													</div>
-												</div>
+			<main className={`${commonStyles.section.container} relative z-10`}>
+				{/* Enhanced Header Section */}
+				<motion.header
+					initial={{ opacity: 0, y: -30 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className="pt-16 md:pt-20 pb-12 text-center"
+				>
+					{/* Experience Count Badge */}
+					<div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 shadow-sm">
+						<FaBriefcase
+							className="w-4 h-4"
+							style={{ color: colors.brand.primary }}
+						/>
+						<span
+							className="text-sm font-semibold"
+							style={{ color: colors.brand.dark }}
+						>
+							{EXPERIENCE_ITEMS.length} Roles
+						</span>
+					</div>
+
+					{/* Title with Gradient */}
+					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Experience</h1>
+
+					{/* Subtitle */}
+					<p className="mt-4 text-[#797F8C] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">A journey through innovative teams and challenging projects that shaped my technical expertise and leadership approach.</p>
+
+					{/* Divider */}
+					<div className="flex justify-center mt-6">
+						<div className={commonStyles.header.divider} />
+					</div>
+				</motion.header>
+
+				{/* Experience Timeline */}
+				<section className="pb-24">
+					<div className="max-w-4xl mx-auto space-y-6">
+						{EXPERIENCE_ITEMS.map((exp, idx) => {
+							const isExpanded = expanded === idx;
+							const isHovered = hoveredDot === idx;
+							const skillsArray = exp.skills.split(", ").map((s) => s.trim());
+							const isLast = idx === EXPERIENCE_ITEMS.length - 1;
+
+							return (
+								<motion.div
+									key={idx}
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.5, delay: idx * 0.1 }}
+									className="relative flex gap-4"
+									onMouseEnter={() => setHoveredDot(idx)}
+									onMouseLeave={() => setHoveredDot(-1)}
+								>
+									{/* --- VERTICAL TIMELINE SIDEBAR --- */}
+									<div className="w-auto flex-shrink-0 relative flex flex-col items-center">
+										{/* Glassmorphism Period Badge */}
+										<div className="mb-3 relative group/period">
+											{/* Outer glow ring */}
+											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
+
+											{/* Main glass badge */}
+											<div className="relative bg-white/70 backdrop-blur-xl px-4 py-2 rounded-full border border-white/40 shadow-xl shadow-slate-200/50">
+												{/* Gradient overlay */}
+												<div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/60 via-transparent to-[#142240]/5" />
+
+												{/* Text with gradient */}
+												<span className="relative text-[11px] md:text-[12px] font-extrabold text-transparent bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text uppercase tracking-wider whitespace-nowrap">{exp.period}</span>
+
+												{/* Bottom shine line */}
+												<div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 											</div>
 										</div>
-									</div>
-								</div>
 
-								{/* Technologies Section */}
-								<div className="px-5 md:px-6 py-4 bg-gray-50 border-t border-gray-100">
-									<div className="flex items-center gap-2 mb-3">
-										<FaLaptopCode
-											className="w-4 h-4"
-											style={{ color: colors.brand.dark }}
-										/>
-										<span className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Tech Stack</span>
-									</div>
-									{renderSkillsWithIcons(exp.skills)}
-								</div>
+										{/* Timeline Dot */}
+										<div className="relative z-10">
+											{/* Subtle pulse ring on hover */}
+											<div className={`absolute inset-0 rounded-full bg-[#142240] transition-all duration-300 ${isHovered ? "scale-[1.8] opacity-10" : "scale-100 opacity-0"}`} />
 
-								{/* Responsibilities Section */}
-								<div className="px-5 md:px-6 py-5 space-y-3">
-									{exp.responsibilities.map((resp, idx) => (
-										<div
-											key={idx}
-											className="flex items-start gap-3 group"
-										>
+											{/* Main dot */}
+											<div className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${isExpanded ? "bg-[#142240] border-[#142240] shadow-md shadow-[#142240]/30 scale-110" : isHovered ? "bg-gradient-to-br from-[#142240] to-[#3D5176] border-[#3D5176] shadow-md shadow-[#142240]/30 scale-105" : "bg-white/80 border-slate-300 shadow-sm backdrop-blur-sm"}`}>
+												{/* Inner glow effect */}
+												<div className={`absolute inset-0 rounded-full transition-all duration-300 ${isExpanded ? "bg-white/15" : isHovered ? "bg-white/20" : "bg-gradient-to-br from-white/30 to-transparent"}`} />
+
+												{/* Center highlight */}
+												{(isExpanded || isHovered) && <div className="absolute top-[1px] left-[1px] w-1 h-1 rounded-full bg-white/50 blur-[0.5px]" />}
+											</div>
+										</div>
+
+										{/* Vertical Connecting Line */}
+										{!isLast && (
+											<div className="relative w-[2px] flex-1 min-h-[80px] mt-2">
+												{/* Glow effect on hover */}
+												<div className={`absolute inset-0 bg-gradient-to-b from-[#142240]/20 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
+												{/* Main line */}
+												<div className="absolute inset-0 bg-gradient-to-b from-slate-300 via-slate-200 to-slate-100" />
+											</div>
+										)}
+									</div>
+
+									{/* --- COMPACT MORPHING CARD --- */}
+									<div
+										className="flex-1 group cursor-pointer"
+										onClick={() => setExpanded(isExpanded ? -1 : idx)}
+									>
+										<div className={`rounded-3xl overflow-hidden border border-white bg-white transition-all duration-500 ${isExpanded ? "shadow-2xl shadow-[#142240]/10 translate-y-[-2px]" : "shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-slate-300/50"}`}>
+											{/* HEADER SECTION (Gradient) */}
 											<div
-												className="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5 shadow-sm"
+												className="p-5 md:p-6 text-white relative transition-all duration-500 overflow-hidden"
 												style={{
-													background: `linear-gradient(135deg, ${colors.brand.dark}, ${colors.brand.light})`,
+													background: `linear-gradient(135deg, ${colors.brand.dark}, ${colors.brand.medium})`,
+													paddingBottom: isExpanded ? "1.5rem" : "1.5rem",
 												}}
 											>
-												{idx + 1}
+												{/* Decorative Gradient Circles in Header */}
+												<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
+												<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
+												<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#3D5176]/30 blur-2xl" />
+
+												<div className="flex justify-between items-start relative z-10">
+													<div className="space-y-0.5">
+														<h3 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h3>
+														<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-blue-100/80">
+															<span className="flex items-center gap-1">
+																<FaBuilding className="text-blue-300 w-2.5 h-2.5" />
+																{exp.company}
+															</span>
+															<span className="flex items-center gap-1">
+																<FaMapMarkerAlt className="w-2.5 h-2.5" />
+																{exp.location}
+															</span>
+														</div>
+													</div>
+													<div className={`p-1.5 rounded-xl bg-white/10 backdrop-blur-md transition-all duration-500 ${isExpanded ? "rotate-180 bg-white/20" : ""}`}>
+														<FaChevronDown className="w-3.5 h-3.5" />
+													</div>
+												</div>
+
+												{/* Header Tech Stack (Visible only when COLLAPSED) */}
+												<div className={`flex flex-wrap gap-1.5 transition-all duration-500 origin-top overflow-hidden ${isExpanded ? "opacity-0 -translate-y-2 mt-0 max-h-0" : "opacity-100 translate-y-0 mt-4 max-h-20"}`}>
+													{skillsArray.slice(0, 4).map((s) => renderSkillBadge(s, true))}
+													{skillsArray.length > 4 && <span className="text-[10px] font-bold text-blue-200/60 self-center">+{skillsArray.length - 4}</span>}
+												</div>
 											</div>
-											<p className="text-sm text-gray-700 leading-relaxed flex-1">{resp}</p>
+
+											{/* EXPANDABLE BODY SECTION */}
+											<div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
+												<div className="p-6 md:p-8 space-y-6 bg-white/50 backdrop-blur-xl">
+													{/* Morphing Landing Spot for Skills */}
+													<div className={`space-y-3 transition-all duration-700 delay-100 ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+														<div className="flex items-center gap-2 mb-2">
+															<div className="h-px w-4 bg-slate-200" />
+															<span className="text-[10px] uppercase font-black tracking-widest text-slate-400">Full Tech Stack</span>
+														</div>
+														<div className="flex flex-wrap gap-2">{skillsArray.map((s) => renderSkillBadge(s, false))}</div>
+													</div>
+
+													{/* Achievement Points */}
+													<div className={`space-y-4 transition-all duration-700 delay-200 ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+														<div className="flex items-center gap-2 mb-2">
+															<div className="h-px w-4 bg-slate-200" />
+															<span className="text-[10px] uppercase font-black tracking-widest text-slate-400">Responsibilities</span>
+														</div>
+														<div className="space-y-3.5">
+															{exp.responsibilities.map((resp, i) => (
+																<div
+																	key={i}
+																	className="flex gap-3 items-start group/item"
+																>
+																	<FaCircle className="w-1 h-1 text-blue-900 mt-2 flex-shrink-0 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all" />
+																	<p className="text-slate-600 text-[13px] md:text-sm leading-relaxed">{resp}</p>
+																</div>
+															))}
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									))}
-								</div>
-							</div>
-						))}
+									</div>
+								</motion.div>
+							);
+						})}
 					</div>
-				</div>
-			</div>
+				</section>
+			</main>
 		</div>
 	);
 };
