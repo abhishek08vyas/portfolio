@@ -52,6 +52,19 @@ export const Footer = () => {
 									</Link>
 								</li>
 								<li>
+									<Link
+										href="/experience"
+										className="text-gray-400 hover:text-white transition-colors"
+									>
+										Experience
+									</Link>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h3 className="font-medium mb-4">The Website</h3>
+							<ul className="space-y-2">
+								<li>
 									{/* Use direct Link to coming-soon instead of onClick handler */}
 									<Link
 										href="/coming-soon"
@@ -60,11 +73,6 @@ export const Footer = () => {
 										Blog
 									</Link>
 								</li>
-							</ul>
-						</div>
-						<div>
-							<h3 className="font-medium mb-4">The Website</h3>
-							<ul className="space-y-2">
 								<li>
 									{/* Use direct Link to coming-soon instead of onClick handler */}
 									<Link

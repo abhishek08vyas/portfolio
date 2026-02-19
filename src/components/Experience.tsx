@@ -3,37 +3,23 @@
 import React, { useState } from "react";
 import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase } from "react-icons/fa";
 import { colors, commonStyles } from "../lib/theme-utils";
-import { SiSpringboot, SiDocker, SiPython, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { HiCode } from "react-icons/hi";
-import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
-import { GrReactjs } from "react-icons/gr";
-import { FaAws, FaJava } from "react-icons/fa";
 import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
+import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { motion } from "framer-motion";
-
-// Icon mapping helper
-const specificSkillIcons: Record<string, React.ReactNode> = {
-	Java: <FaJava style={{ color: colors.tech.java }} />,
-	JavaScript: <TbBrandJavascript style={{ color: colors.tech.javascript }} />,
-	TypeScript: <TbBrandTypescript style={{ color: colors.tech.typescript }} />,
-	Python: <SiPython style={{ color: colors.tech.python }} />,
-	"Spring Boot": <SiSpringboot style={{ color: colors.tech.spring }} />,
-	NextJS: <SiNextdotjs style={{ color: "#000" }} />,
-	"Tailwind CSS": <SiTailwindcss style={{ color: colors.tech.tailwind }} />,
-	Docker: <SiDocker style={{ color: colors.tech.docker }} />,
-	AWS: <FaAws style={{ color: colors.tech.aws }} />,
-	React: <GrReactjs style={{ color: colors.tech.react }} />,
-};
 
 const ExperiencePage: React.FC = () => {
 	const [expanded, setExpanded] = useState<number>(-1); // -1 means all closed by default
 	const [hoveredDot, setHoveredDot] = useState<number>(-1);
 
 	const getSkillIcon = (skillName: string) => {
-		for (const [key, icon] of Object.entries(specificSkillIcons)) {
-			if (skillName.includes(key) || key.includes(skillName)) return icon;
+		// Sort by key length descending so "JavaScript" matches before "Java", etc.
+		const entries = Object.entries(SKILL_ICONS).sort(([a], [b]) => b.length - a.length);
+		const normalized = skillName.trim();
+		for (const [key, icon] of entries) {
+			if (normalized.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(normalized.toLowerCase())) return icon;
 		}
-		return <HiCode className="opacity-50" />;
+		return <HiCode className="opacity-50" style={{ width: 16, height: 16 }} />;
 	};
 
 	const renderSkillBadge = (skill: string, isHeader: boolean) => (
@@ -41,7 +27,8 @@ const ExperiencePage: React.FC = () => {
 			key={skill}
 			className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] md:text-[11px] font-semibold border transition-all duration-500 ${isHeader ? "bg-white/10 border-white/20 text-white" : "bg-slate-50 border-slate-200 text-slate-600 shadow-sm"}`}
 		>
-			<span className="w-3 h-3 flex items-center justify-center scale-90">{getSkillIcon(skill)}</span>
+			{/* Explicit SVG sizing fixes intermittent icon invisibility in flex containers (Firefox/Chrome) */}
+			<span className="w-4 h-4 min-w-4 min-h-4 flex items-center justify-center flex-shrink-0 [&>svg]:!w-4 [&>svg]:!h-4">{getSkillIcon(skill)}</span>
 			{skill}
 		</span>
 	);
@@ -74,7 +61,7 @@ const ExperiencePage: React.FC = () => {
 					{/* Experience Count Badge */}
 					<div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 shadow-sm">
 						<FaBriefcase
-							className="w-4 h-4"
+							className="w-5 h-5"
 							style={{ color: colors.brand.primary }}
 						/>
 						<span
@@ -186,17 +173,17 @@ const ExperiencePage: React.FC = () => {
 														<h3 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h3>
 														<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-blue-100/80">
 															<span className="flex items-center gap-1">
-																<FaBuilding className="text-blue-300 w-2.5 h-2.5" />
+																<FaBuilding className="text-blue-300 w-3 h-3" />
 																{exp.company}
 															</span>
 															<span className="flex items-center gap-1">
-																<FaMapMarkerAlt className="w-2.5 h-2.5" />
+																<FaMapMarkerAlt className="w-3 h-3" />
 																{exp.location}
 															</span>
 														</div>
 													</div>
 													<div className={`p-1.5 rounded-xl bg-white/10 backdrop-blur-md transition-all duration-500 ${isExpanded ? "rotate-180 bg-white/20" : ""}`}>
-														<FaChevronDown className="w-3.5 h-3.5" />
+														<FaChevronDown className="w-4 h-4" />
 													</div>
 												</div>
 
@@ -231,7 +218,7 @@ const ExperiencePage: React.FC = () => {
 																	key={i}
 																	className="flex gap-3 items-start group/item"
 																>
-																	<FaCircle className="w-1 h-1 text-blue-900 mt-2 flex-shrink-0 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all" />
+																	<FaCircle className="w-1.5 h-1.5 text-blue-900 mt-2 flex-shrink-0 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all" />
 																	<p className="text-slate-600 text-[13px] md:text-sm leading-relaxed">{resp}</p>
 																</div>
 															))}

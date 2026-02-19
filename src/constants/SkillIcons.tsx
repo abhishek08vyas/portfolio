@@ -1,7 +1,7 @@
 import { HiCode, HiCloud } from "react-icons/hi";
 import { FaDatabase, FaLaptopCode, FaJava, FaAws } from "react-icons/fa";
 import { TbBrandJavascript, TbBrandTypescript } from "react-icons/tb";
-import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe, SiRedux, SiReduxsaga, SiSwagger, SiJunit5, SiSwift, SiFlask, SiAmazons3, SiNodedotjs, SiFirebase, SiFlutter, SiHeroku } from "react-icons/si";
+import { SiSpringboot, SiDocker, SiPostgresql, SiJenkins, SiGit, SiRedis, SiMongodb, SiMysql, SiApachekafka, SiPython, SiElasticsearch, SiElasticstack, SiNextdotjs, SiTailwindcss, SiTensorflow, SiScikitlearn, SiMediapipe, SiRedux, SiReduxsaga, SiSwagger, SiJunit5, SiSwift, SiFlask, SiAmazons3, SiNodedotjs, SiFirebase, SiFlutter, SiHeroku } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { BiNetworkChart } from "react-icons/bi";
 import { VscTools } from "react-icons/vsc";
@@ -139,6 +139,12 @@ export const SKILL_ICONS: Record<string, React.ReactNode> = {
 	),
 	"Elastic Search": (
 		<SiElasticsearch
+			className="w-4 h-4 mr-1"
+			style={{ color: colors.tech.elasticsearch }}
+		/>
+	),
+	"ELK Stack": (
+		<SiElasticstack
 			className="w-4 h-4 mr-1"
 			style={{ color: colors.tech.elasticsearch }}
 		/>

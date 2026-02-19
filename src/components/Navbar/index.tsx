@@ -58,13 +58,9 @@ export const Navbar = () => {
 									{item.subItems && item.title !== "Home" ? (
 										<>
 											{/* We wrap the trigger in a Link so the title itself is clickable */}
-											<Link
-												href={item.href}
-												legacyBehavior
-												passHref
-											>
-												<NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-gray-600 hover:text-primary font-bold px-2 h-10 text-sm">{item.title}</NavigationMenuTrigger>
-											</Link>
+											<NavigationMenuTrigger asChild className="bg-transparent hover:bg-transparent text-gray-600 hover:text-primary font-bold px-2 h-10 text-sm">
+												<Link href={item.href}>{item.title}</Link>
+											</NavigationMenuTrigger>
 											<NavigationMenuContent>
 												<ul className="grid gap-1 p-2 min-w-40">
 													{item.subItems.map((sub) => (
