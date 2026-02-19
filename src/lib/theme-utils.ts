@@ -101,8 +101,8 @@ export const commonStyles = {
 
 	// Button styles
 	button: {
-		primary: "bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30",
-		secondary: "bg-white text-[#142240] border border-gray-200 hover:bg-gray-50 transition-all duration-300",
+		primary: "cursor-pointer bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30",
+		secondary: "cursor-pointer bg-white text-[#142240] border border-gray-200 hover:bg-gray-50 transition-all duration-300",
 	},
 
 	// Section styles
