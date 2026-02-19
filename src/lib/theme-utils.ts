@@ -3,6 +3,8 @@
 // Color constants
 export const colors = {
 	brand: {
+		/** Primary brand color – navy. Use for accents, icons, badges, and key UI. */
+		primary: "#142240",
 		dark: "#142240",
 		medium: "#3D5176",
 		light: "#797F8C",
@@ -14,6 +16,9 @@ export const colors = {
 		aws: "#FF9900",
 		javascript: "#F7931E",
 		react: "#61DAFB",
+		redux: "#764ABC",
+		saga: "#999999",
+		zustand: "#443E38",
 		tailwind: "#38B2AC",
 		swagger: "#85EA2D",
 		junit: "#25A162",
@@ -96,8 +101,8 @@ export const commonStyles = {
 
 	// Button styles
 	button: {
-		primary: "bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30",
-		secondary: "bg-white text-[#142240] border border-gray-200 hover:bg-gray-50 transition-all duration-300",
+		primary: "cursor-pointer bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30",
+		secondary: "cursor-pointer bg-white text-[#142240] border border-gray-200 hover:bg-gray-50 transition-all duration-300",
 	},
 
 	// Section styles
@@ -137,7 +142,7 @@ export const commonStyles = {
 	// Open to work section
 	openToWork: {
 		container: "bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl",
-		content: "relative bg-black rounded-lg p-6 overflow-hidden",
+		content: "relative bg-[#142240] rounded-lg p-6 overflow-hidden",
 		badge: "inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "text-xl md:text-2xl font-bold text-white mb-3",
 		description: "text-gray-300",
