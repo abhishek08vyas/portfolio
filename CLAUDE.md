@@ -23,7 +23,7 @@ There are no automated tests; verify changes with `pnpm build` and by viewing th
 - **Next.js 15** (App Router, `src/app/`) + **React 19** + **TypeScript** (strict; path alias `@/*` → `src/*`)
 - **Tailwind CSS v4** (`@tailwindcss/postcss`) + **shadcn/ui** (Radix primitives in `src/components/ui/` — generated code, avoid hand-editing; re-generate via shadcn CLI instead)
 - Animations: **Framer Motion** and **GSAP**
-- Fonts: **Inter** (body, via `next/font`) + **Dancing Script** (exposed as `--font-signature` / Tailwind `font-signature` — used for the signature/name flourish)
+- Fonts: **Inter** (body, via `next/font`) + **Fraunces** (display serif, `--font-fraunces` → Tailwind `font-display` — headings/section titles) + **Dancing Script** (exposed as `--font-signature` / Tailwind `font-signature` — used for the signature/name flourish)
 - Contact form: **EmailJS** (`@emailjs/browser`, sent client-side from `ContactModel.tsx`)
 - Analytics: `@vercel/analytics`; deployed on **Vercel** (`vercel.json` sets `pnpm build`)
 - `@tanstack/react-query`, `react-hook-form`, `zod`, `sonner` are available; `react-router-dom` is a leftover dependency — always use `next/link` / `next/navigation`, never react-router
@@ -52,17 +52,18 @@ All are `NEXT_PUBLIC_*` (read client-side):
 
 ## Theming & styling — gotchas
 
-- Brand palette: navy `#142240` (dark) / `#3D5176` (medium) / `#797F8C` (light). It is **duplicated in four places** — `src/app/globals.css` (`@theme` block), `tailwind.config.ts`, `src/lib/theme.ts`, and `src/lib/theme-utils.ts`. Keep them in sync if you change colors.
-- Tailwind v4 CSS-first config lives in `src/app/globals.css` (`@theme` + shadcn HSL variables in `:root`); a legacy v3-style `tailwind.config.ts` also exists (shadcn color mappings, `font-signature`, `darkMode: class`). Both are in play.
-- **Dark mode is not actually implemented**: there is no `ThemeProvider` or theme toggle, and no `.dark` CSS variables — `next-themes` is only imported by the generated `sonner.tsx`. The site ships light-only today; don't assume dark styles work, and don't break the ground for adding it later.
-- `src/lib/theme-utils.ts` exports `commonStyles` (card/button/section/header/tab/experienceCard/openToWork class strings) and `getTechColor()` for per-technology brand colors — reuse these instead of re-inventing class combos.
+- **Theme system (warm dawn/dusk, light + dark)**: design tokens are CSS custom properties in `src/app/globals.css` on `:root` (light/dawn: cream `#fffaf5`, ink `#2a2440`, coral accent `#e04f5f`) and `.dark` (dusk: plum `#14122a`, peach accent `#ff9d8a`) — `--surface-page/card/raised`, `--edge`, `--text-strong/body/dim`, `--accent(-strong/-soft)`, `--glow-a/b`, `--shadow-soft/hover`, `--focus-ring`. Style components with these vars (`text-[var(--text-body)]` etc.), NOT hardcoded hexes.
+- **Dark mode is implemented** via `next-themes` (class strategy): `ThemeProvider.tsx` wraps the app in `layout.tsx` (`suppressHydrationWarning` on `<html>` is required), `ThemeToggle.tsx` lives in the Navbar (mounted-guard against hydration mismatch). Tailwind v4 needs the `@custom-variant dark (&:where(.dark, .dark *));` line in `globals.css` for `dark:` variants — the `darkMode` key in `tailwind.config.ts` is INERT (no `@config` directive). **Check every visual change in BOTH themes** (AA contrast: `--accent` only ≥18px/semibold; small accent text uses `--accent-strong`).
+- Legacy brand navy `#142240`/`#3D5176`/`#797F8C` survives in `tailwind.config.ts`, `src/lib/theme.ts`, `getTechColor()`, and the navbar wordmark — don't propagate it into new component styling; use the tokens.
+- The fixed `SkyBackdrop.tsx` (dawn/dusk gradients, `-z-10`) shows through pages — sections should keep transparent backgrounds. `SectionHeading.tsx` renders the numbered ("01") serif section headers.
+- `src/lib/theme-utils.ts` exports `commonStyles` (token-based card/button/section/header/experienceCard/openToWork class strings) and `getTechColor()` for per-technology brand colors — reuse these instead of re-inventing class combos.
 - `components.json` quirks: `rsc: false`, and its `tailwind.css` path (`src/index.css`) is stale — the real global CSS is `src/app/globals.css`. Fix the path if the shadcn CLI misbehaves.
 
 ## Conventions
 
 - Content changes (new job, project, skill) go in `src/constants/` or `src/data/` — not hardcoded in components.
 - Use existing shadcn/ui components and the `cn()` helper; follow the surrounding Tailwind idiom rather than inline styles.
-- Keep the site fully responsive (mobile-first; `use-mobile` hook exists in `src/hooks/`). The site is currently light-theme only (see gotchas above) — if/when dark mode lands, check both themes for any visual change.
+- Keep the site fully responsive (mobile-first; `use-mobile` hook exists in `src/hooks/`) and verify any visual change in **both light and dark themes** (toggle in the navbar).
 - Accessibility is a requirement, not a nice-to-have: semantic HTML, keyboard navigation, reduced-motion respect for Framer Motion/GSAP animations.
 - Git workflow: work on `feature/*` (or `release/*`) branches and PR into `main` — don't commit to `main` directly.
 
