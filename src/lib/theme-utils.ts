@@ -102,7 +102,7 @@ export const commonStyles = {
 	// Button styles
 	button: {
 		primary:
-			"cursor-pointer rounded-full bg-gradient-to-r from-[#f26d78] to-[#e04f5f] hover:from-[#e04f5f] hover:to-[#e04f5f] text-white font-semibold shadow-lg shadow-[#e04f5f]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#e04f5f]/40 motion-reduce:transform-none",
+			"cursor-pointer rounded-full bg-gradient-to-r from-[#fbbf24] to-[#d97706] hover:from-[#f59e0b] hover:to-[#d97706] text-[#142240] font-bold shadow-lg shadow-[#d97706]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#d97706]/40 motion-reduce:transform-none",
 		secondary: "cursor-pointer rounded-full bg-[var(--surface-raised)] text-[var(--text-strong)] border border-[var(--edge)] hover:bg-[var(--surface-card)] hover:text-[var(--text-strong)] transition-all duration-300",
 	},
 
@@ -140,14 +140,14 @@ export const commonStyles = {
 		responsibilitiesSection: "bg-[var(--surface-raised)] p-3 rounded-lg border border-[var(--edge)]",
 	},
 
-	// Open to work section — dusk-purple gradient panel (reads well in BOTH themes)
+	// Open to work section — brand-navy gradient panel (reads well in BOTH themes)
 	openToWork: {
-		container: "bg-gradient-to-br from-[#3b3161] via-[#6b5aa8] to-[#b8779b] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(59,49,97,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
+		container: "bg-gradient-to-br from-[#142240] via-[#24365c] to-[#3D5176] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(20,34,64,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
 		content: "relative rounded-[34px] p-6 md:p-8 overflow-hidden",
 		badge: "inline-flex items-center bg-emerald-500/20 text-emerald-200 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3",
 		description: "text-white/80",
-		button: "inline-flex items-center justify-center bg-white text-[#2a2440] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
+		button: "inline-flex items-center justify-center bg-white text-[#142240] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
 	},
 };
 

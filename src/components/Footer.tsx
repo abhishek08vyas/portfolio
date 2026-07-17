@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ContactModal } from "./ContactModel";
 import { RESUME_PATH, GITHUB_URL, LINKEDIN_URL, EMAIL } from "@/constants/links";
 
-const footerLinkClass = "text-[#cfc9e8] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1e1b3a] rounded-sm";
+const footerLinkClass = "text-[#c3cce2] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f1830] rounded-sm";
 
 export const Footer = () => {
 	const currentYear = new Date().getFullYear();
@@ -17,15 +17,15 @@ export const Footer = () => {
 	const reduce = useReducedMotion();
 
 	return (
-		<footer className="bg-gradient-to-b from-[#2f2a52] to-[#1e1b3a] text-white pt-12 pb-4">
+		<footer className="bg-gradient-to-b from-[#1a2848] to-[#0f1830] text-white pt-12 pb-4">
 			<div className="container mx-auto px-4">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					{/* Column 1 — Identity */}
 					<div className="flex flex-col space-y-3">
 						<h2 className="text-xl font-bold text-white">Abhishek Vyas</h2>
-						<p className="text-sm text-[#cfc9e8]">Backend & full-stack software engineer building AI-enabled systems. St. John&apos;s, NL · Open to relocation · Remote-ready.</p>
+						<p className="text-sm text-[#c3cce2]">Backend & full-stack software engineer building AI-enabled systems. St. John&apos;s, NL · Open to relocation · Remote-ready.</p>
 						<motion.p
-							className="font-signature text-2xl text-[#cfc9e8] mt-1"
+							className="font-signature text-2xl text-[#c3cce2] mt-1"
 							aria-hidden="true"
 							initial={reduce ? false : { opacity: 0, y: 8 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export const Footer = () => {
 								</button>
 							</li>
 						</ul>
-						<p className="text-sm text-[#cfc9e8] mt-3">Also available for freelance backend and AI consulting work.</p>
+						<p className="text-sm text-[#c3cce2] mt-3">Also available for freelance backend and AI consulting work.</p>
 					</div>
 				</div>
 

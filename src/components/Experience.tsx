@@ -71,7 +71,7 @@ const ExperiencePage: React.FC = () => {
 							const isExpanded = expanded === idx;
 							const isHovered = hoveredDot === idx;
 							const isEducation = exp.type === "education";
-							const dotColor = isEducation ? "#8b7fd4" : "#e04f5f";
+							const dotColor = isEducation ? "#5674ad" : "#d97706";
 							const skillsArray = exp.skills.split(", ").map((s) => s.trim());
 							const isLast = idx === EXPERIENCE_ITEMS.length - 1;
 
@@ -88,7 +88,7 @@ const ExperiencePage: React.FC = () => {
 										{/* Glassmorphism Period Badge */}
 										<div className="mb-3 relative group/period">
 											{/* Outer glow ring */}
-											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#cdc4f9]/40 to-[#ffd9c4]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
+											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#c7d4ee]/40 to-[#f7dfb4]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
 
 											{/* Main glass badge */}
 											<div className="relative bg-[var(--surface-card)] backdrop-blur-xl px-4 py-2 rounded-full border border-[var(--edge)] shadow-xl shadow-[var(--edge)]">
@@ -122,7 +122,7 @@ const ExperiencePage: React.FC = () => {
 										{!isLast && (
 											<div className="relative w-[2px] flex-1 min-h-[80px] mt-2">
 												{/* Glow effect on hover */}
-												<div className={`absolute inset-0 bg-gradient-to-b from-[#cdc4f9]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
+												<div className={`absolute inset-0 bg-gradient-to-b from-[#c7d4ee]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
 												{/* Main line */}
 												<div className="absolute inset-0 bg-gradient-to-b from-[var(--edge)] via-[var(--edge)] to-transparent" />
 											</div>
@@ -143,13 +143,13 @@ const ExperiencePage: React.FC = () => {
 												<div
 													className="p-5 md:p-6 text-white relative transition-all duration-500 motion-reduce:transition-none overflow-hidden"
 													style={{
-														background: isEducation ? "linear-gradient(135deg, #5a4d96, #8b7fd4)" : "linear-gradient(135deg, #3b3161, #6b5aa8)",
+														background: isEducation ? "linear-gradient(135deg, #3D5176, #5674ad)" : "linear-gradient(135deg, #142240, #3D5176)",
 													}}
 												>
 													{/* Decorative Gradient Circles in Header */}
 													<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
 													<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
-													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#b8779b]/30 blur-2xl" />
+													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#fbbf24]/20 blur-2xl" />
 
 													<div className="flex justify-between items-start relative z-10">
 														<div className="space-y-0.5">
@@ -158,12 +158,12 @@ const ExperiencePage: React.FC = () => {
 																<span className="flex items-center gap-1">
 																	{isEducation ? (
 																		<FaGraduationCap
-																			className="text-[#ffd9c4] w-3 h-3"
+																			className="text-[#fbbf24] w-3 h-3"
 																			aria-hidden="true"
 																		/>
 																	) : (
 																		<FaBuilding
-																			className="text-[#ffd9c4] w-3 h-3"
+																			className="text-[#fbbf24] w-3 h-3"
 																			aria-hidden="true"
 																		/>
 																	)}

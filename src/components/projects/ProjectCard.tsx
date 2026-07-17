@@ -27,8 +27,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			transition={{ duration: 0.4 }}
 			className="group relative bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl overflow-hidden border border-[var(--edge)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 flex flex-col h-full"
 		>
-			{/* Image Section — soft lavender backdrop (muted plum in dark) */}
-			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#e6ddff] to-[#cdc4f9] dark:from-[#37306b] dark:to-[#2a2450]">
+			{/* Image Section — soft navy-mist backdrop (deep navy in dark) */}
+			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#dfe7f5] to-[#c7d4ee] dark:from-[#1c2a4e] dark:to-[#16203c]">
 				<Image
 					src={project.image}
 					alt=""
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 				/>
 
 				{/* Role Label Badge */}
-				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#2a2440] shadow-sm">{project.roleLabel}</span>}
+				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#142240] shadow-sm">{project.roleLabel}</span>}
 
 				{/* Title Overlay */}
 				<div className="absolute bottom-0 left-0 right-0 p-5">
@@ -118,7 +118,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 							href={project.links.demo}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-[#f26d78] to-[#e04f5f] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
+							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-[#142240] bg-gradient-to-r from-[#fbbf24] to-[#d97706] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 							aria-label={`Demo — ${project.title} live demo (opens in new tab)`}
 						>
 							<FiExternalLink

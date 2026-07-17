@@ -72,7 +72,7 @@ export function ProjectsArchive() {
 							{/* Badge row + title + description */}
 							<div className="px-6 md:px-8 pt-6 md:pt-8">
 								<div className="flex flex-wrap items-center gap-2 mb-4">
-									<span className="bg-gradient-to-r from-[#f26d78] to-[#e04f5f] inline-flex items-center gap-1 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+									<span className="bg-gradient-to-r from-[#fbbf24] to-[#d97706] inline-flex items-center gap-1 text-[#142240] text-xs font-bold px-2.5 py-1 rounded-full">
 										<HiLightningBolt
 											className="w-3 h-3"
 											aria-hidden="true"

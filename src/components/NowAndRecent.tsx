@@ -11,10 +11,10 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 	const isEducation = item.type === "education";
 
 	return (
-		<article className={`card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 transition-[box-shadow,border-color] duration-300 ${isEducation ? "border-l-[#8b7fd4]" : "border-l-[var(--accent)]"}`}>
-			{/* Icon tile — coral for work, lavender for education */}
+		<article className={`card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 transition-[box-shadow,border-color] duration-300 ${isEducation ? "border-l-[#5674ad]" : "border-l-[var(--accent)]"}`}>
+			{/* Icon tile — amber for work, navy-blue for education */}
 			<div
-				className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shrink-0 ${isEducation ? "bg-gradient-to-br from-[#8b7fd4] to-[#6b5aa8]" : "bg-gradient-to-br from-[#f26d78] to-[#e04f5f]"}`}
+				className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${isEducation ? "bg-gradient-to-br from-[#5674ad] to-[#3D5176] text-white" : "bg-gradient-to-br from-[#fbbf24] to-[#d97706] text-[#142240]"}`}
 				aria-hidden="true"
 			>
 				{isEducation ? <FaGraduationCap className="w-5 h-5" /> : <FaBriefcase className="w-5 h-5" />}
@@ -25,7 +25,7 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 				<div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
 					<h3 className="font-bold text-[var(--text-strong)]">{item.title}</h3>
 					<span className="flex items-center gap-2">
-						{isEducation && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#8b7fd4]/15 text-[#5a4d96] dark:text-[#c3b8f5]">AZ-204</span>}
+						{isEducation && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#5674ad]/15 text-[#31517e] dark:text-[#a9c3e8]">AZ-204</span>}
 						<span className={commonStyles.experienceCard.period}>{item.period}</span>
 					</span>
 				</div>

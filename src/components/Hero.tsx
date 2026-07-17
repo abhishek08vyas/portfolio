@@ -11,10 +11,10 @@ const HERO_SKILLS = ["TypeScript / Node.js", "Java / Spring Boot", "Python", "Ap
 
 /** Desktop-only decorative fact chips floating around the avatar (aria-hidden; facts match site copy exactly) */
 const HERO_FACT_CHIPS: { emoji: string; text: string; position: string; delay: string; dotBg: string }[] = [
-	{ emoji: "📚", text: "RAG pipeline · OSFI (in development)", position: "top-[4%] left-0", delay: "0s", dotBg: "bg-[#efe9ff] dark:bg-[#37306b]" },
-	{ emoji: "⚡", text: "Kafka +40% throughput", position: "top-[30%] right-0", delay: "-1.6s", dotBg: "bg-[#ffe8d9] dark:bg-[#5c3350]" },
+	{ emoji: "📚", text: "RAG pipeline · OSFI (in development)", position: "top-[4%] left-0", delay: "0s", dotBg: "bg-[#e8edf8] dark:bg-[#223058]" },
+	{ emoji: "⚡", text: "Kafka +40% throughput", position: "top-[30%] right-0", delay: "-1.6s", dotBg: "bg-[#fdeecd] dark:bg-[#4d3b15]" },
 	{ emoji: "🛰️", text: "99.9% uptime · 1,000+ DAU", position: "bottom-[24%] left-[2%]", delay: "-3.2s", dotBg: "bg-[#e2f3e8] dark:bg-[#1f3d33]" },
-	{ emoji: "🎓", text: "MASc 2025 · AZ-204", position: "bottom-[2%] right-[10%]", delay: "-4.4s", dotBg: "bg-[#fde7ef] dark:bg-[#4a2b44]" },
+	{ emoji: "🎓", text: "MASc 2025 · AZ-204", position: "bottom-[2%] right-[10%]", delay: "-4.4s", dotBg: "bg-[#f6e7c8] dark:bg-[#453413]" },
 ];
 
 export const Hero = () => {
@@ -104,7 +104,7 @@ export const Hero = () => {
 
 						{/* Name — serif display; "Vyas" in italic coral→lavender gradient */}
 						<h1 className={`${heroTypography.name} text-[var(--text-strong)] mb-3 pb-1`}>
-							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#f26d78] to-[#b48be0] bg-clip-text text-transparent">Vyas</em>
+							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#d97706] to-[#b45309] dark:from-[#fcd34d] dark:to-[#f59e0b] bg-clip-text text-transparent">Vyas</em>
 						</h1>
 
 						{/* Title */}
@@ -247,7 +247,7 @@ export const Hero = () => {
 
 							{/* Profile Image Container */}
 							<div className="absolute inset-4">
-								<div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#f26d78] via-[#b48be0] to-[#ffd9c4] animate-spin-slow motion-reduce:animate-none"></div>
+								<div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#f59e0b] via-[#3D5176] to-[#fbbf24] animate-spin-slow motion-reduce:animate-none"></div>
 								<div className="absolute inset-1 rounded-full bg-[var(--surface-raised)]"></div>
 								<div className="absolute inset-2 rounded-full overflow-hidden">
 									<Image
@@ -288,7 +288,7 @@ export const Hero = () => {
 				style={{ bottom: "1rem" }}
 				aria-hidden="true"
 			>
-				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#e04f5f]/20">
+				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#d97706]/20">
 					<div className="w-1 h-3 bg-[var(--accent)] rounded-full animate-ping motion-reduce:animate-none"></div>
 				</div>
 			</div>

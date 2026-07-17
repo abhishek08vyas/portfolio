@@ -36,7 +36,7 @@ export const FeaturedWork = () => {
 				>
 					<div className="grid grid-cols-1 lg:grid-cols-5">
 						{/* Image column — soft lavender backdrop (muted plum in dark) */}
-						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#e6ddff] to-[#cdc4f9] dark:from-[#37306b] dark:to-[#2a2450] overflow-hidden">
+						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#dfe7f5] to-[#c7d4ee] dark:from-[#1c2a4e] dark:to-[#16203c] overflow-hidden">
 							<Image
 								src={project.image}
 								alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
@@ -44,14 +44,14 @@ export const FeaturedWork = () => {
 								sizes="(max-width: 1024px) 100vw, 460px"
 								className="object-cover transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"
 							/>
-							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#2a2440]/60 to-transparent" />
+							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#142240]/60 to-transparent" />
 						</div>
 
 						{/* Content column */}
 						<div className="lg:col-span-3 p-6 md:p-8">
 							{/* Badge row */}
 							<div className="flex flex-wrap items-center gap-2 mb-4">
-								<span className="bg-gradient-to-r from-[#f26d78] to-[#e04f5f] inline-flex items-center gap-1 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+								<span className="bg-gradient-to-r from-[#fbbf24] to-[#d97706] inline-flex items-center gap-1 text-[#142240] text-xs font-bold px-2.5 py-1 rounded-full">
 									<HiLightningBolt
 										className="w-3 h-3"
 										aria-hidden="true"

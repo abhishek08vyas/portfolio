@@ -50,7 +50,7 @@ export const OpenToWorkSection: React.FC<OpenToWorkSectionProps> = ({ className 
 									<div className="flex flex-col sm:flex-row gap-3 shrink-0">
 										<button
 											onClick={openContactModal}
-											className={`${commonStyles.openToWork.button} w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#3b3161]`}
+											className={`${commonStyles.openToWork.button} w-full sm:w-auto cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#142240]`}
 										>
 											<LuMail
 												className="w-5 h-5 mr-2"
@@ -62,7 +62,7 @@ export const OpenToWorkSection: React.FC<OpenToWorkSectionProps> = ({ className 
 										<a
 											href={RESUME_PATH}
 											download
-											className="group inline-flex items-center justify-center w-full sm:w-auto border border-white/50 text-white hover:bg-white/10 font-medium px-6 py-3 rounded-full transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#3b3161]"
+											className="group inline-flex items-center justify-center w-full sm:w-auto border border-white/50 text-white hover:bg-white/10 font-medium px-6 py-3 rounded-full transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#142240]"
 										>
 											<LuDownload
 												className="w-5 h-5 mr-2 transition-transform group-hover:translate-y-0.5 motion-reduce:transform-none"

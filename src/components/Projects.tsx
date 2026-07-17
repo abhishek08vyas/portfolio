@@ -76,7 +76,7 @@ export const Projects = () => {
 									<h3 className="text-lg font-bold text-white">{project.title}</h3>
 								</div>
 								{hasAnyFeatured && project.featured && (
-									<span className="absolute top-4 left-4 bg-white/85 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm text-[#2a2440]">
+									<span className="absolute top-4 left-4 bg-white/85 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm text-[#142240]">
 										<HiLightningBolt className="w-3 h-3 mr-1" aria-hidden="true" />
 										Featured
 									</span>
@@ -149,16 +149,16 @@ export const Projects = () => {
 					</Button>
 				</div>
 
-				{/* Simplified Call to Action — dusk-purple gradient band */}
+				{/* Simplified Call to Action — brand-navy gradient band */}
 				<div className="mt-20 max-w-3xl mx-auto">
-					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(59,49,97,0.55)] text-center bg-gradient-to-br from-[#3b3161] via-[#6b5aa8] to-[#b8779b]">
+					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(20,34,64,0.55)] text-center bg-gradient-to-br from-[#142240] via-[#24365c] to-[#3D5176]">
 						<h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3">Have a backend or AI project in mind?</h3>
 
 						<p className="text-white/80 mb-4 max-w-lg mx-auto text-sm">I build backend systems, event-driven pipelines, and RAG applications. Open to full-time roles and freelance work.</p>
 
 						<button
 							onClick={openContactModal}
-							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#2a2440] font-semibold px-5 py-2 rounded-full text-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#3b3161]"
+							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#142240] font-semibold px-5 py-2 rounded-full text-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#142240]"
 						>
 							Start a Conversation
 							<FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform motion-reduce:transform-none" aria-hidden="true" />
