@@ -64,7 +64,7 @@ const ExperiencePage: React.FC = () => {
 							className="text-sm font-semibold"
 							style={{ color: colors.brand.dark }}
 						>
-							{EXPERIENCE_ITEMS.filter((e) => e.type !== "education").length} Roles
+							{EXPERIENCE_ITEMS.filter((e) => e.type !== "education").length} Roles · {EXPERIENCE_ITEMS.filter((e) => e.type === "education").length} Degree
 						</span>
 					</div>
 

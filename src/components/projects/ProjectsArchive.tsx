@@ -113,7 +113,7 @@ export function ProjectsArchive() {
 							<div className="relative h-48 md:h-64 mx-6 md:mx-8 mt-6 rounded-xl overflow-hidden">
 								<Image
 									src={featuredProject.image}
-									alt=""
+									alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
 									fill
 									sizes="(max-width: 1024px) 100vw, 92vw"
 									className="object-cover"

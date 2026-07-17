@@ -43,7 +43,7 @@ export const FeaturedWork = () => {
 						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gray-50 overflow-hidden">
 							<Image
 								src={project.image}
-								alt=""
+								alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
 								fill
 								sizes="(max-width: 1024px) 100vw, 460px"
 								className="object-cover transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"

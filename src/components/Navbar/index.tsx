@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,16 @@ export const Navbar = () => {
 		setMenuOpen(false);
 		setIsContactModalOpen(true);
 	};
+
+	// Close the mobile menu on Escape
+	useEffect(() => {
+		if (!menuOpen) return;
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") setMenuOpen(false);
+		};
+		document.addEventListener("keydown", onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	}, [menuOpen]);
 
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
