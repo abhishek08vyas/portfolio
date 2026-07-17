@@ -68,7 +68,7 @@ const ExperiencePage: React.FC = () => {
 							className="text-sm font-semibold"
 							style={{ color: colors.brand.dark }}
 						>
-							{EXPERIENCE_ITEMS.length} Roles
+							{EXPERIENCE_ITEMS.filter((e) => e.type !== "education").length} Roles
 						</span>
 					</div>
 
@@ -76,7 +76,7 @@ const ExperiencePage: React.FC = () => {
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Experience</h1>
 
 					{/* Subtitle */}
-					<p className="mt-4 text-[#797F8C] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">A journey through innovative teams and challenging projects that shaped my technical expertise and leadership approach.</p>
+					<p className="mt-4 text-[#797F8C] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">3+ years shipping production systems, from SRE on-call to event-driven pipelines — now applied to AI-enabled systems.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">

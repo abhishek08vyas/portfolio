@@ -13,8 +13,8 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: 'Abhishek Vyas - Developer & Freelancer',
-  description: 'Java Full Stack Developer with 3+ years of experience',
+  title: 'Abhishek Vyas | Software Engineer — AI-Enabled Systems',
+  description: "Backend & full-stack engineer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.",
 };
 
 export default function RootLayout({

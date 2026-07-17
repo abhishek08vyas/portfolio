@@ -13,7 +13,7 @@ export const Footer = () => {
 					{/* Left Section - Branding */}
 					<div className="flex flex-col space-y-3">
 						<h2 className="text-xl font-bold">Abhishek Vyas</h2>
-						<p className="text-sm text-gray-400">Help you create experiences where aesthetics & functionality seamlessly come together.</p>
+						<p className="text-sm text-gray-400">Backend & full-stack software engineer building AI-enabled systems. St. John&apos;s, NL · Open to relocation · Remote-ready.</p>
 						<div className="flex space-x-4 mt-2">
 							<Link
 								href={process.env.NEXT_PUBLIC_LINKEDIN_LINK ?? "#"}

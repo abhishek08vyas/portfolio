@@ -180,9 +180,9 @@ export const Projects = () => {
 						className="rounded-lg p-6 shadow-md text-center"
 						style={{ backgroundColor: colors.brand.dark }}
 					>
-						<h3 className="text-xl font-bold text-white mb-3">Ready to bring your vision to life?</h3>
+						<h3 className="text-xl font-bold text-white mb-3">Have a backend or AI project in mind?</h3>
 
-						<p className="text-gray-300 mb-4 max-w-lg mx-auto text-sm">I specialize in building scalable, high-performance applications with cutting-edge technologies. Let&apos;s collaborate on your next project.</p>
+						<p className="text-gray-300 mb-4 max-w-lg mx-auto text-sm">I build backend systems, event-driven pipelines, and RAG applications. Open to full-time roles and freelance work.</p>
 
 						<button
 							onClick={openContactModal}

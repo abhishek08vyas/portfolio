@@ -8,7 +8,8 @@ import { commonStyles, responsive, heroTypography } from "@/lib/theme-utils";
 
 // Custom hook for typewriter greeting animation
 const useTypewriterGreeting = () => {
-	const greetings = ["Namaste!", "Hola!", "Bonjour!", "Konnichiwa!", "Ciao!", "Hallo!"];
+	// Single static English greeting (rotating multilingual greetings removed; full animation removal happens in Phase 3)
+	const greetings = ["Hi, I'm Abhishek."];
 	const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
 	const [displayText, setDisplayText] = useState("");
 	const [isTyping, setIsTyping] = useState(true);
@@ -229,7 +230,7 @@ export const Hero = () => {
 
 					{/* Updated Title with smaller, more attractive typography */}
 					<div className="relative mb-8">
-						<h2 className={`${heroTypography.title} `}>Software Engineer</h2>
+						<h2 className={`${heroTypography.title} `}>Software Engineer · Backend & AI-Enabled Systems</h2>
 						<div className="absolute -bottom-3 left-1/2 w-32 h-1 bg-gradient-to-r from-[#142240] to-[#3D5176] transform -translate-x-1/2 rounded-full"></div>
 					</div>
 
@@ -239,11 +240,11 @@ export const Hero = () => {
 								<span className="font-semibold text-[#142240]">{displayText}</span>
 								<br />
 							</span>
-							I'm a solution-driven <span className="font-semibold text-[#142240]">Software Engineer</span> and <span className="font-semibold text-[#142240]">AI Engineering Practitioner</span> dedicated to turning ideas into impactful technology. I thrive on building robust software and intelligent systems that solve real-world problems. With experience across full-stack development, cloud platforms, and modern machine learning, I deliver scalable, production-ready solutions tailored to diverse domains. Let's create something innovative together!
+							I&apos;m a <span className="font-semibold text-[#142240]">backend and full-stack software engineer</span> with 3+ years of experience building AI-enabled systems — RAG pipelines, event-driven architecture, and observability. At Apexon, I engineered an Apache Kafka data-synchronization pipeline that improved throughput by 40% across high-traffic healthcare systems; before that, I ran P0/P1 incident response as a Site Reliability Engineer. I completed my MASc in Computer Engineering at Memorial University in Apr 2025, hold the Microsoft AZ-204 (Azure Developer Associate) certification, and now work as an independent software consultant — most recently building a hybrid RAG pipeline for regulatory document search (OSFI). St. John&apos;s, NL · Open to relocation · Remote-ready.
 						</p>
 
 						<div className="flex flex-wrap justify-center gap-2 mb-4">
-							{["Typescript", "JavaScript", "React", "Redux", "Saga", "Node.js", "Azure", "AWS", "Docker", "Kubernetes", "Redis", "MySQL", "PostgreSQL", "MongoDB", "Jenkins", "Git", "Python", "Java", "FastAPI", "Spring Boot"].map((skill) => (
+							{["TypeScript", "Node.js", "Java", "Spring Boot", "Python", "Apache Kafka", "Azure"].map((skill) => (
 								<span
 									key={skill}
 									className={commonStyles.skillTag}

@@ -5,49 +5,58 @@ export interface ExperienceItem {
 	period: string;
 	skills: string;
 	responsibilities: string[];
-	/** Key = label text, value = display value. e.g. { "API Performance": "<90ms", "Users Served": "8K+ Daily" } */
+	/** Key = label text, value = display value. e.g. { "Daily Active Users": "1,000+" } */
 	metrics?: Record<string, string>;
+	/** Timeline entry type; defaults to "work" when omitted */
+	type?: "work" | "education";
+	/** Optional link (e.g. to a featured case study) */
+	href?: string;
 }
 
 export const EXPERIENCE_ITEMS: ExperienceItem[] = [
 	{
-		title: "Software Engineer 2",
-		company: "Apexon",
+		title: "Independent Software Consultant",
+		company: "Self-employed / Freelance",
+		location: "St. John's, NL, Canada (Remote)",
+		// TODO(ABHISHEK): exact start month
+		period: "2025 - Present",
+		type: "work",
+		href: "/projects#osfi-rag",
+		skills: "AWS, RAG Pipelines",
+		// TODO(ABHISHEK): engagement details/outcomes per SOT:88
+		responsibilities: ["Conducted an AWS migration audit for a client, reviewing existing infrastructure and application architecture to scope the migration.", "Delivering application rebuild work for a client under a statement-of-work (SOW) engagement.", "Building a hybrid RAG pipeline for regulatory document search across OSFI publications for a consulting client."],
+	},
+	{
+		title: "MASc, Computer Engineering",
+		company: "Memorial University of Newfoundland",
+		location: "St. John's, NL, Canada",
+		period: "Sep 2023 - Apr 2025",
+		type: "education",
+		skills: "System Design, SOLID Principles, Software Design & Specification",
+		// TODO(ABHISHEK): research focus/thesis topic
+		// TODO(ABHISHEK): AZ-204 issue date
+		responsibilities: ["Graduated with a CGPA of 3.62/4.0.", "Relevant coursework: System Design, SOLID Principles, Software Design & Specification.", "Earned Microsoft Certified: Azure Developer Associate (AZ-204)."],
+	},
+	{
+		title: "Software Engineer → Software Engineer II",
+		company: "Apexon (formerly Infostretch)",
 		location: "Ahmedabad, India",
-		period: "Jan 2023 - Aug 2023",
-		skills: "TypeScript, ReactJs, NextJs, Redux, Saga, Zustand, Tailwind CSS, MongoDB, Azure, Apache Kafka, Redis, Elastic Search, JavaScript, Java11, MySQL, Microservices, Spring Boot",
-		responsibilities: ["Improved performance of high-traffic REST APIs by implementing asynchronous Azure functions and optimizing Java workflows, resulting in a 10% increase in system throughput.", "Built responsive frontend components using Next.js and integrated RESTful services for seamless user experiences.", "Implemented state management solutions with Redux and Zustand to handle complex data flows, reducing application errors by 40% and improving scalability.", "Implemented Azure Monitor logging and alerting to track application health and support faster troubleshooting in production.", "Contributed to release management and production deployments, supporting multiple rollout strategies including Blue-Green and Canary deployments to ensure smooth environment promotions and minimal user impact.", "Mentored and upskilled junior engineers while directing architectural decisions, resulting in a 10% reduction in technical debt and significantly improved system performance."],
+		period: "Aug 2021 - Aug 2023",
+		type: "work",
+		skills: "Apache Kafka, Java, Node.js, TypeScript, Azure, Azure DevOps, Redux",
+		responsibilities: ["Engineered an asynchronous data-synchronization pipeline using Apache Kafka and Java, improving throughput by 40% and enabling reliable data exchange across high-traffic healthcare systems.", "Designed and optimized production REST APIs in Node.js (TypeScript) and Java, introducing asynchronous Azure Functions that increased system throughput by 10% for high-volume data workloads.", "Orchestrated zero-downtime production deployments using Blue-Green and Canary strategies on Azure DevOps, supporting 1,000+ daily active users at 99.9% uptime; mentored junior engineers and contributed to architectural decisions that reduced recurring technical debt.", "Reduced application errors by 40% by re-architecting frontend state management with Redux, stabilizing performance across complex data flows."],
 		metrics: {
-			"API Performance": "<90ms",
-			"Users Served": "8K+ Daily",
+			"Daily Active Users": "1,000+",
+			Uptime: "99.9%",
 		},
 	},
 	{
-		title: "Software Engineer 1",
-		company: "Apexon",
-		location: "Ahmedabad, India",
-		period: "Aug 2021 - Jan 2023",
-		skills: "Java8, MySQL, Spring Boot, Microservices, AWS, Azure, Redis, Apache Kafka",
-		responsibilities: [
-			"Developed and deployed RESTful APIs for a loyalty-based platform using Spring Boot microservices, MVC architecture, MongoDB, and Java 11, ensuring high scalability and security.",
-			"Designed AWS Lambda functions to enable serverless, asynchronous file processing, reducing processing time.",
-			"Contributed across all stages of deployment, from development to production release, ensuring smooth delivery on AWS cloud.",
-			"Designed and implemented an asynchronous data synchronization architecture using Apache Kafka, enabling reliable patient data exchange across systems, improving throughput by 40%, and reducing latency in healthcare workflows.",
-			"Worked on the internal tool Continuous Engagement, an employee performance application, developing end-to-end components using Next.js, Java 8, Spring Boot, MongoDB, and microservices, resolving minor bugs, writing unit tests, and supporting AWS deployment, contributing to the platform’s mission of empowering employees and unlocking workforce potential.",
-		],
-	},
-	{
 		title: "Site Reliability Engineer",
-		company: "Crest Data System",
+		company: "Crest Data Systems",
 		location: "Ahmedabad, India",
-		period: "Aug 2021 - Jan 2023",
-		skills: "Python, Azure, AWS, Docker, Elastic Search, ELK Stack, Jenkins, Shell Scripting, Linux, Splunk",
-		responsibilities: [
-			"Engineered end-to-end observability across production systems by deploying ELK Stack and Azure Monitor dashboards with proactive alerting, significantly reducing detection time for critical issues and minimizing service downtime.",
-			"Automated operational workflows using Python scripts and CI/CD pipelines, eliminating repetitive manual tasks and ensuring consistent, reliable deployments across environment promotions and production releases.",
-			"Led incident response for P0/P1/P2 incidents in collaboration with the Incident Manager, driving rapid resolution through structured troubleshooting, bottleneck fixes, and performance debugging that measurably improved system stability and recovery time.",
-			"Owned system reliability and high availability by continuously monitoring infrastructure health across Azure and AWS, identifying performance gaps, and partnering with engineering teams to implement targeted improvements.",
-			"Established operational standards by authoring comprehensive technical documentation for monitoring processes, CI/CD pipelines, and troubleshooting runbooks — accelerating team onboarding and improving cross-team collaboration.",
-		],
+		period: "Jun 2020 - Aug 2021",
+		type: "work",
+		skills: "Python, Azure Monitor, ELK Stack, Azure DevOps, CI/CD",
+		responsibilities: ["Built end-to-end observability for production SaaS systems using Azure Monitor and ELK/Kibana dashboards with proactive alerting, reducing mean time to resolution for critical incidents.", "Automated CI/CD pipelines and operational workflows in Python, reducing manual deployment overhead by 60% across Azure DevOps environments.", "Ran P0/P1 incident response for mission-critical healthcare applications, sustaining 99.9%+ uptime while applying security and compliance best practices across cloud infrastructure."],
 	},
 ];
