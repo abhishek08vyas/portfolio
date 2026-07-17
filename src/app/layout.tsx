@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Analytics } from "@vercel/analytics/next";
-import { Inter, Dancing_Script } from 'next/font/google';
+import { Inter, Dancing_Script, Fraunces } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
+import { SkyBackdrop } from '@/components/SkyBackdrop';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
@@ -10,6 +12,12 @@ const dancingScript = Dancing_Script({
   display: 'swap',
   variable: '--font-signature',
   weight: ['400', '700'],
+});
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-fraunces',
+  style: ['normal', 'italic'],
 });
 
 const SITE_URL = 'https://abhishek-vyas.vercel.app';
@@ -84,20 +92,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={dancingScript.variable}>
+    <html lang="en" className={`${dancingScript.variable} ${fraunces.variable}`} suppressHydrationWarning>
       <body className={`${inter.className}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#142240] focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-[#3D5176] focus:ring-offset-2"
-        >
-          Skip to main content
-        </a>
-        <Navbar />
-        <div id="main-content" tabIndex={-1} className="pt-16 outline-none">{children}</div>
+        <ThemeProvider>
+          <SkyBackdrop />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[var(--text-strong)] focus:text-[var(--surface-page)] focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)] focus:ring-offset-2"
+          >
+            Skip to main content
+          </a>
+          <Navbar />
+          <div id="main-content" tabIndex={-1} className="pt-16 outline-none">{children}</div>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

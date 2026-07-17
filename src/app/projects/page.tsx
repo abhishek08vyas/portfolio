@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
 	return (
-		<div className="min-h-screen bg-white">
+		<div className="min-h-screen">
 			<main>
 				<ProjectsArchive />
 			</main>

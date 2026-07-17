@@ -2,6 +2,7 @@
 import React from "react";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { commonStyles } from "@/lib/theme-utils";
+import { SectionHeading } from "./SectionHeading";
 
 interface SkillEntry {
 	label: string;
@@ -55,17 +56,12 @@ export const Skills: React.FC = () => {
 			id="skills"
 			className="relative py-16 md:py-20 overflow-hidden"
 		>
-			{/* Background layer */}
-			<div className={`absolute inset-0 ${commonStyles.section.background}`} />
-
 			<div className={commonStyles.section.container}>
 				{/* Section header */}
-				<div className="mb-12 text-center">
-					<h2 className={commonStyles.header.title}>Technical Skills</h2>
-					<div className="flex justify-center mt-3">
-						<div className={commonStyles.header.divider}></div>
-					</div>
-				</div>
+				<SectionHeading
+					num="03"
+					title="Technical Skills"
+				/>
 
 				<div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 					{SKILL_GROUPS.map((group) => (
@@ -73,7 +69,7 @@ export const Skills: React.FC = () => {
 							key={group.title}
 							className="card-base card-hover p-6"
 						>
-							<h3 className="text-sm font-bold uppercase tracking-widest text-[#3D5176] mb-4">{group.title}</h3>
+							<h3 className="text-sm font-bold uppercase tracking-widest text-[var(--accent-strong)] mb-4">{group.title}</h3>
 							<ul
 								role="list"
 								className="flex flex-wrap gap-2"

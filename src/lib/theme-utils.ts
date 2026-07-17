@@ -91,62 +91,63 @@ export const spacing = {
 	"5xl": "8rem", // 128px
 };
 
-// Common style combinations using hex values directly
+// Common style combinations — warm theme, token-based (light + dark aware)
 export const commonStyles = {
 	// Card styles
 	card: {
-		base: "bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100",
-		hover: "hover:shadow-xl transition-shadow duration-300",
+		base: "bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl shadow-[var(--shadow-soft)] border border-[var(--edge)]",
+		hover: "hover:shadow-[var(--shadow-hover)] transition-shadow duration-300",
 	},
 
 	// Button styles
 	button: {
-		primary: "cursor-pointer bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white font-medium rounded-md shadow-lg shadow-[#142240]/20 transition-all duration-300 hover:shadow-[#142240]/30",
-		secondary: "cursor-pointer bg-white text-[#142240] border border-gray-200 hover:bg-gray-50 transition-all duration-300",
+		primary:
+			"cursor-pointer rounded-full bg-gradient-to-r from-[#f26d78] to-[#e04f5f] hover:from-[#e04f5f] hover:to-[#e04f5f] text-white font-semibold shadow-lg shadow-[#e04f5f]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#e04f5f]/40 motion-reduce:transform-none",
+		secondary: "cursor-pointer rounded-full bg-[var(--surface-raised)] text-[var(--text-strong)] border border-[var(--edge)] hover:bg-[var(--surface-card)] hover:text-[var(--text-strong)] transition-all duration-300",
 	},
 
-	// Section styles
+	// Section styles — transparent so the fixed SkyBackdrop shows through
 	section: {
-		background: "bg-gradient-to-br from-gray-50 via-white to-gray-50",
+		background: "bg-transparent",
 		container: "container mx-auto px-6 relative z-10",
 	},
 
-	// Header styles
+	// Header styles — serif display type carries the style now
 	header: {
-		title: "text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent",
-		divider: "h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full",
+		title: "font-display text-3xl md:text-4xl font-semibold tracking-tight mb-2 text-[var(--text-strong)]",
+		divider: "h-0.5 w-12 bg-[var(--accent)] rounded-full",
 	},
 
 	// Skill tag styles
-	skillTag: "px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 hover:-translate-y-0.5 hover:shadow-sm motion-reduce:transform-none transition-all duration-300 cursor-default",
+	skillTag: "px-4 py-2 bg-[var(--accent-soft)] text-[var(--text-strong)] border border-[var(--edge)] rounded-full text-sm font-medium hover:-translate-y-0.5 hover:shadow-sm motion-reduce:transform-none transition-all duration-300 cursor-default",
 
 	// Tab styles
 	tab: {
-		container: "inline-flex rounded-lg shadow-md bg-gray-100/70 p-1",
-		button: "px-6 py-2 rounded-lg transition-all flex items-center",
-		active: "bg-white shadow-sm text-[#142240] font-medium",
-		inactive: "text-gray-600 hover:text-gray-800",
+		container: "inline-flex rounded-full shadow-md bg-[var(--surface-card)] border border-[var(--edge)] p-1",
+		button: "px-6 py-2 rounded-full transition-all flex items-center",
+		active: "bg-[var(--surface-raised)] shadow-sm text-[var(--text-strong)] font-medium",
+		inactive: "text-[var(--text-dim)] hover:text-[var(--text-strong)]",
 	},
 
 	// Experience card styles
 	experienceCard: {
-		base: "bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm",
+		base: "bg-[var(--surface-card)] rounded-2xl p-6 border border-[var(--edge)] shadow-sm",
 		header: "flex flex-col md:flex-row md:items-center justify-between mb-4",
-		title: "text-xl font-semibold mb-2 md:mb-0 text-gray-800",
-		period: "flex items-center text-gray-600 text-sm bg-white px-3 py-1 rounded-full shadow-sm border border-gray-200",
-		company: "flex items-center text-gray-700 mb-4",
-		skillsSection: "mb-5 p-3 bg-white rounded-lg border border-gray-200",
-		responsibilitiesSection: "bg-white p-3 rounded-lg border border-gray-200",
+		title: "text-xl font-semibold mb-2 md:mb-0 text-[var(--text-strong)]",
+		period: "flex items-center text-[var(--text-dim)] text-sm bg-[var(--surface-raised)] px-3 py-1 rounded-full shadow-sm border border-[var(--edge)]",
+		company: "flex items-center text-[var(--text-body)] mb-4",
+		skillsSection: "mb-5 p-3 bg-[var(--surface-raised)] rounded-lg border border-[var(--edge)]",
+		responsibilitiesSection: "bg-[var(--surface-raised)] p-3 rounded-lg border border-[var(--edge)]",
 	},
 
-	// Open to work section
+	// Open to work section — dusk-purple gradient panel (reads well in BOTH themes)
 	openToWork: {
-		container: "bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-lg p-0.5 shadow-lg transform transition-all hover:scale-[1.02] hover:shadow-xl",
-		content: "relative bg-[#142240] rounded-lg p-6 overflow-hidden",
-		badge: "inline-flex items-center bg-green-500/20 text-green-400 rounded-full py-1 px-3 mb-4 text-xs font-medium",
-		title: "text-xl md:text-2xl font-bold text-white mb-3",
-		description: "text-gray-300",
-		button: "inline-flex items-center justify-center bg-white text-[#142240] font-medium px-6 py-3 rounded-lg shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl group whitespace-nowrap",
+		container: "bg-gradient-to-br from-[#3b3161] via-[#6b5aa8] to-[#b8779b] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(59,49,97,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
+		content: "relative rounded-[34px] p-6 md:p-8 overflow-hidden",
+		badge: "inline-flex items-center bg-emerald-500/20 text-emerald-200 rounded-full py-1 px-3 mb-4 text-xs font-medium",
+		title: "font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3",
+		description: "text-white/80",
+		button: "inline-flex items-center justify-center bg-white text-[#2a2440] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
 	},
 };
 
@@ -165,10 +166,10 @@ export const responsive = {
 	},
 };
 
-// Hero-specific typography for more attractive and smaller sizes
+// Hero-specific typography — serif display face for the name, Inter for the role line
 export const heroTypography = {
-	name: "text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight",
-	title: "text-lg md:text-xl lg:text-2xl font-medium tracking-wide",
+	name: "font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight",
+	title: "text-lg md:text-xl lg:text-2xl font-semibold tracking-wide",
 	subtitle: "text-base md:text-lg font-normal tracking-normal",
 };
 

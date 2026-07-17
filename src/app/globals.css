@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for Tailwind v4 (`dark:` variants follow the .dark class on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
 	--spacing-20: 5rem; /* Define py-20 equivalent (1rem = 4px) */
+
+	/* Serif display face (Fraunces via next/font) → Tailwind `font-display` utility */
+	--font-display: var(--font-fraunces), Georgia, serif;
 
 	/* Custom brand colors */
 	--brand-dark: #142240;
@@ -58,6 +64,63 @@
 		--input: 214.3 31.8% 91.4%;
 		--ring: 221 83% 53%;
 		--radius: 0.75rem;
+
+		/* Warm theme design tokens — LIGHT (dawn) */
+		--surface-page: #fffaf5;
+		--surface-card: rgba(255, 255, 255, 0.82);
+		--surface-raised: #ffffff;
+		--edge: rgba(42, 36, 64, 0.1);
+		--text-strong: #2a2440;
+		--text-body: #4a4462;
+		--text-dim: #6b6483;
+		--accent: #e04f5f;
+		--accent-strong: #b93a49; /* small accent text (AA on light surfaces) */
+		--accent-soft: rgba(224, 79, 95, 0.09);
+		--glow-a: #cdc4f9; /* lavender */
+		--glow-b: #ffd9c4; /* peach */
+		--shadow-soft: 0 18px 50px -18px rgba(74, 58, 120, 0.16);
+		--shadow-hover: 0 28px 70px -20px rgba(74, 58, 120, 0.28);
+		--focus-ring: #b93a49;
+	}
+
+	.dark {
+		/* shadcn HSL variables — dusk values so generated ui components stay legible */
+		--background: 250 30% 12%;
+		--foreground: 260 40% 96%;
+		--card: 250 28% 16%;
+		--card-foreground: 260 40% 96%;
+		--popover: 250 28% 16%;
+		--popover-foreground: 260 40% 96%;
+		--primary: 221 83% 53%;
+		--primary-foreground: 210 40% 98%;
+		--secondary: 250 20% 22%;
+		--secondary-foreground: 260 40% 96%;
+		--muted: 250 20% 22%;
+		--muted-foreground: 255 15% 70%;
+		--accent: 250 20% 22%;
+		--accent-foreground: 260 40% 96%;
+		--destructive: 0 62.8% 50%;
+		--destructive-foreground: 210 40% 98%;
+		--border: 250 20% 26%;
+		--input: 250 20% 26%;
+		--ring: 16 100% 77%;
+
+		/* Warm theme design tokens — DARK (dusk) */
+		--surface-page: #14122a;
+		--surface-card: rgba(32, 29, 64, 0.8);
+		--surface-raised: #201d40;
+		--edge: rgba(205, 196, 249, 0.14);
+		--text-strong: #f2eefc;
+		--text-body: #c9c3e3;
+		--text-dim: #a49fc0;
+		--accent: #ff9d8a;
+		--accent-strong: #ffb3a3; /* small accent text (AA on dusk surfaces) */
+		--accent-soft: rgba(255, 157, 138, 0.12);
+		--glow-a: #37306b;
+		--glow-b: #5c3350;
+		--shadow-soft: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
+		--shadow-hover: 0 28px 70px -20px rgba(0, 0, 0, 0.7);
+		--focus-ring: #ff9d8a;
 	}
 
 	* {
@@ -65,11 +128,17 @@
 	}
 
 	body {
-		@apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
+		background: var(--surface-page);
+		color: var(--text-strong);
+		@apply antialiased;
 	}
 
 	::selection {
-		@apply bg-[hsl(var(--primary)/0.2)];
+		background: rgba(224, 79, 95, 0.22);
+	}
+
+	.dark ::selection {
+		background: rgba(255, 157, 138, 0.28);
 	}
 }
 
@@ -100,23 +169,23 @@
 	}
 
 	.card-base {
-		@apply bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100;
+		@apply bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl shadow-[var(--shadow-soft)] border border-[var(--edge)];
 	}
 
 	.card-hover {
-		@apply hover:shadow-xl transition-shadow duration-300;
+		@apply hover:shadow-[var(--shadow-hover)] transition-shadow duration-300;
 	}
 
 	.skill-tag {
-		@apply px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default;
+		@apply px-4 py-2 bg-[var(--accent-soft)] text-[var(--text-strong)] border border-[var(--edge)] rounded-full text-sm font-medium transition-colors duration-300 cursor-default;
 	}
 
 	.section-header {
-		@apply text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent;
+		@apply font-display text-3xl font-semibold tracking-tight mb-2 text-[var(--text-strong)];
 	}
 
 	.section-divider {
-		@apply h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full;
+		@apply h-0.5 w-12 bg-[var(--accent)] rounded-full;
 	}
 }
 
@@ -133,6 +202,91 @@
 		-ms-overflow-style: none;
 		scrollbar-width: none;
 	}
+}
+
+/* ============ Dawn/dusk sky backdrop (SkyBackdrop.tsx) ============
+   Soft-edged radial gradients — no filter: blur() for performance. */
+.sky-base {
+	background: linear-gradient(170deg, #e8e2fb 0%, #fbd9d3 34%, #ffe9d6 62%, var(--surface-page) 88%);
+}
+
+.dark .sky-base {
+	background: linear-gradient(170deg, #221d45 0%, #2b2154 38%, #1c1738 68%, var(--surface-page) 90%);
+}
+
+.sky-glow {
+	position: absolute;
+	border-radius: 50%;
+	will-change: transform;
+}
+
+.sky-glow--lavender {
+	width: 55vw;
+	height: 55vw;
+	left: -14vw;
+	top: -12vw;
+	background: radial-gradient(circle, var(--glow-a) 0%, transparent 65%);
+	opacity: 0.55;
+}
+
+.sky-glow--peach {
+	width: 46vw;
+	height: 46vw;
+	right: -12vw;
+	top: 14vh;
+	background: radial-gradient(circle, var(--glow-b) 0%, transparent 65%);
+	opacity: 0.5;
+}
+
+.sky-glow--sun {
+	width: 30vw;
+	height: 30vw;
+	right: 14vw;
+	top: 4vh;
+	background: radial-gradient(circle, rgba(255, 243, 176, 0.9) 0%, rgba(255, 217, 160, 0.55) 40%, transparent 70%);
+	opacity: 0.8;
+}
+
+.dark .sky-glow--sun {
+	background: radial-gradient(circle, rgba(255, 190, 150, 0.28) 0%, rgba(180, 140, 220, 0.18) 45%, transparent 70%);
+	opacity: 0.7;
+}
+
+@keyframes sky-drift {
+	from {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+	to {
+		transform: translate3d(2.5vw, 3vh, 0) scale(1.06);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.sky-glow {
+		animation: sky-drift 18s ease-in-out infinite alternate;
+	}
+	.sky-glow--peach {
+		animation-duration: 24s;
+		animation-delay: -8s;
+	}
+	.sky-glow--sun {
+		animation-duration: 30s;
+		animation-delay: -14s;
+	}
+}
+
+/* Gentle bob for the hero floating fact chips (desktop only, aria-hidden) */
+@keyframes chip-bob {
+	from {
+		transform: translateY(-6px);
+	}
+	to {
+		transform: translateY(8px);
+	}
+}
+
+.animate-chip-bob {
+	animation: chip-bob 6s ease-in-out infinite alternate;
 }
 
 /* Entrance animations — CSS-driven so above-the-fold content paints with SSR HTML
@@ -245,7 +399,8 @@
 	}
 
 	.animate-fade-in-up,
-	.animate-fade-in-down {
+	.animate-fade-in-down,
+	.animate-chip-bob {
 		animation: none;
 	}
 

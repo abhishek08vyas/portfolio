@@ -6,6 +6,7 @@ import { Textarea } from "./ui/textarea";
 import { LuX } from "react-icons/lu";
 import emailjs from '@emailjs/browser';
 import { EMAIL } from "@/constants/links";
+import { commonStyles } from "@/lib/theme-utils";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -142,7 +143,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
       {/* Backdrop with blur effect - allows scrolling */}
-      <div className="fixed inset-0 bg-white/30 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
+      <div className="fixed inset-0 bg-[#2a2440]/20 dark:bg-black/40 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
 
       {/* Modal container */}
       <div
@@ -152,38 +153,38 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         aria-labelledby="contact-modal-title"
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 relative animate-fadeIn motion-reduce:animate-none pointer-events-auto outline-none"
+        className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-3xl shadow-[var(--shadow-hover)] w-full max-w-md mx-4 relative animate-fadeIn motion-reduce:animate-none pointer-events-auto outline-none"
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-700 transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+          className="absolute top-4 right-4 text-[var(--text-dim)] hover:text-[var(--text-strong)] transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
           aria-label="Close contact form"
         >
           <LuX size={24} aria-hidden="true" />
         </button>
 
         <div className="p-6">
-          <h2 id="contact-modal-title" className="text-2xl font-bold mb-2 text-center bg-[#797F8C] bg-clip-text text-[#142240]">
+          <h2 id="contact-modal-title" className="font-display text-2xl font-semibold tracking-tight mb-2 text-center text-[var(--text-strong)]">
             Get in Touch
           </h2>
-          <p className="text-gray-600 mb-6 text-center">
+          <p className="text-[var(--text-body)] mb-6 text-center">
             Fill out the form below and I&apos;ll get back to you as soon as possible.
           </p>
 
           {submitStatus === "success" ? (
             <div className="text-center py-8" role="status" aria-live="polite">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-500 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Message sent</h3>
-              <p className="text-gray-600">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
+              <h3 className="text-xl font-semibold text-green-600 dark:text-green-300 mb-2">Message sent</h3>
+              <p className="text-[var(--text-body)]">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-600 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-[var(--text-body)] mb-1">
                   Name
                 </label>
                 <Input
@@ -198,7 +199,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-[var(--text-body)] mb-1">
                   Email
                 </label>
                 <Input
@@ -214,7 +215,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-600 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-[var(--text-body)] mb-1">
                   Subject
                 </label>
                 <Input
@@ -229,7 +230,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-600 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-[var(--text-body)] mb-1">
                   Message
                 </label>
                 <Textarea
@@ -244,22 +245,22 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               {submitStatus === "error" && (
-                <div role="alert" className="bg-red-50 text-red-700 p-3 rounded-md text-sm">
+                <div role="alert" className="bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-300 p-3 rounded-md text-sm">
                   <p>There was an error sending your message. Please try again.</p>
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="inline-block mt-1 font-semibold underline underline-offset-2 text-red-700 hover:text-red-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+                    className="inline-block mt-1 font-semibold underline underline-offset-2 text-red-700 hover:text-red-800 dark:text-red-300 dark:hover:text-red-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-sm"
                   >
                     Or email me directly: {EMAIL}
                   </a>
                 </div>
               )}
-              
+
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 aria-busy={isSubmitting}
-                className="w-full bg-[#142240] hover:bg-[#2B3342] text-white py-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+                className={`${commonStyles.button.primary} w-full py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2`}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>

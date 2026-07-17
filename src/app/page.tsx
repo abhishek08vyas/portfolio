@@ -18,7 +18,7 @@ export default function Home() {
 			<TooltipProvider>
 				<Toaster />
 				<Sonner />
-				<div className="min-h-screen bg-white">
+				<div className="min-h-screen">
 					<main>
 						<Hero />
 						<FeaturedWork />

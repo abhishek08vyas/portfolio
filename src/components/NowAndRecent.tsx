@@ -5,15 +5,16 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FaBriefcase, FaGraduationCap, FaArrowRight } from "react-icons/fa";
 import { EXPERIENCE_ITEMS, type ExperienceItem } from "@/constants/ExperienceItems";
 import { commonStyles } from "@/lib/theme-utils";
+import { SectionHeading } from "./SectionHeading";
 
 const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 	const isEducation = item.type === "education";
 
 	return (
-		<article className={`card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 transition-[box-shadow,border-color] duration-300 ${isEducation ? "border-l-[#3D5176] hover:border-l-[#142240]" : "border-l-[#142240] hover:border-l-[#3D5176]"}`}>
-			{/* Icon tile */}
+		<article className={`card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 transition-[box-shadow,border-color] duration-300 ${isEducation ? "border-l-[#8b7fd4]" : "border-l-[var(--accent)]"}`}>
+			{/* Icon tile — coral for work, lavender for education */}
 			<div
-				className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shrink-0 ${isEducation ? "bg-gradient-to-r from-[#3D5176] to-[#797F8C]" : "brand-gradient"}`}
+				className={`w-11 h-11 rounded-xl text-white flex items-center justify-center shrink-0 ${isEducation ? "bg-gradient-to-br from-[#8b7fd4] to-[#6b5aa8]" : "bg-gradient-to-br from-[#f26d78] to-[#e04f5f]"}`}
 				aria-hidden="true"
 			>
 				{isEducation ? <FaGraduationCap className="w-5 h-5" /> : <FaBriefcase className="w-5 h-5" />}
@@ -22,20 +23,20 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 			<div className="flex-1 min-w-0">
 				{/* Title row */}
 				<div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-					<h3 className="font-bold text-[#142240]">{item.title}</h3>
+					<h3 className="font-bold text-[var(--text-strong)]">{item.title}</h3>
 					<span className="flex items-center gap-2">
-						{isEducation && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#3D5176]/10 text-[#3D5176]">AZ-204</span>}
+						{isEducation && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#8b7fd4]/15 text-[#5a4d96] dark:text-[#c3b8f5]">AZ-204</span>}
 						<span className={commonStyles.experienceCard.period}>{item.period}</span>
 					</span>
 				</div>
 
 				{/* Meta */}
-				<p className="text-sm text-gray-600 mb-2">
+				<p className="text-sm text-[var(--text-dim)] mb-2">
 					{item.company} · {item.location}
 				</p>
 
 				{/* Snapshot one-liner */}
-				<p className="text-sm text-gray-600 leading-relaxed">{item.responsibilities[0]}</p>
+				<p className="text-sm text-[var(--text-body)] leading-relaxed">{item.responsibilities[0]}</p>
 			</div>
 		</article>
 	);
@@ -48,16 +49,14 @@ export const NowAndRecent = () => {
 	return (
 		<section
 			id="now-recent"
-			className="relative py-16 md:py-20 overflow-hidden bg-white"
+			className="relative py-16 md:py-20 overflow-hidden"
 		>
 			<div className={commonStyles.section.container}>
 				{/* Section header */}
-				<div className="mb-12 text-center">
-					<h2 className={commonStyles.header.title}>Now & Recent</h2>
-					<div className="flex justify-center mt-3">
-						<div className={commonStyles.header.divider}></div>
-					</div>
-				</div>
+				<SectionHeading
+					num="02"
+					title="Now & Recent"
+				/>
 
 				<div className="max-w-3xl mx-auto flex flex-col gap-4">
 					{items.map((item, i) => (
@@ -77,7 +76,7 @@ export const NowAndRecent = () => {
 				<div className="text-center mt-8">
 					<Link
 						href="/experience"
-						className="inline-flex items-center gap-2 text-sm font-semibold text-[#142240] hover:text-[#3D5176] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+						className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-strong)] hover:text-[var(--accent-strong)] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-sm"
 					>
 						Full timeline
 						<FaArrowRight

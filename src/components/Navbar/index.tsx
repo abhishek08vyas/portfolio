@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ContactModal } from "@/components/ContactModel";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { commonStyles } from "@/lib/theme-utils";
 import { RESUME_PATH } from "@/constants/links";
 
-const linkClassName = "text-sm text-gray-600 hover:text-primary font-bold py-0.5 pb-1 px-2 inline-block leading-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm";
+const linkClassName = "text-sm text-[var(--text-dim)] hover:text-[var(--text-strong)] font-bold py-0.5 pb-1 px-2 inline-block leading-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-sm";
 
 const NAV_ITEMS: { title: string; href: string }[] = [
 	{ title: "Experience", href: "/experience" },
@@ -36,14 +38,14 @@ export const Navbar = () => {
 	}, [menuOpen]);
 
 	return (
-		<header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
+		<header className="fixed top-0 left-0 right-0 z-50 bg-[var(--surface-page)]/80 backdrop-blur-md border-b border-[var(--edge)]">
 			<nav className="container mx-auto px-4 py-4 flex items-center justify-between">
 				{/* Brand */}
 				<div className="flex items-center relative z-10">
 					<Link
 						href="/"
 						aria-label="Abhishek Vyas — home"
-						className="flex items-center hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-md"
+						className="flex items-center hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-md"
 					>
 						<Image
 							src="/images/av2.png"
@@ -52,9 +54,10 @@ export const Navbar = () => {
 							height={32}
 							priority
 						/>
+						{/* Brand navy stays on the wordmark (light); dusk needs a legible override */}
 						<div className="ml-3 signature-container pointer-events-none">
-							<span className="font-signature text-2xl text-primary signature-static pointer-events-auto">Abhishek Vyas</span>
-							<span className="font-signature text-2xl text-primary signature-animated" aria-hidden="true">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#142240] dark:text-[#f2eefc] signature-static pointer-events-auto">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#142240] dark:text-[#f2eefc] signature-animated" aria-hidden="true">Abhishek Vyas</span>
 						</div>
 					</Link>
 				</div>
@@ -77,7 +80,7 @@ export const Navbar = () => {
 					<Button
 						asChild
 						variant="outline"
-						className="border-[#142240] text-[#142240] hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+						className="rounded-full border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-strong)] hover:bg-[var(--accent-soft)] hover:text-[var(--text-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 					>
 						<a
 							href={RESUME_PATH}
@@ -88,17 +91,18 @@ export const Navbar = () => {
 					</Button>
 					<Button
 						onClick={openContactModal}
-						className="cursor-pointer bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+						className={`${commonStyles.button.primary} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2`}
 					>
 						Contact
 					</Button>
+					<ThemeToggle />
 				</div>
 
 				{/* Mobile Toggle */}
 				<Button
 					variant="ghost"
 					size="icon"
-					className="md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+					className="md:hidden text-[var(--text-strong)] hover:bg-[var(--accent-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 					onClick={() => setMenuOpen(!menuOpen)}
 					aria-label={menuOpen ? "Close menu" : "Open menu"}
 					aria-expanded={menuOpen}
@@ -112,7 +116,7 @@ export const Navbar = () => {
 			{menuOpen && (
 				<div
 					id="mobile-menu"
-					className="md:hidden absolute top-full left-0 right-0 bg-white border-b shadow-xl animate-in slide-in-from-top-2 duration-200 motion-reduce:animate-none"
+					className="md:hidden absolute top-full left-0 right-0 bg-[var(--surface-page)] border-b border-[var(--edge)] shadow-xl animate-in slide-in-from-top-2 duration-200 motion-reduce:animate-none"
 				>
 					<div className="container mx-auto px-6 py-6 flex flex-col gap-4">
 						<ul className="flex flex-col gap-4">
@@ -120,7 +124,7 @@ export const Navbar = () => {
 								<li key={item.title}>
 									<Link
 										href={item.href}
-										className="text-lg font-bold text-gray-900 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+										className="text-lg font-bold text-[var(--text-strong)] hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-sm"
 										onClick={() => setMenuOpen(false)}
 									>
 										{item.title}
@@ -132,7 +136,7 @@ export const Navbar = () => {
 						<Button
 							asChild
 							variant="outline"
-							className="w-full border-[#142240] text-[#142240] hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+							className="w-full rounded-full border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-strong)] hover:bg-[var(--accent-soft)] hover:text-[var(--text-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 						>
 							<a
 								href={RESUME_PATH}
@@ -143,10 +147,13 @@ export const Navbar = () => {
 						</Button>
 						<Button
 							onClick={openContactModal}
-							className="w-full cursor-pointer bg-gradient-to-r from-[#142240] to-[#3D5176] hover:from-[#142240] hover:to-[#142240] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+							className={`${commonStyles.button.primary} w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2`}
 						>
 							Contact
 						</Button>
+						<div className="flex items-center pt-1">
+							<ThemeToggle />
+						</div>
 					</div>
 				</div>
 			)}

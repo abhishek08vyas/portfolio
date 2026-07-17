@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { PROJECTS, getUniqueProjectSkills } from "@/data/projects";
-import { commonStyles, colors } from "@/lib/theme-utils";
+import { commonStyles } from "@/lib/theme-utils";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectFilters } from "./ProjectFilters";
 import { motion, useReducedMotion } from "framer-motion";
@@ -36,42 +36,24 @@ export function ProjectsArchive() {
 	};
 
 	return (
-		<div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
-			{/* Subtle Background Pattern */}
-			<div className="absolute inset-0 -z-10 opacity-10">
-				<div
-					className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[100px]"
-					style={{ backgroundColor: colors.brand.primary }}
-				/>
-				<div
-					className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full blur-[100px]"
-					style={{ backgroundColor: colors.brand.medium }}
-				/>
-			</div>
-
+		<div className="min-h-screen relative overflow-hidden">
 			<div className={`${commonStyles.section.container} relative z-10`}>
 				{/* Header Section */}
 				<header className="pt-16 md:pt-20 pb-12 text-center animate-fade-in-down">
 					{/* Project Count Badge */}
-					<div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 shadow-sm">
+					<div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--surface-card)] backdrop-blur-sm rounded-full border border-[var(--edge)] mb-6 shadow-sm">
 						<HiCollection
-							className="w-4 h-4"
-							style={{ color: colors.brand.primary }}
+							className="w-4 h-4 text-[var(--accent-strong)]"
 							aria-hidden="true"
 						/>
-						<span
-							className="text-sm font-semibold"
-							style={{ color: colors.brand.dark }}
-						>
-							{PROJECTS.length} Projects
-						</span>
+						<span className="text-sm font-semibold text-[var(--text-strong)]">{PROJECTS.length} Projects</span>
 					</div>
 
-					{/* Title with Gradient */}
+					{/* Title — serif display */}
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Projects</h1>
 
 					{/* Subtitle */}
-					<p className="mt-4 text-gray-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Backend systems, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
+					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Backend systems, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">
@@ -86,27 +68,27 @@ export function ProjectsArchive() {
 						aria-labelledby="osfi-rag-title"
 						className="scroll-mt-28 mb-14"
 					>
-						<div className="card-base overflow-hidden border-t-4 border-t-[#142240]">
+						<div className="card-base overflow-hidden border-t-4 border-t-[var(--accent)]">
 							{/* Badge row + title + description */}
 							<div className="px-6 md:px-8 pt-6 md:pt-8">
 								<div className="flex flex-wrap items-center gap-2 mb-4">
-									<span className="brand-gradient inline-flex items-center gap-1 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+									<span className="bg-gradient-to-r from-[#f26d78] to-[#e04f5f] inline-flex items-center gap-1 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
 										<HiLightningBolt
 											className="w-3 h-3"
 											aria-hidden="true"
 										/>
 										Featured
 									</span>
-									{featuredProject.roleLabel && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#142240]/5 text-[#142240] border border-[#142240]/15">{featuredProject.roleLabel}</span>}
-									{featuredProject.period && <span className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full text-gray-600 bg-gray-50 border border-gray-200">{featuredProject.period}</span>}
+									{featuredProject.roleLabel && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] border border-[var(--edge)]">{featuredProject.roleLabel}</span>}
+									{featuredProject.period && <span className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full text-[var(--text-dim)] bg-[var(--surface-raised)] border border-[var(--edge)]">{featuredProject.period}</span>}
 								</div>
 								<h2
 									id="osfi-rag-title"
-									className="text-xl md:text-2xl font-bold text-[#142240] tracking-tight mb-3"
+									className="font-display text-xl md:text-2xl font-semibold text-[var(--text-strong)] tracking-tight mb-3"
 								>
 									{featuredProject.title}
 								</h2>
-								<p className="text-sm md:text-base text-gray-600 leading-relaxed">{featuredProject.description}</p>
+								<p className="text-sm md:text-base text-[var(--text-body)] leading-relaxed">{featuredProject.description}</p>
 							</div>
 
 							{/* Image strip */}
@@ -124,27 +106,27 @@ export function ProjectsArchive() {
 							{/* Case-study 2×2 */}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 md:p-8">
 								{featuredProject.problem && (
-									<div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[#3D5176] mb-1">Problem</p>
-										<p className="text-sm text-gray-600 leading-relaxed">{featuredProject.problem}</p>
+									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Problem</p>
+										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.problem}</p>
 									</div>
 								)}
 								{featuredProject.approach && (
-									<div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[#3D5176] mb-1">Approach</p>
-										<p className="text-sm text-gray-600 leading-relaxed">{featuredProject.approach}</p>
+									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Approach</p>
+										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.approach}</p>
 									</div>
 								)}
 								{featuredProject.architecture && (
-									<div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[#3D5176] mb-1">Architecture</p>
-										<p className="text-sm text-gray-600 leading-relaxed">{featuredProject.architecture}</p>
+									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Architecture</p>
+										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.architecture}</p>
 									</div>
 								)}
 								{featuredProject.outcome && (
-									<div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[#3D5176] mb-1">Outcome</p>
-										<p className="text-sm font-medium text-gray-700 leading-relaxed flex items-center gap-2">
+									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Outcome</p>
+										<p className="text-sm font-medium text-[var(--text-body)] leading-relaxed flex items-center gap-2">
 											<span
 												className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"
 												aria-hidden="true"
@@ -186,8 +168,8 @@ export function ProjectsArchive() {
 						animate={{ opacity: 1, y: 0 }}
 						className="mb-6 text-center"
 					>
-						<p className="text-sm text-gray-600">
-							Showing <span className="font-bold text-[#142240]">{filteredProjects.length}</span> of <span className="font-bold text-[#142240]">{gridProjects.length}</span> projects
+						<p className="text-sm text-[var(--text-body)]">
+							Showing <span className="font-bold text-[var(--text-strong)]">{filteredProjects.length}</span> of <span className="font-bold text-[var(--text-strong)]">{gridProjects.length}</span> projects
 						</p>
 					</motion.div>
 				)}
@@ -221,34 +203,27 @@ export function ProjectsArchive() {
 							initial={reduce ? false : { opacity: 0, scale: 0.95 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.5 }}
-							className="text-center py-20 md:py-32 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-100 shadow-lg"
+							className="text-center py-20 md:py-32 card-base"
 						>
 							<div className="flex flex-col items-center gap-4">
 								{/* Icon */}
-								<div
-									className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg"
-									style={{ backgroundColor: `${colors.brand.primary}10` }}
-								>
+								<div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg bg-[var(--accent-soft)]">
 									<HiEmojiSad
-										className="w-10 h-10"
-										style={{ color: colors.brand.medium }}
+										className="w-10 h-10 text-[var(--accent-strong)]"
 										aria-hidden="true"
 									/>
 								</div>
 
 								{/* Text */}
 								<div>
-									<h3 className="text-2xl font-bold text-[#142240] mb-2">No Projects Found</h3>
-									<p className="text-gray-600 mb-6 max-w-md mx-auto">No matches found for your current filters. Try adjusting your search criteria.</p>
+									<h3 className="font-display text-2xl font-semibold text-[var(--text-strong)] mb-2">No Projects Found</h3>
+									<p className="text-[var(--text-body)] mb-6 max-w-md mx-auto">No matches found for your current filters. Try adjusting your search criteria.</p>
 								</div>
 
 								{/* Reset Button */}
 								<button
 									onClick={handleResetFilters}
-									className="px-6 py-3 font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
-									style={{
-										background: `linear-gradient(135deg, ${colors.brand.primary} 0%, ${colors.brand.medium} 100%)`,
-									}}
+									className={`${commonStyles.button.primary} px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2`}
 								>
 									Reset All Filters
 								</button>
