@@ -118,7 +118,7 @@ export const commonStyles = {
 	},
 
 	// Skill tag styles
-	skillTag: "px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default",
+	skillTag: "px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 hover:-translate-y-0.5 hover:shadow-sm motion-reduce:transform-none transition-all duration-300 cursor-default",
 
 	// Tab styles
 	tab: {

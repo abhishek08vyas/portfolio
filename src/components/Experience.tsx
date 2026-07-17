@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase } from "react-icons/fa";
+import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import Link from "next/link";
 import { colors, commonStyles } from "../lib/theme-utils";
 import { HiCode } from "react-icons/hi";
 import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const ExperiencePage: React.FC = () => {
 	const [expanded, setExpanded] = useState<number>(-1); // -1 means all closed by default
 	const [hoveredDot, setHoveredDot] = useState<number>(-1);
+	const reduce = useReducedMotion();
 
 	const getSkillIcon = (skillName: string) => {
 		// Sort by key length descending so "JavaScript" matches before "Java", etc.
@@ -53,7 +55,7 @@ const ExperiencePage: React.FC = () => {
 			<main className={`${commonStyles.section.container} relative z-10`}>
 				{/* Enhanced Header Section */}
 				<motion.header
-					initial={{ opacity: 0, y: -30 }}
+					initial={reduce ? false : { opacity: 0, y: -30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}
 					className="pt-16 md:pt-20 pb-12 text-center"
@@ -63,6 +65,7 @@ const ExperiencePage: React.FC = () => {
 						<FaBriefcase
 							className="w-5 h-5"
 							style={{ color: colors.brand.primary }}
+							aria-hidden="true"
 						/>
 						<span
 							className="text-sm font-semibold"
@@ -90,15 +93,17 @@ const ExperiencePage: React.FC = () => {
 						{EXPERIENCE_ITEMS.map((exp, idx) => {
 							const isExpanded = expanded === idx;
 							const isHovered = hoveredDot === idx;
+							const isEducation = exp.type === "education";
+							const dotColor = isEducation ? "#3D5176" : "#142240";
 							const skillsArray = exp.skills.split(", ").map((s) => s.trim());
 							const isLast = idx === EXPERIENCE_ITEMS.length - 1;
 
 							return (
 								<motion.div
 									key={idx}
-									initial={{ opacity: 0, y: 20 }}
+									initial={reduce ? false : { opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.5, delay: idx * 0.1 }}
+									transition={{ duration: 0.5, delay: reduce ? 0 : idx * 0.1 }}
 									className="relative flex gap-4"
 									onMouseEnter={() => setHoveredDot(idx)}
 									onMouseLeave={() => setHoveredDot(-1)}
@@ -126,10 +131,16 @@ const ExperiencePage: React.FC = () => {
 										{/* Timeline Dot */}
 										<div className="relative z-10">
 											{/* Subtle pulse ring on hover */}
-											<div className={`absolute inset-0 rounded-full bg-[#142240] transition-all duration-300 ${isHovered ? "scale-[1.8] opacity-10" : "scale-100 opacity-0"}`} />
+											<div
+												className={`absolute inset-0 rounded-full transition-all duration-300 motion-reduce:transition-none ${isHovered ? "scale-[1.8] opacity-10" : "scale-100 opacity-0"}`}
+												style={{ backgroundColor: dotColor }}
+											/>
 
 											{/* Main dot */}
-											<div className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${isExpanded ? "bg-[#142240] border-[#142240] shadow-md shadow-[#142240]/30 scale-110" : isHovered ? "bg-gradient-to-br from-[#142240] to-[#3D5176] border-[#3D5176] shadow-md shadow-[#142240]/30 scale-105" : "bg-white/80 border-slate-300 shadow-sm backdrop-blur-sm"}`}>
+											<div
+												className={`w-3 h-3 rounded-full border-2 transition-all duration-300 motion-reduce:transition-none ${isExpanded ? "shadow-md scale-110" : isHovered ? "shadow-md scale-105" : "bg-white/80 border-slate-300 shadow-sm backdrop-blur-sm"} motion-reduce:transform-none`}
+												style={isExpanded || isHovered ? { backgroundColor: dotColor, borderColor: dotColor, boxShadow: `0 4px 6px -1px ${dotColor}4D` } : undefined}
+											>
 												{/* Inner glow effect */}
 												<div className={`absolute inset-0 rounded-full transition-all duration-300 ${isExpanded ? "bg-white/15" : isHovered ? "bg-white/20" : "bg-gradient-to-br from-white/30 to-transparent"}`} />
 
@@ -150,55 +161,84 @@ const ExperiencePage: React.FC = () => {
 									</div>
 
 									{/* --- COMPACT MORPHING CARD --- */}
-									<div
-										className="flex-1 group cursor-pointer"
-										onClick={() => setExpanded(isExpanded ? -1 : idx)}
-									>
-										<div className={`rounded-3xl overflow-hidden border border-white bg-white transition-all duration-500 ${isExpanded ? "shadow-2xl shadow-[#142240]/10 translate-y-[-2px]" : "shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-slate-300/50"}`}>
-											{/* HEADER SECTION (Gradient) */}
-											<div
-												className="p-5 md:p-6 text-white relative transition-all duration-500 overflow-hidden"
-												style={{
-													background: `linear-gradient(135deg, ${colors.brand.dark}, ${colors.brand.medium})`,
-													paddingBottom: isExpanded ? "1.5rem" : "1.5rem",
-												}}
+									<div className="flex-1 group">
+										<div className={`rounded-3xl overflow-hidden border border-white bg-white transition-all duration-500 motion-reduce:transition-none ${isExpanded ? "shadow-2xl shadow-[#142240]/10 translate-y-[-2px]" : "shadow-lg shadow-slate-200/50 hover:shadow-xl hover:shadow-slate-300/50"}`}>
+											{/* HEADER SECTION (Gradient, expand/collapse trigger) */}
+											<button
+												type="button"
+												className="w-full text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+												aria-expanded={isExpanded}
+												aria-controls={"exp-body-" + idx}
+												onClick={() => setExpanded(isExpanded ? -1 : idx)}
 											>
-												{/* Decorative Gradient Circles in Header */}
-												<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
-												<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
-												<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#3D5176]/30 blur-2xl" />
+												<div
+													className="p-5 md:p-6 text-white relative transition-all duration-500 motion-reduce:transition-none overflow-hidden"
+													style={{
+														background: isEducation ? "linear-gradient(135deg, #3D5176, #797F8C)" : `linear-gradient(135deg, ${colors.brand.dark}, ${colors.brand.medium})`,
+													}}
+												>
+													{/* Decorative Gradient Circles in Header */}
+													<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
+													<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
+													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#3D5176]/30 blur-2xl" />
 
-												<div className="flex justify-between items-start relative z-10">
-													<div className="space-y-0.5">
-														<h3 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h3>
-														<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-blue-100/80">
-															<span className="flex items-center gap-1">
-																<FaBuilding className="text-blue-300 w-3 h-3" />
-																{exp.company}
-															</span>
-															<span className="flex items-center gap-1">
-																<FaMapMarkerAlt className="w-3 h-3" />
-																{exp.location}
-															</span>
+													<div className="flex justify-between items-start relative z-10">
+														<div className="space-y-0.5">
+															<h3 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h3>
+															<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-blue-100/80">
+																<span className="flex items-center gap-1">
+																	{isEducation ? (
+																		<FaGraduationCap
+																			className="text-blue-300 w-3 h-3"
+																			aria-hidden="true"
+																		/>
+																	) : (
+																		<FaBuilding
+																			className="text-blue-300 w-3 h-3"
+																			aria-hidden="true"
+																		/>
+																	)}
+																	{exp.company}
+																</span>
+																<span className="flex items-center gap-1">
+																	<FaMapMarkerAlt
+																		className="w-3 h-3"
+																		aria-hidden="true"
+																	/>
+																	{exp.location}
+																</span>
+																{isEducation && (
+																	<>
+																		<span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/25">Education</span>
+																		<span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/25">AZ-204</span>
+																	</>
+																)}
+															</div>
+														</div>
+														<div className={`p-1.5 rounded-xl bg-white/10 backdrop-blur-md transition-all duration-500 motion-reduce:transition-none ${isExpanded ? "rotate-180 bg-white/20" : ""}`}>
+															<FaChevronDown
+																className="w-4 h-4"
+																aria-hidden="true"
+															/>
 														</div>
 													</div>
-													<div className={`p-1.5 rounded-xl bg-white/10 backdrop-blur-md transition-all duration-500 ${isExpanded ? "rotate-180 bg-white/20" : ""}`}>
-														<FaChevronDown className="w-4 h-4" />
+
+													{/* Header Tech Stack (Visible only when COLLAPSED) */}
+													<div className={`flex flex-wrap gap-1.5 transition-all duration-500 motion-reduce:transition-none origin-top overflow-hidden ${isExpanded ? "opacity-0 -translate-y-2 mt-0 max-h-0" : "opacity-100 translate-y-0 mt-4 max-h-20"}`}>
+														{skillsArray.slice(0, 4).map((s) => renderSkillBadge(s, true))}
+														{skillsArray.length > 4 && <span className="text-[10px] font-bold text-blue-200/60 self-center">+{skillsArray.length - 4}</span>}
 													</div>
 												</div>
-
-												{/* Header Tech Stack (Visible only when COLLAPSED) */}
-												<div className={`flex flex-wrap gap-1.5 transition-all duration-500 origin-top overflow-hidden ${isExpanded ? "opacity-0 -translate-y-2 mt-0 max-h-0" : "opacity-100 translate-y-0 mt-4 max-h-20"}`}>
-													{skillsArray.slice(0, 4).map((s) => renderSkillBadge(s, true))}
-													{skillsArray.length > 4 && <span className="text-[10px] font-bold text-blue-200/60 self-center">+{skillsArray.length - 4}</span>}
-												</div>
-											</div>
+											</button>
 
 											{/* EXPANDABLE BODY SECTION */}
-											<div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
+											<div
+												id={"exp-body-" + idx}
+												className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${isExpanded ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"}`}
+											>
 												<div className="p-6 md:p-8 space-y-6 bg-white/50 backdrop-blur-xl">
 													{/* Morphing Landing Spot for Skills */}
-													<div className={`space-y-3 transition-all duration-700 delay-100 ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+													<div className={`space-y-3 transition-all duration-700 delay-100 motion-reduce:transition-none ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
 														<div className="flex items-center gap-2 mb-2">
 															<div className="h-px w-4 bg-slate-200" />
 															<span className="text-[10px] uppercase font-black tracking-widest text-slate-400">Full Tech Stack</span>
@@ -207,7 +247,7 @@ const ExperiencePage: React.FC = () => {
 													</div>
 
 													{/* Achievement Points */}
-													<div className={`space-y-4 transition-all duration-700 delay-200 ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
+													<div className={`space-y-4 transition-all duration-700 delay-200 motion-reduce:transition-none ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
 														<div className="flex items-center gap-2 mb-2">
 															<div className="h-px w-4 bg-slate-200" />
 															<span className="text-[10px] uppercase font-black tracking-widest text-slate-400">Responsibilities</span>
@@ -218,12 +258,41 @@ const ExperiencePage: React.FC = () => {
 																	key={i}
 																	className="flex gap-3 items-start group/item"
 																>
-																	<FaCircle className="w-1.5 h-1.5 text-blue-900 mt-2 flex-shrink-0 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all" />
+																	<FaCircle
+																		className="w-1.5 h-1.5 text-blue-900 mt-2 flex-shrink-0 opacity-30 group-hover/item:opacity-100 group-hover/item:scale-150 transition-all motion-reduce:transition-none motion-reduce:transform-none"
+																		aria-hidden="true"
+																	/>
 																	<p className="text-slate-600 text-[13px] md:text-sm leading-relaxed">{resp}</p>
 																</div>
 															))}
 														</div>
 													</div>
+
+													{/* Metrics (only when present) */}
+													{exp.metrics && (
+														<div className="grid grid-cols-2 gap-3 max-w-sm">
+															{Object.entries(exp.metrics).map(([label, value]) => (
+																<div
+																	key={label}
+																	className="bg-slate-50 border border-slate-200 rounded-xl p-4"
+																>
+																	<div className="text-xl font-bold text-[#142240]">{value}</div>
+																	<div className="text-[10px] uppercase tracking-widest font-bold text-slate-500">{label}</div>
+																</div>
+															))}
+														</div>
+													)}
+
+													{/* Case-study link (only when present) */}
+													{exp.href && (
+														<Link
+															href={exp.href}
+															onClick={(e) => e.stopPropagation()}
+															className="inline-flex items-center gap-1 text-sm font-semibold text-[#142240] hover:text-[#3D5176] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+														>
+															View the OSFI RAG case study →
+														</Link>
+													)}
 												</div>
 											</div>
 										</div>

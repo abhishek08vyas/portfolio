@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { LuX } from "react-icons/lu";
 import emailjs from '@emailjs/browser';
+import { EMAIL } from "@/constants/links";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -26,32 +27,47 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const sendViaContactApi = async () => {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      throw new Error(`Contact API responded with ${response.status}`);
+    }
+  };
+
+  const sendViaEmailJs = async () => {
+    // EmailJS configuration comes from environment variables only (no hardcoded fallbacks)
+    const emailjsUserId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+    const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const emailjsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+
+    if (!emailjsUserId || !emailjsServiceId || !emailjsTemplateId) {
+      throw new Error("EmailJS environment variables are not configured");
+    }
+
+    emailjs.init(emailjsUserId);
+    await emailjs.send(emailjsServiceId, emailjsTemplateId, {
+      name: formData.name,
+      email: formData.email,
+      title: formData.subject,
+      message: formData.message
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
-  
-    // Use environment variables for EmailJS configuration
-    const emailjsUserId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID || "_Ps4x85xXNJZdeJZwF";
-    const emailjsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "_service_73hagje";
-    const emailjsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "_template_azkrh9n";
-    
-    // Initialize EmailJS with your user ID
-    emailjs.init(emailjsUserId);
-    
+
     try {
-      // Send email using EmailJS
-      await emailjs.send(
-        emailjsServiceId,
-        emailjsTemplateId,
-        {
-          name: formData.name,
-          email: formData.email,
-          title: formData.subject,
-          message: formData.message
-        }
-      );
-      
+      if (process.env.NEXT_PUBLIC_USE_CONTACT_API === "true") {
+        await sendViaContactApi();
+      } else {
+        await sendViaEmailJs();
+      }
+
       setSubmitStatus("success");
       // Reset form after successful submission
       setFormData({ name: "", email: "", subject: "", message: "" });
@@ -62,7 +78,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       }, 2000);
     } catch (error) {
       setSubmitStatus("error");
-      console.error("EmailJS error:", error);
+      console.error("Contact form error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,7 +92,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       <div className="fixed inset-0 bg-white/30 backdrop-blur-md pointer-events-auto" onClick={onClose}></div>
       
       {/* Modal container */}
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 relative animate-fadeIn pointer-events-auto">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 relative animate-fadeIn motion-reduce:animate-none pointer-events-auto">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
@@ -100,7 +116,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Message Sent!</h3>
+              <h3 className="text-xl font-semibold text-green-600 mb-2">Message sent</h3>
               <p className="text-[#797F8C]">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
             </div>
           ) : (
@@ -168,7 +184,13 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               
               {submitStatus === "error" && (
                 <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
-                  There was an error sending your message. Please try again.
+                  <p>There was an error sending your message. Please try again.</p>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="inline-block mt-1 font-semibold underline underline-offset-2 text-red-700 hover:text-red-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+                  >
+                    Or email me directly: {EMAIL}
+                  </a>
                 </div>
               )}
               

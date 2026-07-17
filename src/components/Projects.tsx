@@ -9,8 +9,8 @@ import { colors, commonStyles } from "../lib/theme-utils";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { PROJECTS } from "@/data/projects";
 
-/** Top 2 projects from centralized data; featured flag only shown when at least one has featured: true */
-const topTwoProjects = PROJECTS.slice(0, 2);
+/** Top 2 non-featured projects; the featured project already has its own FeaturedWork section above */
+const topTwoProjects = PROJECTS.filter((p) => !p.featured).slice(0, 2);
 const hasAnyFeatured = topTwoProjects.some((p) => p.featured === true);
 
 // Helper function to get icon for a technology (uses shared SKILL_ICONS)

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { HiCode, HiSearch, HiX, HiFilter, HiChevronDown } from "react-icons/hi";
 import { useState } from "react";
@@ -8,15 +8,18 @@ import { colors } from "@/lib/theme-utils";
 
 interface ProjectFiltersProps {
 	skills: string[];
+	/** Total number of projects, for the "All Projects" chip count */
+	totalProjects: number;
 	selectedSkill: string | null;
 	onSelectSkill: (skill: string | null) => void;
 	searchQuery: string;
 	onSearchChange: (val: string) => void;
 }
 
-export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQuery, onSearchChange }: ProjectFiltersProps) {
+export function ProjectFilters({ skills, totalProjects, selectedSkill, onSelectSkill, searchQuery, onSearchChange }: ProjectFiltersProps) {
 	const [isFilterExpanded, setIsFilterExpanded] = useState(true);
 	const [showMobileFilterModal, setShowMobileFilterModal] = useState(false);
+	const reduce = useReducedMotion();
 
 	const activeFilterCount = (selectedSkill ? 1 : 0) + (searchQuery ? 1 : 0);
 
@@ -29,7 +32,7 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 		<div className="space-y-6">
 			{/* Search Bar - Smaller for desktop */}
 			<motion.div
-				initial={{ opacity: 0, y: -20 }}
+				initial={reduce ? false : { opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				className="relative max-w-xl mx-auto"
 			>
@@ -58,7 +61,7 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 
 			{/* OPTION 1: Mobile - Bottom Sheet Style Filter (Recommended) */}
 			<motion.div
-				initial={{ opacity: 0, y: 20 }}
+				initial={reduce ? false : { opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.1 }}
 				className="bg-white/70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-lg overflow-hidden"
@@ -78,7 +81,7 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 							<div>
 								<h3 className="text-xs md:text-base font-bold text-[#142240]">Filter by Technology</h3>
 								<p className="text-[10px] md:text-xs text-[#797F8C]">
-									{skills.length} available
+									{skills.length} technologies
 									{activeFilterCount > 0 && <span className="ml-1.5 md:ml-2 inline-flex items-center px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium bg-[#142240]/10 text-[#142240]">{activeFilterCount}</span>}
 								</p>
 							</div>
@@ -134,7 +137,7 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 										label="All Projects"
 										isActive={selectedSkill === null}
 										onClick={() => onSelectSkill(null)}
-										count={skills.length}
+										count={totalProjects}
 									/>
 									{skills.map((skill) => (
 										<FilterChip
@@ -227,7 +230,7 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 								<div className="grid grid-cols-3 gap-2">
 									<MobileFilterOption
 										label="All Projects"
-										count={skills.length}
+										count={totalProjects}
 										isActive={selectedSkill === null}
 										onClick={() => {
 											onSelectSkill(null);
@@ -256,13 +259,24 @@ export function ProjectFilters({ skills, selectedSkill, onSelectSkill, searchQue
 	);
 }
 
+interface FilterOptionProps {
+	label: string;
+	isActive: boolean;
+	onClick: () => void;
+	icon?: React.ReactNode;
+	count?: number;
+}
+
 // Desktop Filter Chip
-function FilterChip({ label, isActive, onClick, icon, count }: any) {
+function FilterChip({ label, isActive, onClick, icon, count }: FilterOptionProps) {
+	const reduce = useReducedMotion();
+
 	return (
 		<motion.button
-			whileHover={{ scale: 1.05 }}
-			whileTap={{ scale: 0.95 }}
+			whileHover={reduce ? undefined : { scale: 1.05 }}
+			whileTap={reduce ? undefined : { scale: 0.95 }}
 			onClick={onClick}
+			aria-pressed={isActive}
 			className={`
 				relative flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium
 				transition-all duration-300 border whitespace-nowrap
@@ -297,10 +311,11 @@ function FilterChip({ label, isActive, onClick, icon, count }: any) {
 }
 
 // Mobile Filter Option (for bottom sheet)
-function MobileFilterOption({ label, isActive, onClick, icon, count }: any) {
+function MobileFilterOption({ label, isActive, onClick, icon, count }: FilterOptionProps) {
 	return (
 		<button
 			onClick={onClick}
+			aria-pressed={isActive}
 			className={`
 				relative flex flex-col items-center justify-center gap-1.5 p-3 rounded-lg text-sm font-semibold
 				transition-all duration-300 border-2 min-h-[70px]
