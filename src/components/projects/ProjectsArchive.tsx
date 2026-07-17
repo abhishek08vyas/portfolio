@@ -49,14 +49,9 @@ export function ProjectsArchive() {
 				/>
 			</div>
 
-			<main className={`${commonStyles.section.container} relative z-10`}>
+			<div className={`${commonStyles.section.container} relative z-10`}>
 				{/* Header Section */}
-				<motion.header
-					initial={reduce ? false : { opacity: 0, y: -30 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					className="pt-16 md:pt-20 pb-12 text-center"
-				>
+				<header className="pt-16 md:pt-20 pb-12 text-center animate-fade-in-down">
 					{/* Project Count Badge */}
 					<div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 shadow-sm">
 						<HiCollection
@@ -73,7 +68,7 @@ export function ProjectsArchive() {
 					</div>
 
 					{/* Title with Gradient */}
-					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Library</h1>
+					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Projects</h1>
 
 					{/* Subtitle */}
 					<p className="mt-4 text-gray-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Backend systems, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
@@ -82,7 +77,7 @@ export function ProjectsArchive() {
 					<div className="flex justify-center mt-6">
 						<div className={commonStyles.header.divider} />
 					</div>
-				</motion.header>
+				</header>
 
 				{/* Pinned Featured Case Study */}
 				{featuredProject && (
@@ -120,8 +115,9 @@ export function ProjectsArchive() {
 									src={featuredProject.image}
 									alt=""
 									fill
-									sizes="(max-width: 1024px) 100vw, 960px"
+									sizes="(max-width: 1024px) 100vw, 92vw"
 									className="object-cover"
+									priority
 								/>
 							</div>
 
@@ -173,6 +169,15 @@ export function ProjectsArchive() {
 						onSearchChange={setSearchQuery}
 					/>
 				</section>
+
+				{/* Screen-reader announcement of filter results (always mounted so updates are announced) */}
+				<p
+					role="status"
+					aria-live="polite"
+					className="sr-only"
+				>
+					{selectedSkill || searchQuery ? `Showing ${filteredProjects.length} of ${gridProjects.length} projects` : ""}
+				</p>
 
 				{/* Results Counter */}
 				{(selectedSkill || searchQuery) && (
@@ -251,7 +256,7 @@ export function ProjectsArchive() {
 						</motion.div>
 					)}
 				</section>
-			</main>
+			</div>
 		</div>
 	);
 }

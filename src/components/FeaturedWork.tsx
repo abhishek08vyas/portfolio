@@ -45,7 +45,7 @@ export const FeaturedWork = () => {
 								src={project.image}
 								alt=""
 								fill
-								sizes="(max-width:1024px) 100vw, 40vw"
+								sizes="(max-width: 1024px) 100vw, 460px"
 								className="object-cover transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"
 							/>
 							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#142240]/60 to-transparent" />

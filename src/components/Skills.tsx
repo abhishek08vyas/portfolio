@@ -81,7 +81,7 @@ export const Skills: React.FC = () => {
 								{group.skills.map((skill) => (
 									<li key={skill.label}>
 										<span className={commonStyles.skillTag + " inline-flex items-center gap-1.5 !px-3 !py-1.5 !text-xs"}>
-											{skill.iconKey && SKILL_ICONS[skill.iconKey]}
+											{skill.iconKey && <span aria-hidden="true">{SKILL_ICONS[skill.iconKey]}</span>}
 											{skill.label}
 										</span>
 									</li>

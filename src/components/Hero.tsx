@@ -29,7 +29,7 @@ export const Hero = () => {
 		const radius = 75; // Radius from center of image
 
 		return (
-			<div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+			<div className="absolute inset-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
 				<motion.div
 					className="relative"
 					animate={
@@ -174,7 +174,7 @@ export const Hero = () => {
 							<div className="absolute inset-2 rounded-full overflow-hidden">
 								<Image
 									src="/images/profile_photo.png"
-									alt="Abhishek Vyas Avatar"
+									alt="Portrait of Abhishek Vyas"
 									width={144}
 									height={144}
 									className="w-full h-full object-cover"
@@ -323,6 +323,7 @@ export const Hero = () => {
 					<div
 						className="absolute left-1/2 transform -translate-x-1/2 animate-bounce motion-reduce:animate-none"
 						style={{ bottom: "1rem" }}
+						aria-hidden="true"
 					>
 						<div className="w-8 h-12 rounded-full border-2 border-blue-400 flex items-start justify-center p-2 shadow-lg shadow-blue-500/25">
 							<div className="w-1 h-3 bg-blue-400 rounded-full animate-ping motion-reduce:animate-none"></div>

@@ -1,5 +1,5 @@
 // ContactModal.tsx
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -21,6 +21,59 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  // Focus management: move focus into the dialog on open, restore it on close
+  useEffect(() => {
+    if (isOpen) {
+      triggerRef.current = document.activeElement as HTMLElement | null;
+      // Focus the dialog container so screen readers announce it
+      dialogRef.current?.focus();
+    } else if (triggerRef.current) {
+      triggerRef.current.focus();
+      triggerRef.current = null;
+    }
+  }, [isOpen]);
+
+  // The success view replaces the form (and the focused submit button), which
+  // would drop focus to <body> and break the trap — refocus the dialog instead
+  useEffect(() => {
+    if (isOpen && submitStatus === "success") {
+      dialogRef.current?.focus();
+    }
+  }, [isOpen, submitStatus]);
+
+  // Escape closes; Tab is trapped inside the dialog while open
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey) {
+        if (active === first || active === dialogRef.current) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [onClose]
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -89,40 +142,48 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
       {/* Backdrop with blur effect - allows scrolling */}
-      <div className="fixed inset-0 bg-white/30 backdrop-blur-md pointer-events-auto" onClick={onClose}></div>
-      
+      <div className="fixed inset-0 bg-white/30 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
+
       {/* Modal container */}
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 relative animate-fadeIn motion-reduce:animate-none pointer-events-auto">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-modal-title"
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 relative animate-fadeIn motion-reduce:animate-none pointer-events-auto outline-none"
+      >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
-          aria-label="Close modal"
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-700 transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+          aria-label="Close contact form"
         >
-          <LuX size={24} />
+          <LuX size={24} aria-hidden="true" />
         </button>
-        
+
         <div className="p-6">
-          <h2 className="text-2xl font-bold mb-2 text-center bg-[#797F8C] bg-clip-text text-[#142240]">
+          <h2 id="contact-modal-title" className="text-2xl font-bold mb-2 text-center bg-[#797F8C] bg-clip-text text-[#142240]">
             Get in Touch
           </h2>
-          <p className="text-[#797F8C] mb-6 text-center">
+          <p className="text-gray-600 mb-6 text-center">
             Fill out the form below and I&apos;ll get back to you as soon as possible.
           </p>
-          
+
           {submitStatus === "success" ? (
-            <div className="text-center py-8">
+            <div className="text-center py-8" role="status" aria-live="polite">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-green-600 mb-2">Message sent</h3>
-              <p className="text-[#797F8C]">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
+              <p className="text-gray-600">Thank you for reaching out. I&apos;ll respond to your message soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-[#797F8C] mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-600 mb-1">
                   Name
                 </label>
                 <Input
@@ -137,7 +198,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-[#797F8C] mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-1">
                   Email
                 </label>
                 <Input
@@ -153,7 +214,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-[#797F8C] mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-600 mb-1">
                   Subject
                 </label>
                 <Input
@@ -168,7 +229,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-[#797F8C] mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-600 mb-1">
                   Message
                 </label>
                 <Textarea
@@ -183,7 +244,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               </div>
               
               {submitStatus === "error" && (
-                <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm">
+                <div role="alert" className="bg-red-50 text-red-700 p-3 rounded-md text-sm">
                   <p>There was an error sending your message. Please try again.</p>
                   <a
                     href={`mailto:${EMAIL}`}
@@ -197,10 +258,15 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#142240] hover:bg-[#2B3342] text-white py-2 rounded-md transition-colors"
+                aria-busy={isSubmitting}
+                className="w-full bg-[#142240] hover:bg-[#2B3342] text-white py-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
+              {/* Announce the in-flight submit state to screen readers */}
+              <p className="sr-only" role="status" aria-live="polite">
+                {isSubmitting ? "Sending your message" : ""}
+              </p>
             </form>
           )}
         </div>

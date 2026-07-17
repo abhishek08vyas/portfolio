@@ -32,18 +32,19 @@ export const Navbar = () => {
 				<div className="flex items-center relative z-10">
 					<Link
 						href="/"
+						aria-label="Abhishek Vyas — home"
 						className="flex items-center hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-md"
 					>
 						<Image
 							src="/images/av2.png"
-							alt="Logo"
+							alt=""
 							width={32}
 							height={32}
 							priority
 						/>
 						<div className="ml-3 signature-container pointer-events-none">
 							<span className="font-signature text-2xl text-primary signature-static pointer-events-auto">Abhishek Vyas</span>
-							<span className="font-signature text-2xl text-primary signature-animated">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-primary signature-animated" aria-hidden="true">Abhishek Vyas</span>
 						</div>
 					</Link>
 				</div>
@@ -104,16 +105,19 @@ export const Navbar = () => {
 					className="md:hidden absolute top-full left-0 right-0 bg-white border-b shadow-xl animate-in slide-in-from-top-2 duration-200 motion-reduce:animate-none"
 				>
 					<div className="container mx-auto px-6 py-6 flex flex-col gap-4">
-						{NAV_ITEMS.map((item) => (
-							<Link
-								key={item.title}
-								href={item.href}
-								className="text-lg font-bold text-gray-900 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
-								onClick={() => setMenuOpen(false)}
-							>
-								{item.title}
-							</Link>
-						))}
+						<ul className="flex flex-col gap-4">
+							{NAV_ITEMS.map((item) => (
+								<li key={item.title}>
+									<Link
+										href={item.href}
+										className="text-lg font-bold text-gray-900 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2 rounded-sm"
+										onClick={() => setMenuOpen(false)}
+									>
+										{item.title}
+									</Link>
+								</li>
+							))}
+						</ul>
 						{/* TODO(ABHISHEK): export resume PDF to public/resume.pdf */}
 						<Button
 							asChild

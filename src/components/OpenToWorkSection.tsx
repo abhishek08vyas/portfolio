@@ -41,7 +41,7 @@ export const OpenToWorkSection: React.FC<OpenToWorkSectionProps> = ({ className 
 										</div>
 
 										{/* Main content */}
-										<h4 className={commonStyles.openToWork.title}>Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide</h4>
+										<h2 className={commonStyles.openToWork.title}>Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide</h2>
 
 										<p className="text-sm text-gray-300">Also available for freelance backend and AI consulting work.</p>
 									</div>

@@ -32,9 +32,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			<div className="relative aspect-video w-full overflow-hidden bg-gray-100">
 				<Image
 					src={project.image}
-					alt={project.title}
+					alt=""
 					fill
-					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
 					className="object-cover transition-transform duration-700 group-hover:scale-110 motion-reduce:transform-none"
 				/>
 
@@ -95,7 +95,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 									color: colors.brand.dark,
 								}}
 							>
-								{getSkillIcon(skill)}
+								<span aria-hidden="true">{getSkillIcon(skill)}</span>
 								{skill}
 							</span>
 						))}
@@ -110,7 +110,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border-2 border-gray-200 bg-white text-[#142240] hover:border-[#142240] hover:bg-gray-50 transition-all font-semibold text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
-							aria-label="View GitHub Repository"
+							aria-label={`Code — ${project.title} GitHub repository (opens in new tab)`}
 						>
 							<FaGithub
 								className="w-4 h-4"
@@ -129,7 +129,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 								background: `linear-gradient(135deg, ${colors.brand.primary} 0%, ${colors.brand.medium} 100%)`,
 								color: "white",
 							}}
-							aria-label="View Live Demo"
+							aria-label={`Demo — ${project.title} live demo (opens in new tab)`}
 						>
 							<FiExternalLink
 								className="w-4 h-4"

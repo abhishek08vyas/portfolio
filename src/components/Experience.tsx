@@ -7,12 +7,10 @@ import { colors, commonStyles } from "../lib/theme-utils";
 import { HiCode } from "react-icons/hi";
 import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
-import { motion, useReducedMotion } from "framer-motion";
 
 const ExperiencePage: React.FC = () => {
 	const [expanded, setExpanded] = useState<number>(-1); // -1 means all closed by default
 	const [hoveredDot, setHoveredDot] = useState<number>(-1);
-	const reduce = useReducedMotion();
 
 	const getSkillIcon = (skillName: string) => {
 		// Sort by key length descending so "JavaScript" matches before "Java", etc.
@@ -30,7 +28,7 @@ const ExperiencePage: React.FC = () => {
 			className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] md:text-[11px] font-semibold border transition-all duration-500 ${isHeader ? "bg-white/10 border-white/20 text-white" : "bg-slate-50 border-slate-200 text-slate-600 shadow-sm"}`}
 		>
 			{/* Explicit SVG sizing fixes intermittent icon invisibility in flex containers (Firefox/Chrome) */}
-			<span className="w-4 h-4 min-w-4 min-h-4 flex items-center justify-center flex-shrink-0 [&>svg]:!w-4 [&>svg]:!h-4">{getSkillIcon(skill)}</span>
+			<span aria-hidden="true" className="w-4 h-4 min-w-4 min-h-4 flex items-center justify-center flex-shrink-0 [&>svg]:!w-4 [&>svg]:!h-4">{getSkillIcon(skill)}</span>
 			{skill}
 		</span>
 	);
@@ -52,14 +50,9 @@ const ExperiencePage: React.FC = () => {
 				/>
 			</div>
 
-			<main className={`${commonStyles.section.container} relative z-10`}>
+			<div className={`${commonStyles.section.container} relative z-10`}>
 				{/* Enhanced Header Section */}
-				<motion.header
-					initial={reduce ? false : { opacity: 0, y: -30 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					className="pt-16 md:pt-20 pb-12 text-center"
-				>
+				<header className="pt-16 md:pt-20 pb-12 text-center animate-fade-in-down">
 					{/* Experience Count Badge */}
 					<div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 shadow-sm">
 						<FaBriefcase
@@ -79,13 +72,13 @@ const ExperiencePage: React.FC = () => {
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Experience</h1>
 
 					{/* Subtitle */}
-					<p className="mt-4 text-[#797F8C] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">3+ years shipping production systems, from SRE on-call to event-driven pipelines — now applied to AI-enabled systems.</p>
+					<p className="mt-4 text-gray-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">3+ years shipping production systems, from SRE on-call to event-driven pipelines — now applied to AI-enabled systems.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">
 						<div className={commonStyles.header.divider} />
 					</div>
-				</motion.header>
+				</header>
 
 				{/* Experience Timeline */}
 				<section className="pb-24">
@@ -99,12 +92,10 @@ const ExperiencePage: React.FC = () => {
 							const isLast = idx === EXPERIENCE_ITEMS.length - 1;
 
 							return (
-								<motion.div
+								<div
 									key={idx}
-									initial={reduce ? false : { opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.5, delay: reduce ? 0 : idx * 0.1 }}
-									className="relative flex gap-4"
+									className="relative flex gap-4 animate-fade-in-up"
+									style={{ animationDelay: `${idx * 100}ms` }}
 									onMouseEnter={() => setHoveredDot(idx)}
 									onMouseLeave={() => setHoveredDot(-1)}
 								>
@@ -166,7 +157,7 @@ const ExperiencePage: React.FC = () => {
 											{/* HEADER SECTION (Gradient, expand/collapse trigger) */}
 											<button
 												type="button"
-												className="w-full text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3D5176] focus-visible:ring-offset-2"
+												className="w-full text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset"
 												aria-expanded={isExpanded}
 												aria-controls={"exp-body-" + idx}
 												onClick={() => setExpanded(isExpanded ? -1 : idx)}
@@ -184,7 +175,7 @@ const ExperiencePage: React.FC = () => {
 
 													<div className="flex justify-between items-start relative z-10">
 														<div className="space-y-0.5">
-															<h3 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h3>
+															<h2 className="text-lg md:text-xl font-bold tracking-tight">{exp.title}</h2>
 															<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-blue-100/80">
 																<span className="flex items-center gap-1">
 																	{isEducation ? (
@@ -226,7 +217,7 @@ const ExperiencePage: React.FC = () => {
 													{/* Header Tech Stack (Visible only when COLLAPSED) */}
 													<div className={`flex flex-wrap gap-1.5 transition-all duration-500 motion-reduce:transition-none origin-top overflow-hidden ${isExpanded ? "opacity-0 -translate-y-2 mt-0 max-h-0" : "opacity-100 translate-y-0 mt-4 max-h-20"}`}>
 														{skillsArray.slice(0, 4).map((s) => renderSkillBadge(s, true))}
-														{skillsArray.length > 4 && <span className="text-[10px] font-bold text-blue-200/60 self-center">+{skillsArray.length - 4}</span>}
+														{skillsArray.length > 4 && <span className="text-[10px] font-bold text-blue-100 self-center">+{skillsArray.length - 4}</span>}
 													</div>
 												</div>
 											</button>
@@ -234,7 +225,7 @@ const ExperiencePage: React.FC = () => {
 											{/* EXPANDABLE BODY SECTION */}
 											<div
 												id={"exp-body-" + idx}
-												className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${isExpanded ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"}`}
+												className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${isExpanded ? "max-h-[1200px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}
 											>
 												<div className="p-6 md:p-8 space-y-6 bg-white/50 backdrop-blur-xl">
 													{/* Morphing Landing Spot for Skills */}
@@ -297,12 +288,12 @@ const ExperiencePage: React.FC = () => {
 											</div>
 										</div>
 									</div>
-								</motion.div>
+								</div>
 							);
 						})}
 					</div>
 				</section>
-			</main>
+			</div>
 		</div>
 	);
 };
