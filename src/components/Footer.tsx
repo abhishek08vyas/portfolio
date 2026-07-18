@@ -23,7 +23,7 @@ export const Footer = () => {
 					{/* Column 1 — Identity */}
 					<div className="flex flex-col space-y-3">
 						<h2 className="text-xl font-bold text-white">Abhishek Vyas</h2>
-						<p className="text-sm text-[#c3cce2]">Backend & full-stack software engineer building AI-enabled systems. St. John&apos;s, NL · Open to relocation · Remote-ready.</p>
+						<p className="text-sm text-[#c3cce2]">Backend & full-stack software engineer building AI-enabled systems. Based in St. John&apos;s, NL, Canada · Open to relocation · Remote-ready.</p>
 						<motion.p
 							className="font-signature text-2xl text-[#c3cce2] mt-1"
 							aria-hidden="true"

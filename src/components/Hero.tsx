@@ -31,7 +31,7 @@ export const Hero = () => {
 					<div className="text-center lg:text-left">
 						{/* Location eyebrow */}
 						<p className="inline-flex items-center rounded-full bg-[var(--accent-soft)] border border-[var(--edge)] px-4 py-1.5 text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)] mb-5">
-							St. John&apos;s, NL · Open to relocation · Remote-ready
+							Based in St. John&apos;s, NL, Canada · Open to relocation
 						</p>
 
 						{/* Name — serif display; "Vyas" in italic amber gradient */}
