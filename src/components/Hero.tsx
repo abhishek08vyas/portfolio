@@ -1,6 +1,5 @@
-import { useState, useMemo } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { LuMail, LuDownload, LuGraduationCap } from "react-icons/lu";
+import { useState } from "react";
+import { LuMail, LuDownload } from "react-icons/lu";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { ContactModal } from "./ContactModel";
@@ -9,18 +8,8 @@ import { RESUME_PATH, GITHUB_URL, LINKEDIN_URL } from "@/constants/links";
 
 const HERO_SKILLS = ["TypeScript / Node.js", "Java / Spring Boot", "Python", "Apache Kafka", "Azure", "RAG / LLM pipelines"];
 
-/** Desktop-only decorative fact chips floating around the avatar (aria-hidden; facts match site copy exactly) */
-const HERO_FACT_CHIPS: { emoji: string; text: string; position: string; delay: string; dotBg: string }[] = [
-	{ emoji: "📚", text: "RAG pipeline · OSFI (in development)", position: "top-[4%] left-0", delay: "0s", dotBg: "bg-[#e8edf8] dark:bg-[#223058]" },
-	{ emoji: "⚡", text: "Kafka +40% throughput", position: "top-[30%] right-0", delay: "-1.6s", dotBg: "bg-[#fdeecd] dark:bg-[#4d3b15]" },
-	{ emoji: "🛰️", text: "99.9% uptime · 1,000+ DAU", position: "bottom-[24%] left-[2%]", delay: "-3.2s", dotBg: "bg-[#e2f3e8] dark:bg-[#1f3d33]" },
-	{ emoji: "🎓", text: "MASc 2025 · AZ-204", position: "bottom-[2%] right-[10%]", delay: "-4.4s", dotBg: "bg-[#f6e7c8] dark:bg-[#453413]" },
-];
-
 export const Hero = () => {
 	const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-	const [isHovered, setIsHovered] = useState(false);
-	const reduce = useReducedMotion();
 
 	const openContactModal = () => {
 		setIsContactModalOpen(true);
@@ -30,79 +19,22 @@ export const Hero = () => {
 		setIsContactModalOpen(false);
 	};
 
-	// Memoized Circular text component to prevent unnecessary re-renders
-	const CircularText = useMemo(() => {
-		const text = "• OPEN TO WORK • HIRE ME ";
-		const chars = text.split("");
-		const radius = 75; // Radius from center of image
-
-		return (
-			<div className="absolute inset-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
-				<motion.div
-					className="relative"
-					animate={
-						reduce
-							? undefined
-							: {
-									rotate: 360,
-								}
-					}
-					transition={{
-						duration: isHovered ? 5 : 15,
-						ease: "linear",
-						repeat: Infinity,
-					}}
-					// Add will-change for better performance
-					style={{ willChange: "transform" }}
-				>
-					{chars.map((char, index) => {
-						const angle = (index / chars.length) * 360;
-						const radian = (angle * Math.PI) / 180;
-						const x = Math.cos(radian) * radius;
-						const y = Math.sin(radian) * radius;
-
-						return (
-							<motion.span
-								key={`${char}-${index}`} // More stable key
-								className="absolute text-sm font-bold text-[var(--text-strong)] select-none"
-								style={{
-									left: x,
-									top: y,
-									transform: `translate(-50%, -50%) rotate(${angle + 90}deg)`,
-									willChange: "opacity", // Optimize for opacity changes
-								}}
-								initial={reduce ? false : { opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{
-									delay: index * 0.05,
-									duration: 0.3, // Shorter duration for smoother animation
-								}}
-							>
-								{char}
-							</motion.span>
-						);
-					})}
-				</motion.div>
-			</div>
-		);
-	}, [isHovered, reduce]); // Only re-create when isHovered or reduced-motion changes
-
 	return (
 		<section
 			id="hero"
 			className="relative min-h-screen flex items-center pt-16 overflow-hidden"
 		>
-			{/* Main Content — the fixed SkyBackdrop (dawn/dusk) shows through */}
+			{/* Main Content — the fixed SkyBackdrop shows through */}
 			<div className={responsive.container + " relative z-10"}>
-				<div className="max-w-6xl mx-auto py-8 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-16 items-center">
+				<div className="max-w-6xl mx-auto py-10 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
 					{/* Text column */}
-					<div className="text-center lg:text-left order-2 lg:order-1">
+					<div className="text-center lg:text-left">
 						{/* Location eyebrow */}
-						<p className="inline-flex items-center rounded-full bg-[var(--accent-soft)] border border-[var(--edge)] px-4 py-1.5 text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)] mb-4">
+						<p className="inline-flex items-center rounded-full bg-[var(--accent-soft)] border border-[var(--edge)] px-4 py-1.5 text-xs md:text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)] mb-5">
 							St. John&apos;s, NL · Open to relocation · Remote-ready
 						</p>
 
-						{/* Name — serif display; "Vyas" in italic coral→lavender gradient */}
+						{/* Name — serif display; "Vyas" in italic amber gradient */}
 						<h1 className={`${heroTypography.name} text-[var(--text-strong)] mb-3 pb-1`}>
 							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#d97706] to-[#b45309] dark:from-[#fcd34d] dark:to-[#f59e0b] bg-clip-text text-transparent">Vyas</em>
 						</h1>
@@ -123,36 +55,27 @@ export const Hero = () => {
 						</div>
 
 						{/* Status line */}
-						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-8">Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide</p>
+						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-6">Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide</p>
 
-						<div className={`${commonStyles.card.base} ${commonStyles.card.hover} p-6 mb-10`}>
-							<p className="text-[var(--text-body)] leading-relaxed mb-6 text-justify">
-								I&apos;m a <span className="font-semibold text-[var(--text-strong)]">backend and full-stack software engineer</span> with 3+ years of experience building AI-enabled systems — RAG pipelines, event-driven architecture, and observability. At Apexon, I engineered an Apache Kafka data-synchronization pipeline that improved throughput by 40% across high-traffic healthcare systems; before that, I ran P0/P1 incident response as a Site Reliability Engineer. I completed my MASc in Computer Engineering at Memorial University in Apr 2025, hold the Microsoft AZ-204 (Azure Developer Associate) certification, and now work as an independent software consultant — most recently building a hybrid RAG pipeline for regulatory document search (OSFI). St. John&apos;s, NL · Open to relocation · Remote-ready.
-							</p>
+						{/* Short lede — the full story lives in Now & Recent and /experience */}
+						<p className="text-base md:text-lg text-[var(--text-dim)] leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6">
+							3+ years building <span className="font-semibold text-[var(--text-strong)]">RAG pipelines, event-driven systems, and observability</span> for high-traffic platforms. MASc Computer Engineering, Memorial University (2025) · AZ-204.
+						</p>
 
-							<div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-4">
-								{HERO_SKILLS.map((skill) => (
-									<span
-										key={skill}
-										className={`${commonStyles.skillTag} inline-block`}
-									>
-										{skill}
-									</span>
-								))}
-							</div>
-
-							{/* Credential line */}
-							<p className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 text-sm font-semibold text-[var(--text-strong)] pt-4 border-t border-[var(--edge)]">
-								<LuGraduationCap
-									className="w-4 h-4 text-[var(--accent-strong)]"
-									aria-hidden="true"
-								/>
-								<span>MASc Computer Engineering, Memorial University (Apr 2025) · AZ-204</span>
-							</p>
+						{/* Skill chips */}
+						<div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
+							{HERO_SKILLS.map((skill) => (
+								<span
+									key={skill}
+									className={`${commonStyles.skillTag} inline-block !px-3 !py-1.5 !text-xs`}
+								>
+									{skill}
+								</span>
+							))}
 						</div>
 
 						{/* Call to Action Buttons */}
-						<div className="flex flex-wrap gap-4 justify-center lg:justify-start items-center mb-16 lg:mb-0">
+						<div className="flex flex-wrap gap-4 justify-center lg:justify-start items-center mb-5">
 							{/* TODO(ABHISHEK): export resume PDF to public/resume.pdf */}
 							<Button
 								asChild
@@ -182,7 +105,7 @@ export const Hero = () => {
 							</Button>
 
 							<div className="flex gap-4">
-								{/* GitHub Icon - Enhanced */}
+								{/* GitHub Icon */}
 								<a
 									href={GITHUB_URL}
 									target="_blank"
@@ -207,7 +130,7 @@ export const Hero = () => {
 									</div>
 								</a>
 
-								{/* LinkedIn Icon - Enhanced */}
+								{/* LinkedIn Icon */}
 								<a
 									href={LINKEDIN_URL}
 									target="_blank"
@@ -232,51 +155,39 @@ export const Hero = () => {
 								</a>
 							</div>
 						</div>
+
+						{/* Currently line */}
+						<p className="text-sm font-medium text-[var(--text-dim)]">
+							<span className="font-bold text-[var(--accent-strong)]">Currently:</span> <span className="font-semibold text-[var(--text-strong)]">hybrid RAG pipeline for OSFI regulatory search</span> (consulting)
+						</p>
 					</div>
 
-					{/* Avatar column */}
-					<div className="order-1 lg:order-2 relative flex items-center justify-center py-6 lg:py-0 lg:min-h-[480px]">
-						{/* Profile Image with Animated Border and Circular Text */}
-						<div
-							className="relative w-40 h-40"
-							onMouseEnter={() => setIsHovered(true)}
-							onMouseLeave={() => setIsHovered(false)}
-						>
-							{/* Circular Text - Now memoized */}
-							{CircularText}
-
-							{/* Profile Image Container */}
-							<div className="absolute inset-4">
-								<div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#f59e0b] via-[#3D5176] to-[#fbbf24] animate-spin-slow motion-reduce:animate-none"></div>
-								<div className="absolute inset-1 rounded-full bg-[var(--surface-raised)]"></div>
-								<div className="absolute inset-2 rounded-full overflow-hidden">
-									<Image
-										src="/images/profile_photo.png"
-										alt="Portrait of Abhishek Vyas"
-										width={144}
-										height={144}
-										className="w-full h-full object-cover"
-										priority
-									/>
-								</div>
+					{/* Photo column — framed portrait with pinned availability chip */}
+					<div className="relative flex items-center justify-center pb-6 lg:pb-0">
+						<div className="relative">
+							<div className="w-[min(300px,70vw)] lg:w-[340px] aspect-[4/5] rounded-[30px] overflow-hidden border-2 border-[var(--accent)] rotate-2 shadow-[var(--shadow-soft)] bg-[var(--surface-raised)]">
+								<Image
+									src="/images/profile_photo.png"
+									alt="Portrait of Abhishek Vyas"
+									fill
+									sizes="(max-width: 1024px) 70vw, 340px"
+									className="object-cover"
+									priority
+								/>
 							</div>
-						</div>
-
-						{/* Floating fact chips — desktop only, decorative (facts repeat visible site copy) */}
-						<div
-							className="hidden lg:block absolute inset-0 pointer-events-none"
-							aria-hidden="true"
-						>
-							{HERO_FACT_CHIPS.map((chip) => (
-								<div
-									key={chip.text}
-									className={`card-base absolute flex items-center gap-2.5 px-3.5 py-2 !rounded-2xl animate-chip-bob ${chip.position}`}
-									style={{ animationDelay: chip.delay }}
+							<div className="absolute -left-5 bottom-9 card-base flex items-center gap-2.5 !rounded-2xl px-4 py-2.5 -rotate-1">
+								<span
+									className="relative flex w-2 h-2 shrink-0"
+									aria-hidden="true"
 								>
-									<span className={`w-8 h-8 rounded-xl flex items-center justify-center text-base shrink-0 ${chip.dotBg}`}>{chip.emoji}</span>
-									<span className="text-xs font-semibold text-[var(--text-strong)] whitespace-nowrap">{chip.text}</span>
-								</div>
-							))}
+									<span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+									<span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+								</span>
+								<span className="text-xs font-semibold text-[var(--text-body)] whitespace-nowrap">
+									<b className="block text-[var(--text-strong)] text-[13px]">Open to work</b>
+									Backend &amp; AI · remote Canada
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -284,7 +195,7 @@ export const Hero = () => {
 
 			{/* Scroll Indicator */}
 			<div
-				className="absolute left-1/2 transform -translate-x-1/2 animate-bounce motion-reduce:animate-none"
+				className="absolute left-1/2 transform -translate-x-1/2 animate-bounce motion-reduce:animate-none hidden lg:block"
 				style={{ bottom: "1rem" }}
 				aria-hidden="true"
 			>
