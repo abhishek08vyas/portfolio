@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 // Placed in the root app segment so every route inherits this branded card.
-export const alt = "Abhishek Vyas — Software Engineer — AI-Enabled Systems · St. John's, NL";
+export const alt = "Abhishek Vyas — Full-Stack Developer — AI & RAG Pipelines · St. John's, NL";
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
             marginTop: 28,
           }}
         >
-          {'Software Engineer — AI-Enabled Systems'}
+          {'Full-Stack Developer — AI & RAG Pipelines'}
         </div>
         <div
           style={{

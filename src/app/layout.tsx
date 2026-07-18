@@ -21,12 +21,12 @@ const fraunces = Fraunces({
 });
 
 const SITE_URL = 'https://abhishek-vyas.vercel.app';
-const SITE_TITLE = 'Abhishek Vyas | Software Engineer — AI-Enabled Systems';
+const SITE_TITLE = 'Abhishek Vyas | Full-Stack Developer — AI & RAG Pipelines';
 const SITE_DESCRIPTION =
-  "Backend & full-stack engineer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.";
+  "Full-stack developer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.";
 // Canonical OG description — docs/CONTENT_PLAN.md Section 2 (verbatim)
 const OG_DESCRIPTION =
-  "Backend & full-stack software engineer with 3+ years' experience building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc, Memorial University (Apr 2025) · AZ-204 · St. John's, NL · Remote-ready.";
+  "Full-stack developer with 3+ years' experience building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc, Memorial University (Apr 2025) · AZ-204 · St. John's, NL · Remote-ready.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -61,7 +61,7 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Abhishek Vyas',
-  jobTitle: 'Software Engineer',
+  jobTitle: 'Full Stack Developer',
   url: `${SITE_URL}/`,
   sameAs: [
     'https://github.com/abhishek08vyas',
@@ -78,7 +78,7 @@ const personJsonLd = {
     name: 'Memorial University of Newfoundland',
   },
   knowsAbout: [
-    'Backend development',
+    'Full-stack development',
     'RAG pipelines',
     'Event-driven architecture',
     'Observability',

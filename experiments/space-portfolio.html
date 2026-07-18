@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abhishek Vyas — Mission Log | Software Engineer, AI-Enabled Systems</title>
+<meta name="description" content="A cinematic space-flight portfolio. Abhishek Vyas — Software Engineer building AI-enabled systems: RAG pipelines, event-driven architecture, observability." />
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    --void: #030409;
+    --panel: rgba(10, 14, 28, 0.72);
+    --line: rgba(140, 170, 255, 0.18);
+    --line-bright: rgba(140, 170, 255, 0.45);
+    --star: #e8eeff;
+    --ion: #7dd3fc;       /* cyan engine glow */
+    --flare: #c4b5fd;     /* violet nebula */
+    --alert: #fda4af;
+    --text: #dbe3f8;
+    --text-dim: #8b96b8;
+    --mono: "Cascadia Code", "JetBrains Mono", "Consolas", monospace;
+    --display: "Segoe UI", "Inter", system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--display);
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(125, 211, 252, 0.3); }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--ion);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ============ 3D CANVAS ============ */
+  #space {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: block;
+  }
+
+  /* Subtle CRT vignette over everything */
+  #vignette {
+    position: fixed; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 5, 0.55) 100%);
+  }
+
+  /* ============ LOADER ============ */
+  #loader {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--void);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 28px;
+    font-family: var(--mono);
+  }
+  .loader-mark {
+    font-size: 13px; letter-spacing: 0.6em; color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .loader-pct {
+    font-size: clamp(56px, 12vw, 120px);
+    font-weight: 200; color: var(--star);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .loader-bar {
+    width: min(360px, 70vw); height: 1px;
+    background: var(--line);
+    position: relative; overflow: hidden;
+  }
+  .loader-bar-fill {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--ion), var(--flare));
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+  .loader-status {
+    font-size: 11px; letter-spacing: 0.25em; color: var(--ion);
+    text-transform: uppercase; min-height: 1.2em;
+  }
+
+  /* ============ HUD ============ */
+  #hud {
+    position: fixed; inset: 0; z-index: 50;
+    pointer-events: none;
+    font-family: var(--mono);
+    opacity: 0; /* revealed after loading */
+  }
+  .hud-corner {
+    position: absolute; width: 26px; height: 26px;
+    border-color: var(--line-bright); border-style: solid; border-width: 0;
+  }
+  .hud-corner.tl { top: 18px; left: 18px; border-top-width: 1px; border-left-width: 1px; }
+  .hud-corner.tr { top: 18px; right: 18px; border-top-width: 1px; border-right-width: 1px; }
+  .hud-corner.bl { bottom: 18px; left: 18px; border-bottom-width: 1px; border-left-width: 1px; }
+  .hud-corner.br { bottom: 18px; right: 18px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  .hud-callsign {
+    position: absolute; top: 26px; left: 56px;
+    font-size: 11px; letter-spacing: 0.35em; color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .hud-callsign strong { color: var(--star); font-weight: 600; }
+
+  nav.hud-nav {
+    position: absolute; top: 22px; right: 56px;
+    display: flex; gap: 26px;
+    pointer-events: auto;
+  }
+  .hud-nav a {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    text-decoration: none; color: var(--text-dim);
+    padding: 6px 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .hud-nav a:hover { color: var(--star); }
+  .hud-nav a.active { color: var(--ion); border-bottom-color: var(--ion); }
+  .hud-nav a span { color: var(--line-bright); margin-right: 6px; }
+
+  .hud-telemetry {
+    position: absolute; bottom: 26px; left: 56px;
+    font-size: 10px; letter-spacing: 0.22em; color: var(--text-dim);
+    text-transform: uppercase; line-height: 2;
+  }
+  .hud-telemetry b { color: var(--ion); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  .hud-progress {
+    position: absolute; bottom: 34px; right: 56px;
+    width: 140px; display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-end;
+  }
+  .hud-progress-label { font-size: 10px; letter-spacing: 0.22em; color: var(--text-dim); text-transform: uppercase; }
+  .hud-progress-track { width: 100%; height: 1px; background: var(--line); }
+  .hud-progress-fill { height: 100%; width: 100%; background: var(--ion); transform-origin: left; transform: scaleX(0); }
+
+  /* ============ CONTENT SECTIONS ============ */
+  main { position: relative; z-index: 10; }
+  section { position: relative; padding: 0 clamp(24px, 8vw, 120px); }
+
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--ion);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 1px; background: var(--ion); display: inline-block; }
+
+  /* --- HERO --- */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 26px;
+  }
+  .hero-name {
+    font-size: clamp(52px, 11vw, 168px);
+    font-weight: 800; line-height: 0.95; letter-spacing: -0.02em;
+    text-transform: uppercase; color: var(--star);
+  }
+  .hero-name .row { display: block; overflow: hidden; }
+  .hero-name .row > span { display: inline-block; }
+  .hero-name em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--ion), var(--flare));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .hero-title {
+    font-family: var(--mono); font-size: clamp(13px, 1.6vw, 18px);
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--text);
+  }
+  .hero-sub {
+    max-width: 560px; color: var(--text-dim);
+    font-size: clamp(14px, 1.5vw, 17px); line-height: 1.7;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 42px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--text-dim);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .hero-scroll::after {
+    content: ""; width: 1px; height: 44px;
+    background: linear-gradient(to bottom, var(--ion), transparent);
+    animation: beam 2.2s ease-in-out infinite;
+  }
+  @keyframes beam { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .hero-scroll::after { animation: none; } }
+
+  /* --- MISSIONS --- */
+  #missions { padding-top: 18vh; padding-bottom: 10vh; }
+  .missions-head { margin-bottom: 10vh; display: flex; flex-direction: column; gap: 18px; }
+  .missions-head h2 {
+    font-size: clamp(34px, 6vw, 72px); font-weight: 800;
+    text-transform: uppercase; letter-spacing: -0.01em; color: var(--star);
+  }
+
+  .mission {
+    display: block; text-decoration: none;
+    margin: 0 auto 12vh; max-width: 1040px;
+    perspective: 1200px;
+  }
+  .mission-card {
+    position: relative;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+    padding: clamp(28px, 5vw, 56px);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: border-color 0.35s;
+    will-change: transform;
+  }
+  .mission:hover .mission-card { border-color: var(--line-bright); }
+  .mission-card::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(125, 211, 252, 0.08), transparent 45%);
+    pointer-events: none;
+  }
+  .mission-index {
+    position: absolute; top: 22px; right: 28px;
+    font-family: var(--mono); font-size: clamp(48px, 8vw, 96px);
+    font-weight: 200; color: rgba(140, 170, 255, 0.1);
+    line-height: 1; transform: translateZ(20px);
+  }
+  .mission-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--flare); margin-bottom: 18px;
+    transform: translateZ(35px);
+  }
+  .mission-name {
+    font-size: clamp(26px, 4.2vw, 48px); font-weight: 750;
+    color: var(--star); letter-spacing: -0.01em;
+    margin-bottom: 16px; max-width: 15ch; line-height: 1.08;
+    transform: translateZ(50px);
+  }
+  .mission-brief {
+    color: var(--text-dim); line-height: 1.7; max-width: 58ch;
+    font-size: clamp(14px, 1.4vw, 16px); margin-bottom: 26px;
+    transform: translateZ(30px);
+  }
+  .mission-meta {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: translateZ(40px);
+  }
+  .mission-meta li {
+    list-style: none;
+    border: 1px solid var(--line); color: var(--text-dim);
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .mission-meta li.result { border-color: rgba(125, 211, 252, 0.4); color: var(--ion); }
+  .mission-cta {
+    margin-top: 30px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--ion);
+    display: inline-flex; align-items: center; gap: 10px;
+    transform: translateZ(45px);
+  }
+  .mission-cta::after { content: "→"; transition: transform 0.3s; }
+  .mission:hover .mission-cta::after { transform: translateX(6px); }
+  @media (prefers-reduced-motion: reduce) {
+    .mission:hover .mission-cta::after { transform: none; }
+  }
+
+  /* --- CONTACT --- */
+  #contact {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    gap: 34px; padding-bottom: 14vh;
+  }
+  .contact-head {
+    font-size: clamp(40px, 9vw, 128px); font-weight: 800;
+    text-transform: uppercase; line-height: 0.98; letter-spacing: -0.02em;
+    color: var(--star);
+  }
+  .contact-head em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--ion), var(--flare), var(--alert));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .contact-sub { color: var(--text-dim); max-width: 46ch; line-height: 1.7; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+  .btn {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.28em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 18px 34px; border: 1px solid var(--line-bright);
+    color: var(--star); position: relative; overflow: hidden;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .btn::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, var(--ion), var(--flare));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+    z-index: -1;
+  }
+  .btn:hover { color: #04060f; border-color: transparent; }
+  .btn:hover::before { transform: scaleX(1); }
+  .btn.ghost { border-color: var(--line); color: var(--text-dim); }
+  .btn.ghost:hover { color: #04060f; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn::before { transition: none; }
+  }
+  .contact-foot {
+    position: absolute; bottom: 26px; left: 0; right: 0;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+
+  /* Reveal helpers (GSAP animates these) */
+  .reveal { opacity: 0; transform: translateY(40px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* Small screens: hide dense HUD chrome, keep nav */
+  @media (max-width: 720px) {
+    .hud-telemetry, .hud-progress, .hud-callsign { display: none; }
+    nav.hud-nav { right: 20px; top: 16px; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="space" aria-hidden="true"></canvas>
+<div id="vignette" aria-hidden="true"></div>
+
+<!-- ============ LOADER ============ -->
+<div id="loader" role="status" aria-label="Loading">
+  <div class="loader-mark">AV — Mission Log</div>
+  <div class="loader-pct" id="loaderPct">0</div>
+  <div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div>
+  <div class="loader-status" id="loaderStatus">powering up reactor</div>
+</div>
+
+<!-- ============ HUD ============ -->
+<div id="hud">
+  <span class="hud-corner tl" aria-hidden="true"></span>
+  <span class="hud-corner tr" aria-hidden="true"></span>
+  <span class="hud-corner bl" aria-hidden="true"></span>
+  <span class="hud-corner br" aria-hidden="true"></span>
+
+  <div class="hud-callsign">Vessel <strong>AV-01</strong> · St. John's, NL · Remote-ready</div>
+
+  <nav class="hud-nav" aria-label="Primary">
+    <a href="#hero" data-section="hero"><span>01</span>Bridge</a>
+    <a href="#missions" data-section="missions"><span>02</span>Missions</a>
+    <a href="#contact" data-section="contact"><span>03</span>Comms</a>
+  </nav>
+
+  <div class="hud-telemetry" aria-hidden="true">
+    dist <b id="tDist">0000000</b> km<br />
+    vel <b id="tVel">00.0</b> c &nbsp;·&nbsp; sys <b>nominal</b>
+  </div>
+
+  <div class="hud-progress" aria-hidden="true">
+    <div class="hud-progress-label">Voyage</div>
+    <div class="hud-progress-track"><div class="hud-progress-fill" id="voyageFill"></div></div>
+  </div>
+</div>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section id="hero" aria-label="Introduction">
+    <p class="kicker reveal">Transmission // open</p>
+    <h1 class="hero-name" aria-label="Abhishek Vyas">
+      <span class="row"><span>Abhishek</span></span>
+      <span class="row"><span><em>Vyas</em></span></span>
+    </h1>
+    <p class="hero-title reveal">Software Engineer · Backend &amp; AI-Enabled Systems</p>
+    <p class="hero-sub reveal">
+      3+ years building the machinery behind intelligent products — RAG pipelines,
+      event-driven architecture, and observability. MASc Computer Engineering,
+      Memorial University (2025). Now navigating deep space. Well — remote Canada.
+    </p>
+    <div class="hero-scroll" aria-hidden="true">Scroll to fly</div>
+  </section>
+
+  <!-- ============ MISSIONS ============ -->
+  <section id="missions" aria-label="Case studies">
+    <div class="missions-head">
+      <p class="kicker reveal">Flight recorder</p>
+      <h2 class="reveal">Mission Logs</h2>
+    </div>
+
+    <a class="mission reveal" href="https://abhishek-vyas.vercel.app/projects#osfi-rag" target="_blank" rel="noopener noreferrer">
+      <div class="mission-card">
+        <span class="mission-index" aria-hidden="true">01</span>
+        <p class="mission-tag">Active mission · Consulting engagement</p>
+        <h3 class="mission-name">Hybrid RAG Pipeline for Regulatory Search</h3>
+        <p class="mission-brief">
+          Regulatory teams need precise answers from dense OSFI documents — keyword
+          search fails on regulatory language. Hybrid retrieval surfaces the right
+          passages and keeps LLM answers grounded in source text.
+        </p>
+        <ul class="mission-meta">
+          <li>RAG</li><li>Retrieval</li><li>LLM grounding</li>
+          <li class="result">In active development</li>
+        </ul>
+        <span class="mission-cta">Open mission file</span>
+      </div>
+    </a>
+
+    <a class="mission reveal" href="https://expense-tracker-mun.vercel.app/" target="_blank" rel="noopener noreferrer">
+      <div class="mission-card">
+        <span class="mission-index" aria-hidden="true">02</span>
+        <p class="mission-tag">Completed · Personal project · 2025</p>
+        <h3 class="mission-name">Expense Tracker — Full-Stack SaaS</h3>
+        <p class="mission-brief">
+          Secure full-stack financial tracking with JWT/SSO auth and comprehensive
+          Jest coverage. Node.js, Fastify, Next.js, PostgreSQL, Prisma, Docker.
+        </p>
+        <ul class="mission-meta">
+          <li>Fastify</li><li>Next.js</li><li>PostgreSQL</li><li>Prisma</li>
+          <li class="result">API response times −20%</li>
+        </ul>
+        <span class="mission-cta">Open mission file</span>
+      </div>
+    </a>
+
+    <a class="mission reveal" href="https://github.com/abhishek08vyas/gesture_recognition" target="_blank" rel="noopener noreferrer">
+      <div class="mission-card">
+        <span class="mission-index" aria-hidden="true">03</span>
+        <p class="mission-tag">Completed · MASc-era project · 2024</p>
+        <h3 class="mission-name">Real-Time Gesture Recognition</h3>
+        <p class="mission-brief">
+          Real-time hand-gesture recognition deployed to edge devices — the full ML
+          lifecycle from preprocessing to low-latency inference. Python, TensorFlow,
+          OpenCV, MediaPipe, scikit-learn.
+        </p>
+        <ul class="mission-meta">
+          <li>TensorFlow</li><li>MediaPipe</li><li>Edge deploy</li>
+          <li class="result">78% accuracy · 40 classes</li>
+        </ul>
+        <span class="mission-cta">Open mission file</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" aria-label="Contact">
+    <p class="kicker reveal" style="justify-content: center;">Comms array</p>
+    <h2 class="contact-head reveal">Open a<br /><em>channel</em></h2>
+    <p class="contact-sub reveal">
+      Open to backend &amp; AI roles, remote Canada-wide — and select freelance
+      missions. Signal travels fast; replies do too.
+    </p>
+    <div class="contact-actions reveal">
+      <a class="btn" href="mailto:abhishekvvyas@gmail.com">Transmit email</a>
+      <a class="btn ghost" href="https://github.com/abhishek08vyas" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/abhishekvvyas/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+    <p class="contact-foot">© 2026 Abhishek Vyas · vessel AV-01 · end of transmission</p>
+  </section>
+</main>
+
+<noscript>
+  <style>#loader { display: none; } .reveal { opacity: 1; transform: none; }</style>
+</noscript>
+
+<!-- GSAP (classic globals) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Three.js (module) + scene -->
+<script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from "three";
+
+gsap.registerPlugin(ScrollTrigger);
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ================================================================
+   THREE — the void outside the window
+================================================================ */
+const canvas = document.getElementById("space");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x030409);
+scene.fog = new THREE.Fog(0x030409, 400, 1900);
+
+const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 3000);
+camera.position.set(0, 0, 60);
+
+const FLIGHT = 1500; // total forward distance mapped to page scroll
+
+/* ---- starfield: two layers ---- */
+function makeStars(count, size, color, spread, zNear, zFar) {
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * spread;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * spread;
+    pos[i * 3 + 2] = zNear - Math.random() * (zNear - zFar);
+  }
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({
+    color, size, sizeAttenuation: true,
+    transparent: true, opacity: 0.9,
+    depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  return new THREE.Points(geo, mat);
+}
+const starsFine = makeStars(5200, 1.1, 0xdbe3ff, 1400, 200, -FLIGHT - 900);
+const starsBold = makeStars(420, 3.2, 0x9fd8ff, 1200, 200, -FLIGHT - 900);
+scene.add(starsFine, starsBold);
+
+/* ---- nebulae: additive gradient sprites along the route ---- */
+function nebulaTexture(hex) {
+  const c = document.createElement("canvas");
+  c.width = c.height = 256;
+  const g = c.getContext("2d");
+  const grad = g.createRadialGradient(128, 128, 10, 128, 128, 128);
+  grad.addColorStop(0, hex + "cc");
+  grad.addColorStop(0.4, hex + "44");
+  grad.addColorStop(1, hex + "00");
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+}
+const nebulaSpecs = [
+  { hex: "#4c3d8f", x: -260, y: 90, z: -350, s: 700 },
+  { hex: "#155e75", x: 300, y: -120, z: -700, s: 800 },
+  { hex: "#7c3aed", x: -340, y: -60, z: -1050, s: 750 },
+  { hex: "#9f1239", x: 260, y: 140, z: -1450, s: 900 },
+];
+for (const n of nebulaSpecs) {
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: nebulaTexture(n.hex), transparent: true, opacity: 0.55,
+    depthWrite: false, blending: THREE.AdditiveBlending,
+  }));
+  sprite.position.set(n.x, n.y, n.z);
+  sprite.scale.setScalar(n.s);
+  scene.add(sprite);
+}
+
+/* ---- a planet to fly past (missions zone) ---- */
+const planet = new THREE.Mesh(
+  new THREE.SphereGeometry(60, 48, 48),
+  new THREE.MeshStandardMaterial({ color: 0x35508a, roughness: 0.85, metalness: 0.1 })
+);
+planet.position.set(-170, -40, -820);
+scene.add(planet);
+
+const atmosphere = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: nebulaTexture("#7dd3fc"), transparent: true, opacity: 0.5,
+  depthWrite: false, blending: THREE.AdditiveBlending,
+}));
+atmosphere.position.copy(planet.position);
+atmosphere.scale.setScalar(220);
+scene.add(atmosphere);
+
+/* ---- a distant sun near comms ---- */
+const sun = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: nebulaTexture("#fbd38d"), transparent: true, opacity: 0.9,
+  depthWrite: false, blending: THREE.AdditiveBlending,
+}));
+sun.position.set(120, 60, -FLIGHT - 550);
+sun.scale.setScalar(650);
+scene.add(sun);
+
+scene.add(new THREE.AmbientLight(0x8899ff, 0.35));
+const key = new THREE.DirectionalLight(0xfff3e0, 1.4);
+key.position.set(200, 120, -400);
+scene.add(key);
+
+/* ---- flight controls: scroll = thrust, mouse = drift ---- */
+const flight = { z: 0 };       // scrubbed by ScrollTrigger
+const drift = { x: 0, y: 0 };  // mouse parallax target
+let clock = new THREE.Clock();
+
+if (!reduceMotion) {
+  window.addEventListener("pointermove", (e) => {
+    drift.x = (e.clientX / window.innerWidth - 0.5) * 14;
+    drift.y = (e.clientY / window.innerHeight - 0.5) * -8;
+  });
+}
+
+function render() {
+  const t = clock.getElapsedTime();
+
+  camera.position.z = 60 - flight.z;
+  camera.position.x += (drift.x - camera.position.x) * 0.03;
+  camera.position.y += (drift.y - camera.position.y) * 0.03;
+  camera.rotation.z = reduceMotion ? 0 : Math.sin(flight.z * 0.004) * 0.03; // gentle banking
+
+  if (!reduceMotion) {
+    planet.rotation.y = t * 0.05;
+    starsBold.material.opacity = 0.65 + Math.sin(t * 2.1) * 0.25; // twinkle
+  }
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+}
+render();
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ================================================================
+   GSAP — thrust, telemetry, reveals
+================================================================ */
+const tDist = document.getElementById("tDist");
+const tVel = document.getElementById("tVel");
+let lastP = 0;
+
+ScrollTrigger.create({
+  trigger: document.body,
+  start: "top top",
+  end: "bottom bottom",
+  scrub: reduceMotion ? false : 0.8,
+  onUpdate(self) {
+    flight.z = self.progress * FLIGHT;
+    tDist.textContent = String(Math.round(self.progress * 4200000)).padStart(7, "0");
+    tVel.textContent = (Math.min(Math.abs(self.progress - lastP) * 900, 99)).toFixed(1);
+    lastP = self.progress;
+    gsap.set("#voyageFill", { scaleX: self.progress });
+  },
+});
+
+/* active nav link per section */
+for (const id of ["hero", "missions", "contact"]) {
+  ScrollTrigger.create({
+    trigger: "#" + id,
+    start: "top center",
+    end: "bottom center",
+    onToggle(self) {
+      if (self.isActive) {
+        document.querySelectorAll(".hud-nav a").forEach((a) =>
+          a.classList.toggle("active", a.dataset.section === id));
+      }
+    },
+  });
+}
+
+/* section reveals */
+if (!reduceMotion) {
+  gsap.utils.toArray(".reveal").forEach((el) => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 1, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 82%" },
+    });
+  });
+} else {
+  gsap.set(".reveal", { opacity: 1, y: 0 });
+}
+
+/* ================================================================
+   LOADER — powering up, then punch through to the stars
+================================================================ */
+const pctEl = document.getElementById("loaderPct");
+const statusEl = document.getElementById("loaderStatus");
+const statuses = [
+  "powering up reactor",
+  "calibrating star charts",
+  "spooling ion drives",
+  "pressurizing cabin",
+  "clearance granted — launch",
+];
+const progress = { v: 0 };
+
+const launch = gsap.timeline({ paused: false });
+if (reduceMotion) {
+  document.getElementById("loader").style.display = "none";
+  gsap.set("#hud", { opacity: 1 });
+  gsap.set(".hero-name .row > span", { yPercent: 0 });
+} else {
+  gsap.set(".hero-name .row > span", { yPercent: 110 });
+  launch
+    .to(progress, {
+      v: 100, duration: 2.6, ease: "power2.inOut",
+      onUpdate() {
+        const p = Math.round(progress.v);
+        pctEl.textContent = p;
+        statusEl.textContent = statuses[Math.min(Math.floor(p / 22), statuses.length - 1)];
+        gsap.set("#loaderFill", { scaleX: progress.v / 100 });
+      },
+    })
+    .to("#loader", { opacity: 0, duration: 0.7, ease: "power2.in", pointerEvents: "none" })
+    .set("#loader", { display: "none" })
+    .fromTo(camera.position, { z: 220 }, { z: 60, duration: 1.6, ease: "power3.out" }, "<0.1")
+    .to("#hud", { opacity: 1, duration: 0.8 }, "<0.4")
+    .to(".hero-name .row > span", {
+      yPercent: 0, duration: 1.1, ease: "power4.out", stagger: 0.12,
+    }, "<0.2");
+}
+
+/* ================================================================
+   MISSION CARDS — parallax hover (tilt + layered depth)
+================================================================ */
+const fineHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+if (fineHover && !reduceMotion) {
+  document.querySelectorAll(".mission").forEach((mission) => {
+    const card = mission.querySelector(".mission-card");
+    mission.addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;   // 0..1
+      const py = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+      card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+      gsap.to(card, {
+        rotateY: (px - 0.5) * 10,
+        rotateX: (0.5 - py) * 8,
+        duration: 0.5, ease: "power2.out",
+        transformPerspective: 1200,
+      });
+    });
+    mission.addEventListener("pointerleave", () => {
+      gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.9, ease: "elastic.out(1, 0.5)" });
+    });
+  });
+}
+</script>
+</body>
+</html>

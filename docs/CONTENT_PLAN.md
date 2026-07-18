@@ -22,13 +22,15 @@
 
 | Surface | Exact string |
 |---|---|
-| Meta title | `Abhishek Vyas \| Software Engineer — AI-Enabled Systems` |
-| Meta description | `Backend & full-stack engineer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.` |
-| Hero h2 | `Software Engineer · Backend & AI-Enabled Systems` |
-| OG description | `Backend & full-stack software engineer with 3+ years' experience building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc, Memorial University (Apr 2025) · AZ-204 · St. John's, NL · Remote-ready.` |
-| Footer tagline | `Backend & full-stack software engineer building AI-enabled systems. St. John's, NL · Open to relocation · Remote-ready.` |
-| Status line (mandated, near OPEN TO WORK badge) | `Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide` |
-| Location eyebrow | `St. John's, NL · Open to relocation · Remote-ready` |
+| Meta title | `Abhishek Vyas \| Full-Stack Developer — AI & RAG Pipelines` |
+| Meta description | `Full-stack developer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.` |
+| Hero h2 | `Full-Stack Developer · AI & RAG Pipelines` |
+| OG description | `Full-stack developer with 3+ years' experience building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc, Memorial University (Apr 2025) · AZ-204 · St. John's, NL · Remote-ready.` |
+| Footer tagline | `Full-stack developer building AI-enabled systems — RAG pipelines, event-driven architecture, observability. Based in St. John's, NL, Canada · Open to relocation · Remote-ready.` |
+| Status line (mandated, near OPEN TO WORK badge) | `Building AI/RAG systems · Open to full-stack & AI roles, remote Canada-wide` |
+| Location eyebrow | `Based in St. John's, NL, Canada · Open to relocation` |
+
+> 2026-07-18 owner decision: identity is **Full-Stack Developer** (SOT-approved title) with AI/RAG emphasis — not "backend engineer". "Backend" remains only in factual contexts (project bullets, skills category).
 
 The specialization triple is always "RAG pipelines, event-driven architecture, observability" in that order.
 

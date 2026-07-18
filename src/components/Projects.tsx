@@ -152,9 +152,9 @@ export const Projects = () => {
 				{/* Simplified Call to Action — brand-navy gradient band */}
 				<div className="mt-20 max-w-3xl mx-auto">
 					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(20,34,64,0.55)] text-center bg-gradient-to-br from-[#142240] via-[#24365c] to-[#3D5176]">
-						<h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3">Have a backend or AI project in mind?</h3>
+						<h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3">Have a full-stack or AI project in mind?</h3>
 
-						<p className="text-white/80 mb-4 max-w-lg mx-auto text-sm">I build backend systems, event-driven pipelines, and RAG applications. Open to full-time roles and freelance work.</p>
+						<p className="text-white/80 mb-4 max-w-lg mx-auto text-sm">I build full-stack applications, event-driven pipelines, and RAG systems. Open to full-time roles and freelance work.</p>
 
 						<button
 							onClick={openContactModal}

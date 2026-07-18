@@ -53,7 +53,7 @@ export function ProjectsArchive() {
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Projects</h1>
 
 					{/* Subtitle */}
-					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Backend systems, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
+					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Full-stack builds, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">

@@ -53,7 +53,7 @@ export const Hero = () => {
 								</span>
 								<span className="text-xs font-semibold text-[var(--text-body)] whitespace-nowrap">
 									<b className="block text-[var(--text-strong)] text-[13px]">Open to work</b>
-									Backend &amp; AI · remote Canada
+									Full-stack &amp; AI · remote Canada
 								</span>
 							</div>
 						</div>
@@ -72,7 +72,7 @@ export const Hero = () => {
 						</h1>
 
 						{/* Title */}
-						<h2 className={`${heroTypography.title} text-[var(--text-body)] mb-4 md:mb-6`}>Software Engineer · Backend & AI-Enabled Systems</h2>
+						<h2 className={`${heroTypography.title} text-[var(--text-body)] mb-4 md:mb-6`}>Full-Stack Developer · AI & RAG Pipelines</h2>
 
 						{/* OPEN TO WORK badge */}
 						<div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 dark:bg-emerald-400/15 dark:border-emerald-300/30 px-3.5 py-1.5 mb-2.5">
@@ -87,7 +87,7 @@ export const Hero = () => {
 						</div>
 
 						{/* Status line */}
-						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-5 md:mb-6">Building AI/RAG systems · Open to backend & AI roles, remote Canada-wide</p>
+						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-5 md:mb-6">Building AI/RAG systems · Open to full-stack & AI roles, remote Canada-wide</p>
 
 						{/* Short lede — the full story lives in Now & Recent and /experience */}
 						<p className="text-[15px] md:text-lg text-[var(--text-dim)] leading-relaxed max-w-xl mx-auto lg:mx-0 mb-5 md:mb-6">

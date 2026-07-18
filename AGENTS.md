@@ -47,7 +47,7 @@ Agent guide for this portfolio. For project setup, commands, stack, and conventi
 
 ## Repo facts every agent should know
 
-- **Owner/subject:** Abhishek Vyas — Java Full Stack Developer, 3+ years (Apexon SE1/SE2, Crest Data Systems SRE). Site title: "Abhishek Vyas - Developer & Freelancer".
+- **Owner/subject:** Abhishek Vyas — Full-Stack Developer with AI/RAG focus, 3+ years (Apexon SWE→SWE II, Crest Data Systems SRE, MASc Memorial 2025, now independent consultant). Site identity: "Full-Stack Developer · AI & RAG Pipelines" (owner decision 2026-07-18 — don't advertise as "backend engineer").
 - **Content sources (edit these, not components):**
   - Experience → `src/constants/ExperienceItems.tsx` (`EXPERIENCE_ITEMS`, optional per-role `metrics`)
   - Projects → `src/data/projects.ts` (`PROJECTS`; `skills` values must be keys of `SKILL_ICONS` in `src/constants/SkillIcons.tsx`)
