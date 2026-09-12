@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 // Placed in the root app segment so every route inherits this branded card.
-export const alt = "Abhishek Vyas — Full-Stack Developer — AI & RAG Pipelines · St. John's, NL";
+export const alt = "Abhishek Vyas, Full-Stack Developer · AI & RAG Pipelines · Toronto, ON";
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -16,7 +16,7 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'flex-start',
-          backgroundColor: '#142240',
+          backgroundColor: '#201f2b',
           padding: '96px',
         }}
       >
@@ -25,7 +25,7 @@ export default function OpenGraphImage() {
           style={{
             width: 120,
             height: 8,
-            backgroundColor: '#7C96C4',
+            backgroundColor: '#c4b5fd',
             borderRadius: 4,
             marginBottom: 48,
           }}
@@ -45,21 +45,21 @@ export default function OpenGraphImage() {
           style={{
             fontSize: 40,
             fontWeight: 500,
-            color: '#C9D4E8',
+            color: '#c8c6d1',
             marginTop: 28,
           }}
         >
-          {'Full-Stack Developer — AI & RAG Pipelines'}
+          {'Full-Stack Developer · AI & RAG Pipelines'}
         </div>
         <div
           style={{
             fontSize: 30,
             fontWeight: 400,
-            color: '#8FA3C4',
+            color: '#96939f',
             marginTop: 20,
           }}
         >
-          {"St. John's, NL · Remote-ready"}
+          {"Toronto, ON · Remote-ready"}
         </div>
       </div>
     ),

@@ -76,7 +76,7 @@ export const Projects = () => {
 									<h3 className="text-lg font-bold text-white">{project.title}</h3>
 								</div>
 								{hasAnyFeatured && project.featured && (
-									<span className="absolute top-4 left-4 bg-white/85 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm text-[#142240]">
+									<span className="absolute top-4 left-4 bg-white/85 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded-full flex items-center shadow-sm text-[#201f2b]">
 										<HiLightningBolt className="w-3 h-3 mr-1" aria-hidden="true" />
 										Featured
 									</span>
@@ -112,7 +112,7 @@ export const Projects = () => {
 												target="_blank"
 												rel="noopener noreferrer"
 												className="w-8 h-8 rounded-full bg-[var(--accent-soft)] hover:bg-[var(--accent)] hover:text-white flex items-center justify-center text-[var(--text-strong)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
-												aria-label={`${project.title} — GitHub repository (opens in new tab)`}
+												aria-label={`${project.title}, GitHub repository (opens in new tab)`}
 											>
 												<FaGithub className="w-4.5 h-4.5" aria-hidden="true" />
 											</a>
@@ -123,7 +123,7 @@ export const Projects = () => {
 												target="_blank"
 												rel="noopener noreferrer"
 												className="w-8 h-8 rounded-full bg-[var(--accent-soft)] hover:bg-[var(--accent)] hover:text-white flex items-center justify-center text-[var(--text-strong)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
-												aria-label={`${project.title} — live demo (opens in new tab)`}
+												aria-label={`${project.title}, live demo (opens in new tab)`}
 											>
 												<FiExternalLink className="w-4.5 h-4.5" aria-hidden="true" />
 											</a>
@@ -151,14 +151,14 @@ export const Projects = () => {
 
 				{/* Simplified Call to Action — brand-navy gradient band */}
 				<div className="mt-20 max-w-3xl mx-auto">
-					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(20,34,64,0.55)] text-center bg-gradient-to-br from-[#142240] via-[#24365c] to-[#3D5176]">
+					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(24, 22, 34, 0.55)] text-center bg-gradient-to-br from-[#201f2b] via-[#35314a] to-[#453f5c]">
 						<h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3">Have a full-stack or AI project in mind?</h3>
 
 						<p className="text-white/80 mb-4 max-w-lg mx-auto text-sm">I build full-stack applications, event-driven pipelines, and RAG systems. Open to full-time roles and freelance work.</p>
 
 						<button
 							onClick={openContactModal}
-							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#142240] font-semibold px-5 py-2 rounded-full text-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#142240]"
+							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#201f2b] font-semibold px-5 py-2 rounded-full text-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#201f2b]"
 						>
 							Start a Conversation
 							<FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform motion-reduce:transform-none" aria-hidden="true" />

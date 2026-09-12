@@ -1,33 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { FaBriefcase, FaGraduationCap, FaArrowRight } from "react-icons/fa";
+import { motion, useReducedMotion } from "motion/react";
+import { FaBriefcase, FaArrowRight } from "react-icons/fa";
 import { EXPERIENCE_ITEMS, type ExperienceItem } from "@/constants/ExperienceItems";
 import { commonStyles } from "@/lib/theme-utils";
 import { SectionHeading } from "./SectionHeading";
 
 const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
-	const isEducation = item.type === "education";
-
 	return (
-		<article className={`card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 transition-[box-shadow,border-color] duration-300 ${isEducation ? "border-l-[#5674ad]" : "border-l-[var(--accent)]"}`}>
-			{/* Icon tile — amber for work, navy-blue for education */}
+		<article className="card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 border-l-[var(--accent)] transition-[box-shadow,border-color] duration-300">
+			{/* Icon tile */}
 			<div
-				className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${isEducation ? "bg-gradient-to-br from-[#5674ad] to-[#3D5176] text-white" : "bg-gradient-to-br from-[#fbbf24] to-[#d97706] text-[#142240]"}`}
+				className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white"
 				aria-hidden="true"
 			>
-				{isEducation ? <FaGraduationCap className="w-5 h-5" /> : <FaBriefcase className="w-5 h-5" />}
+				<FaBriefcase className="w-5 h-5" />
 			</div>
 
 			<div className="flex-1 min-w-0">
 				{/* Title row */}
 				<div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-					<h3 className="font-bold text-[var(--text-strong)]">{item.title}</h3>
-					<span className="flex items-center gap-2">
-						{isEducation && <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-[#5674ad]/15 text-[#31517e] dark:text-[#a9c3e8]">AZ-204</span>}
-						<span className={commonStyles.experienceCard.period}>{item.period}</span>
-					</span>
+					<h3 className="font-bold text-[var(--text-strong)]">{item.role}</h3>
+					<span className={commonStyles.experienceCard.period}>{item.period}</span>
 				</div>
 
 				{/* Meta */}
@@ -36,7 +31,7 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 				</p>
 
 				{/* Snapshot one-liner */}
-				<p className="text-sm text-[var(--text-body)] leading-relaxed">{item.responsibilities[0]}</p>
+				<p className="text-sm text-[var(--text-body)] leading-relaxed">{item.summary[0]}</p>
 			</div>
 		</article>
 	);
@@ -44,7 +39,8 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 
 export const NowAndRecent = () => {
 	const reduce = useReducedMotion();
-	const items = EXPERIENCE_ITEMS.slice(0, 3);
+	// Homepage snapshot shows only the Canada-based roles
+	const items = EXPERIENCE_ITEMS.filter((item) => item.location.includes("Canada"));
 
 	return (
 		<section

@@ -44,7 +44,7 @@ export const Navbar = () => {
 				<div className="flex items-center relative z-10">
 					<Link
 						href="/"
-						aria-label="Abhishek Vyas — home"
+						aria-label="Abhishek Vyas home"
 						className="flex items-center hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-md"
 					>
 						<Image
@@ -56,8 +56,8 @@ export const Navbar = () => {
 						/>
 						{/* Brand navy stays on the wordmark (light); dusk needs a legible override */}
 						<div className="ml-3 signature-container pointer-events-none">
-							<span className="font-signature text-2xl text-[#142240] dark:text-[#f2eefc] signature-static pointer-events-auto">Abhishek Vyas</span>
-							<span className="font-signature text-2xl text-[#142240] dark:text-[#f2eefc] signature-animated" aria-hidden="true">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#2a2833] dark:text-[#eeedf3] signature-static pointer-events-auto">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#2a2833] dark:text-[#eeedf3] signature-animated" aria-hidden="true">Abhishek Vyas</span>
 						</div>
 					</Link>
 				</div>

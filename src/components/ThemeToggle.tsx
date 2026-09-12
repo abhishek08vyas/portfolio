@@ -12,6 +12,9 @@ export const ThemeToggle = ({ className = "" }: { className?: string }) => {
 	const { resolvedTheme, setTheme } = useTheme();
 
 	useEffect(() => {
+		// Client-mount guard: the server can't know the resolved theme, so we
+		// flip to mounted once on the client. Intentional single setState.
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setMounted(true);
 	}, []);
 

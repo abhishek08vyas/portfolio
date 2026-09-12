@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import { HiCode, HiSearch, HiX, HiFilter, HiChevronDown } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
@@ -90,9 +90,9 @@ export function ProjectFilters({ skills, totalProjects, selectedSkill, onSelectS
 				<div className="px-4 md:px-6 py-3.5 md:py-4 border-b border-[var(--edge)]">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2.5 md:gap-3">
-							<div className="w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-[#fbbf24] to-[#d97706]">
+							<div className="w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed]">
 								<HiFilter
-									className="w-4 h-4 md:w-5 md:h-5 text-[#142240]"
+									className="w-4 h-4 md:w-5 md:h-5 text-white"
 									aria-hidden="true"
 								/>
 							</div>
@@ -121,7 +121,7 @@ export function ProjectFilters({ skills, totalProjects, selectedSkill, onSelectS
 								onClick={() => setShowMobileFilterModal(true)}
 								aria-haspopup="dialog"
 								aria-expanded={showMobileFilterModal}
-								className="md:hidden px-3 py-1.5 rounded-full bg-gradient-to-r from-[#fbbf24] to-[#d97706] text-[#142240] text-xs font-bold flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
+								className="md:hidden px-3 py-1.5 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white text-xs font-bold flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 							>
 								<HiFilter
 									className="w-3.5 h-3.5"
@@ -348,14 +348,14 @@ function FilterChip({ label, isActive, onClick, icon, count }: FilterOptionProps
 				relative flex items-center gap-2 px-3.5 py-2 rounded-full text-sm font-medium
 				transition-all duration-300 border whitespace-nowrap
 				focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2
-				${isActive ? "border-transparent bg-gradient-to-r from-[#fbbf24] to-[#d97706] text-[#142240] shadow-md" : "border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-body)] hover:bg-[var(--accent-soft)] hover:text-[var(--text-strong)]"}
+				${isActive ? "border-transparent bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white shadow-md" : "border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-body)] hover:bg-[var(--accent-soft)] hover:text-[var(--text-strong)]"}
 			`}
 		>
 			<span className="relative z-10 flex items-center gap-2">
 				{icon && (
 					<span
 						aria-hidden="true"
-						className={isActive ? "text-[#142240]" : "text-[var(--text-dim)]"}
+						className={isActive ? "text-white" : "text-[var(--text-dim)]"}
 					>
 						{icon}
 					</span>
@@ -365,7 +365,7 @@ function FilterChip({ label, isActive, onClick, icon, count }: FilterOptionProps
 					<span
 						className={`
 						ml-1 px-1.5 py-0.5 rounded-md text-xs font-bold
-						${isActive ? "bg-[#142240]/15 text-[#142240]" : "bg-[var(--accent-soft)] text-[var(--text-body)]"}
+						${isActive ? "bg-white/20 text-white" : "bg-[var(--accent-soft)] text-[var(--text-body)]"}
 					`}
 					>
 						{count}
@@ -395,7 +395,7 @@ function MobileFilterOption({ label, isActive, onClick, icon, count }: FilterOpt
 				relative flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl text-sm font-semibold
 				transition-all duration-300 border-2 min-h-[70px]
 				focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2
-				${isActive ? "border-transparent bg-gradient-to-br from-[#fbbf24] to-[#d97706] text-[#142240] shadow-lg" : "border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-body)] active:scale-95 motion-reduce:transform-none"}
+				${isActive ? "border-transparent bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white shadow-lg" : "border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-body)] active:scale-95 motion-reduce:transform-none"}
 			`}
 		>
 			{icon && (

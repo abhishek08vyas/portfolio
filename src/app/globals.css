@@ -10,8 +10,8 @@
 	--font-display: var(--font-fraunces), Georgia, serif;
 
 	/* Custom brand colors */
-	--brand-dark: #142240;
-	--brand-medium: #3d5176;
+	--brand-dark: #201f2b;
+	--brand-medium: #453f5c;
 	--brand-light: #797f8c;
 
 	/* Tech colors */
@@ -50,37 +50,37 @@
 		--card-foreground: 222.2 84% 4.9%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
-		--primary: 221 83% 53%;
-		--primary-foreground: 210 40% 98%;
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
+		--primary: 258 90% 66%;
+		--primary-foreground: 258 40% 98%;
+		--secondary: 258 14% 96.1%;
+		--secondary-foreground: 258 20% 16%;
+		--muted: 258 14% 96.1%;
+		--muted-foreground: 258 8% 45%;
+		--accent: 258 14% 96.1%;
+		--accent-foreground: 258 20% 16%;
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 221 83% 53%;
+		--border: 258 14% 90%;
+		--input: 258 14% 90%;
+		--ring: 258 90% 66%;
 		--radius: 0.75rem;
 
-		/* Warm theme design tokens — LIGHT (warm ivory + brand navy + amber) */
-		--surface-page: #faf7f1;
-		--surface-card: rgba(255, 255, 255, 0.85);
+		/* Theme design tokens — LIGHT (barely-lavender page + white cards + light-purple accent) */
+		--surface-page: #f3f0fb;
+		--surface-card: rgba(255, 255, 255, 0.9);
 		--surface-raised: #ffffff;
-		--edge: rgba(20, 34, 64, 0.1);
-		--text-strong: #142240;
-		--text-body: #39445f;
-		--text-dim: #5d6780;
-		--accent: #d97706;
-		--accent-strong: #92400e; /* small accent text (AA on light surfaces) */
-		--accent-soft: rgba(217, 119, 6, 0.1);
-		--glow-a: #c7d4ee; /* navy mist */
-		--glow-b: #f7dfb4; /* champagne gold */
-		--shadow-soft: 0 18px 50px -18px rgba(20, 34, 64, 0.14);
-		--shadow-hover: 0 28px 70px -20px rgba(20, 34, 64, 0.26);
-		--focus-ring: #b45309;
+		--edge: rgba(40, 38, 52, 0.1);
+		--text-strong: #2a2833;
+		--text-body: #4c4956;
+		--text-dim: #6f6c79;
+		--accent: #8b5cf6;
+		--accent-strong: #7c3aed; /* small accent text (AA on light surfaces) */
+		--accent-soft: rgba(139, 92, 246, 0.1);
+		--glow-a: transparent; /* flat page — ambient wash removed in light */
+		--glow-b: transparent;
+		--shadow-soft: 0 18px 50px -18px rgba(40, 36, 52, 0.14);
+		--shadow-hover: 0 28px 70px -20px rgba(40, 36, 52, 0.26);
+		--focus-ring: #8b5cf6;
 	}
 
 	.dark {
@@ -91,36 +91,36 @@
 		--card-foreground: 220 45% 96%;
 		--popover: 222 42% 15%;
 		--popover-foreground: 220 45% 96%;
-		--primary: 221 83% 53%;
-		--primary-foreground: 210 40% 98%;
-		--secondary: 222 30% 21%;
-		--secondary-foreground: 220 45% 96%;
-		--muted: 222 30% 21%;
-		--muted-foreground: 222 18% 70%;
-		--accent: 222 30% 21%;
-		--accent-foreground: 220 45% 96%;
+		--primary: 252 88% 85%;
+		--primary-foreground: 250 15% 14%;
+		--secondary: 255 8% 22%;
+		--secondary-foreground: 255 15% 96%;
+		--muted: 255 8% 22%;
+		--muted-foreground: 255 8% 70%;
+		--accent: 255 8% 22%;
+		--accent-foreground: 255 15% 96%;
 		--destructive: 0 62.8% 50%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 222 26% 25%;
-		--input: 222 26% 25%;
-		--ring: 43 96% 56%;
+		--border: 255 10% 26%;
+		--input: 255 10% 26%;
+		--ring: 252 88% 85%;
 
-		/* Warm theme design tokens — DARK (deep brand navy + amber) */
-		--surface-page: #0d1428;
-		--surface-card: rgba(23, 33, 61, 0.82);
-		--surface-raised: #1a2542;
-		--edge: rgba(148, 163, 205, 0.16);
-		--text-strong: #eef2fb;
-		--text-body: #c3cce2;
-		--text-dim: #97a3c0;
-		--accent: #fbbf24;
-		--accent-strong: #fcd34d; /* small accent text (AA on navy surfaces) */
-		--accent-soft: rgba(251, 191, 36, 0.12);
-		--glow-a: #223058;
-		--glow-b: #4d3b15;
+		/* Theme design tokens — DARK (neutral charcoal + soft lavender accent) */
+		--surface-page: #15151a;
+		--surface-card: rgba(33, 33, 40, 0.82);
+		--surface-raised: #1f1f27;
+		--edge: rgba(180, 176, 196, 0.14);
+		--text-strong: #eeedf3;
+		--text-body: #c8c6d1;
+		--text-dim: #96939f;
+		--accent: #c4b5fd;
+		--accent-strong: #ddd6fe; /* small accent text (AA on charcoal surfaces) */
+		--accent-soft: rgba(196, 181, 253, 0.14);
+		--glow-a: #23222e;
+		--glow-b: #262433;
 		--shadow-soft: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
 		--shadow-hover: 0 28px 70px -20px rgba(0, 0, 0, 0.7);
-		--focus-ring: #fbbf24;
+		--focus-ring: #c4b5fd;
 	}
 
 	* {
@@ -133,12 +133,20 @@
 		@apply antialiased;
 	}
 
+	/* Smooth cross-fade when toggling light/dark */
+	@media (prefers-reduced-motion: no-preference) {
+		body,
+		.card-base {
+			transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+		}
+	}
+
 	::selection {
-		background: rgba(217, 119, 6, 0.22);
+		background: rgba(139, 92, 246, 0.2);
 	}
 
 	.dark ::selection {
-		background: rgba(251, 191, 36, 0.28);
+		background: rgba(196, 181, 253, 0.28);
 	}
 }
 
@@ -149,11 +157,11 @@
 
 	/* Theme-based component classes */
 	.brand-gradient {
-		@apply bg-gradient-to-r from-[#142240] to-[#3D5176];
+		@apply bg-gradient-to-r from-[#201f2b] to-[#453f5c];
 	}
 
 	.brand-text-gradient {
-		@apply bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text text-transparent;
+		@apply bg-gradient-to-r from-[#201f2b] to-[#453f5c] bg-clip-text text-transparent;
 	}
 
 	.card-base {
@@ -195,11 +203,11 @@
 /* ============ Dawn/dusk sky backdrop (SkyBackdrop.tsx) ============
    Soft-edged radial gradients — no filter: blur() for performance. */
 .sky-base {
-	background: linear-gradient(170deg, #e7ecf7 0%, #f7f0df 38%, #fbf5e6 62%, var(--surface-page) 88%);
+	background: #f3f0fb;
 }
 
 .dark .sky-base {
-	background: linear-gradient(170deg, #101b38 0%, #162244 38%, #0f1830 68%, var(--surface-page) 90%);
+	background: linear-gradient(170deg, #1a1922 0%, #211f2e 38%, #141319 68%, var(--surface-page) 90%);
 }
 
 .sky-glow {
@@ -231,12 +239,12 @@
 	height: 30vw;
 	right: 14vw;
 	top: 4vh;
-	background: radial-gradient(circle, rgba(255, 243, 176, 0.9) 0%, rgba(255, 217, 160, 0.55) 40%, transparent 70%);
-	opacity: 0.8;
+	background: radial-gradient(circle, rgba(224, 216, 244, 0.85) 0%, rgba(230, 227, 242, 0.5) 40%, transparent 70%);
+	opacity: 0;
 }
 
 .dark .sky-glow--sun {
-	background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, rgba(110, 140, 210, 0.14) 45%, transparent 70%);
+	background: radial-gradient(circle, rgba(196, 181, 253, 0.16) 0%, rgba(35, 34, 46, 0.16) 45%, transparent 70%);
 	opacity: 0.7;
 }
 

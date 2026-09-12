@@ -3,11 +3,11 @@
 // Color constants
 export const colors = {
 	brand: {
-		/** Primary brand color – navy. Use for accents, icons, badges, and key UI. */
-		primary: "#142240",
-		dark: "#142240",
-		medium: "#3D5176",
-		light: "#797F8C",
+		/** Primary brand color – slate ink. Use for accents, icons, badges, and key UI. */
+		primary: "#201f2b",
+		dark: "#201f2b",
+		medium: "#453f5c",
+		light: "#847f8c",
 	},
 	tech: {
 		java: "#ED8B00",
@@ -102,7 +102,7 @@ export const commonStyles = {
 	// Button styles
 	button: {
 		primary:
-			"cursor-pointer rounded-full bg-gradient-to-r from-[#fbbf24] to-[#d97706] hover:from-[#f59e0b] hover:to-[#d97706] text-[#142240] font-bold shadow-lg shadow-[#d97706]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#d97706]/40 motion-reduce:transform-none",
+			"cursor-pointer rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] hover:from-[#7c3aed] hover:to-[#6d28d9] text-white font-bold shadow-lg shadow-[#8b5cf6]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#8b5cf6]/40 motion-reduce:transform-none",
 		secondary: "cursor-pointer rounded-full bg-[var(--surface-raised)] text-[var(--text-strong)] border border-[var(--edge)] hover:bg-[var(--surface-card)] hover:text-[var(--text-strong)] transition-all duration-300",
 	},
 
@@ -142,12 +142,12 @@ export const commonStyles = {
 
 	// Open to work section — brand-navy gradient panel (reads well in BOTH themes)
 	openToWork: {
-		container: "bg-gradient-to-br from-[#142240] via-[#24365c] to-[#3D5176] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(20,34,64,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
+		container: "bg-gradient-to-br from-[#201f2b] via-[#35314a] to-[#453f5c] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(24,22,34,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
 		content: "relative rounded-[34px] p-6 md:p-8 overflow-hidden",
 		badge: "inline-flex items-center bg-emerald-500/20 text-emerald-200 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3",
 		description: "text-white/80",
-		button: "inline-flex items-center justify-center bg-white text-[#142240] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
+		button: "inline-flex items-center justify-center bg-white text-[#201f2b] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
 	},
 };
 
@@ -171,49 +171,4 @@ export const heroTypography = {
 	name: "font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight",
 	title: "text-lg md:text-xl lg:text-2xl font-semibold tracking-wide",
 	subtitle: "text-base md:text-lg font-normal tracking-normal",
-};
-
-// CSS class generators
-export const createGradient = (from: string, to: string, direction: "to-r" | "to-br" | "to-b" = "to-r") => {
-	return `bg-gradient-${direction} from-[${from}] to-[${to}]`;
-};
-
-export const createTextGradient = (from: string, to: string, direction: "to-r" | "to-br" | "to-b" = "to-r") => {
-	return `bg-gradient-${direction} from-[${from}] to-[${to}] bg-clip-text text-transparent`;
-};
-
-// Utility functions
-export const getTechColor = (tech: string): string => {
-	const techColors: Record<string, string> = {
-		Java: colors.tech.java,
-		"Spring Boot": colors.tech.spring,
-		Azure: colors.tech.azure,
-		AWS: colors.tech.aws,
-		JavaScript: colors.tech.javascript,
-		TypeScript: colors.tech.typescript,
-		React: colors.tech.react,
-		"Tailwind CSS": colors.tech.tailwind,
-		Swagger: colors.tech.swagger,
-		JUnit: colors.tech.junit,
-		TensorFlow: colors.tech.tensorflow,
-		Swift: colors.tech.swift,
-		Python: colors.tech.python,
-		Docker: colors.tech.docker,
-		PostgreSQL: colors.tech.postgresql,
-		MongoDB: colors.tech.mongodb,
-		MySQL: colors.tech.mysql,
-		Redis: colors.tech.redis,
-		Jenkins: colors.tech.jenkins,
-		Git: colors.tech.git,
-		Elasticsearch: colors.tech.elasticsearch,
-		Splunk: colors.tech.splunk,
-		"scikit-learn": colors.tech.scikitlearn,
-		MediaPipe: colors.tech.mediapipe,
-		"Apache Kafka": colors.tech.kafka,
-		Firebase: colors.tech.firebase,
-		Flutter: colors.tech.flutter,
-		Heroku: colors.tech.heroku,
-	};
-
-	return techColors[tech] || colors.brand.dark;
 };

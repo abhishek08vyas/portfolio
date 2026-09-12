@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const contactSchema = z.object({
 	name: z.string().min(1, "Name is required"),
-	email: z.string().email("A valid email is required"),
+	email: z.email("A valid email is required"),
 	subject: z.string().min(1, "Subject is required"),
 	message: z.string().min(1, "Message is required"),
 });
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
 	const parsed = contactSchema.safeParse(body);
 	if (!parsed.success) {
-		return NextResponse.json({ error: "Invalid payload", issues: parsed.error.flatten().fieldErrors }, { status: 400 });
+		return NextResponse.json({ error: "Invalid payload", issues: z.flattenError(parsed.error).fieldErrors }, { status: 400 });
 	}
 
 	const webhookUrl = process.env.CONTACT_WEBHOOK_URL;

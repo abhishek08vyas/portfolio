@@ -6,7 +6,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { HiCode, HiCalendar } from "react-icons/hi";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 import type { Project } from "@/data/projects";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 interface ProjectCardProps {
 	project: Project;
@@ -28,7 +28,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			className="group relative bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl overflow-hidden border border-[var(--edge)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 flex flex-col h-full"
 		>
 			{/* Image Section — soft navy-mist backdrop (deep navy in dark) */}
-			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#dfe7f5] to-[#c7d4ee] dark:from-[#1c2a4e] dark:to-[#16203c]">
+			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#ece8f5] to-[#e4ddf6] dark:from-[#23222e] dark:to-[#17161f]">
 				<Image
 					src={project.image}
 					alt=""
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 				/>
 
 				{/* Role Label Badge */}
-				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#142240] shadow-sm">{project.roleLabel}</span>}
+				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#201f2b] shadow-sm">{project.roleLabel}</span>}
 
 				{/* Title Overlay */}
 				<div className="absolute bottom-0 left-0 right-0 p-5">
@@ -104,7 +104,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-[var(--edge)] bg-[var(--surface-raised)] text-[var(--text-strong)] hover:bg-[var(--accent-soft)] transition-all font-semibold text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
-							aria-label={`Code — ${project.title} GitHub repository (opens in new tab)`}
+							aria-label={`Code: ${project.title} GitHub repository (opens in new tab)`}
 						>
 							<FaGithub
 								className="w-4 h-4"
@@ -118,8 +118,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
 							href={project.links.demo}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-[#142240] bg-gradient-to-r from-[#fbbf24] to-[#d97706] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
-							aria-label={`Demo — ${project.title} live demo (opens in new tab)`}
+							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
+							aria-label={`Demo: ${project.title} live demo (opens in new tab)`}
 						>
 							<FiExternalLink
 								className="w-4 h-4"

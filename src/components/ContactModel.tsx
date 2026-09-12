@@ -1,5 +1,6 @@
 // ContactModal.tsx
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -138,12 +139,12 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
       {/* Backdrop with blur effect - allows scrolling */}
-      <div className="fixed inset-0 bg-[#142240]/20 dark:bg-black/40 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
+      <div className="fixed inset-0 bg-[#201f2b]/20 dark:bg-black/40 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
 
       {/* Modal container */}
       <div
@@ -272,6 +273,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

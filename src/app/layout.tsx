@@ -21,12 +21,12 @@ const fraunces = Fraunces({
 });
 
 const SITE_URL = 'https://abhishek-vyas.vercel.app';
-const SITE_TITLE = 'Abhishek Vyas | Full-Stack Developer — AI & RAG Pipelines';
+const SITE_TITLE = 'Abhishek Vyas | Full-Stack Developer · AI & RAG Pipelines';
 const SITE_DESCRIPTION =
-  "Full-stack developer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL.";
+  "Full-stack developer, 3+ years. AI-enabled systems: RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · Toronto, ON.";
 // Canonical OG description — docs/CONTENT_PLAN.md Section 2 (verbatim)
 const OG_DESCRIPTION =
-  "Full-stack developer with 3+ years' experience building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc, Memorial University (Apr 2025) · AZ-204 · St. John's, NL · Remote-ready.";
+  "Full-stack developer with 3+ years' experience building AI-enabled systems: RAG pipelines, event-driven architecture, and observability. MASc, Memorial University (Apr 2025) · AZ-204 · Toronto, ON · Remote-ready.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: 'profile',
     firstName: 'Abhishek',
     lastName: 'Vyas',
-    siteName: 'Abhishek Vyas — Portfolio',
+    siteName: 'Abhishek Vyas Portfolio',
     locale: 'en_CA',
     url: '/',
     title: SITE_TITLE,
@@ -69,8 +69,8 @@ const personJsonLd = {
   ],
   address: {
     '@type': 'PostalAddress',
-    addressLocality: "St. John's",
-    addressRegion: 'NL',
+    addressLocality: 'Toronto',
+    addressRegion: 'ON',
     addressCountry: 'CA',
   },
   alumniOf: {

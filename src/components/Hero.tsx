@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LuMail, LuDownload } from "react-icons/lu";
+import { LuMail, LuDownload, LuMapPin } from "react-icons/lu";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { ContactModal } from "./ContactModel";
@@ -30,7 +30,7 @@ export const Hero = () => {
 					{/* Photo — compact and first on mobile, large right column on desktop */}
 					<div className="flex justify-center lg:order-2">
 						<div className="relative">
-							<div className="w-36 sm:w-44 lg:w-[340px] aspect-[4/5] rounded-2xl lg:rounded-[30px] overflow-hidden border-2 border-[var(--accent)] rotate-2 shadow-[var(--shadow-soft)] bg-[var(--surface-raised)]">
+							<div className="relative w-36 sm:w-44 lg:w-[340px] aspect-[4/5] rounded-2xl lg:rounded-[30px] overflow-hidden border-2 border-[var(--accent)] rotate-2 shadow-[var(--shadow-soft)] bg-[var(--surface-raised)]">
 								<Image
 									src="/images/profile_photo.png"
 									alt="Portrait of Abhishek Vyas"
@@ -62,13 +62,14 @@ export const Hero = () => {
 					{/* Text column */}
 					<div className="text-center lg:text-left lg:order-1">
 						{/* Location eyebrow */}
-						<p className="inline-flex items-center rounded-full bg-[var(--accent-soft)] border border-[var(--edge)] px-3.5 py-1.5 text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.12em] sm:tracking-[0.18em] text-[var(--accent-strong)] mb-4 md:mb-5">
-							Based in St. John&apos;s, NL, Canada · Open to relocation
+						<p className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--edge)] px-3.5 py-1.5 text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.12em] sm:tracking-[0.18em] text-[var(--accent-strong)] mb-4 md:mb-5">
+							<LuMapPin className="w-3.5 h-3.5" aria-hidden="true" />
+							Toronto, ON, Canada
 						</p>
 
-						{/* Name — serif display; "Vyas" in italic amber gradient */}
+						{/* Name — serif display; "Vyas" in italic teal gradient */}
 						<h1 className={`${heroTypography.name} text-[var(--text-strong)] mb-2 md:mb-3 pb-1`}>
-							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#d97706] to-[#b45309] dark:from-[#fcd34d] dark:to-[#f59e0b] bg-clip-text text-transparent">Vyas</em>
+							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] dark:from-[#ddd6fe] dark:to-[#c4b5fd] bg-clip-text text-transparent">Vyas</em>
 						</h1>
 
 						{/* Title */}
@@ -89,9 +90,9 @@ export const Hero = () => {
 						{/* Status line */}
 						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-5 md:mb-6">Building AI/RAG systems · Open to full-stack & AI roles, remote Canada-wide</p>
 
-						{/* Short lede — the full story lives in Now & Recent and /experience */}
-						<p className="text-[15px] md:text-lg text-[var(--text-dim)] leading-relaxed max-w-xl mx-auto lg:mx-0 mb-5 md:mb-6">
-							3+ years building <span className="font-semibold text-[var(--text-strong)]">RAG pipelines, event-driven systems, and observability</span> for high-traffic platforms. MASc Computer Engineering, Memorial University (2025) · AZ-204.
+						{/* Introduction — full-stack story (the timeline lives in /experience) */}
+						<p className="text-[15px] md:text-lg text-[var(--text-dim)] leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-5 md:mb-6">
+							I’m a full-stack software developer with <span className="font-semibold text-[var(--text-strong)]">4+ years of professional experience</span> building production systems across backend services, modern web applications, distributed systems, cloud infrastructure, and enterprise SaaS, from Java/Spring Boot and Kafka through modern Python/FastAPI, Next.js, Azure, security, accessibility, and AI-assisted engineering workflows.
 						</p>
 
 						{/* Skill chips */}
@@ -204,7 +205,7 @@ export const Hero = () => {
 				style={{ bottom: "1rem" }}
 				aria-hidden="true"
 			>
-				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#d97706]/20">
+				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#8b5cf6]/20">
 					<div className="w-1 h-3 bg-[var(--accent)] rounded-full animate-ping motion-reduce:animate-none"></div>
 				</div>
 			</div>

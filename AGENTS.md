@@ -66,3 +66,13 @@ Agent guide for this portfolio. For project setup, commands, stack, and conventi
 - Use `next/link` / `next/navigation` for routing — `react-router-dom` in package.json is a leftover, never import it.
 - Resume work draws only from real experience in the master resume.
 - Branch off `feature/*` and PR into `main`; never commit to `main` directly.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

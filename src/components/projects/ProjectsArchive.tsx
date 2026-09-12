@@ -6,7 +6,7 @@ import { PROJECTS, getUniqueProjectSkills } from "@/data/projects";
 import { commonStyles } from "@/lib/theme-utils";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectFilters } from "./ProjectFilters";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { HiCollection, HiEmojiSad, HiLightningBolt } from "react-icons/hi";
 
 export function ProjectsArchive() {
@@ -53,7 +53,7 @@ export function ProjectsArchive() {
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Projects</h1>
 
 					{/* Subtitle */}
-					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Full-stack builds, AI/RAG pipelines, and client work — with the problem, approach, and outcome for each.</p>
+					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">Full-stack builds, AI/RAG pipelines, and client work, with the problem, approach, and outcome for each.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">
@@ -72,7 +72,7 @@ export function ProjectsArchive() {
 							{/* Badge row + title + description */}
 							<div className="px-6 md:px-8 pt-6 md:pt-8">
 								<div className="flex flex-wrap items-center gap-2 mb-4">
-									<span className="bg-gradient-to-r from-[#fbbf24] to-[#d97706] inline-flex items-center gap-1 text-[#142240] text-xs font-bold px-2.5 py-1 rounded-full">
+									<span className="bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] inline-flex items-center gap-1 text-white text-xs font-bold px-2.5 py-1 rounded-full">
 										<HiLightningBolt
 											className="w-3 h-3"
 											aria-hidden="true"
@@ -128,7 +128,7 @@ export function ProjectsArchive() {
 										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Outcome</p>
 										<p className="text-sm font-medium text-[var(--text-body)] leading-relaxed flex items-center gap-2">
 											<span
-												className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"
+												className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shrink-0"
 												aria-hidden="true"
 											></span>
 											{featuredProject.outcome}

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { HiLightningBolt } from "react-icons/hi";
 import { FaArrowRight } from "react-icons/fa";
 import { PROJECTS } from "@/data/projects";
@@ -36,7 +36,7 @@ export const FeaturedWork = () => {
 				>
 					<div className="grid grid-cols-1 lg:grid-cols-5">
 						{/* Image column — soft lavender backdrop (muted plum in dark) */}
-						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#dfe7f5] to-[#c7d4ee] dark:from-[#1c2a4e] dark:to-[#16203c] overflow-hidden">
+						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#ece8f5] to-[#e4ddf6] dark:from-[#23222e] dark:to-[#17161f] overflow-hidden">
 							<Image
 								src={project.image}
 								alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
@@ -44,14 +44,14 @@ export const FeaturedWork = () => {
 								sizes="(max-width: 1024px) 100vw, 460px"
 								className="object-cover transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"
 							/>
-							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#142240]/60 to-transparent" />
+							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#201f2b]/60 to-transparent" />
 						</div>
 
 						{/* Content column */}
 						<div className="lg:col-span-3 p-6 md:p-8">
 							{/* Badge row */}
 							<div className="flex flex-wrap items-center gap-2 mb-4">
-								<span className="bg-gradient-to-r from-[#fbbf24] to-[#d97706] inline-flex items-center gap-1 text-[#142240] text-xs font-bold px-2.5 py-1 rounded-full">
+								<span className="bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] inline-flex items-center gap-1 text-white text-xs font-bold px-2.5 py-1 rounded-full">
 									<HiLightningBolt
 										className="w-3 h-3"
 										aria-hidden="true"
@@ -84,7 +84,7 @@ export const FeaturedWork = () => {
 										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Outcome</p>
 										<p className="text-sm md:text-base font-medium text-[var(--text-body)] leading-relaxed flex items-center gap-2">
 											<span
-												className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"
+												className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shrink-0"
 												aria-hidden="true"
 											></span>
 											{project.outcome}

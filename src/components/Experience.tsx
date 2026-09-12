@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { FaBuilding, FaMapMarkerAlt, FaChevronDown, FaCircle, FaBriefcase, FaRobot, FaUniversalAccess } from "react-icons/fa";
 import Link from "next/link";
 import { commonStyles } from "../lib/theme-utils";
 import { HiCode } from "react-icons/hi";
-import { EXPERIENCE_ITEMS } from "@/constants/ExperienceItems";
+import { EXPERIENCE_ITEMS, EARLIER_EXPERIENCE, CAPABILITY_TAGS } from "@/constants/ExperienceItems";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 
+const ACCENT = "#8b5cf6";
+
 const ExperiencePage: React.FC = () => {
-	const [expanded, setExpanded] = useState<number>(-1); // -1 means all closed by default
+	const [expanded, setExpanded] = useState<number>(-1); // -1 means all collapsed by default
 	const [hoveredDot, setHoveredDot] = useState<number>(-1);
+	const [showEarlier, setShowEarlier] = useState<boolean>(false);
 
 	const getSkillIcon = (skillName: string) => {
 		// Sort by key length descending so "JavaScript" matches before "Java", etc.
@@ -47,37 +50,45 @@ const ExperiencePage: React.FC = () => {
 							className="w-5 h-5 text-[var(--accent-strong)]"
 							aria-hidden="true"
 						/>
-						<span className="text-sm font-semibold text-[var(--text-strong)]">
-							{EXPERIENCE_ITEMS.filter((e) => e.type !== "education").length} Roles · {EXPERIENCE_ITEMS.filter((e) => e.type === "education").length} Degree
-						</span>
+						<span className="text-sm font-semibold text-[var(--text-strong)]">{EXPERIENCE_ITEMS.length} Roles</span>
 					</div>
 
 					{/* Title — serif display */}
 					<h1 className={commonStyles.header.title + " text-4xl md:text-6xl mb-4 pb-0.5 overflow-visible leading-normal"}>Experience</h1>
 
-					{/* Subtitle */}
-					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">3+ years shipping production systems, from SRE on-call to event-driven pipelines — now applied to AI-enabled systems.</p>
+					{/* One-line subtitle */}
+					<p className="mt-4 text-[var(--text-body)] text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed">3+ years shipping production systems, from SRE on-call to event-driven pipelines, now applied to AI-enabled systems.</p>
 
 					{/* Divider */}
 					<div className="flex justify-center mt-6">
 						<div className={commonStyles.header.divider} />
 					</div>
+
+					{/* Capability tags */}
+					<ul className="flex flex-wrap justify-center gap-2 mt-8 max-w-2xl mx-auto" aria-label="Core capabilities">
+						{CAPABILITY_TAGS.map((tag) => (
+							<li
+								key={tag}
+								className="px-3 py-1 rounded-full text-[11px] md:text-xs font-semibold bg-[var(--surface-card)] border border-[var(--edge)] text-[var(--text-body)] shadow-sm"
+							>
+								{tag}
+							</li>
+						))}
+					</ul>
 				</header>
 
 				{/* Experience Timeline */}
-				<section className="pb-24">
+				<section className="pb-16" aria-label="Career timeline">
 					<div className="max-w-4xl mx-auto space-y-6">
 						{EXPERIENCE_ITEMS.map((exp, idx) => {
 							const isExpanded = expanded === idx;
 							const isHovered = hoveredDot === idx;
-							const isEducation = exp.type === "education";
-							const dotColor = isEducation ? "#5674ad" : "#d97706";
-							const skillsArray = exp.skills.split(", ").map((s) => s.trim());
+							const dotColor = ACCENT;
 							const isLast = idx === EXPERIENCE_ITEMS.length - 1;
 
 							return (
 								<div
-									key={idx}
+									key={exp.company}
 									className="relative flex gap-4 animate-fade-in-up"
 									style={{ animationDelay: `${idx * 100}ms` }}
 									onMouseEnter={() => setHoveredDot(idx)}
@@ -88,7 +99,7 @@ const ExperiencePage: React.FC = () => {
 										{/* Glassmorphism Period Badge */}
 										<div className="mb-3 relative group/period">
 											{/* Outer glow ring */}
-											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#c7d4ee]/40 to-[#f7dfb4]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
+											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#e4ddf6]/40 to-[#eae6f2]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
 
 											{/* Main glass badge */}
 											<div className="relative bg-[var(--surface-card)] backdrop-blur-xl px-4 py-2 rounded-full border border-[var(--edge)] shadow-xl shadow-[var(--edge)]">
@@ -122,17 +133,17 @@ const ExperiencePage: React.FC = () => {
 										{!isLast && (
 											<div className="relative w-[2px] flex-1 min-h-[80px] mt-2">
 												{/* Glow effect on hover */}
-												<div className={`absolute inset-0 bg-gradient-to-b from-[#c7d4ee]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
+												<div className={`absolute inset-0 bg-gradient-to-b from-[#e4ddf6]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
 												{/* Main line */}
 												<div className="absolute inset-0 bg-gradient-to-b from-[var(--edge)] via-[var(--edge)] to-transparent" />
 											</div>
 										)}
 									</div>
 
-									{/* --- COMPACT MORPHING CARD --- */}
+									{/* --- MORPHING CARD --- */}
 									<div className="flex-1 group">
 										<div className={`rounded-3xl overflow-hidden border border-[var(--edge)] bg-[var(--surface-card)] backdrop-blur-sm transition-all duration-500 motion-reduce:transition-none ${isExpanded ? "shadow-[var(--shadow-hover)] translate-y-[-2px]" : "shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)]"}`}>
-											{/* HEADER SECTION (Gradient, expand/collapse trigger) */}
+											{/* HEADER SECTION (Gradient, expand/collapse trigger) — collapsed shows role, company, location + top tech */}
 											<button
 												type="button"
 												className="w-full text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset"
@@ -142,31 +153,22 @@ const ExperiencePage: React.FC = () => {
 											>
 												<div
 													className="p-5 md:p-6 text-white relative transition-all duration-500 motion-reduce:transition-none overflow-hidden"
-													style={{
-														background: isEducation ? "linear-gradient(135deg, #3D5176, #5674ad)" : "linear-gradient(135deg, #142240, #3D5176)",
-													}}
+													style={{ background: "linear-gradient(135deg, #201f2b, #453f5c)" }}
 												>
 													{/* Decorative Gradient Circles in Header */}
 													<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
 													<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
-													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#fbbf24]/20 blur-2xl" />
+													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#c4b5fd]/20 blur-2xl" />
 
-													<div className="flex justify-between items-start relative z-10">
-														<div className="space-y-0.5">
-															<h2 className="font-display text-lg md:text-xl font-semibold tracking-tight">{exp.title}</h2>
-															<div className="flex flex-wrap items-center gap-3 text-[11px] font-medium text-white/80">
+													<div className="flex justify-between items-start gap-3 relative z-10">
+														<div className="space-y-1">
+															<h2 className="font-display text-lg md:text-xl font-semibold tracking-tight">{exp.role}</h2>
+															<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium text-white/80">
 																<span className="flex items-center gap-1">
-																	{isEducation ? (
-																		<FaGraduationCap
-																			className="text-[#fbbf24] w-3 h-3"
-																			aria-hidden="true"
-																		/>
-																	) : (
-																		<FaBuilding
-																			className="text-[#fbbf24] w-3 h-3"
-																			aria-hidden="true"
-																		/>
-																	)}
+																	<FaBuilding
+																		className="text-[#ddd6fe] w-3 h-3"
+																		aria-hidden="true"
+																	/>
 																	{exp.company}
 																</span>
 																<span className="flex items-center gap-1">
@@ -176,12 +178,6 @@ const ExperiencePage: React.FC = () => {
 																	/>
 																	{exp.location}
 																</span>
-																{isEducation && (
-																	<>
-																		<span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/25">Education</span>
-																		<span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/15 text-white border border-white/25">AZ-204</span>
-																	</>
-																)}
 															</div>
 														</div>
 														<div className={`p-1.5 rounded-xl bg-white/10 backdrop-blur-md transition-all duration-500 motion-reduce:transition-none ${isExpanded ? "rotate-180 bg-white/20" : ""}`}>
@@ -192,37 +188,53 @@ const ExperiencePage: React.FC = () => {
 														</div>
 													</div>
 
-													{/* Header Tech Stack (Visible only when COLLAPSED) */}
+													{/* Header Tech Stack (Visible only when COLLAPSED) — top 4 + remaining count */}
 													<div className={`flex flex-wrap gap-1.5 transition-all duration-500 motion-reduce:transition-none origin-top overflow-hidden ${isExpanded ? "opacity-0 -translate-y-2 mt-0 max-h-0" : "opacity-100 translate-y-0 mt-4 max-h-20"}`}>
-														{skillsArray.slice(0, 4).map((s) => renderSkillBadge(s, true))}
-														{skillsArray.length > 4 && <span className="text-[10px] font-bold text-white/80 self-center">+{skillsArray.length - 4}</span>}
+														{exp.technologies.slice(0, 4).map((s) => renderSkillBadge(s, true))}
+														{exp.technologies.length > 4 && <span className="text-[10px] font-bold text-white/80 self-center">+{exp.technologies.length - 4}</span>}
 													</div>
 												</div>
 											</button>
 
-											{/* EXPANDABLE BODY SECTION */}
+											{/* EXPANDABLE BODY — full tech stack, then responsibilities, then supporting detail */}
 											<div
 												id={"exp-body-" + idx}
-												className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${isExpanded ? "max-h-[1200px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}
+												className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${isExpanded ? "max-h-[3200px] opacity-100 visible" : "max-h-0 opacity-0 invisible"}`}
 											>
 												<div className="p-6 md:p-8 space-y-6 bg-[var(--surface-raised)]">
-													{/* Morphing Landing Spot for Skills */}
+													{/* Promotion / progression */}
+													{exp.previousRoles && exp.previousRoles.length > 0 && (
+														<div className="flex flex-wrap items-center gap-2">
+															<span className="text-[10px] uppercase font-black tracking-widest text-[var(--text-dim)]">Progression</span>
+															{exp.previousRoles.map((r) => (
+																<span
+																	key={r.role}
+																	className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[var(--surface-card)] border border-[var(--edge)] text-[var(--text-body)]"
+																>
+																	{r.role}
+																	<span className="text-[var(--text-dim)] font-medium">· {r.period}</span>
+																</span>
+															))}
+														</div>
+													)}
+
+													{/* Full tech stack — morphs in from the collapsed header chips */}
 													<div className={`space-y-3 transition-all duration-700 delay-100 motion-reduce:transition-none ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
-														<div className="flex items-center gap-2 mb-2">
+														<div className="flex items-center gap-2">
 															<div className="h-px w-4 bg-[var(--edge)]" />
 															<span className="text-[10px] uppercase font-black tracking-widest text-[var(--text-dim)]">Full Tech Stack</span>
 														</div>
-														<div className="flex flex-wrap gap-2">{skillsArray.map((s) => renderSkillBadge(s, false))}</div>
+														<div className="flex flex-wrap gap-2">{exp.technologies.map((s) => renderSkillBadge(s, false))}</div>
 													</div>
 
-													{/* Achievement Points */}
+													{/* Responsibilities */}
 													<div className={`space-y-4 transition-all duration-700 delay-200 motion-reduce:transition-none ${isExpanded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
-														<div className="flex items-center gap-2 mb-2">
+														<div className="flex items-center gap-2">
 															<div className="h-px w-4 bg-[var(--edge)]" />
 															<span className="text-[10px] uppercase font-black tracking-widest text-[var(--text-dim)]">Responsibilities</span>
 														</div>
 														<div className="space-y-3.5">
-															{exp.responsibilities.map((resp, i) => (
+															{exp.achievements.map((resp, i) => (
 																<div
 																	key={i}
 																	className="flex gap-3 items-start group/item"
@@ -237,18 +249,49 @@ const ExperiencePage: React.FC = () => {
 														</div>
 													</div>
 
-													{/* Metrics (only when present) */}
-													{exp.metrics && (
-														<div className="grid grid-cols-2 gap-3 max-w-sm">
-															{Object.entries(exp.metrics).map(([label, value]) => (
+													{/* Highlight metrics (only when present) */}
+													{exp.metrics && exp.metrics.length > 0 && (
+														<div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+															{exp.metrics.map((m) => (
 																<div
-																	key={label}
-																	className="bg-[var(--surface-card)] border border-[var(--edge)] rounded-xl p-4"
+																	key={m.label}
+																	className="bg-[var(--surface-card)] border border-[var(--edge)] rounded-xl p-4 text-center"
 																>
-																	<div className="font-display text-xl font-semibold text-[var(--text-strong)]">{value}</div>
-																	<div className="text-[10px] uppercase tracking-widest font-bold text-[var(--text-dim)]">{label}</div>
+																	<div className="font-display text-2xl font-semibold text-[var(--accent-strong)]">{m.value}</div>
+																	<div className="mt-1 text-[10px] uppercase tracking-widest font-bold text-[var(--text-dim)] leading-tight">{m.label}</div>
 																</div>
 															))}
+														</div>
+													)}
+
+													{/* Accessibility (only when present) */}
+													{exp.accessibility && exp.accessibility.length > 0 && (
+														<div className="space-y-3">
+															<div className="flex items-center gap-2">
+																<FaUniversalAccess className="w-3.5 h-3.5 text-[var(--accent-strong)]" aria-hidden="true" />
+																<span className="text-[10px] uppercase font-black tracking-widest text-[var(--text-dim)]">Accessibility</span>
+															</div>
+															<div className="flex flex-wrap gap-2">
+																{exp.accessibility.map((a) => (
+																	<span
+																		key={a}
+																		className="px-2 py-1 rounded-md text-[10px] md:text-[11px] font-semibold bg-[var(--surface-card)] border border-[var(--edge)] text-[var(--text-body)]"
+																	>
+																		{a}
+																	</span>
+																))}
+															</div>
+														</div>
+													)}
+
+													{/* AI-assisted engineering callout (only when present) */}
+													{exp.aiCallout && (
+														<div className="rounded-2xl border border-[var(--edge)] bg-[var(--surface-card)] p-4 md:p-5">
+															<div className="flex items-center gap-2 mb-2">
+																<FaRobot className="w-3.5 h-3.5 text-[var(--accent-strong)]" aria-hidden="true" />
+																<span className="text-[10px] uppercase font-black tracking-widest text-[var(--text-dim)]">AI-Assisted Engineering</span>
+															</div>
+															<p className="text-[var(--text-body)] text-[13px] md:text-sm leading-relaxed">{exp.aiCallout}</p>
 														</div>
 													)}
 
@@ -259,7 +302,7 @@ const ExperiencePage: React.FC = () => {
 															onClick={(e) => e.stopPropagation()}
 															className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--text-strong)] hover:text-[var(--accent-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 rounded-sm"
 														>
-															View the OSFI RAG case study →
+															View the case study →
 														</Link>
 													)}
 												</div>
@@ -269,6 +312,40 @@ const ExperiencePage: React.FC = () => {
 								</div>
 							);
 						})}
+					</div>
+				</section>
+
+				{/* Earlier Experience */}
+				<section className="pb-24" aria-label="Earlier experience">
+					<div className="max-w-4xl mx-auto">
+						<button
+							type="button"
+							className="flex items-center gap-2 mx-auto px-4 py-2 rounded-full text-sm font-semibold text-[var(--text-strong)] bg-[var(--surface-card)] border border-[var(--edge)] shadow-sm hover:shadow-[var(--shadow-hover)] transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
+							aria-expanded={showEarlier}
+							aria-controls="earlier-experience"
+							onClick={() => setShowEarlier((v) => !v)}
+						>
+							Earlier experience
+							<FaChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 motion-reduce:transition-none ${showEarlier ? "rotate-180" : ""}`} aria-hidden="true" />
+						</button>
+
+						<div
+							id="earlier-experience"
+							className={`transition-all duration-500 motion-reduce:transition-none ease-in-out overflow-hidden ${showEarlier ? "max-h-[900px] opacity-100 visible mt-6" : "max-h-0 opacity-0 invisible mt-0"}`}
+						>
+							<ul className="grid gap-3 sm:grid-cols-3">
+								{EARLIER_EXPERIENCE.map((r) => (
+									<li
+										key={r.company}
+										className="rounded-2xl border border-[var(--edge)] bg-[var(--surface-card)] p-4 shadow-sm"
+									>
+										<h3 className="font-display text-base font-semibold text-[var(--text-strong)]">{r.role}</h3>
+										<p className="text-[12px] font-semibold text-[var(--accent-strong)] mb-2">{r.company}</p>
+										<p className="text-[13px] leading-relaxed text-[var(--text-body)]">{r.summary}</p>
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
 				</section>
 			</div>
