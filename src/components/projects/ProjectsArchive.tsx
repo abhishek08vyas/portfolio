@@ -91,50 +91,53 @@ export function ProjectsArchive() {
 								<p className="text-sm md:text-base text-[var(--text-body)] leading-relaxed">{featuredProject.description}</p>
 							</div>
 
-							{/* Image strip */}
-							<div className="relative h-48 md:h-64 mx-6 md:mx-8 mt-6 rounded-xl overflow-hidden">
-								<Image
-									src={featuredProject.image}
-									alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
-									fill
-									sizes="(max-width: 1024px) 100vw, 92vw"
-									className="object-cover"
-									priority
-								/>
-							</div>
+							{/* Body — diagram beside the case study (fills the width, no dead space) */}
+							<div className="grid lg:grid-cols-2 gap-6 lg:gap-8 p-6 md:p-8">
+								{/* Diagram */}
+								<div className="relative aspect-[3/2] rounded-xl overflow-hidden border border-[var(--edge)] bg-gradient-to-br from-[#f4ede2] to-[#efe6da] dark:from-[#141416] dark:to-[#0d0d0f] lg:self-start">
+									<Image
+										src={featuredProject.image}
+										alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
+										fill
+										sizes="(max-width: 1024px) 100vw, 540px"
+										className="object-contain p-3 md:p-4"
+										priority
+									/>
+								</div>
 
-							{/* Case-study 2×2 */}
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 md:p-8">
-								{featuredProject.problem && (
-									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Problem</p>
-										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.problem}</p>
-									</div>
-								)}
-								{featuredProject.approach && (
-									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Approach</p>
-										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.approach}</p>
-									</div>
-								)}
-								{featuredProject.architecture && (
-									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Architecture</p>
-										<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.architecture}</p>
-									</div>
-								)}
-								{featuredProject.outcome && (
-									<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
-										<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Outcome</p>
-										<p className="text-sm font-medium text-[var(--text-body)] leading-relaxed flex items-center gap-2">
-											<span
-												className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shrink-0"
-												aria-hidden="true"
-											></span>
-											{featuredProject.outcome}
-										</p>
-									</div>
-								)}
+								{/* Case study — Problem, Approach, Architecture, Outcome */}
+								<div className="space-y-4">
+									{featuredProject.problem && (
+										<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+											<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Problem</p>
+											<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.problem}</p>
+										</div>
+									)}
+									{featuredProject.approach && (
+										<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+											<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Approach</p>
+											<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.approach}</p>
+										</div>
+									)}
+									{featuredProject.architecture && (
+										<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+											<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Architecture</p>
+											<p className="text-sm text-[var(--text-body)] leading-relaxed">{featuredProject.architecture}</p>
+										</div>
+									)}
+									{featuredProject.outcome && (
+										<div className="bg-[var(--surface-raised)] border border-[var(--edge)] rounded-xl p-5">
+											<p className="text-[11px] uppercase font-bold tracking-widest text-[var(--accent-strong)] mb-1">Outcome</p>
+											<p className="text-sm font-medium text-[var(--text-body)] leading-relaxed flex items-center gap-2">
+												<span
+													className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shrink-0"
+													aria-hidden="true"
+												></span>
+												{featuredProject.outcome}
+											</p>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</section>

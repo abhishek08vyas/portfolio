@@ -35,16 +35,15 @@ export const FeaturedWork = () => {
 					className={`group/card max-w-6xl mx-auto ${commonStyles.card.base} ${commonStyles.card.hover} overflow-hidden`}
 				>
 					<div className="grid grid-cols-1 lg:grid-cols-5">
-						{/* Image column — soft lavender backdrop (muted plum in dark) */}
-						<div className="lg:col-span-2 relative aspect-video lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#f4ede2] to-[#efe6da] dark:from-[#2a2016] dark:to-[#1c1509] overflow-hidden">
+						{/* Image column — diagram fits fully (object-contain); warm-cream frame in light, near-black in dark */}
+						<div className="lg:col-span-2 relative aspect-[3/2] lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-[#f4ede2] to-[#efe6da] dark:from-[#141416] dark:to-[#0d0d0f] overflow-hidden">
 							<Image
 								src={project.image}
 								alt="Pipeline diagram: OSFI documents flow through hybrid retrieval into a grounded LLM answer"
 								fill
 								sizes="(max-width: 1024px) 100vw, 460px"
-								className="object-cover transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"
+								className="object-contain p-4 md:p-5 transition-transform duration-500 group-hover/card:scale-[1.02] motion-reduce:transform-none"
 							/>
-							<div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#382a1b]/60 to-transparent" />
 						</div>
 
 						{/* Content column */}
