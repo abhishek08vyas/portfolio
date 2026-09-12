@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { LuMail, LuDownload } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
 import { commonStyles } from "../lib/theme-utils";
 import { ContactModal } from "./ContactModel";
-import { RESUME_PATH } from "@/constants/links";
 
 interface OpenToWorkSectionProps {
 	className?: string;
@@ -58,18 +57,6 @@ export const OpenToWorkSection: React.FC<OpenToWorkSectionProps> = ({ className 
 											/>
 											Contact
 										</button>
-										{/* TODO(ABHISHEK): export resume PDF to public/resume.pdf */}
-										<a
-											href={RESUME_PATH}
-											download
-											className="group inline-flex items-center justify-center w-full sm:w-auto border border-white/50 text-white hover:bg-white/10 font-medium px-6 py-3 rounded-full transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#382a1b] dark:focus-visible:ring-offset-[#140d07]"
-										>
-											<LuDownload
-												className="w-5 h-5 mr-2 transition-transform group-hover:translate-y-0.5 motion-reduce:transform-none"
-												aria-hidden="true"
-											/>
-											Download Resume
-										</a>
 									</div>
 								</div>
 							</div>
