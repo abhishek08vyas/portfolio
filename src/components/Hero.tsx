@@ -6,7 +6,7 @@ import { ContactModal } from "./ContactModel";
 import { commonStyles, responsive, heroTypography } from "@/lib/theme-utils";
 import { RESUME_PATH, GITHUB_URL, LINKEDIN_URL } from "@/constants/links";
 
-const HERO_SKILLS = ["TypeScript / Node.js", "Java / Spring Boot", "Python", "Apache Kafka", "Azure", "RAG / LLM pipelines"];
+const HERO_SKILLS = ["TypeScript / Node.js", "React / Next.js", "Java / Spring Boot", "Python", "Apache Kafka", "Azure", "RAG / LLM pipelines"];
 
 export const Hero = () => {
 	const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -91,7 +91,7 @@ export const Hero = () => {
 						<p className="text-sm md:text-base font-medium text-[var(--text-body)] mb-5 md:mb-6">Building AI/RAG systems · Open to full-stack & AI roles, remote Canada-wide</p>
 
 						{/* Introduction — full-stack story (the timeline lives in /experience) */}
-						<p className="text-[15px] md:text-lg text-[var(--text-dim)] leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-5 md:mb-6">
+						<p className="text-[15px] md:text-lg text-[var(--text-dim)] leading-relaxed text-center lg:text-justify max-w-2xl mx-auto lg:mx-0 mb-5 md:mb-6">
 							I’m a full-stack software developer with <span className="font-semibold text-[var(--text-strong)]">4+ years of professional experience</span> building production systems across backend services, modern web applications, distributed systems, cloud infrastructure, and enterprise SaaS, from Java/Spring Boot and Kafka through modern Python/FastAPI, Next.js, Azure, security, accessibility, and AI-assisted engineering workflows.
 						</p>
 

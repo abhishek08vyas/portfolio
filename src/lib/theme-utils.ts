@@ -142,12 +142,12 @@ export const commonStyles = {
 
 	// Open to work section — brand-navy gradient panel (reads well in BOTH themes)
 	openToWork: {
-		container: "bg-gradient-to-br from-[#382a1b] via-[#4e3f2c] to-[#63503a] dark:from-[#18181b] dark:via-[#1f1f22] dark:to-[#26262a] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(31,24,16,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
+		container: "bg-gradient-to-br from-[#382a1b] via-[#4e3f2c] to-[#63503a] dark:from-[#241b12] dark:via-[#1a130b] dark:to-[#120c06] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(20,13,7,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
 		content: "relative rounded-[34px] p-6 md:p-8 overflow-hidden",
 		badge: "inline-flex items-center bg-emerald-500/20 text-emerald-200 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3",
 		description: "text-white/80",
-		button: "inline-flex items-center justify-center bg-white text-[#382a1b] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
+		button: "inline-flex items-center justify-center bg-white text-[#382a1b] hover:bg-white/90 dark:bg-gradient-to-r dark:from-[#79614b] dark:to-[#544230] dark:hover:from-[#544230] dark:hover:to-[#3f3120] dark:text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl group whitespace-nowrap motion-reduce:transform-none",
 	},
 };
 

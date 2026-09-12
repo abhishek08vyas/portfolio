@@ -151,14 +151,14 @@ export const Projects = () => {
 
 				{/* Simplified Call to Action — brand-navy gradient band */}
 				<div className="mt-20 max-w-3xl mx-auto">
-					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(24, 22, 34, 0.55)] text-center bg-gradient-to-br from-[#382a1b] via-[#4e3f2c] to-[#63503a] dark:from-[#18181b] dark:via-[#1f1f22] dark:to-[#26262a]">
+					<div className="rounded-[26px] p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(20,13,7,0.55)] text-center bg-gradient-to-br from-[#382a1b] via-[#4e3f2c] to-[#63503a] dark:from-[#241b12] dark:via-[#1a130b] dark:to-[#120c06]">
 						<h3 className="font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3">Have a full-stack or AI project in mind?</h3>
 
 						<p className="text-white/80 mb-4 max-w-lg mx-auto text-sm">I build full-stack applications, event-driven pipelines, and RAG systems. Open to full-time roles and freelance work.</p>
 
 						<button
 							onClick={openContactModal}
-							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#382a1b] font-semibold px-5 py-2 rounded-full text-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#382a1b]"
+							className="cursor-pointer group inline-flex items-center justify-center bg-white text-[#382a1b] hover:bg-white/90 dark:bg-gradient-to-r dark:from-[#79614b] dark:to-[#544230] dark:hover:from-[#544230] dark:hover:to-[#3f3120] dark:text-white font-semibold px-5 py-2 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#382a1b] dark:focus-visible:ring-offset-[#140d07]"
 						>
 							Start a Conversation
 							<FaArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform motion-reduce:transform-none" aria-hidden="true" />
