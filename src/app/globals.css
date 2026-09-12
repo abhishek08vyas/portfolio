@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for Tailwind v4 (`dark:` variants follow the .dark class on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
 	--spacing-20: 5rem; /* Define py-20 equivalent (1rem = 4px) */
 
+	/* Serif display face (Fraunces via next/font) → Tailwind `font-display` utility */
+	--font-display: var(--font-fraunces), Georgia, serif;
+
 	/* Custom brand colors */
-	--brand-dark: #142240;
-	--brand-medium: #3d5176;
+	--brand-dark: #382a1b;
+	--brand-medium: #63503a;
 	--brand-light: #797f8c;
 
 	/* Tech colors */
@@ -44,20 +50,77 @@
 		--card-foreground: 222.2 84% 4.9%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
-		--primary: 221 83% 53%;
-		--primary-foreground: 210 40% 98%;
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
+		--primary: 28 24% 38%;
+		--primary-foreground: 34 30% 97%;
+		--secondary: 34 25% 95%;
+		--secondary-foreground: 28 25% 16%;
+		--muted: 34 25% 95%;
+		--muted-foreground: 30 12% 40%;
+		--accent: 34 25% 95%;
+		--accent-foreground: 28 25% 16%;
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 221 83% 53%;
+		--border: 32 20% 87%;
+		--input: 32 20% 87%;
+		--ring: 28 24% 38%;
 		--radius: 0.75rem;
+
+		/* Theme design tokens — LIGHT (warm cream page + white cards + brown accent) */
+		--surface-page: #f7f3ed;
+		--surface-card: rgba(255, 255, 255, 0.9);
+		--surface-raised: #ffffff;
+		--edge: rgba(84, 66, 48, 0.12);
+		--text-strong: #3f3120;
+		--text-body: #574636;
+		--text-dim: #857763;
+		--accent: #79614b;
+		--accent-strong: #544230; /* small accent text (AA on light surfaces) */
+		--accent-soft: rgba(121, 97, 75, 0.12);
+		--glow-a: transparent; /* flat page — ambient wash removed in light */
+		--glow-b: transparent;
+		--shadow-soft: 0 18px 50px -18px rgba(84, 66, 48, 0.16);
+		--shadow-hover: 0 28px 70px -20px rgba(84, 66, 48, 0.28);
+		--focus-ring: #79614b;
+	}
+
+	.dark {
+		/* shadcn HSL variables — deep-navy values so generated ui components stay legible */
+		--background: 222 48% 10%;
+		--foreground: 220 45% 96%;
+		--card: 222 42% 15%;
+		--card-foreground: 220 45% 96%;
+		--popover: 222 42% 15%;
+		--popover-foreground: 220 45% 96%;
+		--primary: 31 40% 66%;
+		--primary-foreground: 0 0% 10%;
+		--secondary: 240 4% 15%;
+		--secondary-foreground: 0 0% 96%;
+		--muted: 240 4% 15%;
+		--muted-foreground: 240 4% 66%;
+		--accent: 240 4% 15%;
+		--accent-foreground: 0 0% 96%;
+		--destructive: 0 62.8% 50%;
+		--destructive-foreground: 210 40% 98%;
+		--border: 240 4% 20%;
+		--input: 240 4% 20%;
+		--ring: 31 40% 66%;
+
+		/* Theme design tokens — DARK (near-black surfaces + sand accent used sparingly) */
+		--surface-page: #0d0d0f;
+		--surface-card: rgba(23, 23, 26, 0.85);
+		--surface-raised: #1a1a1d;
+		--edge: rgba(255, 255, 255, 0.1);
+		--text-strong: #f4f4f5;
+		--text-body: #c7c6c9;
+		--text-dim: #8d8c90;
+		--accent: #c9a585;
+		--accent-strong: #d8bd9f; /* small accent text (AA on near-black surfaces) */
+		--accent-soft: rgba(201, 165, 133, 0.16);
+		--glow-a: #141416;
+		--glow-b: #18181b;
+		--shadow-soft: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
+		--shadow-hover: 0 28px 70px -20px rgba(0, 0, 0, 0.7);
+		--focus-ring: #c9a585;
 	}
 
 	* {
@@ -65,58 +128,60 @@
 	}
 
 	body {
-		@apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
+		background: var(--surface-page);
+		color: var(--text-strong);
+		@apply antialiased;
+	}
+
+	/* Smooth cross-fade when toggling light/dark */
+	@media (prefers-reduced-motion: no-preference) {
+		body,
+		.card-base {
+			transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+		}
 	}
 
 	::selection {
-		@apply bg-[hsl(var(--primary)/0.2)];
+		background: rgba(121, 97, 75, 0.22);
+	}
+
+	.dark ::selection {
+		background: rgba(201, 165, 133, 0.3);
 	}
 }
 
 @layer components {
 	.section-padding {
-		@apply py-20 px-6;
-	}
-
-	@screen md {
-		.section-padding {
-			@apply px-12;
-		}
-	}
-
-	@screen lg {
-		.section-padding {
-			@apply px-24;
-		}
+		@apply py-20 px-6 md:px-12 lg:px-24;
 	}
 
 	/* Theme-based component classes */
 	.brand-gradient {
-		@apply bg-gradient-to-r from-[#142240] to-[#3D5176];
+		@apply bg-gradient-to-r from-[#382a1b] to-[#63503a];
 	}
 
 	.brand-text-gradient {
-		@apply bg-gradient-to-r from-[#142240] to-[#3D5176] bg-clip-text text-transparent;
+		@apply bg-gradient-to-r from-[#382a1b] to-[#63503a] bg-clip-text text-transparent;
 	}
 
 	.card-base {
-		@apply bg-white/70 backdrop-blur-sm rounded-xl shadow-lg border border-gray-100;
+		@apply bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl shadow-[var(--shadow-soft)] border border-[var(--edge)];
 	}
 
 	.card-hover {
-		@apply hover:shadow-xl transition-shadow duration-300;
+		@apply hover:shadow-[var(--shadow-hover)] transition-shadow duration-300;
 	}
 
 	.skill-tag {
-		@apply px-4 py-2 bg-gradient-to-r from-[#142240]/10 to-[#3D5176]/10 text-[#142240] rounded-full text-sm font-medium hover:bg-[#142240]/20 transition-colors duration-300 cursor-default;
+		@apply px-4 py-2 bg-[var(--accent-soft)] text-[var(--text-strong)] border border-[var(--edge)] rounded-full text-sm font-medium transition-colors duration-300 cursor-default;
 	}
 
 	.section-header {
-		@apply text-3xl font-bold mb-2 bg-gradient-to-r from-[#142240] via-[#142240] to-[#797F8C] bg-clip-text text-transparent;
+		@apply font-display text-3xl font-semibold tracking-tight mb-2 text-[var(--text-strong)];
 	}
 
 	.section-divider {
-		@apply h-0.5 w-12 bg-gradient-to-r from-[#142240] to-[#797F8C] rounded-full;
+		@apply h-0.5 w-12 bg-[var(--accent)] rounded-full;
 	}
 }
 
@@ -133,6 +198,123 @@
 		-ms-overflow-style: none;
 		scrollbar-width: none;
 	}
+}
+
+/* ============ Dawn/dusk sky backdrop (SkyBackdrop.tsx) ============
+   Soft-edged radial gradients — no filter: blur() for performance. */
+.sky-base {
+	background: #f7f3ed;
+}
+
+.dark .sky-base {
+	background: linear-gradient(170deg, #141416 0%, #19191b 38%, #0d0d0f 68%, var(--surface-page) 90%);
+}
+
+.sky-glow {
+	position: absolute;
+	border-radius: 50%;
+	will-change: transform;
+}
+
+.sky-glow--lavender {
+	width: 55vw;
+	height: 55vw;
+	left: -14vw;
+	top: -12vw;
+	background: radial-gradient(circle, var(--glow-a) 0%, transparent 65%);
+	opacity: 0.55;
+}
+
+.sky-glow--peach {
+	width: 46vw;
+	height: 46vw;
+	right: -12vw;
+	top: 14vh;
+	background: radial-gradient(circle, var(--glow-b) 0%, transparent 65%);
+	opacity: 0.5;
+}
+
+.sky-glow--sun {
+	width: 30vw;
+	height: 30vw;
+	right: 14vw;
+	top: 4vh;
+	background: radial-gradient(circle, rgba(224, 216, 244, 0.85) 0%, rgba(230, 227, 242, 0.5) 40%, transparent 70%);
+	opacity: 0;
+}
+
+.dark .sky-glow--sun {
+	background: radial-gradient(circle, rgba(201, 165, 133, 0.08) 0%, rgba(24, 22, 18, 0.14) 45%, transparent 70%);
+	opacity: 0.7;
+}
+
+@keyframes sky-drift {
+	from {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+	to {
+		transform: translate3d(2.5vw, 3vh, 0) scale(1.06);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.sky-glow {
+		animation: sky-drift 18s ease-in-out infinite alternate;
+	}
+	.sky-glow--peach {
+		animation-duration: 24s;
+		animation-delay: -8s;
+	}
+	.sky-glow--sun {
+		animation-duration: 30s;
+		animation-delay: -14s;
+	}
+}
+
+/* Gentle bob for the hero floating fact chips (desktop only, aria-hidden) */
+@keyframes chip-bob {
+	from {
+		transform: translateY(-6px);
+	}
+	to {
+		transform: translateY(8px);
+	}
+}
+
+.animate-chip-bob {
+	animation: chip-bob 6s ease-in-out infinite alternate;
+}
+
+/* Entrance animations — CSS-driven so above-the-fold content paints with SSR HTML
+   instead of waiting for JS hydration (framer-motion mount animations delay LCP). */
+@keyframes fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-in-down {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fade-in-up {
+	animation: fade-in-up 0.5s ease-out both;
+}
+
+.animate-fade-in-down {
+	animation: fade-in-down 0.6s ease-out both;
 }
 
 /* Apply Dancing Script font to the font-signature class */
@@ -198,4 +380,28 @@
 .signature-static {
 	visibility: hidden;
 	animation: delay-appear 0.1s 4.5s forwards;
+}
+
+/* Reduced motion: disable smooth scrolling and the signature writing loop */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	:root {
+		scroll-behavior: auto !important;
+	}
+
+	.signature-animated {
+		animation: none;
+		display: none;
+	}
+
+	.animate-fade-in-up,
+	.animate-fade-in-down,
+	.animate-chip-bob {
+		animation: none;
+	}
+
+	.signature-static {
+		animation: none;
+		visibility: visible;
+	}
 }

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Hybrid RAG Pipeline - OSFI Regulatory Search">
+  <rect width="1200" height="800" fill="#2b2117"/>
+  <g font-family="-apple-system, 'Segoe UI', Arial, sans-serif">
+    <!-- Pipeline boxes -->
+    <g stroke="#a08267" stroke-width="3" fill="#3a2c1d">
+      <rect x="100" y="310" width="280" height="150" rx="16"/>
+      <rect x="460" y="310" width="280" height="150" rx="16"/>
+      <rect x="820" y="310" width="280" height="150" rx="16"/>
+    </g>
+    <!-- Arrows -->
+    <g stroke="#c9a585" stroke-width="5" fill="none">
+      <line x1="380" y1="385" x2="440" y2="385"/>
+      <line x1="740" y1="385" x2="800" y2="385"/>
+    </g>
+    <g fill="#c9a585">
+      <path d="M440 373 L458 385 L440 397 Z"/>
+      <path d="M800 373 L818 385 L800 397 Z"/>
+    </g>
+    <!-- Box labels -->
+    <g fill="#f5efe6" font-size="30" font-weight="600" text-anchor="middle">
+      <text x="240" y="395">Documents</text>
+      <text x="600" y="395">Retrieval</text>
+      <text x="960" y="395">LLM Answer</text>
+    </g>
+    <!-- Sub-labels -->
+    <g fill="#c2ad91" font-size="19" text-anchor="middle">
+      <text x="240" y="430">OSFI publications</text>
+      <text x="600" y="430">Hybrid search</text>
+      <text x="960" y="430">Grounded response</text>
+    </g>
+    <!-- Title -->
+    <text x="600" y="580" fill="#f5efe6" font-size="34" font-weight="700" text-anchor="middle">Hybrid RAG Pipeline · OSFI Regulatory Search</text>
+    <text x="600" y="622" fill="#c2ad91" font-size="21" text-anchor="middle">Consulting engagement · In active development</text>
+    <!-- Accent line -->
+    <rect x="480" y="650" width="240" height="4" rx="2" fill="#c9a585"/>
+  </g>
+</svg>

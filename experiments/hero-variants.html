@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hero Variants — navy + amber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --surface-page: #faf7f1;
+    --surface-card: rgba(255, 255, 255, 0.85);
+    --surface-raised: #ffffff;
+    --edge: rgba(20, 34, 64, 0.1);
+    --text-strong: #142240;
+    --text-body: #39445f;
+    --text-dim: #5d6780;
+    --accent: #d97706;
+    --accent-strong: #92400e;
+    --accent-soft: rgba(217, 119, 6, 0.1);
+    --shadow-soft: 0 18px 50px -18px rgba(20, 34, 64, 0.14);
+  }
+  .dark {
+    --surface-page: #0d1428;
+    --surface-card: rgba(23, 33, 61, 0.82);
+    --surface-raised: #1a2542;
+    --edge: rgba(148, 163, 205, 0.16);
+    --text-strong: #eef2fb;
+    --text-body: #c3cce2;
+    --text-dim: #97a3c0;
+    --accent: #fbbf24;
+    --accent-strong: #fcd34d;
+    --accent-soft: rgba(251, 191, 36, 0.12);
+    --shadow-soft: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Inter", system-ui, sans-serif; background: var(--surface-page); color: var(--text-strong); }
+  .serif { font-family: "Fraunces", Georgia, serif; }
+
+  .variant-label {
+    position: sticky; top: 0; z-index: 40;
+    background: var(--text-strong); color: var(--surface-page);
+    padding: 10px 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .variant-label button {
+    font: inherit; background: var(--accent); border: none; color: #142240;
+    padding: 6px 14px; border-radius: 999px; cursor: pointer; font-weight: 700;
+  }
+
+  section.hero {
+    min-height: 92vh; position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    background:
+      radial-gradient(55vw 55vw at -10% -10%, #c7d4ee55 0%, transparent 60%),
+      radial-gradient(40vw 40vw at 100% 10%, #f7dfb466 0%, transparent 65%),
+      linear-gradient(170deg, #e7ecf7 0%, #f7f0df 38%, var(--surface-page) 80%);
+  }
+  .dark section.hero {
+    background:
+      radial-gradient(55vw 55vw at -10% -10%, #22305888 0%, transparent 60%),
+      radial-gradient(40vw 40vw at 100% 10%, #4d3b1566 0%, transparent 65%),
+      linear-gradient(170deg, #101b38 0%, #162244 38%, var(--surface-page) 80%);
+  }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 60px clamp(22px, 5vw, 48px); width: 100%; }
+
+  .eyebrow-pill {
+    display: inline-flex; border-radius: 999px;
+    background: var(--accent-soft); border: 1px solid var(--edge);
+    padding: 8px 18px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-strong);
+  }
+  .badge-otw {
+    display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+    background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
+    padding: 6px 14px; font-size: 11.5px; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #047857;
+  }
+  .dark .badge-otw { color: #6ee7b7; }
+  .badge-otw i { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    padding: 15px 30px; border-radius: 999px; font-weight: 700; font-size: 15px;
+  }
+  .btn.amber { background: linear-gradient(120deg, #fbbf24, #d97706); color: #142240; box-shadow: 0 14px 30px -12px rgba(217, 119, 6, 0.5); }
+  .btn.ghost { background: var(--surface-raised); color: var(--text-strong); border: 1px solid var(--edge); }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pills li {
+    list-style: none; font-size: 13px; font-weight: 600;
+    color: var(--accent-strong); background: var(--accent-soft);
+    border: 1px solid var(--edge); padding: 7px 16px; border-radius: 999px;
+  }
+
+  /* ============ VARIANT A — Split Statement ============ */
+  .heroA .grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+  .heroA h1 { font-size: clamp(52px, 7.5vw, 96px); font-weight: 640; line-height: 1.0; letter-spacing: -0.02em; margin: 22px 0 14px; }
+  .heroA h1 em { font-style: italic; color: var(--accent); }
+  .heroA .role { font-size: clamp(18px, 2vw, 24px); font-weight: 600; color: var(--text-body); margin-bottom: 20px; }
+  .heroA .lede { color: var(--text-dim); font-size: 17px; line-height: 1.7; max-width: 46ch; margin: 22px 0 30px; }
+  .heroA .lede b { color: var(--text-strong); }
+  .heroA .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+  .heroA .cred { font-size: 14px; font-weight: 600; color: var(--text-dim); }
+  .heroA .cred b { color: var(--accent-strong); }
+  .heroA .photo { position: relative; justify-self: center; }
+  .heroA .frame {
+    width: min(320px, 70vw); aspect-ratio: 4/5; border-radius: 30px; overflow: hidden;
+    border: 2px solid var(--accent); transform: rotate(2.5deg);
+    box-shadow: var(--shadow-soft); background: var(--surface-raised);
+  }
+  .heroA .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .heroA .chip {
+    position: absolute; left: -26px; bottom: 40px;
+    background: var(--surface-raised); border: 1px solid var(--edge); border-radius: 16px;
+    padding: 12px 18px; box-shadow: var(--shadow-soft); font-size: 13px; font-weight: 600; color: var(--text-body);
+  }
+  .heroA .chip b { display: block; color: var(--text-strong); font-size: 14px; }
+  .heroA .chip b i { color: #10b981; font-style: normal; }
+
+  /* ============ VARIANT B — Centered Editorial ============ */
+  .heroB .wrap { text-align: center; max-width: 900px; }
+  .heroB .avatar {
+    width: 108px; height: 108px; border-radius: 50%; margin: 0 auto 26px;
+    border: 3px solid var(--accent); padding: 4px; background: var(--surface-raised);
+  }
+  .heroB .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+  .heroB h1 { font-size: clamp(44px, 6.6vw, 84px); font-weight: 600; line-height: 1.06; letter-spacing: -0.02em; margin: 24px 0 18px; }
+  .heroB h1 em { font-style: italic; color: var(--accent); }
+  .heroB .who { font-size: clamp(16px, 1.9vw, 21px); font-weight: 600; color: var(--text-body); margin-bottom: 26px; }
+  .heroB .who b { color: var(--text-strong); }
+  .heroB .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 30px 0 38px; }
+  .heroB .statrow {
+    display: inline-flex; gap: 0; border: 1px solid var(--edge); border-radius: 20px;
+    background: var(--surface-card); box-shadow: var(--shadow-soft); overflow: hidden;
+  }
+  .heroB .stat { padding: 18px 34px; text-align: center; }
+  .heroB .stat + .stat { border-left: 1px solid var(--edge); }
+  .heroB .stat b { display: block; font-size: 24px; font-weight: 650; color: var(--accent-strong); font-family: "Fraunces", serif; }
+  .heroB .stat span { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+
+  /* ============ VARIANT C — Ledger / Proof-first ============ */
+  .heroC .grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 70px; align-items: center; }
+  .heroC .idrow { display: flex; align-items: center; gap: 18px; margin: 26px 0 8px; }
+  .heroC .idrow img { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--accent); }
+  .heroC h1 { font-size: clamp(44px, 6vw, 76px); font-weight: 640; line-height: 1.02; letter-spacing: -0.02em; }
+  .heroC h1 em { font-style: italic; color: var(--accent); }
+  .heroC .role { font-size: 19px; font-weight: 600; color: var(--text-body); margin: 14px 0 26px; }
+  .heroC .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .heroC .ledger { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--accent); }
+  .heroC .row { padding: 20px 0 20px 28px; border-bottom: 1px dashed var(--edge); }
+  .heroC .row:last-child { border-bottom: none; }
+  .heroC .row .k { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 5px; }
+  .heroC .row .v { font-size: 16.5px; font-weight: 600; color: var(--text-strong); }
+  .heroC .row .v small { display: block; font-weight: 500; color: var(--text-dim); font-size: 13.5px; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ================= VARIANT A ================= -->
+<div class="variant-label">Option A — Split Statement (framed photo, one-line lede)<button onclick="document.body.classList.toggle('dark'); document.documentElement.classList.toggle('dark')">Toggle theme</button></div>
+<section class="hero heroA">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow-pill">St. John's, NL · Open to relocation · Remote-ready</span>
+      <h1 class="serif">Abhishek <em>Vyas</em></h1>
+      <p class="role">Software Engineer · Backend &amp; AI-Enabled Systems</p>
+      <span class="badge-otw"><i></i>Open to Work — remote Canada-wide</span>
+      <p class="lede">3+ years building <b>RAG pipelines, event-driven systems, and observability</b> for high-traffic platforms. MASc Computer Engineering, Memorial University (2025) · AZ-204.</p>
+      <div class="actions">
+        <a class="btn amber" href="#">Download Resume</a>
+        <a class="btn ghost" href="#">Contact</a>
+      </div>
+      <p class="cred">Currently: <b>hybrid RAG pipeline for OSFI regulatory search</b> (consulting)</p>
+    </div>
+    <div class="photo">
+      <div class="frame"><img src="https://abhishek-vyas.vercel.app/images/profile_photo.png" alt="Abhishek Vyas" /></div>
+      <div class="chip"><b><i>●</i> Open to work</b>Backend &amp; AI · remote Canada</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VARIANT B ================= -->
+<div class="variant-label">Option B — Centered Editorial (statement headline + stat row)</div>
+<section class="hero heroB">
+  <div class="wrap">
+    <div class="avatar"><img src="https://abhishek-vyas.vercel.app/images/profile_photo.png" alt="Abhishek Vyas" /></div>
+    <span class="eyebrow-pill">St. John's, NL · Open to relocation · Remote-ready</span>
+    <h1 class="serif">Building calm, <em>intelligent</em> systems.</h1>
+    <p class="who"><b>Abhishek Vyas</b> — Software Engineer · Backend &amp; AI-Enabled Systems<br />Building AI/RAG systems · Open to backend &amp; AI roles, remote Canada-wide</p>
+    <div class="actions">
+      <a class="btn amber" href="#">Download Resume</a>
+      <a class="btn ghost" href="#">Contact</a>
+    </div>
+    <div class="statrow">
+      <div class="stat"><b>3+</b><span>Years in production</span></div>
+      <div class="stat"><b>MASc</b><span>Memorial · 2025</span></div>
+      <div class="stat"><b>AZ-204</b><span>Azure certified</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VARIANT C ================= -->
+<div class="variant-label">Option C — Ledger (identity left, proof column right)</div>
+<section class="hero heroC">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow-pill">St. John's, NL · Remote-ready</span>
+      <div class="idrow">
+        <img src="https://abhishek-vyas.vercel.app/images/profile_photo.png" alt="Abhishek Vyas" />
+        <span class="badge-otw"><i></i>Open to Work</span>
+      </div>
+      <h1 class="serif">Abhishek <em>Vyas</em></h1>
+      <p class="role">Software Engineer · Backend &amp; AI-Enabled Systems<br />Building AI/RAG systems · Open to backend &amp; AI roles, remote Canada-wide</p>
+      <div class="actions">
+        <a class="btn amber" href="#">Download Resume</a>
+        <a class="btn ghost" href="#">Contact</a>
+      </div>
+    </div>
+    <div class="ledger">
+      <div class="row"><div class="k">Now</div><div class="v">Hybrid RAG pipeline — OSFI regulatory search<small>Independent consulting · 2025–present</small></div></div>
+      <div class="row"><div class="k">Proof</div><div class="v">Kafka pipeline +40% throughput · 99.9% uptime, 1,000+ DAU<small>Apexon · healthcare &amp; loyalty platforms</small></div></div>
+      <div class="row"><div class="k">Credentials</div><div class="v">MASc Computer Engineering (2025) · AZ-204<small>Memorial University of Newfoundland</small></div></div>
+      <div class="row"><div class="k">Stack</div><div class="v">Node.js / Java · Kafka · Azure · PostgreSQL · RAG</small></div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

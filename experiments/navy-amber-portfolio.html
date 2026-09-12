@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abhishek Vyas | Software Engineer — Backend & AI-Enabled Systems</title>
+<meta name="description" content="Backend & full-stack software engineer building AI-enabled systems — RAG pipelines, event-driven architecture, observability. MASc (Memorial, 2025) · St. John's, NL." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============ THEME TOKENS ============ */
+  :root, [data-theme="dark"] {
+    --bg: #0a1020;
+    --bg-soft: #0e1630;
+    --panel: #131c38;
+    --panel-edge: rgba(148, 163, 184, 0.12);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --amber: #f7b32b;
+    --amber-deep: #e29b13;
+    --amber-soft: rgba(247, 179, 43, 0.12);
+    --amber-edge: rgba(247, 179, 43, 0.35);
+    --shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.55);
+  }
+  [data-theme="light"] {
+    --bg: #f6f8fc;
+    --bg-soft: #eef2f9;
+    --panel: #ffffff;
+    --panel-edge: rgba(20, 34, 64, 0.1);
+    --text: #142240;
+    --text-dim: #55617f;
+    --amber: #d98e07;
+    --amber-deep: #b57505;
+    --amber-soft: rgba(217, 142, 7, 0.1);
+    --amber-edge: rgba(217, 142, 7, 0.35);
+    --shadow: 0 20px 50px -24px rgba(20, 34, 64, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.65;
+    transition: background 0.35s, color 0.35s;
+  }
+  h1, h2, h3, .grotesk { font-family: "Space Grotesk", "Inter", sans-serif; }
+  ::selection { background: rgba(247, 179, 43, 0.3); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 44px); }
+
+  /* ============ NAV ============ */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo {
+    font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 22px;
+    text-decoration: none; color: var(--text);
+  }
+  .logo b { color: var(--amber); }
+  .nav-links { display: flex; gap: 6px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-dim); font-size: 14.5px; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links a.active { border-bottom-color: var(--amber); border-radius: 0; }
+  #themeToggle {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid var(--panel-edge);
+    background: var(--panel); color: var(--amber);
+    cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.25s;
+  }
+  #themeToggle:hover { transform: rotate(18deg); }
+  @media (prefers-reduced-motion: reduce) { #themeToggle:hover { transform: none; } }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section { padding: clamp(70px, 10vh, 110px) 0; }
+  section:nth-of-type(even) { background: var(--bg-soft); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 44px; }
+  .sec-num {
+    font-family: "Space Grotesk", monospace; font-size: 15px; font-weight: 600;
+    color: var(--amber); letter-spacing: 0.1em;
+  }
+  .sec-title { font-size: clamp(30px, 4.6vw, 46px); font-weight: 700; letter-spacing: -0.01em; }
+
+  /* ============ HERO ============ */
+  #hero { padding-top: 150px; min-height: 100vh; display: flex; align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(34px, 6vw, 80px); align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 18px;
+  }
+  .hero-name {
+    font-size: clamp(46px, 7.8vw, 84px); font-weight: 700;
+    line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  .hero-name em { font-style: normal; color: var(--amber); }
+  .hero-role { font-size: clamp(19px, 2.4vw, 27px); font-weight: 600; color: var(--text-dim); margin-bottom: 22px; }
+  [data-theme="dark"] .hero-role { color: #b6c2dd; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+  .pills li {
+    list-style: none; font-size: 13.5px; font-weight: 600;
+    color: var(--amber); background: var(--amber-soft);
+    border: 1px solid var(--amber-edge);
+    padding: 8px 18px; border-radius: 999px;
+  }
+  .hero-bio { color: var(--text-dim); max-width: 56ch; margin-bottom: 34px; font-size: 16.5px; }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 34px; }
+  .btn {
+    text-decoration: none; font-weight: 700; font-size: 15px;
+    padding: 15px 30px; border-radius: 12px;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  }
+  .btn.amber {
+    background: linear-gradient(120deg, var(--amber), var(--amber-deep));
+    color: #131313;
+    box-shadow: 0 14px 30px -12px rgba(247, 179, 43, 0.55);
+  }
+  .btn.amber:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -12px rgba(247, 179, 43, 0.7); }
+  .btn.ghost { color: var(--text); border: 1.5px solid var(--panel-edge); background: transparent; }
+  .btn.ghost:hover { border-color: var(--amber-edge); transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { .btn:hover { transform: none; } }
+
+  .socials { display: flex; gap: 12px; }
+  .socials a {
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid var(--panel-edge); background: var(--panel);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 18px; color: var(--text-dim);
+    transition: color 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .socials a:hover { color: var(--amber); border-color: var(--amber-edge); transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { .socials a:hover { transform: none; } }
+
+  .hero-photo { position: relative; justify-self: center; }
+  .hero-photo .frame {
+    width: min(340px, 78vw); aspect-ratio: 4 / 5;
+    border-radius: 28px; overflow: hidden;
+    border: 1.5px solid var(--amber-edge);
+    transform: rotate(2.5deg);
+    box-shadow: var(--shadow);
+    background: var(--panel);
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-photo .chip {
+    position: absolute; left: -22px; bottom: 34px;
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 14px; padding: 12px 18px;
+    box-shadow: var(--shadow);
+    font-size: 13px; font-weight: 600;
+  }
+  .hero-photo .chip b { color: var(--amber); display: block; font-size: 15px; }
+  @media (max-width: 900px) { .hero-photo { display: none; } }
+
+  /* ============ ABOUT ============ */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(30px, 5vw, 64px); }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-text p { color: var(--text-dim); margin-bottom: 18px; font-size: 16.5px; }
+  .about-text p b { color: var(--text); }
+  .stats { display: flex; flex-direction: column; gap: 18px; }
+  .stat-card {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 18px; padding: 26px 30px;
+    box-shadow: var(--shadow);
+  }
+  .stat-card b {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(30px, 4vw, 42px); font-weight: 700;
+    color: var(--amber); display: block; line-height: 1.1; margin-bottom: 6px;
+  }
+  .stat-card span { color: var(--text-dim); font-size: 14.5px; }
+
+  /* ============ EXPERIENCE ============ */
+  .xp-list { display: grid; gap: 18px; max-width: 860px; }
+  .xp {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-left: 3px solid var(--amber);
+    border-radius: 16px; padding: 26px 30px;
+    box-shadow: var(--shadow);
+  }
+  .xp.edu { border-left-color: #7f9bd6; }
+  .xp-date {
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
+  }
+  .xp.edu .xp-date { color: #7f9bd6; }
+  .xp h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .xp .org { color: var(--text-dim); font-size: 14.5px; font-weight: 600; margin-bottom: 12px; }
+  .xp p { color: var(--text-dim); font-size: 15px; }
+
+  /* ============ PROJECTS ============ */
+  .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 960px) { .proj-grid { grid-template-columns: 1fr; } }
+  .proj {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 20px; padding: 30px;
+    display: flex; flex-direction: column; gap: 16px;
+    text-decoration: none; color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+  }
+  .proj:hover { transform: translateY(-6px); border-color: var(--amber-edge); }
+  @media (prefers-reduced-motion: reduce) { .proj:hover { transform: none; } }
+  .proj-top { display: flex; justify-content: space-between; align-items: center; }
+  .badge {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--amber);
+    background: var(--amber-soft); border: 1px solid var(--amber-edge);
+    padding: 7px 14px; border-radius: 999px;
+  }
+  .proj-arrow {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--panel-edge);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--amber); font-size: 16px;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .proj:hover .proj-arrow { transform: rotate(45deg); background: var(--amber-soft); }
+  @media (prefers-reduced-motion: reduce) { .proj:hover .proj-arrow { transform: none; } }
+  .proj h3 { font-size: 21px; font-weight: 700; line-height: 1.25; }
+  .proj p { color: var(--text-dim); font-size: 14.5px; flex: 1; }
+  .proj .outcome { color: var(--amber); font-weight: 600; font-size: 13.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li {
+    list-style: none; font-size: 12.5px; font-weight: 600; color: var(--text-dim);
+    border: 1px solid var(--panel-edge); background: transparent;
+    padding: 6px 13px; border-radius: 999px;
+  }
+
+  /* ============ SKILLS ============ */
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 18px; padding: 26px;
+    box-shadow: var(--shadow);
+  }
+  .skill-card h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber); margin-bottom: 16px;
+  }
+  .skill-card ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-card li {
+    font-size: 13px; font-weight: 600; color: var(--text-dim);
+    border: 1px solid var(--panel-edge); padding: 6px 13px; border-radius: 999px;
+  }
+
+  /* ============ EDUCATION / CERTS ============ */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(26px, 4vw, 50px); }
+  @media (max-width: 860px) { .edu-grid { grid-template-columns: 1fr; } }
+  .col-label { font-size: 19px; font-weight: 700; color: var(--amber); margin-bottom: 20px; }
+  .edu-card {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-radius: 16px; padding: 26px 28px; margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .edu-card .xp-date { margin-bottom: 6px; }
+  .edu-card h4 { font-size: 17.5px; font-weight: 700; margin-bottom: 4px; }
+  .edu-card p { color: var(--text-dim); font-size: 14.5px; }
+  .cert {
+    background: var(--panel); border: 1px solid var(--panel-edge);
+    border-left: 3px solid var(--amber);
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 14px;
+    font-size: 15px;
+  }
+  .cert b { font-weight: 700; }
+  .cert span { color: var(--text-dim); }
+
+  /* ============ CONTACT ============ */
+  #contact { text-align: center; }
+  .contact-title { font-size: clamp(32px, 5.4vw, 54px); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+  .contact-title em { font-style: normal; color: var(--amber); }
+  .contact-sub { color: var(--text-dim); max-width: 52ch; margin: 0 auto 36px; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; }
+
+  footer {
+    border-top: 1px solid var(--panel-edge);
+    padding: 30px 20px; text-align: center;
+    color: var(--text-dim); font-size: 13.5px;
+  }
+
+  /* GSAP reveal helper */
+  .reveal { opacity: 0; transform: translateY(32px); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#hero">AV<b>.</b></a>
+    <ul class="nav-links">
+      <li><a href="#about" data-sec="about">About</a></li>
+      <li><a href="#experience" data-sec="experience">Experience</a></li>
+      <li><a href="#projects" data-sec="projects">Projects</a></li>
+      <li><a href="#skills" data-sec="skills">Skills</a></li>
+      <li><a href="#education" data-sec="education">Education</a></li>
+      <li><a href="#contact" data-sec="contact">Contact</a></li>
+    </ul>
+    <button id="themeToggle" aria-label="Toggle light and dark theme">☀</button>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow reveal">Hello, I'm</p>
+        <h1 class="hero-name reveal">Abhishek <em>Vyas</em></h1>
+        <p class="hero-role reveal">Software Engineer · Backend &amp; AI-Enabled Systems</p>
+        <ul class="pills reveal">
+          <li>RAG Pipelines</li>
+          <li>Event-Driven Systems</li>
+          <li>Observability</li>
+        </ul>
+        <p class="hero-bio reveal">
+          I build backend and full-stack systems that stay calm under load — Kafka
+          pipelines, zero-downtime deployments, and retrieval systems that keep LLM
+          answers grounded. 3+ years in production. MASc Computer Engineering,
+          Memorial University (2025). St. John's, NL · Open to relocation · Remote-ready.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn amber" href="#projects">View Projects</a>
+          <a class="btn ghost" href="https://abhishek-vyas.vercel.app/" target="_blank" rel="noopener noreferrer">Full Portfolio ↗</a>
+        </div>
+        <div class="socials reveal">
+          <a href="https://www.linkedin.com/in/abhishekvvyas/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+          <a href="https://github.com/abhishek08vyas" target="_blank" rel="noopener noreferrer" aria-label="GitHub">gh</a>
+          <a href="mailto:abhishekvvyas@gmail.com" aria-label="Email">✉</a>
+        </div>
+      </div>
+      <div class="hero-photo reveal">
+        <div class="frame">
+          <img src="https://abhishek-vyas.vercel.app/images/profile_photo.png" alt="Abhishek Vyas" />
+        </div>
+        <div class="chip"><b>Open to work</b>Backend &amp; AI · remote Canada</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">01</span><h2 class="sec-title">About Me</h2></div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="reveal">
+            I'm a backend and full-stack software engineer with hands-on production
+            experience across <b>REST APIs in Node.js and Java</b>, <b>Apache Kafka
+            data pipelines</b>, and <b>cloud reliability on Azure and AWS</b> — with
+            frontend work in React and Next.js when the job calls for it.
+          </p>
+          <p class="reveal">
+            After 3+ years shipping for high-traffic healthcare and loyalty platforms
+            in India, I moved to Canada for a <b>MASc in Computer Engineering at
+            Memorial University</b> (graduated April 2025, CGPA 3.62/4.0). I now work
+            as an independent software consultant — my current engagement is a
+            <b>hybrid RAG pipeline for regulatory document search (OSFI)</b>.
+          </p>
+          <p class="reveal">
+            My SRE years left a permanent mark: I believe dashboards ship with the
+            feature, deploys should be boring, and every claim should have a number
+            behind it.
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat-card reveal"><b>3+</b><span>Years of production engineering experience</span></div>
+          <div class="stat-card reveal"><b>99.9%</b><span>Uptime for 1,000+ daily active users — Azure deployments at Apexon</span></div>
+          <div class="stat-card reveal"><b>+40%</b><span>Throughput gain from an Apache Kafka data-sync pipeline in healthcare</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 EXPERIENCE ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">02</span><h2 class="sec-title">Experience</h2></div>
+      <div class="xp-list">
+        <div class="xp reveal">
+          <p class="xp-date">2025 — Present</p>
+          <h3>Independent Software Consultant</h3>
+          <p class="org">Self-employed · St. John's, NL (Remote)</p>
+          <p>AWS migration audit, application rebuild SOW work, and a hybrid RAG pipeline for regulatory document search (OSFI).</p>
+        </div>
+        <div class="xp edu reveal">
+          <p class="xp-date">Sep 2023 — Apr 2025</p>
+          <h3>MASc, Computer Engineering</h3>
+          <p class="org">Memorial University of Newfoundland · St. John's, NL</p>
+          <p>CGPA 3.62/4.0 · System Design, SOLID Principles, Software Design &amp; Specification.</p>
+        </div>
+        <div class="xp reveal">
+          <p class="xp-date">Aug 2021 — Aug 2023</p>
+          <h3>Software Engineer → Software Engineer II</h3>
+          <p class="org">Apexon (formerly Infostretch) · Ahmedabad, India</p>
+          <p>Kafka data-sync pipeline (+40% throughput, healthcare) · async Azure Functions (+10% throughput) · Blue-Green/Canary deploys serving 1,000+ DAU at 99.9% uptime · Redux re-architecture (−40% app errors).</p>
+        </div>
+        <div class="xp reveal">
+          <p class="xp-date">Jun 2020 — Aug 2021</p>
+          <h3>Site Reliability Engineer</h3>
+          <p class="org">Crest Data Systems · Ahmedabad, India</p>
+          <p>End-to-end observability (Azure Monitor, ELK/Kibana) · Python CI/CD automation (−60% deployment overhead) · P0/P1 incident response at 99.9%+ uptime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">03</span><h2 class="sec-title">Selected Projects</h2></div>
+      <div class="proj-grid">
+        <a class="proj reveal" href="https://abhishek-vyas.vercel.app/projects#osfi-rag" target="_blank" rel="noopener noreferrer">
+          <div class="proj-top"><span class="badge">RAG · In Development</span><span class="proj-arrow" aria-hidden="true">↗</span></div>
+          <h3>Hybrid RAG Pipeline for Regulatory Search</h3>
+          <p>Regulatory teams need precise answers from dense OSFI documents — keyword search fails on regulatory language. Hybrid retrieval keeps LLM answers grounded in source text. Consulting engagement.</p>
+          <span class="outcome">In active development for a consulting client</span>
+          <ul class="chips"><li>RAG</li><li>Retrieval</li><li>LLM grounding</li></ul>
+        </a>
+        <a class="proj reveal" href="https://expense-tracker-mun.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <div class="proj-top"><span class="badge">SaaS · Live</span><span class="proj-arrow" aria-hidden="true">↗</span></div>
+          <h3>Expense Tracker — Full-Stack SaaS</h3>
+          <p>Secure financial tracking with JWT/SSO auth, modular components, and comprehensive Jest coverage. Deployed on Vercel.</p>
+          <span class="outcome">API response times optimized by 20%</span>
+          <ul class="chips"><li>Node.js</li><li>Fastify</li><li>Next.js</li><li>PostgreSQL</li><li>Prisma</li></ul>
+        </a>
+        <a class="proj reveal" href="https://github.com/abhishek08vyas/gesture_recognition" target="_blank" rel="noopener noreferrer">
+          <div class="proj-top"><span class="badge">ML · Open Source</span><span class="proj-arrow" aria-hidden="true">↗</span></div>
+          <h3>Real-Time Gesture Recognition</h3>
+          <p>Hand-gesture recognition deployed to edge devices — the full ML lifecycle from preprocessing to low-latency inference.</p>
+          <span class="outcome">78% accuracy across 40 classes</span>
+          <ul class="chips"><li>Python</li><li>TensorFlow</li><li>OpenCV</li><li>MediaPipe</li></ul>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 SKILLS ============ -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">04</span><h2 class="sec-title">Skills</h2></div>
+      <div class="skill-grid">
+        <div class="skill-card reveal">
+          <h3>Backend</h3>
+          <ul><li>Java</li><li>Spring Boot</li><li>Node.js</li><li>TypeScript</li><li>Python</li><li>FastAPI</li></ul>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Data &amp; Messaging</h3>
+          <ul><li>PostgreSQL</li><li>MongoDB</li><li>MySQL</li><li>Redis</li><li>Apache Kafka</li></ul>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Cloud &amp; DevOps</h3>
+          <ul><li>Azure (AZ-204)</li><li>AWS</li><li>Docker</li><li>Azure DevOps</li><li>CI/CD</li><li>ELK/Kibana</li></ul>
+        </div>
+        <div class="skill-card reveal">
+          <h3>AI / ML (Applied)</h3>
+          <ul><li>TensorFlow</li><li>scikit-learn</li><li>MediaPipe</li><li>RAG pipelines</li></ul>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Frontend</h3>
+          <ul><li>React</li><li>Next.js</li><li>Redux</li><li>Tailwind CSS</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 EDUCATION ============ -->
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">05</span><h2 class="sec-title">Education &amp; Certifications</h2></div>
+      <div class="edu-grid">
+        <div>
+          <p class="col-label reveal">Education</p>
+          <div class="edu-card reveal">
+            <p class="xp-date">Sep 2023 — Apr 2025</p>
+            <h4>MASc, Computer Engineering</h4>
+            <p>Memorial University of Newfoundland · St. John's, NL, Canada · CGPA 3.62/4.0</p>
+          </div>
+          <div class="edu-card reveal">
+            <p class="xp-date">2016 — 2020</p>
+            <h4>Bachelor's, Information Technology</h4>
+            <p>Charotar University of Science and Technology (CHARUSAT) · India</p>
+          </div>
+        </div>
+        <div>
+          <p class="col-label reveal">Certifications</p>
+          <div class="cert reveal"><b>Microsoft Certified: Azure Developer Associate (AZ-204)</b> <span>— Microsoft</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head reveal" style="justify-content: center;"><span class="sec-num">06</span><h2 class="sec-title">Contact</h2></div>
+      <h2 class="contact-title reveal">Let's build something <em>reliable</em>.</h2>
+      <p class="contact-sub reveal">Open to backend &amp; AI roles, remote Canada-wide — and select freelance projects. I reply fast.</p>
+      <div class="contact-actions reveal">
+        <a class="btn amber" href="mailto:abhishekvvyas@gmail.com">✉ &nbsp;Email Me</a>
+        <a class="btn ghost" href="https://github.com/abhishek08vyas" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/abhishekvvyas/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Abhishek Vyas · St. John's, NL · Software Engineer — Backend &amp; AI-Enabled Systems</footer>
+
+<noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- theme toggle (persisted) ---- */
+  const root = document.documentElement;
+  const toggle = document.getElementById("themeToggle");
+  const saved = localStorage.getItem("theme");
+  if (saved) { root.dataset.theme = saved; }
+  const syncIcon = () => { toggle.textContent = root.dataset.theme === "dark" ? "☀" : "☾"; };
+  syncIcon();
+  toggle.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", root.dataset.theme);
+    syncIcon();
+  });
+
+  /* ---- reveals ---- */
+  if (!reduceMotion) {
+    gsap.to("#hero .reveal", { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.09, delay: 0.15 });
+    gsap.utils.toArray("main section:not(#hero) .reveal").forEach((el) => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 86%" },
+      });
+    });
+  } else {
+    gsap.set(".reveal", { opacity: 1, y: 0 });
+  }
+
+  /* ---- active nav underline ---- */
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    const sec = document.getElementById(link.dataset.sec);
+    if (!sec) return;
+    ScrollTrigger.create({
+      trigger: sec, start: "top center", end: "bottom center",
+      onToggle(self) { link.classList.toggle("active", self.isActive); },
+    });
+  });
+</script>
+</body>
+</html>
