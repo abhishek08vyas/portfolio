@@ -28,7 +28,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 			className="group relative bg-[var(--surface-card)] backdrop-blur-sm rounded-3xl overflow-hidden border border-[var(--edge)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 flex flex-col h-full"
 		>
 			{/* Image Section — soft navy-mist backdrop (deep navy in dark) */}
-			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#ece8f5] to-[#e4ddf6] dark:from-[#23222e] dark:to-[#17161f]">
+			<div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-[#f4ede2] to-[#efe6da] dark:from-[#2a2016] dark:to-[#1c1509]">
 				<Image
 					src={project.image}
 					alt=""
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 				/>
 
 				{/* Role Label Badge */}
-				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#201f2b] shadow-sm">{project.roleLabel}</span>}
+				{project.roleLabel && <span className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/85 backdrop-blur-sm text-[#382a1b] shadow-sm">{project.roleLabel}</span>}
 
 				{/* Title Overlay */}
 				<div className="absolute bottom-0 left-0 right-0 p-5">
@@ -118,7 +118,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 							href={project.links.demo}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
+							className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#79614b] to-[#544230] transition-all shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2"
 							aria-label={`Demo: ${project.title} live demo (opens in new tab)`}
 						>
 							<FiExternalLink

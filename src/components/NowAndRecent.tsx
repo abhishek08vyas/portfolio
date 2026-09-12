@@ -12,7 +12,7 @@ const SnapshotCard = ({ item }: { item: ExperienceItem }) => {
 		<article className="card-base card-hover p-5 md:p-6 flex gap-4 border-l-4 border-l-[var(--accent)] transition-[box-shadow,border-color] duration-300">
 			{/* Icon tile */}
 			<div
-				className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white"
+				className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-[#79614b] to-[#544230] text-white"
 				aria-hidden="true"
 			>
 				<FaBriefcase className="w-5 h-5" />

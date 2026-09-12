@@ -69,7 +69,7 @@ export const Hero = () => {
 
 						{/* Name — serif display; "Vyas" in italic teal gradient */}
 						<h1 className={`${heroTypography.name} text-[var(--text-strong)] mb-2 md:mb-3 pb-1`}>
-							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] dark:from-[#ddd6fe] dark:to-[#c4b5fd] bg-clip-text text-transparent">Vyas</em>
+							Abhishek <em className="italic font-[650] bg-gradient-to-r from-[#79614b] to-[#544230] dark:from-[#d8bd9f] dark:to-[#c9a585] bg-clip-text text-transparent">Vyas</em>
 						</h1>
 
 						{/* Title */}
@@ -205,7 +205,7 @@ export const Hero = () => {
 				style={{ bottom: "1rem" }}
 				aria-hidden="true"
 			>
-				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#8b5cf6]/20">
+				<div className="w-8 h-12 rounded-full border-2 border-[var(--accent)] flex items-start justify-center p-2 shadow-lg shadow-[#79614b]/20">
 					<div className="w-1 h-3 bg-[var(--accent)] rounded-full animate-ping motion-reduce:animate-none"></div>
 				</div>
 			</div>

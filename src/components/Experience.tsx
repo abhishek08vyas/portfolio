@@ -8,7 +8,7 @@ import { HiCode } from "react-icons/hi";
 import { EXPERIENCE_ITEMS, EARLIER_EXPERIENCE, CAPABILITY_TAGS } from "@/constants/ExperienceItems";
 import { SKILL_ICONS } from "@/constants/SkillIcons";
 
-const ACCENT = "#8b5cf6";
+const ACCENT = "#79614b";
 
 const ExperiencePage: React.FC = () => {
 	const [expanded, setExpanded] = useState<number>(-1); // -1 means all collapsed by default
@@ -99,7 +99,7 @@ const ExperiencePage: React.FC = () => {
 										{/* Glassmorphism Period Badge */}
 										<div className="mb-3 relative group/period">
 											{/* Outer glow ring */}
-											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#e4ddf6]/40 to-[#eae6f2]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
+											<div className={`absolute inset-0 rounded-full bg-gradient-to-r from-[#efe6da]/40 to-[#f0e9df]/40 blur-md transition-all duration-300 ${isHovered ? "scale-110 opacity-80" : "scale-100 opacity-40"}`} />
 
 											{/* Main glass badge */}
 											<div className="relative bg-[var(--surface-card)] backdrop-blur-xl px-4 py-2 rounded-full border border-[var(--edge)] shadow-xl shadow-[var(--edge)]">
@@ -133,7 +133,7 @@ const ExperiencePage: React.FC = () => {
 										{!isLast && (
 											<div className="relative w-[2px] flex-1 min-h-[80px] mt-2">
 												{/* Glow effect on hover */}
-												<div className={`absolute inset-0 bg-gradient-to-b from-[#e4ddf6]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
+												<div className={`absolute inset-0 bg-gradient-to-b from-[#efe6da]/50 to-transparent blur-sm transition-opacity duration-300 ${isHovered ? "opacity-60" : "opacity-0"}`} />
 												{/* Main line */}
 												<div className="absolute inset-0 bg-gradient-to-b from-[var(--edge)] via-[var(--edge)] to-transparent" />
 											</div>
@@ -152,13 +152,12 @@ const ExperiencePage: React.FC = () => {
 												onClick={() => setExpanded(isExpanded ? -1 : idx)}
 											>
 												<div
-													className="p-5 md:p-6 text-white relative transition-all duration-500 motion-reduce:transition-none overflow-hidden"
-													style={{ background: "linear-gradient(135deg, #201f2b, #453f5c)" }}
+													className="p-5 md:p-6 text-white relative transition-all duration-500 motion-reduce:transition-none overflow-hidden bg-gradient-to-br from-[#382a1b] to-[#63503a] dark:from-[#18181b] dark:to-[#26262a]"
 												>
 													{/* Decorative Gradient Circles in Header */}
 													<div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
 													<div className="absolute -right-4 top-12 w-24 h-24 rounded-full bg-white/10 blur-xl" />
-													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#c4b5fd]/20 blur-2xl" />
+													<div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-[#c9a585]/20 blur-2xl" />
 
 													<div className="flex justify-between items-start gap-3 relative z-10">
 														<div className="space-y-1">
@@ -166,7 +165,7 @@ const ExperiencePage: React.FC = () => {
 															<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium text-white/80">
 																<span className="flex items-center gap-1">
 																	<FaBuilding
-																		className="text-[#ddd6fe] w-3 h-3"
+																		className="text-[#d8bd9f] w-3 h-3"
 																		aria-hidden="true"
 																	/>
 																	{exp.company}

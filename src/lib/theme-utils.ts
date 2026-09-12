@@ -4,9 +4,9 @@
 export const colors = {
 	brand: {
 		/** Primary brand color – slate ink. Use for accents, icons, badges, and key UI. */
-		primary: "#201f2b",
-		dark: "#201f2b",
-		medium: "#453f5c",
+		primary: "#382a1b",
+		dark: "#382a1b",
+		medium: "#63503a",
 		light: "#847f8c",
 	},
 	tech: {
@@ -102,7 +102,7 @@ export const commonStyles = {
 	// Button styles
 	button: {
 		primary:
-			"cursor-pointer rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] hover:from-[#7c3aed] hover:to-[#6d28d9] text-white font-bold shadow-lg shadow-[#8b5cf6]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#8b5cf6]/40 motion-reduce:transform-none",
+			"cursor-pointer rounded-full bg-gradient-to-r from-[#79614b] to-[#544230] hover:from-[#544230] hover:to-[#3f3120] text-white font-bold shadow-lg shadow-[#79614b]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#79614b]/40 motion-reduce:transform-none",
 		secondary: "cursor-pointer rounded-full bg-[var(--surface-raised)] text-[var(--text-strong)] border border-[var(--edge)] hover:bg-[var(--surface-card)] hover:text-[var(--text-strong)] transition-all duration-300",
 	},
 
@@ -142,12 +142,12 @@ export const commonStyles = {
 
 	// Open to work section — brand-navy gradient panel (reads well in BOTH themes)
 	openToWork: {
-		container: "bg-gradient-to-br from-[#201f2b] via-[#35314a] to-[#453f5c] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(24,22,34,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
+		container: "bg-gradient-to-br from-[#382a1b] via-[#4e3f2c] to-[#63503a] dark:from-[#18181b] dark:via-[#1f1f22] dark:to-[#26262a] rounded-[34px] shadow-[0_34px_80px_-30px_rgba(31,24,16,0.6)] transform transition-all hover:scale-[1.01] hover:shadow-xl",
 		content: "relative rounded-[34px] p-6 md:p-8 overflow-hidden",
 		badge: "inline-flex items-center bg-emerald-500/20 text-emerald-200 rounded-full py-1 px-3 mb-4 text-xs font-medium",
 		title: "font-display text-xl md:text-2xl font-semibold tracking-tight text-white mb-3",
 		description: "text-white/80",
-		button: "inline-flex items-center justify-center bg-white text-[#201f2b] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
+		button: "inline-flex items-center justify-center bg-white text-[#382a1b] font-semibold px-6 py-3 rounded-full shadow-lg transition-all hover:bg-white/90 hover:shadow-xl group whitespace-nowrap",
 	},
 };
 

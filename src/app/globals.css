@@ -10,8 +10,8 @@
 	--font-display: var(--font-fraunces), Georgia, serif;
 
 	/* Custom brand colors */
-	--brand-dark: #201f2b;
-	--brand-medium: #453f5c;
+	--brand-dark: #382a1b;
+	--brand-medium: #63503a;
 	--brand-light: #797f8c;
 
 	/* Tech colors */
@@ -50,37 +50,37 @@
 		--card-foreground: 222.2 84% 4.9%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
-		--primary: 258 90% 66%;
-		--primary-foreground: 258 40% 98%;
-		--secondary: 258 14% 96.1%;
-		--secondary-foreground: 258 20% 16%;
-		--muted: 258 14% 96.1%;
-		--muted-foreground: 258 8% 45%;
-		--accent: 258 14% 96.1%;
-		--accent-foreground: 258 20% 16%;
+		--primary: 28 24% 38%;
+		--primary-foreground: 34 30% 97%;
+		--secondary: 34 25% 95%;
+		--secondary-foreground: 28 25% 16%;
+		--muted: 34 25% 95%;
+		--muted-foreground: 30 12% 40%;
+		--accent: 34 25% 95%;
+		--accent-foreground: 28 25% 16%;
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 258 14% 90%;
-		--input: 258 14% 90%;
-		--ring: 258 90% 66%;
+		--border: 32 20% 87%;
+		--input: 32 20% 87%;
+		--ring: 28 24% 38%;
 		--radius: 0.75rem;
 
-		/* Theme design tokens — LIGHT (barely-lavender page + white cards + light-purple accent) */
-		--surface-page: #f3f0fb;
+		/* Theme design tokens — LIGHT (warm cream page + white cards + brown accent) */
+		--surface-page: #f7f3ed;
 		--surface-card: rgba(255, 255, 255, 0.9);
 		--surface-raised: #ffffff;
-		--edge: rgba(40, 38, 52, 0.1);
-		--text-strong: #2a2833;
-		--text-body: #4c4956;
-		--text-dim: #6f6c79;
-		--accent: #8b5cf6;
-		--accent-strong: #7c3aed; /* small accent text (AA on light surfaces) */
-		--accent-soft: rgba(139, 92, 246, 0.1);
+		--edge: rgba(84, 66, 48, 0.12);
+		--text-strong: #3f3120;
+		--text-body: #574636;
+		--text-dim: #857763;
+		--accent: #79614b;
+		--accent-strong: #544230; /* small accent text (AA on light surfaces) */
+		--accent-soft: rgba(121, 97, 75, 0.12);
 		--glow-a: transparent; /* flat page — ambient wash removed in light */
 		--glow-b: transparent;
-		--shadow-soft: 0 18px 50px -18px rgba(40, 36, 52, 0.14);
-		--shadow-hover: 0 28px 70px -20px rgba(40, 36, 52, 0.26);
-		--focus-ring: #8b5cf6;
+		--shadow-soft: 0 18px 50px -18px rgba(84, 66, 48, 0.16);
+		--shadow-hover: 0 28px 70px -20px rgba(84, 66, 48, 0.28);
+		--focus-ring: #79614b;
 	}
 
 	.dark {
@@ -91,36 +91,36 @@
 		--card-foreground: 220 45% 96%;
 		--popover: 222 42% 15%;
 		--popover-foreground: 220 45% 96%;
-		--primary: 252 88% 85%;
-		--primary-foreground: 250 15% 14%;
-		--secondary: 255 8% 22%;
-		--secondary-foreground: 255 15% 96%;
-		--muted: 255 8% 22%;
-		--muted-foreground: 255 8% 70%;
-		--accent: 255 8% 22%;
-		--accent-foreground: 255 15% 96%;
+		--primary: 31 40% 66%;
+		--primary-foreground: 0 0% 10%;
+		--secondary: 240 4% 15%;
+		--secondary-foreground: 0 0% 96%;
+		--muted: 240 4% 15%;
+		--muted-foreground: 240 4% 66%;
+		--accent: 240 4% 15%;
+		--accent-foreground: 0 0% 96%;
 		--destructive: 0 62.8% 50%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 255 10% 26%;
-		--input: 255 10% 26%;
-		--ring: 252 88% 85%;
+		--border: 240 4% 20%;
+		--input: 240 4% 20%;
+		--ring: 31 40% 66%;
 
-		/* Theme design tokens — DARK (neutral charcoal + soft lavender accent) */
-		--surface-page: #15151a;
-		--surface-card: rgba(33, 33, 40, 0.82);
-		--surface-raised: #1f1f27;
-		--edge: rgba(180, 176, 196, 0.14);
-		--text-strong: #eeedf3;
-		--text-body: #c8c6d1;
-		--text-dim: #96939f;
-		--accent: #c4b5fd;
-		--accent-strong: #ddd6fe; /* small accent text (AA on charcoal surfaces) */
-		--accent-soft: rgba(196, 181, 253, 0.14);
-		--glow-a: #23222e;
-		--glow-b: #262433;
+		/* Theme design tokens — DARK (near-black surfaces + sand accent used sparingly) */
+		--surface-page: #0d0d0f;
+		--surface-card: rgba(23, 23, 26, 0.85);
+		--surface-raised: #1a1a1d;
+		--edge: rgba(255, 255, 255, 0.1);
+		--text-strong: #f4f4f5;
+		--text-body: #c7c6c9;
+		--text-dim: #8d8c90;
+		--accent: #c9a585;
+		--accent-strong: #d8bd9f; /* small accent text (AA on near-black surfaces) */
+		--accent-soft: rgba(201, 165, 133, 0.16);
+		--glow-a: #141416;
+		--glow-b: #18181b;
 		--shadow-soft: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
 		--shadow-hover: 0 28px 70px -20px rgba(0, 0, 0, 0.7);
-		--focus-ring: #c4b5fd;
+		--focus-ring: #c9a585;
 	}
 
 	* {
@@ -142,11 +142,11 @@
 	}
 
 	::selection {
-		background: rgba(139, 92, 246, 0.2);
+		background: rgba(121, 97, 75, 0.22);
 	}
 
 	.dark ::selection {
-		background: rgba(196, 181, 253, 0.28);
+		background: rgba(201, 165, 133, 0.3);
 	}
 }
 
@@ -157,11 +157,11 @@
 
 	/* Theme-based component classes */
 	.brand-gradient {
-		@apply bg-gradient-to-r from-[#201f2b] to-[#453f5c];
+		@apply bg-gradient-to-r from-[#382a1b] to-[#63503a];
 	}
 
 	.brand-text-gradient {
-		@apply bg-gradient-to-r from-[#201f2b] to-[#453f5c] bg-clip-text text-transparent;
+		@apply bg-gradient-to-r from-[#382a1b] to-[#63503a] bg-clip-text text-transparent;
 	}
 
 	.card-base {
@@ -203,11 +203,11 @@
 /* ============ Dawn/dusk sky backdrop (SkyBackdrop.tsx) ============
    Soft-edged radial gradients — no filter: blur() for performance. */
 .sky-base {
-	background: #f3f0fb;
+	background: #f7f3ed;
 }
 
 .dark .sky-base {
-	background: linear-gradient(170deg, #1a1922 0%, #211f2e 38%, #141319 68%, var(--surface-page) 90%);
+	background: linear-gradient(170deg, #141416 0%, #19191b 38%, #0d0d0f 68%, var(--surface-page) 90%);
 }
 
 .sky-glow {
@@ -244,7 +244,7 @@
 }
 
 .dark .sky-glow--sun {
-	background: radial-gradient(circle, rgba(196, 181, 253, 0.16) 0%, rgba(35, 34, 46, 0.16) 45%, transparent 70%);
+	background: radial-gradient(circle, rgba(201, 165, 133, 0.08) 0%, rgba(24, 22, 18, 0.14) 45%, transparent 70%);
 	opacity: 0.7;
 }
 

@@ -144,7 +144,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
       {/* Backdrop with blur effect - allows scrolling */}
-      <div className="fixed inset-0 bg-[#201f2b]/20 dark:bg-black/40 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
+      <div className="fixed inset-0 bg-[#382a1b]/20 dark:bg-black/40 backdrop-blur-md pointer-events-auto" onClick={onClose} aria-hidden="true"></div>
 
       {/* Modal container */}
       <div

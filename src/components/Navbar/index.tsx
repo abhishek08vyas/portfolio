@@ -56,8 +56,8 @@ export const Navbar = () => {
 						/>
 						{/* Brand navy stays on the wordmark (light); dusk needs a legible override */}
 						<div className="ml-3 signature-container pointer-events-none">
-							<span className="font-signature text-2xl text-[#2a2833] dark:text-[#eeedf3] signature-static pointer-events-auto">Abhishek Vyas</span>
-							<span className="font-signature text-2xl text-[#2a2833] dark:text-[#eeedf3] signature-animated" aria-hidden="true">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#3f3120] dark:text-[#f2ece3] signature-static pointer-events-auto">Abhishek Vyas</span>
+							<span className="font-signature text-2xl text-[#3f3120] dark:text-[#f2ece3] signature-animated" aria-hidden="true">Abhishek Vyas</span>
 						</div>
 					</Link>
 				</div>
